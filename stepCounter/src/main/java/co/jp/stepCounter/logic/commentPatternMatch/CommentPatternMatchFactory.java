@@ -4,7 +4,7 @@ import co.jp.stepCounter.constant.EnumReverseLookup;
 
 /**
  * <p>
- * コメントパターンマッチクラスの生成に利用するFactoryクラス。
+ * コメントパターンマッチクラスの生成に利用するFactoryクラス
  * <p>
  * {@link IfCommentPatternMatch}をimplementsしたクラスオブジェクトを生成する場合は、<br>
  * {@link CommentPatternMatchType#of(String)}の引数に生成するオブジェクトに紐づく拡張子を渡してください。

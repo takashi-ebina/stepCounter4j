@@ -37,7 +37,7 @@ public class JavaStepCount extends AbsStepCount {
 	 * コンストラクタ
 	 * 
 	 * ファクトリクラスとして利用するために、{@link StepCountType}で利用しています。<br>
-	 * 同一パッケージでこのコンストラクタを用いたインスタンスの生成は可能ですが、。<br>
+	 * 同一パッケージでこのコンストラクタを用いたインスタンスの生成は可能ですが。<br>
 	 * {@link AbsStepCount#commentPatternMatch}が初期化されないため、推奨していません。<br>
 	 * インスタンスを生成する際は、{@link StepCountType#of(String, IfCommentPatternMatch)}を用いて生成してください。
 	 */

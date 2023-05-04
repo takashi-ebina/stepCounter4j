@@ -34,8 +34,8 @@ import co.jp.stepCounter.util.validator.ValidatorUtil;
  * フォルダ内に存在するプログラムファイルのステップ数を集計し、CSV形式でファイルに出力します。
  * <p>
  * [使い方]<br>
- * java StepCountMain<br>
- * java StepCountMain [オプション] <br>
+ * java StepCounter<br>
+ * java StepCounter [オプション] <br>
  * [オプション]<br>
  * {@literal -h}:このメッセージを表示して終了する。<br>
  * {@literal -s}:スクリプトモードで実行する。（オプションを指定しない場合はGUIモード）<br>

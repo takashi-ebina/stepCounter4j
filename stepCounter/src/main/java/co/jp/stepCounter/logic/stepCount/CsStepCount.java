@@ -8,9 +8,27 @@ import java.util.Objects;
 
 import co.jp.stepCounter.constant.Constant;
 import co.jp.stepCounter.data.StepCountData;
+import co.jp.stepCounter.logic.commentPatternMatch.AbsCommentPatternMatch;
 import co.jp.stepCounter.logic.commentPatternMatch.IfCommentPatternMatch;
 import co.jp.stepCounter.logic.stepCount.StepCountFactory.StepCountType;
-
+/**
+ * <p>
+ * ステップカウントの具象クラス
+ * <p>
+ * CSファイルのステップカウント処理を提供する具象クラスです。
+ * <p>
+ * インスタンスを生成する際は、{@link StepCountType#of(String, IfCommentPatternMatch)}を用いて生成してください。
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ * 
+ * @see IfStepCount
+ * @see AbsStepCount
+ * @see JavaStepCount
+ * @see StepCountFactory
+ * @see AbsCommentPatternMatch
+ */
 public class CsStepCount extends AbsStepCount {
 
 	/**
