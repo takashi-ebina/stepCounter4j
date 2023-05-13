@@ -27,9 +27,9 @@ public class StepCounterSharedService {
 	/** Log4J2インスタンス */
 	private final Log4J2 logger = Log4J2.getInstance();
 	/** ステップカウント処理のリポジトリクラス */
-	private final StepCountRepository stepCountRepository;
+	private StepCountRepository stepCountRepository;
 	/** ステップ数集計処理実行クラス */
-	private final StepCountExecutor stepCountExecutor;
+	private StepCountExecutor stepCountExecutor;
 	
 	/**
 	 * コンストラクタ

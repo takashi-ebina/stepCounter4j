@@ -21,7 +21,7 @@ import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
 public class StepCounterGuiMainService {
 
 	/** 共通サービスクラス */
-	private final StepCounterSharedService sharedService;
+	private StepCounterSharedService sharedService;
 	
 	/**
 	 * コンストラクタ
