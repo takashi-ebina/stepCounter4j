@@ -7,7 +7,8 @@ class TestUtil {
 
 	@Test
 	void test() {
-		// FIXME テストコード未実装
+		// Util.javaは呼出し側でまとめてテストを実施するため
+		// テストコード未実装
 	}
 
 }

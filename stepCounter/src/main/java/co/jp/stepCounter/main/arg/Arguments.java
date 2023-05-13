@@ -2,9 +2,9 @@ package co.jp.stepCounter.main.arg;
 
 import java.util.Objects;
 
-import co.jp.stepCounter.constant.Constant.ExecuteMode;
-import co.jp.stepCounter.constant.Constant.SortTarget;
-import co.jp.stepCounter.constant.Constant.SortType;
+import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
+import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
+import co.jp.stepCounter.constant.StepCounterConstant.SortType;
 import co.jp.stepCounter.util.Util;
 
 /**
@@ -18,13 +18,15 @@ import co.jp.stepCounter.util.Util;
 public final class Arguments {
 
 	/** ステップカウント処理実行モード */
-	private ExecuteMode stepCountExecuteMode = ExecuteMode.INTERACTIVE;
+	private ExecuteMode stepCountExecuteMode = ExecuteMode.HELP;
 	/** ステップカウントソート区分 */
 	private SortType stepCountSortType = SortType.NO_SORT;
 	/** ステップカウントソート対象 */
 	private SortTarget stepCountSortTarget = SortTarget.FILEPATH;
-	/** スクリプトモードで利用する引数をオブジェクト化したクラス */
-	private ScriptArguments scriptArguments = new ScriptArguments();
+	/** カウント対象のディレクトリパス */
+	private String inputDirectoryPath = null;
+	/** カウント結果出力対象のファイルパス */
+	private String outputFilePath = null;
 
 	/**
 	 * <p>
@@ -34,8 +36,8 @@ public final class Arguments {
 	 * <ul>
 	 * <li>コマンドライン引数の長さが0の場合、ステップカウント処理実行モードがGUIモードになる。</li>
 	 * <li>コマンドライン引数に{@literal -h}が存在する場合、ステップカウント処理実行モードがヘルプモードになる。</li>
+	 * <li>コマンドライン引数に{@literal -i}が存在する場合、ステップカウント処理実行モードが対話モードになる。</li>
 	 * <li>コマンドライン引数に{@literal -s}が存在する場合、ステップカウント処理実行モードがスクリプトモードになる。<br>
-	 * また、スクリプトモードで利用する引数を{@link ScriptArguments}に設定する。</li>
 	 * <li>スクリプトモードで利用する引数は{@literal -input=}および{@literal -output=}を指定する。</li>
 	 * <li>{@literal -input=}：「=」以降にカウント対象のディレクトリパスを指定する。</li>
 	 * <li>{@literal -output=}：「=」以降にカウント結果出力対象のファイルパスを指定する。</li>
@@ -59,6 +61,9 @@ public final class Arguments {
 			if (Objects.equals(commandOption, "-h")) {
 				// ヘルプモードの場合
 				this.stepCountExecuteMode = ExecuteMode.HELP;
+			} else if (Objects.equals(commandOption, "-i")) {
+				// 対話モードの場合
+				this.stepCountExecuteMode = ExecuteMode.INTERACTIVE;
 			} else if (Objects.equals(commandOption, "-s")) {
 				// スクリプトモードの場合
 				this.stepCountExecuteMode = ExecuteMode.SCRIPT;
@@ -79,7 +84,11 @@ public final class Arguments {
 			}
 		}
 		if (this.stepCountExecuteMode == ExecuteMode.SCRIPT) {
-			this.scriptArguments = new ScriptArguments(inputDirectoryPath, outputFilePath);
+			if (inputDirectoryPath == null || outputFilePath == null) {
+				throw new IllegalArgumentException("カウント対象のディレクトリパスまたはカウント結果出力対象のファイルパスの値がNullです");
+			}
+			this.inputDirectoryPath = inputDirectoryPath;
+			this.outputFilePath = outputFilePath;
 		}
 	}
 
@@ -115,12 +124,22 @@ public final class Arguments {
 	
 	/**
 	 * <p>
-	 * スクリプトモードで利用する引数をオブジェクト化したクラスを返却するメソッド
+	 * カウント対象のディレクトリパスを返却するメソッド
 	 * 
-	 * @return スクリプトモードで利用する引数をオブジェクト化したクラス
+	 * @return カウント対象のディレクトリパス
 	 */
-	public ScriptArguments getScriptArguments() {
-		return this.scriptArguments;
+	public String getInputDirectoryPath() {
+		return inputDirectoryPath;
+	}
+
+	/**
+	 * <p>
+	 * カウント対象のディレクトリパスを返却するメソッド
+	 * 
+	 * @return カウント対象のディレクトリパス
+	 */
+	public String getOutputFilePath() {
+		return outputFilePath;
 	}
 	
 }

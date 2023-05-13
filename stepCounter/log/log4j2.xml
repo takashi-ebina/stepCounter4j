@@ -20,11 +20,12 @@
     
 	<Appenders>
 		<!-- コンソールに出力する設定 -->
-		<Console name="Console" target="SYSTEM_OUT">
+		<!-- ステップ数集計処理をコンソールから実行する際にログを出力させたくないためコメントアウト -->
+		<!-- <Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout>
 				<pattern>${format1}</pattern>
 			</PatternLayout>
-		</Console>
+		</Console> -->
 
 		<!-- ファイルに出力する設定 -->
 		<RollingFile name="logfile001" append="true" fileName="${logfile}"
@@ -41,7 +42,8 @@
 	
 	<Loggers>
 		<Root level="trace">
-			<AppenderRef ref="Console" />
+		<!-- ステップ数集計処理をコンソールから実行する際にログを出力させたくないためコメントアウト -->
+			<!-- <AppenderRef ref="Console" />-->
 			<AppenderRef ref="logfile001" />
 		</Root>
 	</Loggers>

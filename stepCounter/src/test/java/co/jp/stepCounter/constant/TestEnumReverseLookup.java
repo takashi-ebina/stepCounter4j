@@ -1,6 +1,3 @@
-/**
- * 
- */
 package co.jp.stepCounter.constant;
 
 import org.junit.jupiter.api.Disabled;

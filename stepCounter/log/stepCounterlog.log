@@ -1,0 +1,139 @@
+2023/05/13 10:27:20.136 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:27:20.144 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output/result.csv
+2023/05/13 10:27:20.144 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCounterSharedService:execStepCount() -- ステップカウント処理 開始 ---------------------------------------
+2023/05/13 10:27:20.145 [main] WARN   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ファイルの拡張子が未対応。ステップカウント処理をスキップ。 ファイル名：.DS_Store
+2023/05/13 10:27:20.145 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Mario.java
+2023/05/13 10:27:20.146 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Luigi.java
+2023/05/13 10:27:20.146 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Character.java
+2023/05/13 10:27:20.147 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：HammerBros.java
+2023/05/13 10:27:20.147 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：CharacterIf.java
+2023/05/13 10:27:20.148 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Main.java
+2023/05/13 10:27:20.149 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Constant.java
+2023/05/13 10:27:20.150 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Character.java
+2023/05/13 10:27:20.150 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/CharacterIf.java
+2023/05/13 10:27:20.151 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/constant/Constant.java
+2023/05/13 10:27:20.151 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/HammerBros.java
+2023/05/13 10:27:20.151 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Luigi.java
+2023/05/13 10:27:20.151 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/logic/Main.java
+2023/05/13 10:27:20.151 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Mario.java
+2023/05/13 10:27:20.152 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCounterSharedService:execStepCount() -- ステップカウント処理 終了 ---------------------------------------
+2023/05/13 10:27:20.164 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/result.csv
+2023/05/13 10:27:20.164 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/05/13 10:27:20.168 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:27:20.169 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output
+2023/05/13 10:27:20.169 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() チェック結果：出力ファイルパスがディレクトリ
+2023/05/13 10:27:20.172 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:27:20.172 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output/result.csv
+2023/05/13 10:28:16.459 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:28:16.464 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output/result.csv
+2023/05/13 10:28:16.466 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCounterSharedService:execStepCount() -- ステップカウント処理 開始 ---------------------------------------
+2023/05/13 10:28:16.470 [main] WARN   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ファイルの拡張子が未対応。ステップカウント処理をスキップ。 ファイル名：.DS_Store
+2023/05/13 10:28:16.474 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Mario.java
+2023/05/13 10:28:16.477 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Luigi.java
+2023/05/13 10:28:16.477 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Character.java
+2023/05/13 10:28:16.479 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：HammerBros.java
+2023/05/13 10:28:16.479 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：CharacterIf.java
+2023/05/13 10:28:16.480 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Main.java
+2023/05/13 10:28:16.483 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Constant.java
+2023/05/13 10:28:16.487 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Character.java
+2023/05/13 10:28:16.488 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/CharacterIf.java
+2023/05/13 10:28:16.488 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/constant/Constant.java
+2023/05/13 10:28:16.488 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/HammerBros.java
+2023/05/13 10:28:16.488 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Luigi.java
+2023/05/13 10:28:16.489 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/logic/Main.java
+2023/05/13 10:28:16.489 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Mario.java
+2023/05/13 10:28:16.492 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCounterSharedService:execStepCount() -- ステップカウント処理 終了 ---------------------------------------
+2023/05/13 10:28:16.500 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:28:16.500 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output/result.csv
+2023/05/13 10:28:16.501 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCounterSharedService:execStepCount() -- ステップカウント処理 開始 ---------------------------------------
+2023/05/13 10:28:16.502 [main] WARN   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ファイルの拡張子が未対応。ステップカウント処理をスキップ。 ファイル名：.DS_Store
+2023/05/13 10:28:16.502 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Mario.java
+2023/05/13 10:28:16.503 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Luigi.java
+2023/05/13 10:28:16.504 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Character.java
+2023/05/13 10:28:16.505 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：HammerBros.java
+2023/05/13 10:28:16.506 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：CharacterIf.java
+2023/05/13 10:28:16.507 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Main.java
+2023/05/13 10:28:16.508 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Constant.java
+2023/05/13 10:28:16.510 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/logic/Main.java
+2023/05/13 10:28:16.510 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Character.java
+2023/05/13 10:28:16.510 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/constant/Constant.java
+2023/05/13 10:28:16.511 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/CharacterIf.java
+2023/05/13 10:28:16.511 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Mario.java
+2023/05/13 10:28:16.511 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Luigi.java
+2023/05/13 10:28:16.511 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/HammerBros.java
+2023/05/13 10:28:16.512 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCounterSharedService:execStepCount() -- ステップカウント処理 終了 ---------------------------------------
+2023/05/13 10:28:16.515 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:28:16.516 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output/result.csv
+2023/05/13 10:28:16.516 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCounterSharedService:execStepCount() -- ステップカウント処理 開始 ---------------------------------------
+2023/05/13 10:28:16.516 [main] WARN   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ファイルの拡張子が未対応。ステップカウント処理をスキップ。 ファイル名：.DS_Store
+2023/05/13 10:28:16.517 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Mario.java
+2023/05/13 10:28:16.517 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Luigi.java
+2023/05/13 10:28:16.518 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Character.java
+2023/05/13 10:28:16.519 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：HammerBros.java
+2023/05/13 10:28:16.520 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：CharacterIf.java
+2023/05/13 10:28:16.521 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Main.java
+2023/05/13 10:28:16.522 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Constant.java
+2023/05/13 10:28:16.523 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Mario.java
+2023/05/13 10:28:16.523 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Luigi.java
+2023/05/13 10:28:16.523 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Character.java
+2023/05/13 10:28:16.523 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/HammerBros.java
+2023/05/13 10:28:16.524 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/CharacterIf.java
+2023/05/13 10:28:16.524 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/logic/Main.java
+2023/05/13 10:28:16.524 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/constant/Constant.java
+2023/05/13 10:28:16.524 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCounterSharedService:execStepCount() -- ステップカウント処理 終了 ---------------------------------------
+2023/05/13 10:28:16.531 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:28:16.531 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output/result.csv
+2023/05/13 10:28:16.532 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCounterSharedService:execStepCount() -- ステップカウント処理 開始 ---------------------------------------
+2023/05/13 10:28:16.534 [main] WARN   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ファイルの拡張子が未対応。ステップカウント処理をスキップ。 ファイル名：.DS_Store
+2023/05/13 10:28:16.534 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Mario.java
+2023/05/13 10:28:16.535 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Luigi.java
+2023/05/13 10:28:16.536 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Character.java
+2023/05/13 10:28:16.537 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：HammerBros.java
+2023/05/13 10:28:16.538 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：CharacterIf.java
+2023/05/13 10:28:16.539 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Main.java
+2023/05/13 10:28:16.540 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Constant.java
+2023/05/13 10:28:16.541 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Mario.java
+2023/05/13 10:28:16.541 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Luigi.java
+2023/05/13 10:28:16.541 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Character.java
+2023/05/13 10:28:16.541 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/HammerBros.java
+2023/05/13 10:28:16.541 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/CharacterIf.java
+2023/05/13 10:28:16.542 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/logic/Main.java
+2023/05/13 10:28:16.542 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/constant/Constant.java
+2023/05/13 10:28:16.542 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCounterSharedService:execStepCount() -- ステップカウント処理 終了 ---------------------------------------
+2023/05/13 10:28:16.560 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:28:16.560 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output/result.csv
+2023/05/13 10:28:16.567 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output/result.csv
+2023/05/13 10:28:16.567 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/05/13 10:28:16.570 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:28:16.570 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:28:16.571 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() チェック結果：出力ファイルパスがディレクトリ
+2023/05/13 10:28:16.573 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:28:16.574 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output/result.csv
+2023/05/13 10:28:16.576 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:28:16.577 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output/result.csv
+2023/05/13 10:28:16.580 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:28:16.580 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output/result.csv
+2023/05/13 10:28:16.580 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCounterSharedService:execStepCount() -- ステップカウント処理 開始 ---------------------------------------
+2023/05/13 10:28:16.580 [main] WARN   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ファイルの拡張子が未対応。ステップカウント処理をスキップ。 ファイル名：.DS_Store
+2023/05/13 10:28:16.581 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Mario.java
+2023/05/13 10:28:16.581 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Luigi.java
+2023/05/13 10:28:16.582 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Character.java
+2023/05/13 10:28:16.582 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：HammerBros.java
+2023/05/13 10:28:16.582 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：CharacterIf.java
+2023/05/13 10:28:16.583 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Main.java
+2023/05/13 10:28:16.583 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountExecutor:execStepCountInDirectory() ステップカウント処理開始。 ファイル名：Constant.java
+2023/05/13 10:28:16.584 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Character.java
+2023/05/13 10:28:16.584 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/CharacterIf.java
+2023/05/13 10:28:16.584 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/constant/Constant.java
+2023/05/13 10:28:16.585 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/HammerBros.java
+2023/05/13 10:28:16.585 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Luigi.java
+2023/05/13 10:28:16.585 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/logic/Main.java
+2023/05/13 10:28:16.585 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCountCsvDao:save() ステップカウント結果出力開始。 ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/character/Mario.java
+2023/05/13 10:28:16.586 [main] INFO   co.jp.stepCounter.infrastructure.log.Log4J2 StepCounterSharedService:execStepCount() -- ステップカウント処理 終了 ---------------------------------------
+2023/05/13 10:28:16.588 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input/result.csv
+2023/05/13 10:28:16.588 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/05/13 10:28:16.590 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:28:16.590 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output
+2023/05/13 10:28:16.591 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() チェック結果：出力ファイルパスがディレクトリ
+2023/05/13 10:28:16.593 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/input
+2023/05/13 10:28:16.594 [main] DEBUG  co.jp.stepCounter.infrastructure.log.Log4J2 ValidatorUtil:outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter/work/output/result.csv

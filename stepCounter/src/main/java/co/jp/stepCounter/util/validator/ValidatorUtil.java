@@ -2,10 +2,10 @@ package co.jp.stepCounter.util.validator;
 
 import java.io.File;
 import java.util.Objects;
+import java.util.Scanner;
 
-import co.jp.stepCounter.constant.Constant.ExecuteMode;
-import co.jp.stepCounter.constant.Constant.FilePathType;
-import co.jp.stepCounter.util.log.Log4J2;
+import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
+import co.jp.stepCounter.infrastructure.log.Log4J2;
 
 /**
  * <p>
@@ -43,14 +43,15 @@ public class ValidatorUtil {
 	 */
 	public static boolean inputDirectoryCheck(final String inputPath) {
 
+		logger.logDebug("入力ディレクトリパスチェック ファイルパス：" + inputPath);
+		
 		if ("".equals(inputPath)) {
-			// System.out.println("--> 入力フォルダが指定されていません。");
-			logger.logInfo("入力フォルダが指定されていません。");
+			logger.logDebug("チェック結果：入力ファイルパスが未指定");
 			return false;
 		}
-		if (!fileCheck(inputPath, FilePathType.DIRECTORY)) {
-			// System.out.println("--> 入力フォルダが指定に誤りがあります。");
-			logger.logInfo("入力フォルダが指定に誤りがあります。");
+		final File file = new File(inputPath);
+		if (!file.isDirectory()) {
+			logger.logDebug("チェック結果：入力ファイルパスがファイル");
 			return false;
 		}
 		return true;
@@ -58,7 +59,7 @@ public class ValidatorUtil {
 
 	/**
 	 * <p>
-	 * 出力ファイルチェック
+	 * 出力ファイルパスチェック
 	 * <p>
 	 * 以下のチェックを実施する。
 	 * <ol>
@@ -69,91 +70,59 @@ public class ValidatorUtil {
 	 * 
 	 * @param outputPath 出力ファイルパス
 	 * @param mode       コマンドオプション区分
+	 * @param sn         Scanner
 	 * @return 全ての入力チェックが正常の場合はtrueを返却。それ以外の場合はfalseを返却する。
 	 */
-	public static boolean outputFileCheck(final String outputPath, final ExecuteMode mode) {
-
+	public static boolean outputFileCheck(final String outputPath, final ExecuteMode mode, final Scanner sn) {
+		
+		logger.logDebug("出力ファイルパスチェック ファイルパス：" + outputPath);
+		
 		if ("".equals(outputPath)) {
-			// System.out.println("--> 出力フォルダが指定されていません。");
-			logger.logInfo("出力フォルダが指定されていません。");
+			logger.logDebug("チェック結果：出力ファイルパスが未指定");
 			return false;
 		}
-		if (fileCheck(outputPath, FilePathType.DIRECTORY)) {
-			// System.out.println("--> 出力指定がフォルダになっています。 ファイルを指定してください");
-			logger.logInfo("出力指定がフォルダになっています。 ファイルを指定してください。");
+		final File file = new File(outputPath);
+		if (file.isDirectory()) {
+			logger.logDebug("チェック結果：出力ファイルパスがディレクトリ");
 			return false;
 		}
-		if (!isExtensionForCsv(new File(outputPath))) {
-			// System.out.println("--> 拡張子がCSVではありません。");
-			logger.logInfo("拡張子がCSVではありません。");
+		if (!isExtension(file, "csv")) {
+			logger.logDebug("チェック結果：拡張子がCSV以外");
 			return false;
 		}
-//		if (mode == ExecuteMode.INTERACTIVE && new File(outputPath).exists()) {
-//			System.out.println("--> ------------------------------------------------");
-//			System.out.println("--> 該当のファイルが既に存在します。 上書きされてしまいますがよろしいですか？ y / n");
-//			System.out.println("--> ファイルパス：" + outputPath);
-//			System.out.println("--> ------------------------------------------------");
-//			@SuppressWarnings("resource")
-//			final Scanner sn = new Scanner(System.in);
-//			while (true) {
-//				final String decide = sn.next().toLowerCase().trim();
-//				if (Objects.equals(decide, "y")) {
-//					break;
-//				} else if (Objects.equals(decide, "n")) {
-//					return false;
-//				} else {
-//					System.out.println("--> y または n を入力してください");
-//				}
-//			}
-//		}
+		if (mode == ExecuteMode.INTERACTIVE &&
+				new File(outputPath).exists() && sn != null) {
+			System.out.println("--> ------------------------------------------------");
+			System.out.println("--> 該当のファイルが既に存在します。 上書きされてしまいますがよろしいですか？ y / n");
+			System.out.println("--> ファイルパス：" + outputPath);
+			System.out.println("--> ------------------------------------------------");
+			while (true) {
+				final String decide = sn.next().toLowerCase().trim();
+				if (Objects.equals(decide, "y")) {
+					break;
+				} else if (Objects.equals(decide, "n")) {
+					return false;
+				} else {
+					System.out.println("--> y または n を入力してください");
+				}
+			}
+		}
 		return true;
 	}
 
 	/**
 	 * <p>
-	 * ファイルチェック
+	 * 拡張子チェック
 	 * <p>
-	 * 引数のファイルパスがファイルまたはディレクトリであるかを判定する。<br>
-	 * 引数のファイルパスタイプ（{@link FilePathType}）によってチェック内容が変動する。
-	 * 
-	 * @param path         チェック対象のファイルパス
-	 * @param filePathType ファイルパスタイプ<br>
-	 *                     {@link FilePathType#DIRECTORY}の場合はディレクトリであるかのチェック処理、<br>
-	 *                     {@link FilePathType#FILE}の場合はファイルであるかのチェック処理を行う。<br>
-	 * @return 全ての入力チェックが正常の場合はtrueを返却。それ以外の場合はfalseを返却する。
-	 * @see FilePathType
-	 */
-	private static boolean fileCheck(final String path, final FilePathType filePathType) {
-		boolean retFlg = false;
-		File file = new File(path);
-		switch (filePathType) {
-		case DIRECTORY:
-			retFlg = file.isDirectory();
-			break;
-		case FILE:
-			if (file.isDirectory()) {
-				retFlg = false;
-			} else {
-				retFlg = file.canRead();
-			}
-			break;
-		default:
-		}
-		return retFlg;
-	}
-
-	/**
-	 * <p>
-	 * CSVファイルチェック
-	 * <p>
-	 * 引数のファイルの拡張子がCSVであるか判定する。
+	 * 引数のファイルの拡張子が想定通りであるか判定する。
 	 * 
 	 * @param file チェック対象のファイル
-	 * @return ファイルの拡張子がCSVの場合はtrueを返却。それ以外の場合はfalseを返却する。
+	 * @param expectedExtension 期待値となる拡張子
+	 * @return ファイルの拡張子が想定通りの場合はtrueを返却。それ以外の場合はfalseを返却する。
 	 */
-	private static boolean isExtensionForCsv(final File file) {
+	private static boolean isExtension(final File file, final String expectedExtension) {
 		final String fileName = file.getName();
 		final String extension = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase().trim();
-		return Objects.equals(extension, "csv");
+		return Objects.equals(extension, expectedExtension);
 	}
 }
