@@ -18,8 +18,8 @@ import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
  * フォルダ内に存在するプログラムファイルのステップ数を集計し、CSV形式でファイルに出力します。
  * <p>
  * [使い方]<br>
- * java StepCounter<br>
- * java StepCounter [オプション] <br>
+ * java -jar StepCounter-jar-with-dependencies.jar<br>
+ * java -jar StepCounter-jar-with-dependencies.jar [オプション] <br>
  * [オプション]<br>
  * {@literal -h}:このメッセージを表示して終了する。<br>
  * {@literal -i}:対話モードで実行する。（オプションを指定しない場合はGUIモード）<br>
