@@ -61,7 +61,7 @@ public class Log4J2 {
 		pos += 2; // 出力したいクラス名/メソッド名は自分(MyLog4J)の2個次の位置にいる
 		final StackTraceElement currentStackTrace = stackTraceElements[pos];
 		// ログ出力対象のクラス名:[メソッド名] + log message
-		return extractClassName(currentStackTrace.getClassName()) + ":" + currentStackTrace.getMethodName() + "() " + msg;
+		return extractClassName(currentStackTrace.getClassName()) + "#" + currentStackTrace.getMethodName() + "() " + msg;
 	}
 	
 	/**

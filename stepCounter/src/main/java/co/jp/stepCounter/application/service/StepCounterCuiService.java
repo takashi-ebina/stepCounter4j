@@ -57,7 +57,7 @@ public class StepCounterCuiService {
 			final SortType stepCountSortType, final SortTarget stepCountSortTarget) {
 		try {
 			logger.logInfo("------------------------------------------------------------------");
-			logger.logInfo("-- START StrpCount -----------------------------------------------");
+			logger.logInfo("-- START StepCount -----------------------------------------------");
 			logger.logInfo("------------------------------------------------------------------");
 
 			// ステップ数の集計処理
@@ -68,7 +68,7 @@ public class StepCounterCuiService {
 					new AllFilesStepCountData(stepCountDataList, stepCountSortType, stepCountSortTarget), outputFile);
 
 			logger.logInfo("------------------------------------------------------------------");
-			logger.logInfo("-- END   StrpCount -----------------------------------------------");
+			logger.logInfo("-- END   StepCount -----------------------------------------------");
 			logger.logInfo("------------------------------------------------------------------");
 
 			return ProcessResult.SUCCESS;

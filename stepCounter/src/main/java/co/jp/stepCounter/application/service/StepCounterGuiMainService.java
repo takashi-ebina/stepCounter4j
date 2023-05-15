@@ -56,7 +56,9 @@ public class StepCounterGuiMainService {
 	public ProcessResult execStepCount(final File inputDirectory, final File outputFile,
 			final SortType stepCountSortType, final SortTarget stepCountSortTarget) {
 		try {
-			logger.logInfo("-- ステップカウント処理 開始 ---------------------------------------");
+			logger.logInfo("------------------------------------------------------------------");
+			logger.logInfo("-- START StepCount -----------------------------------------------");
+			logger.logInfo("------------------------------------------------------------------");
 
 			// ステップ数の集計処理
 			final List<StepCountData> stepCountDataList = 
@@ -65,7 +67,9 @@ public class StepCounterGuiMainService {
 			stepCountRepository.save(
 					new AllFilesStepCountData(stepCountDataList, stepCountSortType, stepCountSortTarget), outputFile);
 
-			logger.logInfo("-- ステップカウント処理 終了 ---------------------------------------");
+			logger.logInfo("------------------------------------------------------------------");
+			logger.logInfo("-- END   StepCount -----------------------------------------------");
+			logger.logInfo("------------------------------------------------------------------");
 
 			return ProcessResult.SUCCESS;
 		} catch (Exception e) {

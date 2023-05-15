@@ -2,9 +2,12 @@ package co.jp.stepCounter.presentation.view;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ImageProducer;
 import java.io.File;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -55,7 +58,8 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	private ButtonGroup sortTypeRadioGroup = null;
 	private ButtonGroup sortTargetRadioGroup = null;
 	
-	private final String TITLE_IMG_PATH = "./src/main/resources/img/icon_ebi.png";
+	/** タイトルロゴ */
+	private final String TITLE_IMG_PATH = "/img/icon_ebi.png";
 	
 	private final StepCounterGuiMainController controller;
 
@@ -104,8 +108,16 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	private JPanel getJContentHeaderPane() {
 		if (this.jHeaderContentPane == null) {
 			this.jHeaderContentPane = new JPanel();
-			ImageIcon icon1 = new ImageIcon(TITLE_IMG_PATH);
-			JLabel label1 = new JLabel(icon1);
+			URL url = this.getClass().getResource(TITLE_IMG_PATH);
+			ImageIcon icon = null;
+			Image image = null;
+			try {
+				image = this.createImage((ImageProducer) url.getContent());
+				icon = new ImageIcon(image);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			JLabel label1 = new JLabel(icon);
 			this.jHeaderContentPane.add(label1, null);
 		}
 		return this.jHeaderContentPane;
