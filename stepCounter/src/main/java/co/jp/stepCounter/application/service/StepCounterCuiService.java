@@ -1,15 +1,19 @@
 package co.jp.stepCounter.application.service;
 
 import java.io.File;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
-import co.jp.stepCounter.application.sharedService.StepCounterSharedService;
-import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.constant.StepCounterConstant.ProcessResult;
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
-import co.jp.stepCounter.presentation.controller.cui.StepCounterCuiRequestDto;
-import co.jp.stepCounter.util.validator.ValidatorUtil;
+import co.jp.stepCounter.domain.model.stepCountExecutor.StepCountExecutor;
+import co.jp.stepCounter.domain.repository.StepCountRepository;
+import co.jp.stepCounter.domain.value.AllFilesStepCountData;
+import co.jp.stepCounter.domain.value.StepCountData;
+import co.jp.stepCounter.infrastructure.csvdao.StepCountCsvDao;
+import co.jp.stepCounter.infrastructure.log.Log4J2;
+
 /**
  * <p>
  * CUIでステップカウント処理を実行するサービスクラス
@@ -20,159 +24,53 @@ import co.jp.stepCounter.util.validator.ValidatorUtil;
  */
 public class StepCounterCuiService {
 
-	/** 共通サービスクラス */
-	private StepCounterSharedService sharedService;
-	
+	/** Log4J2インスタンス */
+	private final Log4J2 logger = Log4J2.getInstance();
+	/** ステップカウント処理のリポジトリクラス */
+	private StepCountRepository stepCountRepository;
+	/** ステップ数集計処理実行クラス */
+	private StepCountExecutor stepCountExecutor;
+
 	/**
 	 * コンストラクタ
 	 */
 	public StepCounterCuiService() {
-		sharedService = new StepCounterSharedService();
+		stepCountRepository = new StepCountCsvDao();
+		stepCountExecutor = new StepCountExecutor();
 	}
-	/**
-	 * <p>
-	 * ヘルプメッセージ出力メソッド
-	 * <p>
-	 * ヘルプメッセージをコンソールに出力する。
-	 */
-	public void printHelp() {
-		System.out.println("Usage: java StepCounter");
-		System.out.println("       java StepCounter [OPTIONS]");
-		System.out.println("OPTIONS");
-		System.out.println("       -h:このメッセージを表示して終了する。");
-		System.out.println("       -s:スクリプトモードで実行する。（オプションを指定しない場合はGUIモード）");
-		System.out.println("       -input=[inputDirectoryPath]:ステップカウント対象のディレクトリパスを指定する。 ※「-s」オプションを利用する場合に指定してください。");
-		System.out.println("       -output=[outputFilePath]:カウント結果出力対象のファイルパスを指定する。 ※「-s」オプションを利用する場合に指定してください。");
-		System.out.println("       -asc=[sortTarget]:ステップカウント処理の出力順を[sortTarget]をキーとして昇順ソートする。");
-		System.out.println("       -desc=[sortTarget]:ステップカウント処理の出力順を[sortTarget]をキーとして降順ソートする。");
-		System.out.println("       [sortTarget]: 0:ファイルパス、1:総行数、2:実行行数、3:コメント行数、4:空行数");
-	}
-	/**
-	 * <p>
-	 * 対話モードのステップカウントメソッド
-	 * <p>
-	 * [処理概要]<br>
-	 * <ol>
-	 * <li>カウント対象のディレクトリパスの入力<br>
-	 * <li>カウント対象のディレクトリパスの入力チェック<br>
-	 * <li>カウント結果出力対象のファイルパスの入力<br>
-	 * <li>カウント結果出力対象のファイルパスの入力チェック<br>
-	 * <li>ソート区分の入力<br>
-	 * <li>ソート対象の入力<br>
-	 * <li>カウント対象ディレクトリのステップカウント処理及びカウント結果をカウント結果出力ファイルに書き込む処理の呼出し<br>
-	 * </ol>
-	 */
-	@SuppressWarnings("resource")
-	public void stepCountInteractiveMode() {
-		System.out.println("--> ------------------------------------------------");
-		System.out.println("--> カウント対象のディレクトリパスを入力してください");
-		System.out.println("--> ------------------------------------------------");
-		final Scanner sn = new Scanner(System.in);
-		final String inputDirectoryPath = sn.next();
-		if (!ValidatorUtil.inputDirectoryCheck(inputDirectoryPath)) {
-			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> 入力フォルダに問題があります。");
-			System.out.println("--> ------------------------------------------------");
-			return;
-		}
 
-		System.out.println("--> ------------------------------------------------");
-		System.out.println("--> カウント結果出力対象のファイルパスを入力してください");
-		System.out.println("--> ファイル拡張子：CSV");
-		System.out.println("--> ------------------------------------------------");
-		final String outputFilePath = sn.next();
-		if (!ValidatorUtil.outputFileCheck(outputFilePath, ExecuteMode.INTERACTIVE, sn)) {
-			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> 出力ファイルに問題があります。");
-			System.out.println("--> ------------------------------------------------");
-			return;
-		}
-		
-		System.out.println("--> ------------------------------------------------");
-		System.out.println("--> ソート区分を入力してください");
-		System.out.println("--> 0：ソートなし、1：昇順ソート、2：降順ソート");
-		System.out.println("--> ------------------------------------------------");
-		SortType sortType = null;
-		try {
-			sortType = SortType.lookup(sn.next());
-		} catch (IllegalArgumentException e) {
-			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> ソート区分に問題があります。");
-			System.out.println("--> ------------------------------------------------");
-			return;
-		}
-		
-		SortTarget sortTarget = null;
-		if (sortType != SortType.NO_SORT) {
-			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> ソート対象を入力してください");
-			System.out.println("--> 0：ファイルパス、1：総行数、2：実行行数、3：コメント行数、4：空行数");
-			System.out.println("--> ------------------------------------------------");
-			try {
-				sortTarget = SortTarget.lookup(sn.next());
-			} catch (IllegalArgumentException e) {
-				System.out.println("--> ------------------------------------------------");
-				System.out.println("--> ソート対象に問題があります。");
-				System.out.println("--> ------------------------------------------------");
-				return;
-			}
-		} else {
-			sortTarget = SortTarget.FILEPATH;
-		}
-		
-		final ProcessResult result = 
-				sharedService.execStepCount(new File(inputDirectoryPath), new File(outputFilePath), sortType, sortTarget);
-		if (result == ProcessResult.SUCCESS) {
-			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> ステップカウント処理が完了しました。 処理結果：正常終了");
-			System.out.println("--> ------------------------------------------------");
-		} else if (result == ProcessResult.FAIL) {
-			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> ステップカウント処理が完了しました。 処理結果：異常終了");
-			System.out.println("--> ------------------------------------------------");
-		}
-	}
 	/**
 	 * <p>
-	 * スクリプトモードのステップカウントメソッド
+	 * ステップカウント処理実行メソッド
 	 * <p>
-	 * [処理概要]<br>
-	 * <ol>
-	 * <li>カウント対象のディレクトリパスの入力チェック<br>
-	 * <li>カウント結果出力対象のファイルパスの入力チェック<br>
-	 * <li>カウント対象ディレクトリのステップカウント処理及びカウント結果をカウント結果出力ファイルに書き込む処理の呼出し<br>
-	 * </ol>
+	 * 引数のカウント対象のディレクトリ、カウント結果出力対象のファイルを元にステップカウント処理を実行する。
+	 * <p>
+	 * 処理中に例外が発生した場合はエラーメッセージを出力し処理を終了する。
 	 * 
-	 * @param dto CUIでステップカウント処理を実行する際に利用するDTOクラス
-	 * @see StepCounterCuiRequestDto
+	 * @param inputDirectory      カウント対象のディレクトリ
+	 * @param outputFile          カウント結果出力対象のファイル
+	 * @param stepCountSortType   ソート区分
+	 * @param stepCountSortTarget ソート対象
+	 * @return 処理結果。正常終了の場合は{@link ProcessResult#SUCCESS}を返却。それ以外の場合は{@link ProcessResult#FAIL}を返却する。
 	 */
-	public void stepCountScriptMode(final StepCounterCuiRequestDto dto) {
-		final String inputDirectoryPath = dto.getInputDirectoryPath();
-		final String outputFilePath = dto.getOutputFilePath();
+	public ProcessResult execStepCount(final File inputDirectory, final File outputFile,
+			final SortType stepCountSortType, final SortTarget stepCountSortTarget) {
+		try {
+			logger.logInfo("-- ステップカウント処理 開始 ---------------------------------------");
 
-		if (!ValidatorUtil.inputDirectoryCheck(inputDirectoryPath)) {
-			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> 入力フォルダに問題があります。");
-			System.out.println("--> ------------------------------------------------");
-			return;
-		}
-		if (!ValidatorUtil.outputFileCheck(outputFilePath, ExecuteMode.SCRIPT, null)) {
-			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> 出力ファイルに問題があります。");
-			System.out.println("--> ------------------------------------------------");
-			return;
-		}
-		final ProcessResult result = 
-				sharedService.execStepCount(new File(inputDirectoryPath), new File(outputFilePath), dto.getStepCountSortType(), dto.getStepCountSortTarget());
+			// ステップ数の集計処理
+			final List<StepCountData> stepCountDataList = 
+					stepCountExecutor.execStepCountInDirectory(inputDirectory, new ArrayList<StepCountData>());
+			// ステップ数集計結果の書き込み処理
+			stepCountRepository.save(
+					new AllFilesStepCountData(stepCountDataList, stepCountSortType, stepCountSortTarget), outputFile);
 
-		if (result == ProcessResult.SUCCESS) {
-			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> ステップカウント処理が完了しました。 処理結果：正常終了");
-			System.out.println("--> ------------------------------------------------");
-		} else if (result == ProcessResult.FAIL) {
-			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> ステップカウント処理が完了しました。 処理結果：異常終了");
-			System.out.println("--> ------------------------------------------------");
+			logger.logInfo("-- ステップカウント処理 終了 ---------------------------------------");
+
+			return ProcessResult.SUCCESS;
+		} catch (Exception e) {
+			logger.logError("ステップカウント処理で異常発生", e);
+			return ProcessResult.FAIL;
 		}
 	}
 }

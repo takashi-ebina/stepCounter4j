@@ -1,6 +1,6 @@
 co.jp.base
+co.jp.stepCounter
 co.jp.stepCounter.application.service
-co.jp.stepCounter.application.sharedService
 co.jp.stepCounter.constant
 co.jp.stepCounter.domain.model.commentPatternMatch
 co.jp.stepCounter.domain.model.stepCountDetail
@@ -9,11 +9,7 @@ co.jp.stepCounter.domain.repository
 co.jp.stepCounter.domain.value
 co.jp.stepCounter.infrastructure.csvdao
 co.jp.stepCounter.infrastructure.log
-co.jp.stepCounter.main
-co.jp.stepCounter.main.arg
 co.jp.stepCounter.presentation.controller.cui
 co.jp.stepCounter.presentation.controller.gui
+co.jp.stepCounter.presentation.validator
 co.jp.stepCounter.presentation.view
-co.jp.stepCounter.util
-co.jp.stepCounter.util.csvdao
-co.jp.stepCounter.util.validator

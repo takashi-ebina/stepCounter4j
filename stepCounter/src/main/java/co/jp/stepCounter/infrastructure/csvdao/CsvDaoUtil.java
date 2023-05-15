@@ -1,4 +1,4 @@
-package co.jp.stepCounter.util.csvdao;
+package co.jp.stepCounter.infrastructure.csvdao;
 
 import java.io.BufferedWriter;
 import java.io.File;

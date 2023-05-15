@@ -1,8 +1,8 @@
-package co.jp.stepCounter.util.csvdao;
+package co.jp.stepCounter;
 
 import org.junit.jupiter.api.Test;
 
-class TestCsvDaoUtil {
+class TestStepCounter {
 
 	@Test
 	void test() {

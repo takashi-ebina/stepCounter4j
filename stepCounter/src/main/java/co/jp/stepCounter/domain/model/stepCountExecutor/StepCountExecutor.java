@@ -9,7 +9,6 @@ import co.jp.stepCounter.domain.model.stepCountDetail.IfStepCount;
 import co.jp.stepCounter.domain.model.stepCountDetail.StepCountFactory.StepCountType;
 import co.jp.stepCounter.domain.value.StepCountData;
 import co.jp.stepCounter.infrastructure.log.Log4J2;
-import co.jp.stepCounter.util.Util;
 
 /**
  * <p>
@@ -46,7 +45,7 @@ public class StepCountExecutor {
 			if (inputFile.isDirectory()) {
 				execStepCountInDirectory(inputFile, stepCountDatalist);
 			} else if (inputFile.isFile()) {
-				final String extension = Util.getExtension(inputFile);
+				final String extension = getExtension(inputFile);
 				if (isValidExtension(extension)) {
 					IfStepCount stepCountObj = StepCountType.of(extension, CommentPatternMatchType.of(extension));
 					logger.logInfo("ステップカウント処理開始。 ファイル名：" + inputFile.getName());
@@ -70,5 +69,22 @@ public class StepCountExecutor {
 	 */
 	private boolean isValidExtension(final String extension) {
 		return CommentPatternMatchType.containsExtension(extension) && StepCountType.containsExtension(extension);
+	}
+	
+	/**
+	 * <p>
+	 * ファイル拡張子取得メソッド
+	 * <p>
+	 * Fileオブジェクトからファイルの拡張子を取得し返却する。
+	 * 
+	 * @param file Fileオブジェクト
+	 * @return ファイルの拡張子を文字列型で返却する。引数のFileオブジェクトがnullの場合はnullを返却する。
+	 */
+	private String getExtension(final File file) {
+		if (file == null) {
+			return null;
+		}
+		final String fileName = file.getName();
+		return fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase().trim();
 	}
 }

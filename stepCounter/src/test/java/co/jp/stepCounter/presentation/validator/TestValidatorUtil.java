@@ -1,4 +1,4 @@
-package co.jp.stepCounter.util.validator;
+package co.jp.stepCounter.presentation.validator;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Nested;
 
 class TestJavaCommentPatternMatch {
 
-	private JavaCommentPatternMatch jcpm;
+	//private JavaCommentPatternMatch jcpm;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -23,7 +23,7 @@ class TestJavaCommentPatternMatch {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		jcpm = new JavaCommentPatternMatch();
+		//jcpm = new JavaCommentPatternMatch();
 	}
 
 	@AfterEach

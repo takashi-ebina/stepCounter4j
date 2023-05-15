@@ -1,14 +1,18 @@
 package co.jp.stepCounter.application.service;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JOptionPane;
-
-import co.jp.stepCounter.application.sharedService.StepCounterSharedService;
 import co.jp.stepCounter.constant.StepCounterConstant.ProcessResult;
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
-import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
+import co.jp.stepCounter.domain.model.stepCountExecutor.StepCountExecutor;
+import co.jp.stepCounter.domain.repository.StepCountRepository;
+import co.jp.stepCounter.domain.value.AllFilesStepCountData;
+import co.jp.stepCounter.domain.value.StepCountData;
+import co.jp.stepCounter.infrastructure.csvdao.StepCountCsvDao;
+import co.jp.stepCounter.infrastructure.log.Log4J2;
 
 /**
  * <p>
@@ -20,40 +24,53 @@ import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
  */
 public class StepCounterGuiMainService {
 
-	/** 共通サービスクラス */
-	private StepCounterSharedService sharedService;
-	
+	/** Log4J2インスタンス */
+	private final Log4J2 logger = Log4J2.getInstance();
+	/** ステップカウント処理のリポジトリクラス */
+	private StepCountRepository stepCountRepository;
+	/** ステップ数集計処理実行クラス */
+	private StepCountExecutor stepCountExecutor;
+
 	/**
 	 * コンストラクタ
 	 */
 	public StepCounterGuiMainService() {
-		sharedService = new StepCounterSharedService();
+		stepCountRepository = new StepCountCsvDao();
+		stepCountExecutor = new StepCountExecutor();
 	}
+
 	/**
 	 * <p>
-	 * GUIモードのステップカウントメソッド
+	 * ステップカウント処理実行メソッド
 	 * <p>
-	 * [処理概要]<br>
-	 * <ol>
-	 * <li>カウント対象のディレクトリパスの入力チェック<br>
-	 * <li>カウント結果出力対象のファイルパスの入力チェック<br>
-	 * <li>カウント結果出力対象のファイルパスのCSVヘッダーに書き込む処理<br>
-	 * <li>プログラムファイルのステップ数をステップカウント結果出力ファイルに書き込む処理<br>
-	 * </ol>
+	 * 引数のカウント対象のディレクトリ、カウント結果出力対象のファイルを元にステップカウント処理を実行する。
+	 * <p>
+	 * 処理中に例外が発生した場合はエラーメッセージを出力し処理を終了する。
 	 * 
-	 * @param inputDirectoryPath カウント対象のディレクトリ
-	 * @param outputFilePath カウント結果出力対象のファイル
-	 * @param parent 親画面
+	 * @param inputDirectory      カウント対象のディレクトリ
+	 * @param outputFile          カウント結果出力対象のファイル
+	 * @param stepCountSortType   ソート区分
+	 * @param stepCountSortTarget ソート対象
+	 * @return 処理結果。正常終了の場合は{@link ProcessResult#SUCCESS}を返却。それ以外の場合は{@link ProcessResult#FAIL}を返却する。
 	 */
-	public void stepCountGuiMode(final String inputDirectoryPath, final String outputFilePath ,final StepCounterGuiMainView parent) {
+	public ProcessResult execStepCount(final File inputDirectory, final File outputFile,
+			final SortType stepCountSortType, final SortTarget stepCountSortTarget) {
+		try {
+			logger.logInfo("-- ステップカウント処理 開始 ---------------------------------------");
 
-		final ProcessResult result = 
-				sharedService.execStepCount(new File(inputDirectoryPath), new File(outputFilePath), SortType.NO_SORT, SortTarget.FILEPATH);
+			// ステップ数の集計処理
+			final List<StepCountData> stepCountDataList = 
+					stepCountExecutor.execStepCountInDirectory(inputDirectory, new ArrayList<StepCountData>());
+			// ステップ数集計結果の書き込み処理
+			stepCountRepository.save(
+					new AllFilesStepCountData(stepCountDataList, stepCountSortType, stepCountSortTarget), outputFile);
 
-		if (result == ProcessResult.SUCCESS) {
-			JOptionPane.showMessageDialog(parent, "ステップカウント処理が完了しました。 処理結果：正常終了");
-		} else if (result == ProcessResult.FAIL) {
-			JOptionPane.showMessageDialog(parent, "ステップカウント処理が完了しました。 処理結果：異常終了");	
+			logger.logInfo("-- ステップカウント処理 終了 ---------------------------------------");
+
+			return ProcessResult.SUCCESS;
+		} catch (Exception e) {
+			logger.logError("ステップカウント処理で異常発生", e);
+			return ProcessResult.FAIL;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package co.jp.stepCounter.util.validator;
+package co.jp.stepCounter.presentation.validator;
 
 import java.io.File;
 import java.util.Objects;

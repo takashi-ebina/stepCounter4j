@@ -14,7 +14,6 @@ import co.jp.stepCounter.domain.repository.StepCountRepository;
 import co.jp.stepCounter.domain.value.AllFilesStepCountData;
 import co.jp.stepCounter.domain.value.StepCountData;
 import co.jp.stepCounter.infrastructure.log.Log4J2;
-import co.jp.stepCounter.util.csvdao.CsvDaoUtil;
 
 /**
  * <p>
