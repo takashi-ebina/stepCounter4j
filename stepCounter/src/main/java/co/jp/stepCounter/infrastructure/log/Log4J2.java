@@ -64,18 +64,19 @@ public class Log4J2 {
 		return extractClassName(currentStackTrace.getClassName()) + ":" + currentStackTrace.getMethodName() + "() " + msg;
 	}
 	
-    /**
-     * 現在のメソッドを呼び出したクラスの名前を取得する。
-     * @param name パッケージ名付きのクラス名
-     * @return パッケージ名を削除したクラス名。取得できない場合は空文字列
-     */
+	/**
+	 * 現在のメソッドを呼び出したクラスの名前を取得する。
+	 * 
+	 * @param name パッケージ名付きのクラス名
+	 * @return パッケージ名を削除したクラス名。取得できない場合は空文字列
+	 */
 	private String extractClassName(String name) {
-        int n = name.lastIndexOf('.');
-        if (n < 0) {
-            return name;
-        }
-        return name.substring(n + 1);
-    }
+		int n = name.lastIndexOf('.');
+		if (n < 0) {
+			return name;
+		}
+		return name.substring(n + 1);
+	}
 
 	/**
 	 * <p>

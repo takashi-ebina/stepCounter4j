@@ -392,9 +392,6 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	 * @return GUIでステップカウント処理を実行する際に利用するDTOオブジェクト
 	 */
 	private StepCounterGuiRequestDto makeStepCounterGuiRequestDto() {
-		System.out.println(this.sortTypeRadioGroup);
-		System.out.println(this.sortTypeRadioGroup.getSelection());
-		System.out.println(this.sortTypeRadioGroup.getSelection().getActionCommand());
 		final SortType sortType = 
 				SortType.lookup(this.sortTypeRadioGroup.getSelection().getActionCommand(), SortType::getSortTypeName);
 		final SortTarget sortTarget = 

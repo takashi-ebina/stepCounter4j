@@ -79,8 +79,7 @@ public class StepCounter {
 		}
 		// CUIモードとして実行
 		final StepCounterCuiRequestDto requestDto = makeStepCounterCuiRequestDto(args);
-		StepCounterCuiController controller = new StepCounterCuiController();
-		//new StepCounterCuiController().executeStepCount(makeStepCounterCuiRequestDto(args));
+		final StepCounterCuiController controller = new StepCounterCuiController();
 		switch (requestDto.getStepCountExecuteMode()) {
 		case HELP:
 			controller.printHelp();
@@ -152,8 +151,8 @@ public class StepCounter {
 	 * @param del 区切り文字列
 	 * @return 分割された文字列を格納した配列
 	 */
-	private static String[] split(String str, String del){
-		ArrayList<String> list = new ArrayList<String>();
+	private static String[] split(final String str, final String del){
+		final ArrayList<String> list = new ArrayList<String>();
 		int pos   = 0;
 		int index = 0;
 		while ((index = str.indexOf(del, pos)) !=- 1) {
