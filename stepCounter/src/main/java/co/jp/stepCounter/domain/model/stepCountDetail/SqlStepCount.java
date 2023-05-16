@@ -11,7 +11,7 @@ import co.jp.stepCounter.domain.model.stepCountDetail.StepCountFactory.StepCount
  * <p>
  * ステップカウントの具象クラス
  * <p>
- * CSファイルのステップカウント処理を提供する具象クラスです。
+ * Sqlファイルのステップカウント処理を提供する具象クラスです。
  * <p>
  * インスタンスを生成する際は、{@link StepCountType#of(String, IfCommentPatternMatch)}を用いて生成してください。
  * 
@@ -24,31 +24,30 @@ import co.jp.stepCounter.domain.model.stepCountDetail.StepCountFactory.StepCount
  * @see StepCountFactory
  * @see AbsCommentPatternMatch
  */
-public class CsStepCount extends AbsStepCount {
+public class SqlStepCount extends AbsStepCount {
 
 	/**
 	 * <p>
 	 * コンストラクタ
 	 * 
 	 * ファクトリクラスとして利用するために、{@link StepCountType}で利用しています。<br>
-	 * 同一パッケージでこのコンストラクタを用いたインスタンスの生成は可能ですが、。<br>
+	 * 同一パッケージでこのコンストラクタを用いたインスタンスの生成は可能ですが。<br>
 	 * {@link AbsStepCount#commentPatternMatch}が初期化されないため、推奨していません。<br>
 	 * インスタンスを生成する際は、{@link StepCountType#of(String, IfCommentPatternMatch)}を用いて生成してください。
 	 */
-	public CsStepCount() {
+	SqlStepCount() {
 		super();
 	}
-
+	
 	/**
 	 * <p>
 	 * コンストラクタ
 	 * 
 	 * @param commentPatternMatch コメントパターン判定用クラス
 	 * @param methodType メソッド区分
-	 * 
 	 * @throws IllegalArgumentException コメントパターン判定用クラスがNullの場合
 	 */
-	public CsStepCount(final IfCommentPatternMatch commentPatternMatch, final MethodType methodType) {
+	public SqlStepCount(final IfCommentPatternMatch commentPatternMatch, final MethodType methodType) {
 		super(commentPatternMatch, methodType);
 	}
 
@@ -64,11 +63,11 @@ public class CsStepCount extends AbsStepCount {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof CsStepCount)) {
+		if (!(obj instanceof SqlStepCount)) {
 			return false;
 		}
-
-		CsStepCount test = (CsStepCount) obj;
+		
+		SqlStepCount test = (SqlStepCount) obj;
 		if (!(Objects.equals(this.commentPatternMatch, test.commentPatternMatch))) {
 			return false;
 		}
@@ -88,19 +87,20 @@ public class CsStepCount extends AbsStepCount {
 	public int hashCode() {
 		return Objects.hash();
 	}
-
+	
 	/**
 	 * <p>
-	 * Csステップカウントのオブジェクトを返却するメソッド
+	 * Sqlステップカウントのオブジェクトを返却するメソッド
 	 * 
 	 * @param commentPatternMatch コメントパターン判定用クラス
 	 * @param methodType メソッド区分
 	 * @throws IllegalArgumentException コメントパターン判定用クラスがNullの場合
-	 * @return Csステップカウントのオブジェクト
+	 * @return Sqlステップカウントのオブジェクト
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T extends IfStepCount> T create(final IfCommentPatternMatch commentPatternMatch, final MethodType methodType) {
-		return (T) new CsStepCount(commentPatternMatch, methodType);
+	public <T extends IfStepCount> T create(IfCommentPatternMatch commentPatternMatch, MethodType methodType) {
+		return (T) new SqlStepCount(commentPatternMatch, methodType);
 	}
+
 }

@@ -31,8 +31,9 @@ public abstract class AbsCommentPatternMatch implements IfCommentPatternMatch {
 		/** Java１行コメント */
 		Java("^//.*"),
 		/** Cs１行コメント */
-		Cs("^//.*");
-
+		Cs("^//.*"),
+		/** sql１行コメント */
+		sql("^--.*");
 		/** １行コメント種別 */
 		private String value;
 
@@ -62,7 +63,9 @@ public abstract class AbsCommentPatternMatch implements IfCommentPatternMatch {
 		/** Java複数行コメント（開始） */
 		Java("^/\\*[^*]*"),
 		/** Cs複数行コメント（開始） */
-		Cs("^/\\*[^*]*");
+		Cs("^/\\*[^*]*"),
+		/** sql複数行コメント（開始） */
+		sql("^/\\*[^*]*");
 
 		/** 複数行コメント（開始）種別 */
 		private String value;
@@ -93,7 +96,9 @@ public abstract class AbsCommentPatternMatch implements IfCommentPatternMatch {
 		/** Java複数行コメント（終了） */
 		Java("\\*/$"),
 		/** Cs複数行コメント（終了） */
-		Cs("\\*/$");
+		Cs("\\*/$"),
+		/** sql複数行コメント（終了） */
+		sql("\\*/$");
 
 		/** 複数行コメント（終了）種別 */
 		private String value;

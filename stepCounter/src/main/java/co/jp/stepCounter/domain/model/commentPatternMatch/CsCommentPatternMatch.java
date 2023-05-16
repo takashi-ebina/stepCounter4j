@@ -22,7 +22,6 @@ import co.jp.stepCounter.domain.model.commentPatternMatch.CommentPatternMatchFac
  * 
  * @see IfCommentPatternMatch
  * @see AbsCommentPatternMatch
- * @see JavaCommentPatternMatch
  * @see CommentPatternMatchFactory
  */
 public class CsCommentPatternMatch extends AbsCommentPatternMatch {

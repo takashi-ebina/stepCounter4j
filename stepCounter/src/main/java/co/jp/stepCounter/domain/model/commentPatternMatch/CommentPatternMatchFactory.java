@@ -19,6 +19,7 @@ import co.jp.stepCounter.constant.EnumReverseLookup;
  * @see AbsCommentPatternMatch
  * @see JavaCommentPatternMatch
  * @see CsCommentPatternMatch
+ * @see SqlCommentPatternMatch
  */
 public class CommentPatternMatchFactory {
 	/**
@@ -29,7 +30,9 @@ public class CommentPatternMatchFactory {
 		/** Javaコメント判定用オブジェクト */
 		Java("java", new JavaCommentPatternMatch()),
 		/** Csコメント判定用オブジェクト */
-		Cs("cs", new CsCommentPatternMatch());
+		Cs("cs", new CsCommentPatternMatch()),
+		/** sqlコメント判定用オブジェクト */
+		sql("sql", new SqlCommentPatternMatch());
 
 		/** 拡張子 */
 		private final String extension;

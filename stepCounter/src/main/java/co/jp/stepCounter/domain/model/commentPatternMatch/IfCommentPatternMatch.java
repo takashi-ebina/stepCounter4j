@@ -26,6 +26,7 @@ import co.jp.stepCounter.domain.model.stepCountDetail.StepCountFactory.StepCount
  * @see AbsCommentPatternMatch
  * @see JavaCommentPatternMatch
  * @see CsCommentPatternMatch
+ * @see SqlCommentPatternMatch
  * @see CommentPatternMatchFactory
  */
 public interface IfCommentPatternMatch {
@@ -66,6 +67,7 @@ public interface IfCommentPatternMatch {
 	 * <p>
 	 * コメントパターン判定のオブジェクトを返却するメソッド
 	 * 
+	 * @param <T> 型パラメーターの例です
 	 * @return コメントパターン判定のオブジェクト
 	 */
 	public <T extends IfCommentPatternMatch> T create();

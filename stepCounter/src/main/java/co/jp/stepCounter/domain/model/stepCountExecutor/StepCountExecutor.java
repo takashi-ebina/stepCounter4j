@@ -33,6 +33,7 @@ public class StepCountExecutor {
 	 * @param inputDirectory    カウント対象ディレクトリ
 	 * @param stepCountDatalist 1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラスリスト
 	 * @return stepCountDatalist 1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラスリスト
+	 * @throws Exception プログラムファイルのステップ数集計処理で例外が発生した場合
 	 * @see CommentPatternMatchType#containsExtension
 	 * @see StepCountType#containsExtension
 	 * @see CommentPatternMatchType#of
@@ -40,7 +41,7 @@ public class StepCountExecutor {
 	 * @see IfCommentPatternMatch
 	 * @see IfStepCount#stepCount
 	 */
-	public List<StepCountData> execStepCountInDirectory(final File inputDirectory, final List<StepCountData> stepCountDatalist) {
+	public List<StepCountData> execStepCountInDirectory(final File inputDirectory, final List<StepCountData> stepCountDatalist) throws Exception {
 		for (final File inputFile : inputDirectory.listFiles()) {
 			if (inputFile.isDirectory()) {
 				execStepCountInDirectory(inputFile, stepCountDatalist);

@@ -19,23 +19,37 @@ import co.jp.stepCounter.domain.model.commentPatternMatch.IfCommentPatternMatch;
  * @see IfStepCount
  * @see AbsStepCount
  * @see JavaStepCount
+ * @see SqlStepCount
  * @see CsStepCount
  */
 public class StepCountFactory {
+	
+	/**
+	 * <p>
+	 * ステップカウントメソッドの種別をもつ列挙型クラス
+	 */
+	public enum MethodType {
+		/** 標準 */
+		DEFAULT,
+		/** 独自 */
+		ORIGINAL
+	}
+	
 	/**
 	 * <p>
 	 * ステップカウントクラスの種別をもつ列挙型クラス
 	 */
 	public enum StepCountType {
 		/** Javaステップカウントオブジェクト */
-		Java("java", new JavaStepCount()),
+		Java("java", new JavaStepCount(), MethodType.DEFAULT),
 		/** Csステップカウントオブジェクト */
-		Cs("cs", new CsStepCount());
+		Cs("cs", new CsStepCount(), MethodType.DEFAULT);
 
 		/** 拡張子 */
 		private final String extension;
 		/** ステップカウントオブジェクト */
 		private final IfStepCount stepCount;
+		private final MethodType methodType;
 
 		/**
 		 * <p>
@@ -43,10 +57,12 @@ public class StepCountFactory {
 		 * 
 		 * @param extension    拡張子
 		 * @param stepCount ステップカウントオブジェクト
+		 * @param methodType メソッド区分
 		 */
-		StepCountType(final String extension, final IfStepCount stepCount) {
+		StepCountType(final String extension, final IfStepCount stepCount, final MethodType methodType) {
 			this.extension = extension;
 			this.stepCount = stepCount;
+			this.methodType = methodType;
 		}
 
 		/**
@@ -71,6 +87,16 @@ public class StepCountFactory {
 
 		/**
 		 * <p>
+		 * ステップカウントオブジェクトを返却するメソッド
+		 * 
+		 * @return ステップカウントオブジェクト
+		 */
+		public MethodType getMethodType() {
+			return this.methodType;
+		}
+
+		/**
+		 * <p>
 		 * 拡張子に対応するステップカウントオブジェクトを返却するメソッド
 		 * <p>
 		 * 拡張子から該当のEnumを取得する処理は{@link EnumReverseLookup#lookup(Object)}に移譲しています。
@@ -82,6 +108,21 @@ public class StepCountFactory {
 		public static IfStepCount getByStepCount(final String extension) throws IllegalArgumentException {
 			return new EnumReverseLookup<>(StepCountType.class, StepCountType::getExtension)
 					.lookup(extension).getStepCount();
+		}
+
+		/**
+		 * <p>
+		 * 拡張子に対応するステップカウントオブジェクトを返却するメソッド
+		 * <p>
+		 * 拡張子から該当のEnumを取得する処理は{@link EnumReverseLookup#lookup(Object)}に移譲しています。
+		 * 
+		 * @param extension 拡張子
+		 * @throws IllegalArgumentException 拡張子に対応するクラスが存在しない場合
+		 * @return 拡張子に対応するステップカウントオブジェクト
+		 */
+		public static MethodType getByMethodType(final String extension) throws IllegalArgumentException {
+			return new EnumReverseLookup<>(StepCountType.class, StepCountType::getExtension)
+					.lookup(extension).getMethodType();
 		}
 		
 		/**
@@ -109,7 +150,7 @@ public class StepCountFactory {
 		 * @return ステップカウントオブジェクト
 		 */
 		public static IfStepCount of(final String extension, final IfCommentPatternMatch commentPatternMatch) {
-			return getByStepCount(extension).create(commentPatternMatch);
+			return getByStepCount(extension).create(commentPatternMatch, getByMethodType(extension));
 		}
 	}
 }

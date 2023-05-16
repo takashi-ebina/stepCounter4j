@@ -7,9 +7,9 @@ import co.jp.stepCounter.domain.model.commentPatternMatch.CommentPatternMatchFac
 
 /**
  * <p>
- * Javaコメントパターン判定の具象クラス
+ * sqlコメントパターン判定の具象クラス
  * <p>
- * Javaコメントを判定する処理を提供する具象クラスです。
+ * sqlコメントを判定する処理を提供する具象クラスです。
  * <p>
  * {@link IfCommentPatternMatch}で定義されているメソッドをオーバライドして、<br>
  * １行コメント／複数行コメント（開始）／複数行コメント（終了）を判定する処理を実装しています。
@@ -24,7 +24,7 @@ import co.jp.stepCounter.domain.model.commentPatternMatch.CommentPatternMatchFac
  * @see AbsCommentPatternMatch
  * @see CommentPatternMatchFactory
  */
-public class JavaCommentPatternMatch extends AbsCommentPatternMatch {
+public class SqlCommentPatternMatch extends AbsCommentPatternMatch {
 	/**
 	 * <p>
 	 * １行コメント判定メソッド
@@ -35,8 +35,8 @@ public class JavaCommentPatternMatch extends AbsCommentPatternMatch {
 	 * @return １行コメントが存在する場合はtrueを返却。それ以外の場合はfalseを返却する。
 	 */
 	@Override
-	public boolean isSingleCommentPattern(final String target) {
-		final Pattern singleCommentPattern = Pattern.compile(SingleCommentPattern.Java.getValue());
+	public boolean isSingleCommentPattern(String target) {
+		final Pattern singleCommentPattern = Pattern.compile(SingleCommentPattern.sql.getValue());
 		return singleCommentPattern.matcher(target).find();
 	}
 
@@ -51,7 +51,7 @@ public class JavaCommentPatternMatch extends AbsCommentPatternMatch {
 	 */
 	@Override
 	public boolean isStartMultiCommentPattern(final String target) {
-		final Pattern startMultiCommentPattern = Pattern.compile(StartMultiCommentPattern.Java.getValue());
+		final Pattern startMultiCommentPattern = Pattern.compile(StartMultiCommentPattern.sql.getValue());
 		return startMultiCommentPattern.matcher(target).find();
 	}
 
@@ -66,7 +66,7 @@ public class JavaCommentPatternMatch extends AbsCommentPatternMatch {
 	 */
 	@Override
 	public boolean isEndMultiCommentPattern(final String target) {
-		final Pattern endMultiCCommentPattern = Pattern.compile(EndMultiCommentPattern.Java.getValue());
+		final Pattern endMultiCCommentPattern = Pattern.compile(EndMultiCommentPattern.sql.getValue());
 		return endMultiCCommentPattern.matcher(target).find();
 	}
 
@@ -82,7 +82,7 @@ public class JavaCommentPatternMatch extends AbsCommentPatternMatch {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof JavaCommentPatternMatch)) {
+		if (!(obj instanceof SqlCommentPatternMatch)) {
 			return false;
 		}
 		return true;
@@ -101,13 +101,14 @@ public class JavaCommentPatternMatch extends AbsCommentPatternMatch {
 	
 	/**
 	 * <p>
-	 * Javaコメントパターン判定のオブジェクトを返却するメソッド
+	 * sqlコメントパターン判定のオブジェクトを返却するメソッド
 	 * 
 	 * @return Javaコメントパターン判定のオブジェクト
 	 */
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends IfCommentPatternMatch> T create() {
-        return (T) new JavaCommentPatternMatch();
-    }
+	public <T extends IfCommentPatternMatch> T create() {
+    	return (T) new SqlCommentPatternMatch();
+	}
+
 }
