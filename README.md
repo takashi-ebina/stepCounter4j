@@ -23,6 +23,7 @@ StepCounter-jar-with-dependencies.jar
 ```
 mvn install
 ```
+Jarファイル作成時にテストコードが起動し、テスト成功の場合にJarファイルが作成されます。
 
 ## GUIでの起動方法
 ```
@@ -59,3 +60,4 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
 # 集計対象言語
  * Java
  * Cs
+ * sql
