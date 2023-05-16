@@ -42,7 +42,7 @@ class TestCommentPatternMatchFactory {
 			// 【実行】
 			// 【検証】
 			assertThrows(IllegalArgumentException.class,
-					() -> CommentPatternMatchFactory.CommentPatternMatchType.of("sql"));
+					() -> CommentPatternMatchFactory.CommentPatternMatchType.of("vb"));
 			// 【後処理】
 		}
 	}

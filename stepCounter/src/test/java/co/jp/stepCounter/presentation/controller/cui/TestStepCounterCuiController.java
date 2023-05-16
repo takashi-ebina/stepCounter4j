@@ -37,12 +37,15 @@ class TestStepCounterCuiController {
 	private StepCounterCuiController cuiController = new StepCounterCuiController();
 	private StandardInputStream in = new StandardInputStream();
 	private StandardOutputStream out = new StandardOutputStream();
+	
+	private String localFilePath = null;
 
 	@BeforeEach
 	void setUp() {
 		System.setIn(in);
 		System.setOut(out);
 		MockitoAnnotations.initMocks(this);
+		localFilePath = new File(".").getAbsoluteFile().getParentFile().getPath();
 	}
 
 	@AfterEach
@@ -60,8 +63,8 @@ class TestStepCounterCuiController {
 			// 【実行】
 			cuiController.printHelp();
 			// 【検証】
-			assertEquals("Usage: java StepCounter", out.readLine());
-			assertEquals("       java StepCounter [OPTIONS]", out.readLine());
+			assertEquals("Usage: java -jar StepCounter-jar-with-dependencies.jar", out.readLine());
+			assertEquals("       java -jar StepCounter-jar-with-dependencies.jar [OPTIONS]", out.readLine());
 			assertEquals("OPTIONS", out.readLine());
 			assertEquals("       -h:このメッセージを表示して終了する。", out.readLine());
 			assertEquals("       -s:スクリプトモードで実行する。（オプションを指定しない場合はGUIモード）", out.readLine());
@@ -80,17 +83,16 @@ class TestStepCounterCuiController {
 		@Test
 		void success1() {
 			// 【事前準備】
-			Path p = Paths.get("/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+			Path p = Paths.get(localFilePath + "/var/output/result.csv");
 			try{
 				Files.deleteIfExists(p);
 			} catch (IOException e) {
 			}
-			
-			// TODO 相対パスで取れるようにしたい
+
 			// カウント対象のディレクトリパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/input"); 
+			in.inputln(localFilePath + "/var/input"); 
 			// カウント結果出力対象のファイルパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+			in.inputln(localFilePath + "/var/output/result.csv");
 			// ソート区分の入力
 			in.inputln("1");
 			// ソート対象の入力
@@ -127,15 +129,14 @@ class TestStepCounterCuiController {
 		@Test
 		void success2() {
 			// 【事前準備】
-			Path p = Paths.get("/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+			Path p = Paths.get(localFilePath + "/var/output/result.csv");
 			try {
 				Files.createFile(p);
 			} catch (IOException e) {
 			}
-			String outputPath = "/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv";
-			// TODO 相対パスで取れるようにしたい
+			String outputPath = localFilePath + "/var/output/result.csv";
 			// カウント対象のディレクトリパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/input"); 
+			in.inputln(localFilePath + "/var/input"); 
 			// カウント結果出力対象のファイルパスの入力
 			in.inputln(outputPath);
 			// ファイルの上書き実施
@@ -181,15 +182,14 @@ class TestStepCounterCuiController {
 		@Test
 		void success3() {
 			// 【事前準備】
-			Path p = Paths.get("/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+			Path p = Paths.get(localFilePath + "/var/output/result.csv");
 			try{
 				Files.deleteIfExists(p);
 			} catch (IOException e) {
 			}
-			String outputPath = "/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv";
-			// TODO 相対パスで取れるようにしたい
+			String outputPath = localFilePath + "/var/output/result.csv";
 			// カウント対象のディレクトリパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/input"); 
+			in.inputln(localFilePath + "/var/input"); 
 			// カウント結果出力対象のファイルパスの入力
 			in.inputln(outputPath);
 			// ソート区分の入力
@@ -222,15 +222,14 @@ class TestStepCounterCuiController {
 		@Test
 		void success4() {
 			// 【事前準備】
-			Path p = Paths.get("/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+			Path p = Paths.get(localFilePath + "/var/output/result.csv");
 			try {
 				Files.createFile(p);
 			} catch (IOException e) {
 			}
-			String outputPath = "/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv";
-			// TODO 相対パスで取れるようにしたい
+			String outputPath = localFilePath + "/var/output/result.csv";
 			// カウント対象のディレクトリパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/input"); 
+			in.inputln(localFilePath + "/var/input"); 
 			// カウント結果出力対象のファイルパスの入力
 			in.inputln(outputPath);
 			// ファイルの上書き実施
@@ -279,7 +278,7 @@ class TestStepCounterCuiController {
 			// カウント対象のディレクトリパスの入力
 			in.inputln(""); 
 			// カウント結果出力対象のファイルパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+			in.inputln(localFilePath + "/var/output/result.csv");
 			// 【実行】
 			cuiController.stepCountInteractiveMode();
 			// 【検証】
@@ -296,11 +295,10 @@ class TestStepCounterCuiController {
 		@Test
 		void warning2() {
 			// 【事前準備】
-			// TODO 相対パスで取れるようにしたい
 			// カウント対象のディレクトリパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/input"); 
+			in.inputln(localFilePath + "/var/input"); 
 			// カウント結果出力対象のファイルパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/input");
+			in.inputln(localFilePath + "/var/input");
 			// 【実行】
 			cuiController.stepCountInteractiveMode();
 			// 【検証】
@@ -323,16 +321,15 @@ class TestStepCounterCuiController {
 		@Test
 		void warning3() {
 			// 【事前準備】
-			Path p = Paths.get("/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+			Path p = Paths.get(localFilePath + "/var/output/result.csv");
 			try{
 				Files.deleteIfExists(p);
 			} catch (IOException e) {
 			}
-			// TODO 相対パスで取れるようにしたい
 			// カウント対象のディレクトリパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/input"); 
+			in.inputln(localFilePath + "/var/input"); 
 			// カウント結果出力対象のファイルパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+			in.inputln(localFilePath + "/var/output/result.csv");
 			// ソート区分の入力
 			in.inputln("3");
 			// 【実行】
@@ -362,16 +359,15 @@ class TestStepCounterCuiController {
 		@Test
 		void warning4() {
 			// 【事前準備】
-			Path p = Paths.get("/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+			Path p = Paths.get(localFilePath + "/var/output/result.csv");
 			try{
 				Files.deleteIfExists(p);
 			} catch (IOException e) {
 			}
-			// TODO 相対パスで取れるようにしたい
 			// カウント対象のディレクトリパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/input"); 
+			in.inputln(localFilePath + "/var/input"); 
 			// カウント結果出力対象のファイルパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+			in.inputln(localFilePath + "/var/output/result.csv");
 			// ソート区分の入力
 			in.inputln("1");
 			// ソート対象の入力
@@ -410,17 +406,16 @@ class TestStepCounterCuiController {
 			when(mockCuiService.execStepCount((File)any(), (File)any(), (SortType)any(), (SortTarget)any()))
 					.thenReturn(ProcessResult.FAIL);
 			
-			Path p = Paths.get("/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+			Path p = Paths.get(localFilePath + "/var/output/result.csv");
 			try{
 				Files.deleteIfExists(p);
 			} catch (IOException e) {
 			}
 			
-			// TODO 相対パスで取れるようにしたい
 			// カウント対象のディレクトリパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/input"); 
+			in.inputln(localFilePath + "/var/input"); 
 			// カウント結果出力対象のファイルパスの入力
-			in.inputln("/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+			in.inputln(localFilePath + "/var/output/result.csv");
 			// ソート区分の入力
 			in.inputln("1");
 			// ソート対象の入力
@@ -466,8 +461,8 @@ class TestStepCounterCuiController {
 							ExecuteMode.SCRIPT,
 							SortType.ASCENDING_ORDER,
 							SortTarget.FILEPATH,
-							"/Users/takashi.ebina/git/repository2/stepCounter/var/input",
-							"/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+							localFilePath + "/var/input",
+							localFilePath + "/var/output/result.csv");
 			// 【実行】
 			cuiController.stepCountScriptMode(dto);
 			// 【検証】
@@ -490,8 +485,8 @@ class TestStepCounterCuiController {
 							ExecuteMode.SCRIPT,
 							SortType.ASCENDING_ORDER,
 							SortTarget.FILEPATH,
-							"/Users/takashi.ebina/git/repository2/stepCounter/var/input/result.csv",
-							"/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+							localFilePath + "/var/input/result.csv",
+							localFilePath + "/var/output/result.csv");
 			// 【実行】
 			injectMockcuiController.stepCountScriptMode(dto);
 			// 【検証】
@@ -513,8 +508,8 @@ class TestStepCounterCuiController {
 							ExecuteMode.SCRIPT,
 							SortType.ASCENDING_ORDER,
 							SortTarget.FILEPATH,
-							"/Users/takashi.ebina/git/repository2/stepCounter/var/input",
-							"/Users/takashi.ebina/git/repository2/stepCounter/var/output");
+							localFilePath + "/var/input",
+							localFilePath + "/var/output");
 			// 【実行】
 			injectMockcuiController.stepCountScriptMode(dto);
 			// 【検証】
@@ -536,8 +531,8 @@ class TestStepCounterCuiController {
 							ExecuteMode.SCRIPT,
 							SortType.ASCENDING_ORDER,
 							SortTarget.FILEPATH,
-							"/Users/takashi.ebina/git/repository2/stepCounter/var/input",
-							"/Users/takashi.ebina/git/repository2/stepCounter/var/output/result.csv");
+							localFilePath + "/var/input",
+							localFilePath + "/var/output/result.csv");
 			// 【実行】
 			injectMockcuiController.stepCountScriptMode(dto);
 			// 【検証】

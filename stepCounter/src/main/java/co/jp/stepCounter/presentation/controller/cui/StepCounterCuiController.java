@@ -29,8 +29,8 @@ public class StepCounterCuiController {
 	 * ヘルプメッセージをコンソールに出力する。
 	 */
 	public void printHelp() {
-		System.out.println("Usage: java StepCounter");
-		System.out.println("       java StepCounter [OPTIONS]");
+		System.out.println("Usage: java -jar StepCounter-jar-with-dependencies.jar");
+		System.out.println("       java -jar StepCounter-jar-with-dependencies.jar [OPTIONS]");
 		System.out.println("OPTIONS");
 		System.out.println("       -h:このメッセージを表示して終了する。");
 		System.out.println("       -s:スクリプトモードで実行する。（オプションを指定しない場合はGUIモード）");

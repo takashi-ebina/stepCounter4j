@@ -55,7 +55,7 @@ class TestStepCountFactory {
 			// 【実行】
 			IfStepCount stepCountObj = StepCountFactory.StepCountType.of("sql", scpm);
 			// 【検証】
-			assertEquals(new CsStepCount(scpm, MethodType.DEFAULT), stepCountObj);
+			assertEquals(new SqlStepCount(scpm, MethodType.DEFAULT), stepCountObj);
 			// 【後処理】
 		}
 		

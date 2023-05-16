@@ -43,7 +43,9 @@ public class StepCountFactory {
 		/** Javaステップカウントオブジェクト */
 		Java("java", new JavaStepCount(), MethodType.DEFAULT),
 		/** Csステップカウントオブジェクト */
-		Cs("cs", new CsStepCount(), MethodType.DEFAULT);
+		Cs("cs", new CsStepCount(), MethodType.DEFAULT),
+		/** sqlステップカウントオブジェクト */
+		sql("sql", new SqlStepCount(), MethodType.DEFAULT);
 
 		/** 拡張子 */
 		private final String extension;
