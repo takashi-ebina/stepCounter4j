@@ -47,7 +47,7 @@ public final class AllFilesStepCountData {
 	public AllFilesStepCountData(final List<StepCountData> stepCountDataList, 
 			final SortType stepCountSortType, final SortTarget stepCountSortTarget) {
 
-		if (stepCountDataList == null) {
+		if (Objects.isNull(stepCountDataList)) {
 			throw new IllegalArgumentException("コンストラクタの引数の値がNullです");
 		}
 

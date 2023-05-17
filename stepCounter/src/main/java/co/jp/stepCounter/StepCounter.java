@@ -73,7 +73,7 @@ public class StepCounter {
 	 */
 	public static void main(String[] args) {
 		System.setProperty("log4j.configurationFile", "main/resources/log4j2.xml");
-		if (args == null || args.length == 0) {
+		if (Objects.isNull(args)|| args.length == 0) {
 			new StepCounterGuiMainView();	// GUIモードとして実行
 			return;
 		}
@@ -136,7 +136,7 @@ public class StepCounter {
 			}
 		}
 		if (stepCountExecuteMode == ExecuteMode.SCRIPT) {
-			if (inputDirectoryPath == null || outputFilePath == null) {
+			if (Objects.isNull(inputDirectoryPath) || Objects.isNull(outputFilePath)) {
 				throw new IllegalArgumentException("カウント対象のディレクトリパスまたはカウント結果出力対象のファイルパスの値がNullです");
 			}
 		}

@@ -45,7 +45,7 @@ public class ValidatorUtil {
 
 		logger.logDebug("入力ディレクトリパスチェック ファイルパス：" + inputPath);
 		
-		if ("".equals(inputPath)) {
+		if (Objects.equals(inputPath, "")) {
 			logger.logDebug("チェック結果：入力ファイルパスが未指定");
 			return false;
 		}
@@ -77,7 +77,7 @@ public class ValidatorUtil {
 		
 		logger.logDebug("出力ファイルパスチェック ファイルパス：" + outputPath);
 		
-		if ("".equals(outputPath)) {
+		if (Objects.equals(outputPath, "")) {
 			logger.logDebug("チェック結果：出力ファイルパスが未指定");
 			return false;
 		}
@@ -91,7 +91,7 @@ public class ValidatorUtil {
 			return false;
 		}
 		if (mode == ExecuteMode.INTERACTIVE &&
-				new File(outputPath).exists() && sn != null) {
+				new File(outputPath).exists() && Objects.nonNull(sn)) {
 			System.out.println("--> ------------------------------------------------");
 			System.out.println("--> 該当のファイルが既に存在します。 上書きされてしまいますがよろしいですか？ y / n");
 			System.out.println("--> ファイルパス：" + outputPath);

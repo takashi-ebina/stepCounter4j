@@ -30,7 +30,7 @@ public class Log4J2 {
 	 * @return Log4J2インスタンス
 	 */
 	public synchronized static Log4J2 getInstance() {
-		if (Log4J2.thisinstance == null) {
+		if (Objects.isNull(Log4J2.thisinstance)) {
 			Log4J2.thisinstance = new Log4J2();
 		}
 		return Log4J2.thisinstance;
@@ -135,7 +135,7 @@ public class Log4J2 {
 		String detailMessage = "";
 		String errorlMessage = "";
 		final Logger logger = LogManager.getLogger(e.getClass());
-		if (stackTraceElements != null && stackTraceElements.length > 0) {
+		if (Objects.nonNull(stackTraceElements) && stackTraceElements.length > 0) {
 			detailMessage = SystemConstant.LINE_SEPARATOR 
 					+ "Class:" + e.getClass().getName() + SystemConstant.LINE_SEPARATOR
 					+ "Detail:" + e.getMessage() + SystemConstant.LINE_SEPARATOR;

@@ -4,12 +4,22 @@ import java.io.File;
 import java.util.Scanner;
 
 import co.jp.stepCounter.application.service.StepCounterCuiService;
+import co.jp.stepCounter.application.service.impl.StepCounterCuiServiceImpl;
 import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.constant.StepCounterConstant.ProcessResult;
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
+import co.jp.stepCounter.domain.model.stepCountExecutor.StepCountExecutor;
+import co.jp.stepCounter.infrastructure.csvdao.StepCountCsvDao;
 import co.jp.stepCounter.presentation.validator.ValidatorUtil;
-
+/**
+ * <p>
+ * CUIでステップカウント処理を実行するコントローラクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
 public class StepCounterCuiController {
 	
 	/** CUIでステップカウント処理を実行するサービスクラス*/
@@ -19,9 +29,9 @@ public class StepCounterCuiController {
 	 * コンストラクタ
 	 */
 	public StepCounterCuiController() {
-		this.service = new StepCounterCuiService();
+		this.service = new StepCounterCuiServiceImpl(new StepCountCsvDao(), new StepCountExecutor());
 	}
-	
+
 	/**
 	 * <p>
 	 * ヘルプメッセージ出力メソッド

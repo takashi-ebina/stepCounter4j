@@ -1,6 +1,7 @@
 package co.jp.stepCounter.domain.value;
 
 import java.io.File;
+import java.util.Objects;
 
 /**
  * <p>
@@ -41,7 +42,7 @@ public final class StepCountData {
 		if (totalStepCount < 0 || execStepCount < 0 || commentStepCount < 0 || emptyStepCount < 0) {
 			throw new IllegalArgumentException("ステップ数の値が0未満です");
 		}
-		if (inputFile == null) {
+		if (Objects.isNull(inputFile)) {
 			throw new IllegalArgumentException("カウント対象プログラムファイルの値がNullです");
 		}
 		this.totalStepCount = totalStepCount;

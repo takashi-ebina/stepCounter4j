@@ -2,6 +2,7 @@ package co.jp.stepCounter.domain.model.stepCountExecutor;
 
 import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 import co.jp.stepCounter.domain.model.commentPatternMatch.CommentPatternMatchFactory.CommentPatternMatchType;
 import co.jp.stepCounter.domain.model.commentPatternMatch.IfCommentPatternMatch;
@@ -82,7 +83,7 @@ public class StepCountExecutor {
 	 * @return ファイルの拡張子を文字列型で返却する。引数のFileオブジェクトがnullの場合はnullを返却する。
 	 */
 	private String getExtension(final File file) {
-		if (file == null) {
+		if (Objects.isNull(file)) {
 			return null;
 		}
 		final String fileName = file.getName();

@@ -5,11 +5,21 @@ import java.io.File;
 import javax.swing.JOptionPane;
 
 import co.jp.stepCounter.application.service.StepCounterGuiMainService;
+import co.jp.stepCounter.application.service.impl.StepCounterGuiMainServiceImpl;
 import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.constant.StepCounterConstant.ProcessResult;
+import co.jp.stepCounter.domain.model.stepCountExecutor.StepCountExecutor;
+import co.jp.stepCounter.infrastructure.csvdao.StepCountCsvDao;
 import co.jp.stepCounter.presentation.validator.ValidatorUtil;
 import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
-
+/**
+ * <p>
+ * GUIでステップカウント処理を実行するコントローラクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
 public class StepCounterGuiMainController {
 	
 	/** GUIでステップカウント処理を実行するサービスクラス*/
@@ -19,9 +29,20 @@ public class StepCounterGuiMainController {
 	 * コンストラクタ
 	 */
 	public StepCounterGuiMainController() {
-		this.service = new StepCounterGuiMainService();
+		this.service = new StepCounterGuiMainServiceImpl(new StepCountCsvDao(), new StepCountExecutor());
 	}
 	
+	/**
+	 * <p>
+	 * GUIモードのステップカウントメソッド
+	 * <p>
+	 * [処理概要]<br>
+	 * <ol>
+	 * <li>カウント対象のディレクトリパスの入力チェック<br>
+	 * <li>カウント結果出力対象のファイルパスの入力チェック<br>
+	 * <li>カウント対象ディレクトリのステップカウント処理及びカウント結果をカウント結果出力ファイルに書き込む処理の呼出し<br>
+	 * </ol>
+	 */
 	public void stepCountGuiMode (final StepCounterGuiRequestDto dto, final StepCounterGuiMainView parent) {
 		final String inputDirectoryPath = dto.getInputDirectoryPath();
 		final String outputFilePath = dto.getOutputFilePath();

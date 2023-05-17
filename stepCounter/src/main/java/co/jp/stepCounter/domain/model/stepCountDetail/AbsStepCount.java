@@ -67,7 +67,7 @@ public abstract class AbsStepCount implements IfStepCount {
 	 * @throws IllegalArgumentException コメントパターン判定用クラスがNullの場合
 	 */
 	public AbsStepCount(final IfCommentPatternMatch commentPatternMatch, final MethodType methodType) {
-		if (commentPatternMatch == null || methodType == null) {
+		if (Objects.isNull(commentPatternMatch) || Objects.isNull(methodType == null)) {
 			throw new IllegalArgumentException("コンストラクタの引数の値がNullです");
 		}
 		this.commentPatternMatch = commentPatternMatch;
@@ -167,7 +167,7 @@ public abstract class AbsStepCount implements IfStepCount {
 				new InputStreamReader(new FileInputStream(inputFile), SystemConstant.CHARSET_NAME))) {
 			String readLine = "";
 			boolean isCommentLine = false;
-			while ((readLine = bw.readLine()) != null) {
+			while (Objects.nonNull((readLine = bw.readLine()))) {
 				final String trimReadLine = readLine.trim();
 				tmpTotalStepCount++;
 				// コメント行状態判定

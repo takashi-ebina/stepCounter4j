@@ -21,7 +21,7 @@ import org.mockito.MockitoAnnotations;
 
 import co.jp.base.StandardInputStream;
 import co.jp.base.StandardOutputStream;
-import co.jp.stepCounter.application.service.StepCounterCuiService;
+import co.jp.stepCounter.application.service.impl.StepCounterCuiServiceImpl;
 import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.constant.StepCounterConstant.ProcessResult;
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
@@ -30,7 +30,7 @@ import co.jp.stepCounter.constant.StepCounterConstant.SortType;
 class TestStepCounterCuiController {
 
 	@Mock
-	private StepCounterCuiService mockCuiService;
+	private StepCounterCuiServiceImpl mockCuiService;
 	@InjectMocks
 	private StepCounterCuiController injectMockcuiController  = new StepCounterCuiController();
 	
