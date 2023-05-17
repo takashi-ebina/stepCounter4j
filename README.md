@@ -52,11 +52,11 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
  * `[sortTarget]`:0:ファイルパス、1:総行数、2:実行行数、3:コメント行数、4:空行数。
 
 ## ログ出力について　
-ログ出力としてLog4j2を利用していますが、現状実行形式Jarファイルを実行する場合、以下の手順を実行しないとログが出力されません。
+ログ出力としてLog4j2を利用していますが、現状実行形式Jarファイルを実行する場合、以下の手順を実行しないとログが出力されません。<br>
 EclipseからStepCounter.javaを起動する場合はログ出力が行われます。
 
 ### 手順１
-リポジトリ内に存在するlog4j2.xmlファイルを任意のフォルダに格納（一例として、tepCounter-jar-with-dependencies.jar　と同階層のフォルダに格納する）
+リポジトリ内に存在するlog4j2.xmlファイルを任意のフォルダに格納（一例として、StepCounter-jar-with-dependencies.jarと同階層のフォルダに格納する）
 ### 手順2
 Jarファイル実行時に`-Dlog4j2.configurationFile`のオプションを追加する。
 
