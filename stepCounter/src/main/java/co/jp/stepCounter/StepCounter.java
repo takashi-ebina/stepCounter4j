@@ -72,7 +72,7 @@ public class StepCounter {
 	 * @param args 未入力の場合、GUIモードで処理を実行。それ以外の場合は引数に応じて処理が変動する。
 	 */
 	public static void main(String[] args) {
-		System.setProperty("log4j.configurationFile", "main/resources/log4j2.xml");
+		//System.setProperty("log4j.configurationFile", "src/main/resources/log/log4j2.xml");
 		if (Objects.isNull(args)|| args.length == 0) {
 			new StepCounterGuiMainView();	// GUIモードとして実行
 			return;
