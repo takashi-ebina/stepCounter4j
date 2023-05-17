@@ -51,6 +51,18 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
  * `-desc=[sortTarget]`:ステップカウント処理の出力順を`[sortTarget]`をキーとして降順ソートする。
  * `[sortTarget]`:0:ファイルパス、1:総行数、2:実行行数、3:コメント行数、4:空行数。
 
+## ログ出力について　
+ログ出力としてLog4j2を利用していますが、現状実行形式Jarファイルを実行する場合、以下の手順を実行しないとログが出力されません。
+EclipseからStepCounter.javaを起動する場合はログ出力が行われます。
+
+### 手順１
+リポジトリ内に存在するlog4j2.xmlファイルを任意のフォルダに格納（一例として、tepCounter-jar-with-dependencies.jar　と同階層のフォルダに格納する）
+### 手順2
+Jarファイル実行時に`-Dlog4j2.configurationFile`のオプションを追加する。
+
+```
+java -jar -Dlog4j2.configurationFile=log4j2.xml StepCounter-jar-with-dependencies.jar
+```
 ### [出力ファイルイメージ]
 ファイルパス,総行数,実行行数,コメント行数,空行数<br>
 /Users/xxx.java,30,20,4,6<br>
