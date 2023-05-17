@@ -23,6 +23,7 @@ StepCounter-jar-with-dependencies.jar
 ```
 mvn install
 ```
+Jarファイル作成時にテストコードが起動し、テスト成功の場合にJarファイルが作成されます。
 
 ## GUIでの起動方法
 ```
@@ -51,11 +52,12 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
  * `[sortTarget]`:0:ファイルパス、1:総行数、2:実行行数、3:コメント行数、4:空行数。
 
 ### [出力ファイルイメージ]
-ファイルパス,総行数,実行行数,コメント行数,空行数
-/Users/xxx.java,30,20,4,6
-.. 中略 ..
-合計,60,40,8,12
+ファイルパス,総行数,実行行数,コメント行数,空行数<br>
+/Users/xxx.java,30,20,4,6<br>
+.. 中略 ..<br>
+合計,60,40,8,12<br>
 
 # 集計対象言語
  * Java
  * Cs
+ * sql
