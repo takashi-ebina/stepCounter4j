@@ -56,6 +56,9 @@
 						<manifest>
 							<mainClass>co.jp.stepCounter.StepCounter</mainClass>
 						</manifest>
+						<manifestEntries>
+							<Class-Path>./settings/</Class-Path>
+						</manifestEntries>
 					</archive>
 				</configuration>
 				<executions>
@@ -65,6 +68,27 @@
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<mkdir dir="${project.build.directory}/settings" />
+								<copy todir="${project.build.directory}/settings">
+									<fileset
+										dir="${project.basedir}/src/main/resources/settings" />
+								</copy>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
 						</goals>
 					</execution>
 				</executions>
