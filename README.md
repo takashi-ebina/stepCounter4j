@@ -12,18 +12,43 @@
 # 画面レイアウト
 ![stepcounter_ui](https://github.com/takashi-ebina/stepCounterforJava/assets/40939908/c612b40a-eee4-419f-a756-80b4a136fe85)
 
+# 主なディレクトリ構成
+```
+stepCounter
+├── doc  ・・・ JavaDocが格納されているフォルダ
+├── src  ・・・ stepCounterForJavaの資源が格納されているフォルダ
+│   ├── main  ・・・ javaソースコードが格納されているフォルダ
+│   │   ├── java
+│   │   │   └── co
+│   │   │       └── jp
+│   │   │           └── stepCounter
+│   │   └── resources  ・・・ 静的資源が格納されているフォルダ
+│   │       ├── img
+│   │       │   └── icon_ebi.png
+│   │       └── settings
+│   │           └── log4j2.xml
+│   └── test  ・・・ テストコードが格納されているフォルダ
+├── target  ・・・ ビルド後の資源が格納されているフォルダ
+│   ├── StepCounter-jar-with-dependencies.jar  ・・・ステップカウント処理実行に利用する実行形式Jarファイル
+│   └── settings    ・・・ 実行形式Jarファイルが参照する静的資源
+│       └── log4j2.xml
+└── pom.xml  
+```
+
 # 使い方
 ## Jarファイル名及びJarファイルビルド方法
 ### ファイル名
-```
-StepCounter-jar-with-dependencies.jar
-```
+ステップ数の集計ツール起動時に利用するファイルは`StepCounter-jar-with-dependencies.jar`です。<br>
+同階層に`settings`フォルダも存在する状態で起動してください。
 
 ### Jarファイルビルド方法
+pom.xmlが存在する階層で以下のコマンドを実行してください。
 ```
 mvn install
 ```
-Jarファイル作成時にテストコードが起動し、テスト成功の場合にJarファイルが作成されます。
+ * ビルド時に`stepCounter>src>mainフォルダ`に存在するテストコードが起動します。
+ * テスト成功の場合に`StepCounter-jar-with-dependencies.jar`ファイルが作成されます。
+ * Jarファイルの出力先は`stepCounter>target`フォルダになります。
 
 ## GUIでの起動方法
 ```
@@ -51,23 +76,11 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
  * `-desc=[sortTarget]`:ステップカウント処理の出力順を`[sortTarget]`をキーとして降順ソートする。
  * `[sortTarget]`:0:ファイルパス、1:総行数、2:実行行数、3:コメント行数、4:空行数。
 
-## ログ出力について　
-ログ出力としてLog4j2を利用していますが、現状実行形式Jarファイルを実行する場合、以下の手順を実行しないとログが出力されません。<br>
-EclipseからStepCounter.javaを起動する場合はログ出力が行われます。
-
-### 手順１
-リポジトリ内に存在するlog4j2.xmlファイルを任意のフォルダに格納（一例として、StepCounter-jar-with-dependencies.jarと同階層のフォルダに格納する）
-### 手順2
-Jarファイル実行時に`-Dlog4j2.configurationFile`のオプションを追加する。
-
-```
-java -jar -Dlog4j2.configurationFile=log4j2.xml StepCounter-jar-with-dependencies.jar
-```
 ### [出力ファイルイメージ]
-ファイルパス,総行数,実行行数,コメント行数,空行数<br>
-/Users/xxx.java,30,20,4,6<br>
-.. 中略 ..<br>
-合計,60,40,8,12<br>
+ファイルパス      ,総行数,実行行数,コメント行数,空行数 <br>
+/Users/xxx.java,30   ,20     ,4       ,6     <br>
+           .. 中略 ..                         <br>
+合計            ,60   ,40     ,8       ,12    <br>
 
 # 集計対象言語
  * Java
