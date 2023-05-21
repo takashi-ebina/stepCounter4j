@@ -34,6 +34,9 @@ public class StepCounterGuiMainServiceImpl implements StepCounterGuiMainService 
 
 	/**
 	 * コンストラクタ
+	 * 
+	 * @param stepCountRepository      ステップカウント処理のリポジトリクラス 
+	 * @param stepCountExecutor        ステップ数集計処理実行クラス
 	 */
 	public StepCounterGuiMainServiceImpl(final StepCountRepository stepCountRepository, final StepCountExecutor stepCountExecutor) {
 		if (Objects.isNull(stepCountRepository) || Objects.isNull(stepCountExecutor)) {

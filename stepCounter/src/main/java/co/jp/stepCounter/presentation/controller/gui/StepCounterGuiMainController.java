@@ -42,6 +42,9 @@ public class StepCounterGuiMainController {
 	 * <li>カウント結果出力対象のファイルパスの入力チェック<br>
 	 * <li>カウント対象ディレクトリのステップカウント処理及びカウント結果をカウント結果出力ファイルに書き込む処理の呼出し<br>
 	 * </ol>
+	 * 
+	 * @param dto GUIでステップカウント処理を実行する際に利用するDTOクラス
+	 * @param parent ステップ数の集計を実施するGUIクラス
 	 */
 	public void stepCountGuiMode (final StepCounterGuiRequestDto dto, final StepCounterGuiMainView parent) {
 		final String inputDirectoryPath = dto.getInputDirectoryPath();

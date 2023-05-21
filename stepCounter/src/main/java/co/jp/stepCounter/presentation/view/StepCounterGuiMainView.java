@@ -108,17 +108,14 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	private JPanel getJContentHeaderPane() {
 		if (this.jHeaderContentPane == null) {
 			this.jHeaderContentPane = new JPanel();
-			URL url = this.getClass().getResource(TITLE_IMG_PATH);
-			ImageIcon icon = null;
-			Image image = null;
 			try {
-				image = this.createImage((ImageProducer) url.getContent());
-				icon = new ImageIcon(image);
+				final URL url = this.getClass().getResource(TITLE_IMG_PATH);
+				final Image image = this.createImage((ImageProducer) url.getContent());
+				final ImageIcon icon = new ImageIcon(image);
+				this.jHeaderContentPane.add(new JLabel(icon), null);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			JLabel label1 = new JLabel(icon);
-			this.jHeaderContentPane.add(label1, null);
 		}
 		return this.jHeaderContentPane;
 	}
@@ -261,21 +258,27 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	 */
 	public JPanel getSortTypeRadioButton() {
 		if (this.jSortTypeRadioButton == null && this.sortTypeRadioGroup == null) {
+			// ラジオボタンのパネル
 			this.jSortTypeRadioButton = new JPanel();
+			// ラジオボタンのタイトル
 			this.jSortTypeRadioButton.setBorder(BorderFactory.createTitledBorder("ソート区分"));
+			// 各ラジオボタンの生成
 			JRadioButton sortTypeRadioFromNoSort = 
 					new JRadioButton(SortType.NO_SORT.getSortTypeName(), true);
 			JRadioButton sortTypeRadioFromAscOrder = 
 					new JRadioButton(SortType.ASCENDING_ORDER.getSortTypeName());
 			JRadioButton sortTypeRadioFromDesOrder = 
 					new JRadioButton(SortType.DESCENDING_ORDER.getSortTypeName());
+			// 各ラジオボタンのアクション
 			sortTypeRadioFromNoSort.setActionCommand(SortType.NO_SORT.getSortTypeName());
 			sortTypeRadioFromAscOrder.setActionCommand(SortType.ASCENDING_ORDER.getSortTypeName());
 			sortTypeRadioFromDesOrder.setActionCommand(SortType.DESCENDING_ORDER.getSortTypeName());
+			// ラジオボタンのグルーピング
 			this.sortTypeRadioGroup = new ButtonGroup();
 			this.sortTypeRadioGroup.add(sortTypeRadioFromNoSort);
 			this.sortTypeRadioGroup.add(sortTypeRadioFromAscOrder);
 			this.sortTypeRadioGroup.add(sortTypeRadioFromDesOrder);
+			// ラジオボタンの追加
 			this.jSortTypeRadioButton.add(sortTypeRadioFromNoSort);
 			this.jSortTypeRadioButton.add(sortTypeRadioFromAscOrder);
 			this.jSortTypeRadioButton.add(sortTypeRadioFromDesOrder);
@@ -290,9 +293,12 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	 * @return ソート対象ラジオボタン
 	 */
 	public JPanel getSortTargetRadioButton() {
-		if (this.jSortTargetRadioButton == null) {
+		if (this.jSortTargetRadioButton == null && this.sortTargetRadioGroup == null) {
+			// ラジオボタンのパネル
 			this.jSortTargetRadioButton = new JPanel();
+			// ラジオボタンのタイトル
 			jSortTargetRadioButton.setBorder(BorderFactory.createTitledBorder("ソート対象"));
+			// 各ラジオボタンの生成
 			JRadioButton sortTargetRadioFromFilePath = 
 					new JRadioButton(SortTarget.FILEPATH.getSortTargetName(), true);
 			JRadioButton sortTargetRadioFromTotalStep = 
@@ -303,17 +309,20 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 					new JRadioButton(SortTarget.COMMENTSTEPCOUNT.getSortTargetName());
 			JRadioButton sortTargetRadioFromEmptyStep = 
 					new JRadioButton(SortTarget.EMPTYSTEPCOUNT.getSortTargetName());
+			// 各ラジオボタンのアクション
 			sortTargetRadioFromFilePath.setActionCommand(SortTarget.FILEPATH.getSortTargetName());
 			sortTargetRadioFromTotalStep.setActionCommand(SortTarget.TOTALSTEPCOUNT.getSortTargetName());
 			sortTargetRadioFromExecStep.setActionCommand(SortTarget.EXECSTEPCOUNT.getSortTargetName());
 			sortTargetRadioFromCommentStep.setActionCommand(SortTarget.COMMENTSTEPCOUNT.getSortTargetName());
 			sortTargetRadioFromEmptyStep.setActionCommand(SortTarget.EMPTYSTEPCOUNT.getSortTargetName());
+			// ラジオボタンのグルーピング
 			this.sortTargetRadioGroup = new ButtonGroup();
 			this.sortTargetRadioGroup.add(sortTargetRadioFromFilePath);
 			this.sortTargetRadioGroup.add(sortTargetRadioFromTotalStep);
 			this.sortTargetRadioGroup.add(sortTargetRadioFromExecStep);
 			this.sortTargetRadioGroup.add(sortTargetRadioFromCommentStep);
 			this.sortTargetRadioGroup.add(sortTargetRadioFromEmptyStep);
+			// ラジオボタンの追加
 			this.jSortTargetRadioButton.add(sortTargetRadioFromFilePath);
 			this.jSortTargetRadioButton.add(sortTargetRadioFromTotalStep);
 			this.jSortTargetRadioButton.add(sortTargetRadioFromExecStep);
@@ -384,7 +393,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 		}
 		
 		try {
-			buttonAble(false);
+			setButtonAble(false);
 			if ("sel1".equals(cmd)) {
 				directoriesSelect(this.getInput());
 			} else if ("sel2".equals(cmd)) {
@@ -393,7 +402,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 				this.controller.stepCountGuiMode(makeStepCounterGuiRequestDto(), this);
 			}
 		} finally {
-			buttonAble(true);
+			setButtonAble(true);
 		}
 	}
 	
@@ -419,7 +428,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	 * 
 	 * @param flg ボタン抑止フラグ
 	 */
-	protected void buttonAble(boolean flg) {
+	protected void setButtonAble(final boolean flg) {
 		this.getStartButton().setEnabled(flg);
 		this.getSelButton().setEnabled(flg);
 		this.getSelButton2().setEnabled(flg);

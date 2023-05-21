@@ -1,6 +1,7 @@
 co.jp.base
 co.jp.stepCounter
 co.jp.stepCounter.application.service
+co.jp.stepCounter.application.service.impl
 co.jp.stepCounter.constant
 co.jp.stepCounter.domain.model.commentPatternMatch
 co.jp.stepCounter.domain.model.stepCountDetail

@@ -51,6 +51,7 @@ public class StepCountFactory {
 		private final String extension;
 		/** ステップカウントオブジェクト */
 		private final IfStepCount stepCount;
+		/** メソッド区分 */
 		private final MethodType methodType;
 
 		/**

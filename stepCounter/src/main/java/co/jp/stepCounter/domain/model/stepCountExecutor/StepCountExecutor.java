@@ -43,6 +43,9 @@ public class StepCountExecutor {
 	 * @see IfStepCount#stepCount
 	 */
 	public List<StepCountData> execStepCountInDirectory(final File inputDirectory, final List<StepCountData> stepCountDatalist) throws Exception {
+		
+		if (Objects.isNull(inputDirectory)) return stepCountDatalist;
+		
 		for (final File inputFile : inputDirectory.listFiles()) {
 			if (inputFile.isDirectory()) {
 				execStepCountInDirectory(inputFile, stepCountDatalist);
@@ -83,9 +86,9 @@ public class StepCountExecutor {
 	 * @return ファイルの拡張子を文字列型で返却する。引数のFileオブジェクトがnullの場合はnullを返却する。
 	 */
 	private String getExtension(final File file) {
-		if (Objects.isNull(file)) {
-			return null;
-		}
+		
+		if (Objects.isNull(file)) return null;
+		
 		final String fileName = file.getName();
 		return fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase().trim();
 	}
