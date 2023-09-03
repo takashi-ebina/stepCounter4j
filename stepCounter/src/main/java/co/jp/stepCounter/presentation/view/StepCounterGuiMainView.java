@@ -1,8 +1,16 @@
 package co.jp.stepCounter.presentation.view;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.ImageProducer;
@@ -19,11 +27,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
 
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
 import co.jp.stepCounter.presentation.controller.gui.StepCounterGuiMainController;
 import co.jp.stepCounter.presentation.controller.gui.StepCounterGuiRequestDto;
+import co.jp.stepCounter.presentation.view.custom.JPlaceholderTextField;
 
 /**
  * <p>
@@ -36,31 +47,32 @@ import co.jp.stepCounter.presentation.controller.gui.StepCounterGuiRequestDto;
 public class StepCounterGuiMainView extends JFrame implements ActionListener {
 
 	private JPanel jContentPane = null;
-	private JPanel jMainContentPane = null;
 	private JPanel jHeaderContentPane = null;
-	
+
 	private JPanel jp1 = null;
 	private JPanel jp2 = null;
 	private JPanel jp3 = null;
 	private JPanel jp4 = null;
-	
+
 	private JTextField input = null;
 	private JButton jSelButton = null;
 	private JTextField input2 = null;
 	private JButton jSelButton2 = null;
-	
+
 	private JButton jStartButton = null;
-	private JButton jExitButton = null;
-	
+
 	private JPanel jSortTypeRadioButton = null;
 	private JPanel jSortTargetRadioButton = null;
-	
+
 	private ButtonGroup sortTypeRadioGroup = null;
 	private ButtonGroup sortTargetRadioGroup = null;
-	
+
+	private GridBagLayout gbl = new GridBagLayout();
+	private GridBagConstraints gbc = new GridBagConstraints();
+
 	/** タイトルロゴ */
 	private final String TITLE_IMG_PATH = "/img/icon_ebi.png";
-	
+
 	private final StepCounterGuiMainController controller;
 
 	/**
@@ -78,8 +90,8 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	private void init() {
 		this.setResizable(false);
 		this.setContentPane(getJContentPane());
-		this.setTitle("ステップ数集計ツール");
-		this.setSize(750, 375);
+		this.setTitle("StepCounter");
+		this.setSize(750, 450);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -92,9 +104,25 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	 */
 	private JPanel getJContentPane() {
 		if (this.jContentPane == null) {
-			this.jContentPane = new JPanel();
+			this.jContentPane = new JPanel() {
+				@Override
+				protected void paintComponent(Graphics g) {
+					Graphics2D g2d = (Graphics2D) g;
+					Color start = new Color(255, 240, 245);
+					Color end = new Color(255, 192, 203);
+					// グラデーションでペイントする
+					Paint paint = new GradientPaint(0.0f, 0.0f, start, 0.0f, getHeight(), end);
+					g2d.setPaint(paint);
+					g2d.fillRect(0, 0, getWidth(), getHeight());
+				}
+			};
+
 			this.jContentPane.add(getJContentHeaderPane());
-			this.jContentPane.add(getJContentMainPane());
+			this.jContentPane.add(getJp1());
+			this.jContentPane.add(getJp2());
+			this.jContentPane.add(getJp3());
+			this.jContentPane.add(getJp4());
+			this.jContentPane.setOpaque(false);
 		}
 		return this.jContentPane;
 	}
@@ -113,29 +141,19 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 				final Image image = this.createImage((ImageProducer) url.getContent());
 				final ImageIcon icon = new ImageIcon(image);
 				this.jHeaderContentPane.add(new JLabel(icon), null);
+				this.jHeaderContentPane.setOpaque(false);
+
+				gbc.fill = GridBagConstraints.BOTH;
+				gbc.gridx = 0;
+				gbc.gridy = 0;
+				gbc.gridwidth = 1;
+				gbc.gridheight = 1;
+				gbl.setConstraints(this.jHeaderContentPane, gbc);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		return this.jHeaderContentPane;
-	}
-
-	/**
-	 * <p>
-	 * メインパネル（メイン部）の生成処理
-	 * 
-	 * @return メインパネル（メイン部）
-	 */
-	private JPanel getJContentMainPane() {
-		if (this.jMainContentPane == null) {
-			this.jMainContentPane = new JPanel();
-			this.jMainContentPane.setLayout(new GridLayout(5, 1, 4, 4));
-			this.jMainContentPane.add(getJp1(), null);
-			this.jMainContentPane.add(getJp2(), null);
-			this.jMainContentPane.add(getJp3(), null);
-			this.jMainContentPane.add(getJp4(), null);
-		}
-		return this.jMainContentPane;
 	}
 
 	/**
@@ -147,10 +165,11 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	public JPanel getJp1() {
 		if (this.jp1 == null) {
 			this.jp1 = new JPanel();
-			this.jp1.setLayout(new BorderLayout());
-			this.jp1.add(new JLabel("入力フォルダ"), BorderLayout.WEST);
 			this.jp1.add(getInput(), BorderLayout.CENTER);
 			this.jp1.add(getSelButton(), BorderLayout.EAST);
+			this.jp1.setOpaque(false);
+			this.jp1.setPreferredSize(new Dimension(750, 70));
+
 		}
 		return this.jp1;
 	}
@@ -163,9 +182,17 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	 */
 	public JTextField getInput() {
 		if (this.input == null) {
-			this.input = new JTextField();
+			this.input = new JPlaceholderTextField("入力フォルダ");
+			this.input.setOpaque(false);
 			File f = new File(".").getAbsoluteFile().getParentFile();
 			this.input.setText(f.getPath());
+			this.input.setPreferredSize(new Dimension(650, 50));
+			gbc.fill = GridBagConstraints.BOTH;
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			gbc.gridwidth = 1;
+			gbc.gridheight = 1;
+			gbl.setConstraints(this.input, gbc);
 		}
 		return this.input;
 	}
@@ -182,6 +209,13 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			this.jSelButton.setText("...");
 			this.jSelButton.addActionListener(this);
 			this.jSelButton.setActionCommand("sel1");
+			this.jSelButton.setPreferredSize(new Dimension(50, 50));
+			gbc.fill = GridBagConstraints.BOTH;
+			gbc.gridx = 1;
+			gbc.gridy = 1;
+			gbc.gridwidth = 1;
+			gbc.gridheight = 1;
+			gbl.setConstraints(this.jSelButton, gbc);
 		}
 		return this.jSelButton;
 	}
@@ -195,10 +229,16 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	public JPanel getJp2() {
 		if (this.jp2 == null) {
 			this.jp2 = new JPanel();
-			this.jp2.setLayout(new BorderLayout());
-			this.jp2.add(new JLabel("出力ファイル"), BorderLayout.WEST);
 			this.jp2.add(getInput2(), BorderLayout.CENTER);
 			this.jp2.add(getSelButton2(), BorderLayout.EAST);
+			this.jp2.setOpaque(false);
+			this.jp2.setPreferredSize(new Dimension(750, 70));
+			gbc.fill = GridBagConstraints.BOTH;
+			gbc.gridx = 0;
+			gbc.gridy = 2;
+			gbc.gridwidth = 1;
+			gbc.gridheight = 1;
+			gbl.setConstraints(this.jp2, gbc);
 		}
 		return this.jp2;
 	}
@@ -211,9 +251,10 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	 */
 	public JTextField getInput2() {
 		if (this.input2 == null) {
-			this.input2 = new JTextField();
+			this.input2 = new JPlaceholderTextField("出力ファイル（拡張子はCSVを指定してください）");
 			File f = new File(".").getAbsoluteFile().getParentFile();
 			this.input2.setText(f.getPath());
+			this.input2.setPreferredSize(new Dimension(650, 50));
 		}
 		return this.input2;
 	}
@@ -230,6 +271,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			this.jSelButton2.setText("...");
 			this.jSelButton2.addActionListener(this);
 			this.jSelButton2.setActionCommand("sel2");
+			this.jSelButton2.setPreferredSize(new Dimension(50, 50));
 		}
 		return this.jSelButton2;
 	}
@@ -243,9 +285,16 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	public JPanel getJp3() {
 		if (this.jp3 == null) {
 			this.jp3 = new JPanel();
-			this.jp3.setLayout(new BorderLayout());
 			this.jp3.add(getSortTypeRadioButton(), BorderLayout.WEST);
 			this.jp3.add(getSortTargetRadioButton(), BorderLayout.CENTER);
+			this.jp3.setOpaque(false);
+			this.jp3.setPreferredSize(new Dimension(750, 70));
+			gbc.fill = GridBagConstraints.BOTH;
+			gbc.gridx = 0;
+			gbc.gridy = 3;
+			gbc.gridwidth = 1;
+			gbc.gridheight = 1;
+			gbl.setConstraints(this.jp3, gbc);
 		}
 		return this.jp3;
 	}
@@ -263,16 +312,16 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			// ラジオボタンのタイトル
 			this.jSortTypeRadioButton.setBorder(BorderFactory.createTitledBorder("ソート区分"));
 			// 各ラジオボタンの生成
-			JRadioButton sortTypeRadioFromNoSort = 
-					new JRadioButton(SortType.NO_SORT.getSortTypeName(), true);
-			JRadioButton sortTypeRadioFromAscOrder = 
-					new JRadioButton(SortType.ASCENDING_ORDER.getSortTypeName());
-			JRadioButton sortTypeRadioFromDesOrder = 
-					new JRadioButton(SortType.DESCENDING_ORDER.getSortTypeName());
+			JRadioButton sortTypeRadioFromNoSort = new JRadioButton(SortType.NO_SORT.getSortTypeName(), true);
+			JRadioButton sortTypeRadioFromAscOrder = new JRadioButton(SortType.ASCENDING_ORDER.getSortTypeName());
+			JRadioButton sortTypeRadioFromDesOrder = new JRadioButton(SortType.DESCENDING_ORDER.getSortTypeName());
 			// 各ラジオボタンのアクション
 			sortTypeRadioFromNoSort.setActionCommand(SortType.NO_SORT.getSortTypeName());
 			sortTypeRadioFromAscOrder.setActionCommand(SortType.ASCENDING_ORDER.getSortTypeName());
 			sortTypeRadioFromDesOrder.setActionCommand(SortType.DESCENDING_ORDER.getSortTypeName());
+			sortTypeRadioFromNoSort.setOpaque(false);
+			sortTypeRadioFromAscOrder.setOpaque(false);
+			sortTypeRadioFromDesOrder.setOpaque(false);
 			// ラジオボタンのグルーピング
 			this.sortTypeRadioGroup = new ButtonGroup();
 			this.sortTypeRadioGroup.add(sortTypeRadioFromNoSort);
@@ -282,6 +331,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			this.jSortTypeRadioButton.add(sortTypeRadioFromNoSort);
 			this.jSortTypeRadioButton.add(sortTypeRadioFromAscOrder);
 			this.jSortTypeRadioButton.add(sortTypeRadioFromDesOrder);
+			this.jSortTypeRadioButton.setOpaque(false);
 		}
 		return this.jSortTypeRadioButton;
 	}
@@ -299,22 +349,24 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			// ラジオボタンのタイトル
 			jSortTargetRadioButton.setBorder(BorderFactory.createTitledBorder("ソート対象"));
 			// 各ラジオボタンの生成
-			JRadioButton sortTargetRadioFromFilePath = 
-					new JRadioButton(SortTarget.FILEPATH.getSortTargetName(), true);
-			JRadioButton sortTargetRadioFromTotalStep = 
-					new JRadioButton(SortTarget.TOTALSTEPCOUNT.getSortTargetName());
-			JRadioButton sortTargetRadioFromExecStep = 
-					new JRadioButton(SortTarget.EXECSTEPCOUNT.getSortTargetName());
-			JRadioButton sortTargetRadioFromCommentStep = 
-					new JRadioButton(SortTarget.COMMENTSTEPCOUNT.getSortTargetName());
-			JRadioButton sortTargetRadioFromEmptyStep = 
-					new JRadioButton(SortTarget.EMPTYSTEPCOUNT.getSortTargetName());
+			JRadioButton sortTargetRadioFromFilePath = new JRadioButton(SortTarget.FILEPATH.getSortTargetName(), true);
+			JRadioButton sortTargetRadioFromTotalStep = new JRadioButton(SortTarget.TOTALSTEPCOUNT.getSortTargetName());
+			JRadioButton sortTargetRadioFromExecStep = new JRadioButton(SortTarget.EXECSTEPCOUNT.getSortTargetName());
+			JRadioButton sortTargetRadioFromCommentStep = new JRadioButton(
+					SortTarget.COMMENTSTEPCOUNT.getSortTargetName());
+			JRadioButton sortTargetRadioFromEmptyStep = new JRadioButton(SortTarget.EMPTYSTEPCOUNT.getSortTargetName());
 			// 各ラジオボタンのアクション
 			sortTargetRadioFromFilePath.setActionCommand(SortTarget.FILEPATH.getSortTargetName());
 			sortTargetRadioFromTotalStep.setActionCommand(SortTarget.TOTALSTEPCOUNT.getSortTargetName());
 			sortTargetRadioFromExecStep.setActionCommand(SortTarget.EXECSTEPCOUNT.getSortTargetName());
 			sortTargetRadioFromCommentStep.setActionCommand(SortTarget.COMMENTSTEPCOUNT.getSortTargetName());
 			sortTargetRadioFromEmptyStep.setActionCommand(SortTarget.EMPTYSTEPCOUNT.getSortTargetName());
+
+			sortTargetRadioFromFilePath.setOpaque(false);
+			sortTargetRadioFromTotalStep.setOpaque(false);
+			sortTargetRadioFromExecStep.setOpaque(false);
+			sortTargetRadioFromCommentStep.setOpaque(false);
+			sortTargetRadioFromEmptyStep.setOpaque(false);
 			// ラジオボタンのグルーピング
 			this.sortTargetRadioGroup = new ButtonGroup();
 			this.sortTargetRadioGroup.add(sortTargetRadioFromFilePath);
@@ -328,6 +380,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			this.jSortTargetRadioButton.add(sortTargetRadioFromExecStep);
 			this.jSortTargetRadioButton.add(sortTargetRadioFromCommentStep);
 			this.jSortTargetRadioButton.add(sortTargetRadioFromEmptyStep);
+			this.jSortTargetRadioButton.setOpaque(false);
 		}
 		return this.jSortTargetRadioButton;
 	}
@@ -341,9 +394,16 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	public JPanel getJp4() {
 		if (this.jp4 == null) {
 			this.jp4 = new JPanel();
-			this.jp4.setLayout(new GridLayout(1, 2, 8, 8));
 			this.jp4.add(getStartButton(), null);
-			this.jp4.add(getExitButton(), null);
+			this.jp4.setOpaque(false);
+			this.jp4.setPreferredSize(new Dimension(300, 70));
+			gbc.fill = GridBagConstraints.BOTH;
+			gbc.gridx = 0;
+			gbc.gridy = 4;
+			gbc.gridwidth = 1;
+			gbc.gridheight = 1;
+			gbl.setConstraints(this.jp4, gbc);
+
 		}
 		return this.jp4;
 	}
@@ -357,27 +417,20 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	public JButton getStartButton() {
 		if (this.jStartButton == null) {
 			this.jStartButton = new JButton();
-			this.jStartButton.setText("開始");
 			this.jStartButton.addActionListener(this);
 			this.jStartButton.setActionCommand("start");
+			this.jStartButton.setText("count start !!");
+			this.jStartButton.setFont(new Font("Arial", Font.PLAIN, 28));
+
+			this.jStartButton.setForeground(new Color(224, 255, 255));
+			this.jStartButton.setBackground(new Color(240,128,128));
+			this.jStartButton.setPreferredSize(new Dimension(30, 30));
+			this.jStartButton.setBorder(
+					new SoftBevelBorder(BevelBorder.RAISED, new Color(255, 228, 225), new Color(128, 128, 128)));
+			this.jStartButton.setOpaque(true);
+			this.jStartButton.setPreferredSize(new Dimension(300, 60));
 		}
 		return this.jStartButton;
-	}
-
-	/**
-	 * <p>
-	 * 終了ボタン
-	 * 
-	 * @return 終了ボタン
-	 */
-	public JButton getExitButton() {
-		if (this.jExitButton == null) {
-			this.jExitButton = new JButton();
-			this.jExitButton.setText("終了");
-			this.jExitButton.addActionListener(this);
-			this.jExitButton.setActionCommand("exit");
-		}
-		return this.jExitButton;
 	}
 
 	/**
@@ -387,11 +440,6 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		final String cmd = e.getActionCommand();
-		if ("exit".equals(cmd)) {
-			this.dispose();
-			System.exit(0);
-		}
-		
 		try {
 			setButtonAble(false);
 			if ("sel1".equals(cmd)) {
@@ -405,7 +453,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			setButtonAble(true);
 		}
 	}
-	
+
 	/**
 	 * <p>
 	 * GUIでステップカウント処理を実行する際に利用するDTOオブジェクトの作成メソッド
@@ -413,10 +461,10 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	 * @return GUIでステップカウント処理を実行する際に利用するDTOオブジェクト
 	 */
 	private StepCounterGuiRequestDto makeStepCounterGuiRequestDto() {
-		final SortType sortType = 
-				SortType.lookup(this.sortTypeRadioGroup.getSelection().getActionCommand(), SortType::getSortTypeName);
-		final SortTarget sortTarget = 
-				SortTarget.lookup(this.sortTargetRadioGroup.getSelection().getActionCommand(), SortTarget::getSortTargetName);
+		final SortType sortType = SortType.lookup(this.sortTypeRadioGroup.getSelection().getActionCommand(),
+				SortType::getSortTypeName);
+		final SortTarget sortTarget = SortTarget.lookup(this.sortTargetRadioGroup.getSelection().getActionCommand(),
+				SortTarget::getSortTargetName);
 		final String inputDirectoryPath = this.getInput().getText();
 		final String outputFilePath = this.getInput2().getText();
 		return new StepCounterGuiRequestDto(sortType, sortTarget, inputDirectoryPath, outputFilePath);
@@ -432,7 +480,6 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 		this.getStartButton().setEnabled(flg);
 		this.getSelButton().setEnabled(flg);
 		this.getSelButton2().setEnabled(flg);
-		this.getExitButton().setEnabled(flg);
 	}
 
 	/**
