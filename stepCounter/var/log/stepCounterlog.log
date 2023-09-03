@@ -627,3 +627,71 @@
 2023/05/17 14:02:00.193 [AWT-EventQueue-0] INFO   Log4J2 StepCounterGuiMainServiceImpl#execStepCount() ------------------------------------------------------------------
 2023/05/17 14:02:00.194 [AWT-EventQueue-0] INFO   Log4J2 StepCounterGuiMainServiceImpl#execStepCount() -- END   StepCount -----------------------------------------------
 2023/05/17 14:02:00.194 [AWT-EventQueue-0] INFO   Log4J2 StepCounterGuiMainServiceImpl#execStepCount() ------------------------------------------------------------------
+2023/09/02 10:57:33.929 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 10:57:33.932 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:10:03.818 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:10:03.822 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:10:06.740 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:10:06.741 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:10:09.819 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:10:09.820 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:11:03.657 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:11:03.659 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:12:57.930 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:12:57.932 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:19:34.421 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:19:34.424 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:19:45.117 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:19:45.118 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:25:56.452 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:25:56.455 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:37:32.950 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:37:32.955 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:37:35.414 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:37:35.414 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:37:36.804 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:37:36.804 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:37:38.031 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:37:38.031 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:37:58.362 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:37:58.365 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:38:05.621 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:38:05.621 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:38:33.991 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:38:33.992 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 11:42:49.818 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 11:42:49.818 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 12:20:43.890 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 12:20:43.893 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 12:21:05.314 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 12:21:05.317 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 12:27:19.065 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 12:27:19.069 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 12:27:20.988 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 12:27:20.989 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 12:27:22.727 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 12:27:22.728 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 12:30:59.993 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 12:30:59.998 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 21:38:56.583 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 21:38:56.586 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 21:46:10.466 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 21:46:10.469 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 22:21:08.438 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 22:21:08.441 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 22:23:39.198 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 22:23:39.200 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 22:32:32.103 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 22:32:32.107 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 22:32:34.857 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 22:32:34.857 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 22:32:37.651 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 22:32:37.652 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/02 22:32:39.716 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：入力フォルダ
+2023/09/02 22:32:39.717 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() チェック結果：入力ファイルパスがファイル
+2023/09/04 00:17:09.417 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter
+2023/09/04 00:17:09.420 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter
+2023/09/04 00:17:09.421 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#outputFileCheck() チェック結果：出力ファイルパスがディレクトリ
+2023/09/04 00:17:18.090 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#inputDirectoryCheck() 入力ディレクトリパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter
+2023/09/04 00:17:18.091 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#outputFileCheck() 出力ファイルパスチェック ファイルパス：/Users/takashi.ebina/git/repository2/stepCounter
+2023/09/04 00:17:18.091 [AWT-EventQueue-0] DEBUG  Log4J2 ValidatorUtil#outputFileCheck() チェック結果：出力ファイルパスがディレクトリ

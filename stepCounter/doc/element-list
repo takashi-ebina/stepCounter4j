@@ -14,3 +14,4 @@ co.jp.stepCounter.presentation.controller.cui
 co.jp.stepCounter.presentation.controller.gui
 co.jp.stepCounter.presentation.validator
 co.jp.stepCounter.presentation.view
+co.jp.stepCounter.presentation.view.custom

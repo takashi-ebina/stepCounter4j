@@ -21,6 +21,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -45,37 +46,55 @@ import co.jp.stepCounter.presentation.view.custom.JPlaceholderTextField;
  * @author takashi.ebina
  */
 public class StepCounterGuiMainView extends JFrame implements ActionListener {
-
+	/** メインパネル */
 	private JPanel jContentPane = null;
+	/** ヘッダー */
 	private JPanel jHeaderContentPane = null;
-
+	/** メインパネル１ */
 	private JPanel jp1 = null;
+	/** メインパネル２ */
 	private JPanel jp2 = null;
+	/** メインパネル３ */
 	private JPanel jp3 = null;
+	/** メインパネル４ */
 	private JPanel jp4 = null;
-
+	/** 入力フォルダテキストボックス */
 	private JTextField input = null;
+	/** 入力フォルダ選択ボタン */
 	private JButton jSelButton = null;
+	/** 出力ファイルテキストボックス */
 	private JTextField input2 = null;
+	/** 出力ファイル選択ボタン */
 	private JButton jSelButton2 = null;
-
-	private JButton jStartButton = null;
-
+	/** ソート区分ラジオボタン */
 	private JPanel jSortTypeRadioButton = null;
+	/** ソート対象ラジオボタン */
 	private JPanel jSortTargetRadioButton = null;
-
+	/** ソート区分ラジオグループ */
 	private ButtonGroup sortTypeRadioGroup = null;
+	/** ソート対象ラジオグループ */
 	private ButtonGroup sortTargetRadioGroup = null;
-
+	/** 開始ボタン */
+	private JButton jStartButton = null;
+	/** GridBagLayout */
 	private GridBagLayout gbl = new GridBagLayout();
+	/** GridBagConstraints */
 	private GridBagConstraints gbc = new GridBagConstraints();
-
 	/** タイトルロゴ */
 	private final String TITLE_IMG_PATH = "/img/icon_ebi.png";
-
+	/** コントローラー */
 	private final StepCounterGuiMainController controller;
+	/** メインパネルのグラデーション（START） */
+	private final Color CONPANE_GRADATION_START_COLOR = new Color(255, 240, 245);
+	/** メインパネルのグラデーション（END） */
+	private final Color CONPANE_GRADATION_END_COLOR = new Color(255, 192, 203);
+	/** ボタンの背景色 */
+	private final Color BACKGROUND_BUTTON_COLOR = new Color(240, 128, 128);
+	/** ボタンの前景色 */
+	private final Color FOREGROUND_BUTTON_COLOR = new Color(248, 248, 255);
 
 	/**
+	 * <p>
 	 * コンストラクタ
 	 */
 	public StepCounterGuiMainView() {
@@ -108,15 +127,12 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 				@Override
 				protected void paintComponent(Graphics g) {
 					Graphics2D g2d = (Graphics2D) g;
-					Color start = new Color(255, 240, 245);
-					Color end = new Color(255, 192, 203);
-					// グラデーションでペイントする
-					Paint paint = new GradientPaint(0.0f, 0.0f, start, 0.0f, getHeight(), end);
+					Paint paint = new GradientPaint(0.0f, 0.0f, CONPANE_GRADATION_START_COLOR, 0.0f, getHeight(),
+							CONPANE_GRADATION_END_COLOR);
 					g2d.setPaint(paint);
 					g2d.fillRect(0, 0, getWidth(), getHeight());
 				}
 			};
-
 			this.jContentPane.add(getJContentHeaderPane());
 			this.jContentPane.add(getJp1());
 			this.jContentPane.add(getJp2());
@@ -142,13 +158,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 				final ImageIcon icon = new ImageIcon(image);
 				this.jHeaderContentPane.add(new JLabel(icon), null);
 				this.jHeaderContentPane.setOpaque(false);
-
-				gbc.fill = GridBagConstraints.BOTH;
-				gbc.gridx = 0;
-				gbc.gridy = 0;
-				gbc.gridwidth = 1;
-				gbc.gridheight = 1;
-				gbl.setConstraints(this.jHeaderContentPane, gbc);
+				setGridBagLayout(this.jHeaderContentPane, GridBagConstraints.BOTH, 0, 0, 1, 1);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -169,7 +179,6 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			this.jp1.add(getSelButton(), BorderLayout.EAST);
 			this.jp1.setOpaque(false);
 			this.jp1.setPreferredSize(new Dimension(750, 70));
-
 		}
 		return this.jp1;
 	}
@@ -187,12 +196,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			File f = new File(".").getAbsoluteFile().getParentFile();
 			this.input.setText(f.getPath());
 			this.input.setPreferredSize(new Dimension(650, 50));
-			gbc.fill = GridBagConstraints.BOTH;
-			gbc.gridx = 0;
-			gbc.gridy = 1;
-			gbc.gridwidth = 1;
-			gbc.gridheight = 1;
-			gbl.setConstraints(this.input, gbc);
+			setGridBagLayout(this.input, GridBagConstraints.BOTH, 0, 1, 1, 1);
 		}
 		return this.input;
 	}
@@ -210,12 +214,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			this.jSelButton.addActionListener(this);
 			this.jSelButton.setActionCommand("sel1");
 			this.jSelButton.setPreferredSize(new Dimension(50, 50));
-			gbc.fill = GridBagConstraints.BOTH;
-			gbc.gridx = 1;
-			gbc.gridy = 1;
-			gbc.gridwidth = 1;
-			gbc.gridheight = 1;
-			gbl.setConstraints(this.jSelButton, gbc);
+			setGridBagLayout(this.jSelButton, GridBagConstraints.BOTH, 1, 1, 1, 1);
 		}
 		return this.jSelButton;
 	}
@@ -233,12 +232,6 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			this.jp2.add(getSelButton2(), BorderLayout.EAST);
 			this.jp2.setOpaque(false);
 			this.jp2.setPreferredSize(new Dimension(750, 70));
-			gbc.fill = GridBagConstraints.BOTH;
-			gbc.gridx = 0;
-			gbc.gridy = 2;
-			gbc.gridwidth = 1;
-			gbc.gridheight = 1;
-			gbl.setConstraints(this.jp2, gbc);
 		}
 		return this.jp2;
 	}
@@ -255,6 +248,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			File f = new File(".").getAbsoluteFile().getParentFile();
 			this.input2.setText(f.getPath());
 			this.input2.setPreferredSize(new Dimension(650, 50));
+			setGridBagLayout(this.input2, GridBagConstraints.BOTH, 0, 2, 1, 1);
 		}
 		return this.input2;
 	}
@@ -272,6 +266,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			this.jSelButton2.addActionListener(this);
 			this.jSelButton2.setActionCommand("sel2");
 			this.jSelButton2.setPreferredSize(new Dimension(50, 50));
+			setGridBagLayout(this.jSelButton2, GridBagConstraints.BOTH, 1, 2, 1, 1);
 		}
 		return this.jSelButton2;
 	}
@@ -289,12 +284,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			this.jp3.add(getSortTargetRadioButton(), BorderLayout.CENTER);
 			this.jp3.setOpaque(false);
 			this.jp3.setPreferredSize(new Dimension(750, 70));
-			gbc.fill = GridBagConstraints.BOTH;
-			gbc.gridx = 0;
-			gbc.gridy = 3;
-			gbc.gridwidth = 1;
-			gbc.gridheight = 1;
-			gbl.setConstraints(this.jp3, gbc);
+			setGridBagLayout(this.jp3, GridBagConstraints.BOTH, 0, 3, 1, 1);
 		}
 		return this.jp3;
 	}
@@ -397,13 +387,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			this.jp4.add(getStartButton(), null);
 			this.jp4.setOpaque(false);
 			this.jp4.setPreferredSize(new Dimension(300, 70));
-			gbc.fill = GridBagConstraints.BOTH;
-			gbc.gridx = 0;
-			gbc.gridy = 4;
-			gbc.gridwidth = 1;
-			gbc.gridheight = 1;
-			gbl.setConstraints(this.jp4, gbc);
-
+			setGridBagLayout(this.jp4, GridBagConstraints.BOTH, 0, 4, 1, 1);
 		}
 		return this.jp4;
 	}
@@ -421,9 +405,8 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			this.jStartButton.setActionCommand("start");
 			this.jStartButton.setText("count start !!");
 			this.jStartButton.setFont(new Font("Arial", Font.PLAIN, 28));
-
-			this.jStartButton.setForeground(new Color(224, 255, 255));
-			this.jStartButton.setBackground(new Color(240,128,128));
+			this.jStartButton.setForeground(FOREGROUND_BUTTON_COLOR);
+			this.jStartButton.setBackground(BACKGROUND_BUTTON_COLOR);
 			this.jStartButton.setPreferredSize(new Dimension(30, 30));
 			this.jStartButton.setBorder(
 					new SoftBevelBorder(BevelBorder.RAISED, new Color(255, 228, 225), new Color(128, 128, 128)));
@@ -516,4 +499,23 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * <p>
+	 * コンポーネント設定
+	 * 
+	 * @param target     コンポーネント設定対象
+	 * @param fill       初期 fill 値
+	 * @param gridx      初期 gridx 値
+	 * @param gridy      初期 gridy 値
+	 * @param gridwidth  初期 gridwidth 値
+	 * @param gridheight 初期 gridheight 値
+	 */
+	private void setGridBagLayout(JComponent target, int fill, int gridx, int gridy, int gridwidth, int gridheight) {
+		this.gbc.fill = fill;
+		this.gbc.gridx = gridx;
+		this.gbc.gridy = gridy;
+		this.gbc.gridwidth = gridwidth;
+		this.gbc.gridheight = gridheight;
+		this.gbl.setConstraints(target, gbc);
+	}
 }
