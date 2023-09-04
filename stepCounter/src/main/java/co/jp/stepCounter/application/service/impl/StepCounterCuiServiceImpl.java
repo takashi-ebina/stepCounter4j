@@ -63,9 +63,8 @@ public class StepCounterCuiServiceImpl implements StepCounterCuiService {
 	public ProcessResult execStepCount(final File inputDirectory, final File outputFile,
 			final SortType stepCountSortType, final SortTarget stepCountSortTarget) {
 		try {
-			logger.logInfo("------------------------------------------------------------------");
-			logger.logInfo("-- START StepCount -----------------------------------------------");
-			logger.logInfo("------------------------------------------------------------------");
+			logger.logInfo(String.format("[START]StepCount execute {inputDirectory:%s ,outputFile:%s ,SortType: %s,SortTarget:%s}"
+					,inputDirectory.toString(), outputFile.toString(), stepCountSortType.getSortTypeCode(), stepCountSortTarget.getSortTargetCode()));
 
 			// ステップ数の集計処理
 			final List<StepCountData> stepCountDataList = 
@@ -74,9 +73,7 @@ public class StepCounterCuiServiceImpl implements StepCounterCuiService {
 			stepCountRepository.save(
 					new AllFilesStepCountData(stepCountDataList, stepCountSortType, stepCountSortTarget), outputFile);
 
-			logger.logInfo("------------------------------------------------------------------");
-			logger.logInfo("-- END   StepCount -----------------------------------------------");
-			logger.logInfo("------------------------------------------------------------------");
+			logger.logInfo("[END]StepCount execute ");
 
 			return ProcessResult.SUCCESS;
 		} catch (Exception e) {

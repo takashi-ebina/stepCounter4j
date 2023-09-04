@@ -90,7 +90,7 @@ class TestStepCounterCuiController {
 			}
 
 			// カウント対象のディレクトリパスの入力
-			in.inputln(localFilePath + "/var/input"); 
+			in.inputln(localFilePath + "/src/test/resources/input"); 
 			// カウント結果出力対象のファイルパスの入力
 			in.inputln(localFilePath + "/var/output/result.csv");
 			// ソート区分の入力
@@ -136,7 +136,7 @@ class TestStepCounterCuiController {
 			}
 			String outputPath = localFilePath + "/var/output/result.csv";
 			// カウント対象のディレクトリパスの入力
-			in.inputln(localFilePath + "/var/input"); 
+			in.inputln(localFilePath + "/src/test/resources/input"); 
 			// カウント結果出力対象のファイルパスの入力
 			in.inputln(outputPath);
 			// ファイルの上書き実施
@@ -189,7 +189,7 @@ class TestStepCounterCuiController {
 			}
 			String outputPath = localFilePath + "/var/output/result.csv";
 			// カウント対象のディレクトリパスの入力
-			in.inputln(localFilePath + "/var/input"); 
+			in.inputln(localFilePath + "/src/test/resources/input"); 
 			// カウント結果出力対象のファイルパスの入力
 			in.inputln(outputPath);
 			// ソート区分の入力
@@ -229,7 +229,7 @@ class TestStepCounterCuiController {
 			}
 			String outputPath = localFilePath + "/var/output/result.csv";
 			// カウント対象のディレクトリパスの入力
-			in.inputln(localFilePath + "/var/input"); 
+			in.inputln(localFilePath + "/src/test/resources/input"); 
 			// カウント結果出力対象のファイルパスの入力
 			in.inputln(outputPath);
 			// ファイルの上書き実施
@@ -296,9 +296,9 @@ class TestStepCounterCuiController {
 		void warning2() {
 			// 【事前準備】
 			// カウント対象のディレクトリパスの入力
-			in.inputln(localFilePath + "/var/input"); 
+			in.inputln(localFilePath + "/src/test/resources/input"); 
 			// カウント結果出力対象のファイルパスの入力
-			in.inputln(localFilePath + "/var/input");
+			in.inputln(localFilePath + "/src/test/resources/input");
 			// 【実行】
 			cuiController.stepCountInteractiveMode();
 			// 【検証】
@@ -327,7 +327,7 @@ class TestStepCounterCuiController {
 			} catch (IOException e) {
 			}
 			// カウント対象のディレクトリパスの入力
-			in.inputln(localFilePath + "/var/input"); 
+			in.inputln(localFilePath + "/src/test/resources/input"); 
 			// カウント結果出力対象のファイルパスの入力
 			in.inputln(localFilePath + "/var/output/result.csv");
 			// ソート区分の入力
@@ -365,7 +365,7 @@ class TestStepCounterCuiController {
 			} catch (IOException e) {
 			}
 			// カウント対象のディレクトリパスの入力
-			in.inputln(localFilePath + "/var/input"); 
+			in.inputln(localFilePath + "/src/test/resources/input"); 
 			// カウント結果出力対象のファイルパスの入力
 			in.inputln(localFilePath + "/var/output/result.csv");
 			// ソート区分の入力
@@ -413,7 +413,7 @@ class TestStepCounterCuiController {
 			}
 			
 			// カウント対象のディレクトリパスの入力
-			in.inputln(localFilePath + "/var/input"); 
+			in.inputln(localFilePath + "/src/test/resources/input"); 
 			// カウント結果出力対象のファイルパスの入力
 			in.inputln(localFilePath + "/var/output/result.csv");
 			// ソート区分の入力
@@ -461,7 +461,7 @@ class TestStepCounterCuiController {
 							ExecuteMode.SCRIPT,
 							SortType.ASCENDING_ORDER,
 							SortTarget.FILEPATH,
-							localFilePath + "/var/input",
+							localFilePath + "/src/test/resources/input",
 							localFilePath + "/var/output/result.csv");
 			// 【実行】
 			cuiController.stepCountScriptMode(dto);
@@ -508,7 +508,7 @@ class TestStepCounterCuiController {
 							ExecuteMode.SCRIPT,
 							SortType.ASCENDING_ORDER,
 							SortTarget.FILEPATH,
-							localFilePath + "/var/input",
+							localFilePath + "/src/test/resources/input",
 							localFilePath + "/var/output");
 			// 【実行】
 			injectMockcuiController.stepCountScriptMode(dto);
@@ -531,7 +531,7 @@ class TestStepCounterCuiController {
 							ExecuteMode.SCRIPT,
 							SortType.ASCENDING_ORDER,
 							SortTarget.FILEPATH,
-							localFilePath + "/var/input",
+							localFilePath + "/src/test/resources/input",
 							localFilePath + "/var/output/result.csv");
 			// 【実行】
 			injectMockcuiController.stepCountScriptMode(dto);

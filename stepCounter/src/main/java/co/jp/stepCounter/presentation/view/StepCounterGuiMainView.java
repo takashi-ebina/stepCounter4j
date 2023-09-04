@@ -29,7 +29,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.TitledBorder;
 
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
@@ -50,13 +52,13 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	private JPanel jContentPane = null;
 	/** ヘッダー */
 	private JPanel jHeaderContentPane = null;
-	/** メインパネル１ */
+	/** メインパネル１（入力フォルダ） */
 	private JPanel jp1 = null;
-	/** メインパネル２ */
+	/** メインパネル２(結果出力選択) */
 	private JPanel jp2 = null;
-	/** メインパネル３ */
+	/** メインパネル３（ラジオボタン） */
 	private JPanel jp3 = null;
-	/** メインパネル４ */
+	/** メインパネル４（ボタン）*/
 	private JPanel jp4 = null;
 	/** 入力フォルダテキストボックス */
 	private JTextField input = null;
@@ -77,13 +79,13 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	/** 開始ボタン */
 	private JButton jStartButton = null;
 	/** GridBagLayout */
-	private GridBagLayout gbl = new GridBagLayout();
+	private final GridBagLayout gbl = new GridBagLayout();
 	/** GridBagConstraints */
-	private GridBagConstraints gbc = new GridBagConstraints();
+	private final GridBagConstraints gbc = new GridBagConstraints();
 	/** タイトルロゴ */
 	private final String TITLE_IMG_PATH = "/img/icon_ebi.png";
 	/** コントローラー */
-	private final StepCounterGuiMainController controller;
+	private final StepCounterGuiMainController controller = new StepCounterGuiMainController();
 	/** メインパネルのグラデーション（START） */
 	private final Color CONPANE_GRADATION_START_COLOR = new Color(255, 240, 245);
 	/** メインパネルのグラデーション（END） */
@@ -98,7 +100,6 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	 * コンストラクタ
 	 */
 	public StepCounterGuiMainView() {
-		this.controller = new StepCounterGuiMainController();
 		init();
 	}
 
@@ -168,9 +169,9 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 
 	/**
 	 * <p>
-	 * ファイル入力選択
+	 * メインパネル１（入力フォルダ）
 	 * 
-	 * @return ファイル入力選択
+	 * @return メインパネル１（入力フォルダ）
 	 */
 	public JPanel getJp1() {
 		if (this.jp1 == null) {
@@ -185,9 +186,9 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 
 	/**
 	 * <p>
-	 * ファイルインプット（ディレクトリ）
+	 * テキストフィールド（フォルダ）
 	 * 
-	 * @return ファイルインプット（ディレクトリ）
+	 * @return テキストフィールド（フォルダ）
 	 */
 	public JTextField getInput() {
 		if (this.input == null) {
@@ -203,9 +204,9 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 
 	/**
 	 * <p>
-	 * ファイル選択ボタン
+	 * フォルダ選択ボタン
 	 * 
-	 * @return ファイル選択ボタン
+	 * @return フォルダ選択ボタン
 	 */
 	public JButton getSelButton() {
 		if (this.jSelButton == null) {
@@ -221,9 +222,9 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 
 	/**
 	 * <p>
-	 * 結果出力選択
+	 * メインパネル２（出力ファイル）
 	 * 
-	 * @return 結果出力選択
+	 * @return メインパネル２（出力ファイル）
 	 */
 	public JPanel getJp2() {
 		if (this.jp2 == null) {
@@ -238,16 +239,17 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 
 	/**
 	 * <p>
-	 * ファイルインプット（ファイル）
+	 * テキストフィールド（ファイル）
 	 * 
-	 * @return ファイルインプット（ファイル）
+	 * @return テキストフィールド（ファイル）
 	 */
 	public JTextField getInput2() {
 		if (this.input2 == null) {
-			this.input2 = new JPlaceholderTextField("出力ファイル（拡張子はCSVを指定してください）");
+			this.input2 = new JPlaceholderTextField("出力ファイル");
 			File f = new File(".").getAbsoluteFile().getParentFile();
 			this.input2.setText(f.getPath());
 			this.input2.setPreferredSize(new Dimension(650, 50));
+			this.input2.setToolTipText("拡張子はCSVを指定してください");
 			setGridBagLayout(this.input2, GridBagConstraints.BOTH, 0, 2, 1, 1);
 		}
 		return this.input2;
@@ -273,9 +275,9 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 
 	/**
 	 * <p>
-	 * ラジオボタン
+	 * メインパネル３（ラジオボタン）
 	 * 
-	 * @return ラジオボタン
+	 * @return メインパネル３（ラジオボタン）
 	 */
 	public JPanel getJp3() {
 		if (this.jp3 == null) {
@@ -300,7 +302,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			// ラジオボタンのパネル
 			this.jSortTypeRadioButton = new JPanel();
 			// ラジオボタンのタイトル
-			this.jSortTypeRadioButton.setBorder(BorderFactory.createTitledBorder("ソート区分"));
+			setRadioButtonTitle(this.jSortTypeRadioButton, "ソート区分");
 			// 各ラジオボタンの生成
 			JRadioButton sortTypeRadioFromNoSort = new JRadioButton(SortType.NO_SORT.getSortTypeName(), true);
 			JRadioButton sortTypeRadioFromAscOrder = new JRadioButton(SortType.ASCENDING_ORDER.getSortTypeName());
@@ -337,7 +339,7 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			// ラジオボタンのパネル
 			this.jSortTargetRadioButton = new JPanel();
 			// ラジオボタンのタイトル
-			jSortTargetRadioButton.setBorder(BorderFactory.createTitledBorder("ソート対象"));
+			setRadioButtonTitle(this.jSortTargetRadioButton, "ソート対象");
 			// 各ラジオボタンの生成
 			JRadioButton sortTargetRadioFromFilePath = new JRadioButton(SortTarget.FILEPATH.getSortTargetName(), true);
 			JRadioButton sortTargetRadioFromTotalStep = new JRadioButton(SortTarget.TOTALSTEPCOUNT.getSortTargetName());
@@ -351,7 +353,6 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 			sortTargetRadioFromExecStep.setActionCommand(SortTarget.EXECSTEPCOUNT.getSortTargetName());
 			sortTargetRadioFromCommentStep.setActionCommand(SortTarget.COMMENTSTEPCOUNT.getSortTargetName());
 			sortTargetRadioFromEmptyStep.setActionCommand(SortTarget.EMPTYSTEPCOUNT.getSortTargetName());
-
 			sortTargetRadioFromFilePath.setOpaque(false);
 			sortTargetRadioFromTotalStep.setOpaque(false);
 			sortTargetRadioFromExecStep.setOpaque(false);
@@ -374,12 +375,24 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 		}
 		return this.jSortTargetRadioButton;
 	}
-
 	/**
 	 * <p>
-	 * ボタン
+	 * ラジオボタンのタイトルレイアウト設定
 	 * 
-	 * @return ボタン
+	 * @param target コンポーネント対象
+	 * @param titleName タイトル名
+	 */
+	private void setRadioButtonTitle(final JPanel target, final String titleName) {
+		final Border outside = BorderFactory.createMatteBorder(0, 10, 2, 0, new Color(250, 128, 114));
+		final Border inside = BorderFactory.createEmptyBorder(0, 5, 0, 0);
+		target.setBorder(BorderFactory.createTitledBorder(BorderFactory.createCompoundBorder(outside, inside),
+			titleName, TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SANS_SERIF, Font.BOLD, 14), Color.BLACK));
+	}
+	/**
+	 * <p>
+	 * メインパネル４（ボタン）
+	 * 
+	 * @return メインパネル４（ボタン）
 	 */
 	public JPanel getJp4() {
 		if (this.jp4 == null) {
