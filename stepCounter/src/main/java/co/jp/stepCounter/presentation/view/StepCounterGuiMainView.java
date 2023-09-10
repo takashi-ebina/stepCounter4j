@@ -1,6 +1,7 @@
 package co.jp.stepCounter.presentation.view;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -16,9 +17,11 @@ import java.awt.event.ActionListener;
 import java.awt.image.ImageProducer;
 import java.io.File;
 import java.net.URL;
+import java.util.Objects;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -27,17 +30,30 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTextField;
+import javax.swing.JTree;
+import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.basic.BasicSplitPaneDivider;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreeSelectionModel;
 
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
+import co.jp.stepCounter.infrastructure.log.Log4J2;
 import co.jp.stepCounter.presentation.controller.gui.StepCounterGuiMainController;
 import co.jp.stepCounter.presentation.controller.gui.StepCounterGuiRequestDto;
+import co.jp.stepCounter.presentation.view.custom.EmptyIcon;
 import co.jp.stepCounter.presentation.view.custom.JPlaceholderTextField;
+import co.jp.stepCounter.presentation.view.custom.RowSelectionTree;
 
 /**
  * <p>
@@ -48,17 +64,25 @@ import co.jp.stepCounter.presentation.view.custom.JPlaceholderTextField;
  * @author takashi.ebina
  */
 public class StepCounterGuiMainView extends JFrame implements ActionListener {
+	/** 全体パネル */
+	private JPanel jWholePane = null;
+	/** サイドメニューとメインパネルを分割するパネル */
+	private JSplitPane jSpritPane = null;
 	/** メインパネル */
-	private JPanel jContentPane = null;
-	/** ヘッダー */
+	private JPanel jMainPane = null;
+	/** サイドメニューパネル */
+	private JScrollPane jSideMenuPane = null;
+	/** ホームパネル */
+	private JPanel jHomePane = null;
+	/** ホームヘッダー */
 	private JPanel jHeaderContentPane = null;
-	/** メインパネル１（入力フォルダ） */
+	/** ホームパネル１（入力フォルダ） */
 	private JPanel jp1 = null;
-	/** メインパネル２(結果出力選択) */
+	/** ホームパネル２(結果出力選択) */
 	private JPanel jp2 = null;
-	/** メインパネル３（ラジオボタン） */
+	/** ホームパネル３（ラジオボタン） */
 	private JPanel jp3 = null;
-	/** メインパネル４（ボタン）*/
+	/** ホームパネル４（ボタン） */
 	private JPanel jp4 = null;
 	/** 入力フォルダテキストボックス */
 	private JTextField input = null;
@@ -78,12 +102,18 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	private ButtonGroup sortTargetRadioGroup = null;
 	/** 開始ボタン */
 	private JButton jStartButton = null;
+	
+	/** 情報パネル */
+	private JPanel jInfoPane = null;
+	
 	/** GridBagLayout */
 	private final GridBagLayout gbl = new GridBagLayout();
 	/** GridBagConstraints */
 	private final GridBagConstraints gbc = new GridBagConstraints();
 	/** タイトルロゴ */
 	private final String TITLE_IMG_PATH = "/img/icon_ebi.png";
+	/** フレームロゴ */
+	private final String FRAME_IMG_PATH = "/img/frame_icon_ebi.png";
 	/** コントローラー */
 	private final StepCounterGuiMainController controller = new StepCounterGuiMainController();
 	/** メインパネルのグラデーション（START） */
@@ -95,36 +125,145 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	/** ボタンの前景色 */
 	private final Color FOREGROUND_BUTTON_COLOR = new Color(248, 248, 255);
 
+	/** Log4J2インスタンス */
+	private final Log4J2 logger = Log4J2.getInstance();
+
 	/**
 	 * <p>
 	 * コンストラクタ
 	 */
 	public StepCounterGuiMainView() {
+		logger.logDebug("GUI-mode start ....");
+		logger.logDebug("current LookAndFeel:" + UIManager.getLookAndFeel());
 		init();
 	}
-
 	/**
 	 * <p>
 	 * 初期化処理
 	 */
 	private void init() {
+		this.setIconImage(getImageIcon(FRAME_IMG_PATH).getImage());
 		this.setResizable(false);
-		this.setContentPane(getJContentPane());
+		this.setContentPane(getJWholePane());
 		this.setTitle("StepCounter");
-		this.setSize(750, 450);
+		this.setSize(850, 430);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	/**
+	 * <p>
+	 * 全体パネルの生成処理
+	 * 
+	 * @return 全体パネル
+	 */
+	private JPanel getJWholePane() {
+		if (this.jWholePane == null) {
+			this.jWholePane = new JPanel(new BorderLayout(2, 2));
+			this.jWholePane.add(getJSplitPane());
+			this.jWholePane.setPreferredSize(new Dimension(100, 430));
+		}
+		return this.jWholePane;
+	}
+	
+	/**
+	 * <p>
+	 * サイドメニューパネルとメインパネルを分割するパネルの生成処理
+	 * 
+	 * @return サイドメニューパネルとメインパネルを分割するパネル
+	 */
+	private JSplitPane getJSplitPane() {
+		if (this.jSpritPane == null) {
+			// DefaultTreeCellRendererに対して、
+			// アイコンを表示させないようにしたり、文字に色を設定するなど
+			// サイドメニューのレイアウトに関する設定を行なっている。
+			final Icon emptyIcon = new EmptyIcon();
+			UIManager.put("Tree.openIcon", emptyIcon);
+			UIManager.put("Tree.closedIcon", emptyIcon);
+			UIManager.put("Tree.leafIcon", emptyIcon);
+			UIManager.put("Tree.expandedIcon", emptyIcon);
+			UIManager.put("Tree.collapsedIcon", emptyIcon);
+			UIManager.put("Tree.leftChildIndent", 10);
+			UIManager.put("Tree.rightChildIndent", 0);
+			UIManager.put("Tree.paintLines", false);
+			UIManager.put("Tree.textForeground", Color.WHITE);
+			
+			// FIXME:jMainPaneのインタンスが生成されていないとgetJSideMenePaneがうまく動作しないので、
+			// getJMainPane→getJSideMenePaneの順序で呼び出す必要がある。
+			final CardLayout cardLayout = new CardLayout();
+			getJMainPane(cardLayout);
+			getJSideMenuPane(cardLayout);
+			// サイドメニューパネルとメインパネルを分割するパネルの生成
+			this.jSpritPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.jSideMenuPane, this.jMainPane);
+			
+			// 仕切線の色設定
+			this.jSpritPane.setUI(new BasicSplitPaneUI() {
+				public BasicSplitPaneDivider createDefaultDivider() {
+					return new BasicSplitPaneDivider(this) {
+						public void setBorder(Border b) {
+						}
+						@Override
+						public void paint(Graphics g) {
+							g.setColor(BACKGROUND_BUTTON_COLOR);
+							g.fillRect(0, 0, getSize().width, getSize().height);
+							super.paint(g);
+						}
+					};
+				}
+			});
+			this.jSpritPane.setBorder(null);
+		}
+		return this.jSpritPane;
 	}
 
 	/**
 	 * <p>
-	 * メインパネル（ヘッダー部 + メイン部）の生成処理
+	 * サイドメニューパネルの生成処理
 	 * 
-	 * @return メインパネル（ヘッダー部 + メイン部）
+	 * @return サイドメニューパネル
 	 */
-	private JPanel getJContentPane() {
-		if (this.jContentPane == null) {
-			this.jContentPane = new JPanel() {
+	private JScrollPane getJSideMenuPane(final CardLayout cardLayout) {
+		if (this.jSideMenuPane == null) {
+			final TreeModel model = makeModel();
+			final JTree tree = new RowSelectionTree();
+			tree.setModel(model);
+			tree.setRowHeight(32);
+			tree.setBorder(BorderFactory.createEmptyBorder(12,12,12,12));
+			tree.setBackground(BACKGROUND_BUTTON_COLOR);
+			tree.setFont(new Font("Arial", Font.BOLD, 14));
+			
+			int row = 0;
+			while (row < tree.getRowCount()) {
+				tree.expandRow(row++);
+			}
+			tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+			// サイドメニューとメインメニューを紐付けるイベント設定
+			tree.addTreeSelectionListener(e -> {
+				final Object o = e.getNewLeadSelectionPath().getLastPathComponent();
+				if (o instanceof DefaultMutableTreeNode) {
+					final DefaultMutableTreeNode node = (DefaultMutableTreeNode) o;
+					final String title = Objects.toString(node.getUserObject());
+					cardLayout.show(jMainPane, title);
+				}
+			});
+			this.jSideMenuPane = new JScrollPane(tree);
+			
+			this.jSideMenuPane.setBackground(BACKGROUND_BUTTON_COLOR);
+			this.jSideMenuPane.setBorder(null);
+		}
+		return this.jSideMenuPane;
+	}
+	
+	/**
+	 * <p>
+	 * メインパネルの生成処理
+	 * 
+	 * @return メインパネル
+	 */
+	private JPanel getJMainPane(CardLayout cardLayout) {
+		if (this.jMainPane == null) {
+			// CardLayoutかつ背景色がグラデーションのメインパネルを生成
+			// メインパネル配下のパネルは、JComponent#setOpaque(false);で背景色を透明にすることで本レイアウトが適用させる
+			this.jMainPane = new JPanel(cardLayout) {
 				@Override
 				protected void paintComponent(Graphics g) {
 					Graphics2D g2d = (Graphics2D) g;
@@ -134,44 +273,97 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 					g2d.fillRect(0, 0, getWidth(), getHeight());
 				}
 			};
-			this.jContentPane.add(getJContentHeaderPane());
-			this.jContentPane.add(getJp1());
-			this.jContentPane.add(getJp2());
-			this.jContentPane.add(getJp3());
-			this.jContentPane.add(getJp4());
-			this.jContentPane.setOpaque(false);
+			this.jMainPane.add(getJHomePane(), "HOME");
+			this.jMainPane.add(getJInfoPane(), "INFO");
 		}
-		return this.jContentPane;
+		return this.jMainPane;
+	}
+	
+	/**
+	 * <p>
+	 * サイドメニューのツリーモデルの生成処理
+	 * 
+	 * @return ツリーモデル
+	 */
+	private DefaultTreeModel makeModel() {
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
+		DefaultMutableTreeNode c1 = new DefaultMutableTreeNode("HOME");
+		DefaultMutableTreeNode c2 = new DefaultMutableTreeNode("INFO");
+		root.add(c1);
+		root.add(c2);
+		return new DefaultTreeModel(root);
+	}
+	/**
+	 * <p>
+	 * 情報パネルの生成処理
+	 * 
+	 * @return 情報パネル
+	 */
+	private JPanel getJInfoPane() {
+		if (this.jInfoPane == null ) {
+			this.jInfoPane = new JPanel();
+			String strHtml = 
+					"<html><h1><font>stepcounterについて</font></h1>"
+					+ "<p>プログラムのステップ数を集計するツールです。</p>"
+					+ "<br>"
+					+ "<p>作成者：takashi.ebina<br>"
+					+ "GitHubリポジトリ：https://github.com/takashi-ebina/stepCounterforJava/</p>"
+					+ "<h2>対応プログラムファイル</h2>"
+					+ "<ul><li>Java</li><li>Cs</li><li>sql</li></ul></p>"
+					+ "<h2>変更履歴</h2>"
+					+ "<h3>1.0.0</h3>"
+					+ "新規リリース"
+					;
+			JLabel l = new JLabel();
+			l.setText(strHtml);
+
+			this.jInfoPane.add(l);
+			this.jInfoPane.setOpaque(false);
+			this.jInfoPane.setPreferredSize(new Dimension(750, 440));
+		}
+		return this.jInfoPane;
+	}
+	/**
+	 * <p>
+	 * ホームパネル（ヘッダー部 + メイン部）の生成処理
+	 * 
+	 * @return メインパネル（ヘッダー部 + メイン部）
+	 */
+	private JPanel getJHomePane() {
+		if (this.jHomePane == null) {
+			this.jHomePane = new JPanel();
+			this.jHomePane.add(getJContentHeaderPane());
+			this.jHomePane.add(getJp1());
+			this.jHomePane.add(getJp2());
+			this.jHomePane.add(getJp3());
+			this.jHomePane.add(getJp4());
+			this.jHomePane.setOpaque(false);
+			this.jHomePane.setPreferredSize(new Dimension(750, 440));
+		}
+		return this.jHomePane;
 	}
 
 	/**
 	 * <p>
-	 * メインパネル（ヘッダー部）の生成処理
+	 * ホームパネル（ヘッダー部）の生成処理
 	 * 
-	 * @return メインパネル（ヘッダー部）
+	 * @return ホームパネル（ヘッダー部）
 	 */
 	private JPanel getJContentHeaderPane() {
 		if (this.jHeaderContentPane == null) {
 			this.jHeaderContentPane = new JPanel();
-			try {
-				final URL url = this.getClass().getResource(TITLE_IMG_PATH);
-				final Image image = this.createImage((ImageProducer) url.getContent());
-				final ImageIcon icon = new ImageIcon(image);
-				this.jHeaderContentPane.add(new JLabel(icon), null);
-				this.jHeaderContentPane.setOpaque(false);
-				setGridBagLayout(this.jHeaderContentPane, GridBagConstraints.BOTH, 0, 0, 1, 1);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			this.jHeaderContentPane.add(new JLabel(getImageIcon(TITLE_IMG_PATH)), null);
+			this.jHeaderContentPane.setOpaque(false);
+			setGridBagLayout(this.jHeaderContentPane, GridBagConstraints.BOTH, 0, 0, 1, 1);
 		}
 		return this.jHeaderContentPane;
 	}
 
 	/**
 	 * <p>
-	 * メインパネル１（入力フォルダ）
+	 * ホームパネル１（入力フォルダ）
 	 * 
-	 * @return メインパネル１（入力フォルダ）
+	 * @return ホームパネル１（入力フォルダ）
 	 */
 	public JPanel getJp1() {
 		if (this.jp1 == null) {
@@ -222,9 +414,9 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 
 	/**
 	 * <p>
-	 * メインパネル２（出力ファイル）
+	 * ホームパネル２（出力ファイル）
 	 * 
-	 * @return メインパネル２（出力ファイル）
+	 * @return ホームパネル２（出力ファイル）
 	 */
 	public JPanel getJp2() {
 		if (this.jp2 == null) {
@@ -275,9 +467,9 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 
 	/**
 	 * <p>
-	 * メインパネル３（ラジオボタン）
+	 * ホームパネル３（ラジオボタン）
 	 * 
-	 * @return メインパネル３（ラジオボタン）
+	 * @return ホームパネル３（ラジオボタン）
 	 */
 	public JPanel getJp3() {
 		if (this.jp3 == null) {
@@ -299,7 +491,6 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	 */
 	public JPanel getSortTypeRadioButton() {
 		if (this.jSortTypeRadioButton == null && this.sortTypeRadioGroup == null) {
-			// ラジオボタンのパネル
 			this.jSortTypeRadioButton = new JPanel();
 			// ラジオボタンのタイトル
 			setRadioButtonTitle(this.jSortTypeRadioButton, "ソート区分");
@@ -336,7 +527,6 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 	 */
 	public JPanel getSortTargetRadioButton() {
 		if (this.jSortTargetRadioButton == null && this.sortTargetRadioGroup == null) {
-			// ラジオボタンのパネル
 			this.jSortTargetRadioButton = new JPanel();
 			// ラジオボタンのタイトル
 			setRadioButtonTitle(this.jSortTargetRadioButton, "ソート対象");
@@ -375,24 +565,26 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 		}
 		return this.jSortTargetRadioButton;
 	}
+
 	/**
 	 * <p>
 	 * ラジオボタンのタイトルレイアウト設定
 	 * 
-	 * @param target コンポーネント対象
+	 * @param target    コンポーネント対象
 	 * @param titleName タイトル名
 	 */
 	private void setRadioButtonTitle(final JPanel target, final String titleName) {
 		final Border outside = BorderFactory.createMatteBorder(0, 10, 2, 0, new Color(250, 128, 114));
 		final Border inside = BorderFactory.createEmptyBorder(0, 5, 0, 0);
 		target.setBorder(BorderFactory.createTitledBorder(BorderFactory.createCompoundBorder(outside, inside),
-			titleName, TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SANS_SERIF, Font.BOLD, 14), Color.BLACK));
+				titleName, TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SANS_SERIF, Font.BOLD, 14), Color.BLACK));
 	}
+
 	/**
 	 * <p>
-	 * メインパネル４（ボタン）
+	 * ホームパネル４（ボタン）
 	 * 
-	 * @return メインパネル４（ボタン）
+	 * @return ホームパネル４（ボタン）
 	 */
 	public JPanel getJp4() {
 		if (this.jp4 == null) {
@@ -438,12 +630,10 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 		final String cmd = e.getActionCommand();
 		try {
 			setButtonAble(false);
-			if ("sel1".equals(cmd)) {
-				directoriesSelect(this.getInput());
-			} else if ("sel2".equals(cmd)) {
-				fileSelect(this.getInput2());
-			} else if ("start".equals(cmd)) {
-				this.controller.stepCountGuiMode(makeStepCounterGuiRequestDto(), this);
+			switch (cmd) {
+			case "sel1" -> directoriesSelect(this.getInput());
+			case "sel2" -> fileSelect(this.getInput2());
+			case "start" -> this.controller.stepCountGuiMode(makeStepCounterGuiRequestDto(), this);
 			}
 		} finally {
 			setButtonAble(true);
@@ -530,5 +720,24 @@ public class StepCounterGuiMainView extends JFrame implements ActionListener {
 		this.gbc.gridwidth = gridwidth;
 		this.gbc.gridheight = gridheight;
 		this.gbl.setConstraints(target, gbc);
+	}
+	/**
+	 * <p>
+	 * ImageIcon取得
+	 * 
+	 * @param imageIconPath　画像のパス
+	 * 
+	 * @return ImageIconオブジェクト
+	 */
+	private ImageIcon getImageIcon(final String imageIconPath) {
+		ImageIcon icon = null;
+		try {
+			final URL url = this.getClass().getResource(imageIconPath);
+			final Image image = this.createImage((ImageProducer) url.getContent());
+			icon = new ImageIcon(image);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return icon;
 	}
 }

@@ -1,5 +1,6 @@
 package co.jp.stepCounter;
 
+import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -42,6 +43,7 @@ import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
  * <ul>
  * <li>Java</li>
  * <li>Cs</li>
+ * <li>sql</li>
  * </ul>
  * 
  * @since 1.0
@@ -72,25 +74,19 @@ public class StepCounter {
 	 * @param args 未入力の場合、GUIモードで処理を実行。それ以外の場合は引数に応じて処理が変動する。
 	 */
 	public static void main(String[] args) {
-		if (Objects.isNull(args)|| args.length == 0) {
-			new StepCounterGuiMainView();	// GUIモードとして実行
+		if (Objects.isNull(args) || args.length == 0) {
+			// GUIモードとして実行
+			EventQueue.invokeLater(StepCounterGuiMainView::new);
 			return;
 		}
 		// CUIモードとして実行
 		final StepCounterCuiRequestDto requestDto = makeStepCounterCuiRequestDto(args);
 		final StepCounterCuiController controller = new StepCounterCuiController();
 		switch (requestDto.getStepCountExecuteMode()) {
-		case HELP:
-			controller.printHelp();
-			break;
-		case INTERACTIVE:
-			controller.stepCountInteractiveMode();
-			break;
-		case SCRIPT:
-			controller.stepCountScriptMode(requestDto);
-			break;
-		default:
-			break;
+			case HELP        -> controller.printHelp();
+			case INTERACTIVE -> controller.stepCountInteractiveMode();
+			case SCRIPT      -> controller.stepCountScriptMode(requestDto);
+			default          -> throw new IllegalArgumentException("Unexpected value: " + requestDto.getStepCountExecuteMode());
 		}
 	}
 	/**
