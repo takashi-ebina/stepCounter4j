@@ -1,5 +1,6 @@
 package co.jp.stepCounter.presentation.controller.gui;
 
+import java.awt.Component;
 import java.io.File;
 
 import javax.swing.JOptionPane;
@@ -11,7 +12,6 @@ import co.jp.stepCounter.constant.StepCounterConstant.ProcessResult;
 import co.jp.stepCounter.domain.model.stepCountExecutor.StepCountExecutor;
 import co.jp.stepCounter.infrastructure.csvdao.StepCountCsvDao;
 import co.jp.stepCounter.presentation.validator.ValidatorUtil;
-import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
 /**
  * <p>
  * GUIでステップカウント処理を実行するコントローラクラス
@@ -46,7 +46,7 @@ public class StepCounterGuiMainController {
 	 * @param dto GUIでステップカウント処理を実行する際に利用するDTOクラス
 	 * @param parent ステップ数の集計を実施するGUIクラス
 	 */
-	public void stepCountGuiMode (final StepCounterGuiRequestDto dto, final StepCounterGuiMainView parent) {
+	public void stepCountGuiMode (final StepCounterGuiRequestDto dto, final Component parent) {
 		final String inputDirectoryPath = dto.getInputDirectoryPath();
 		final String outputFilePath = dto.getOutputFilePath();
 		
