@@ -10,7 +10,7 @@
  * Mavenによる実行形式Jarの作成
 
 # 画面レイアウト
-![スクリーンショット 2023-09-13 0 57 40](https://github.com/takashi-ebina/stepCounterforJava/assets/40939908/e1beb4e2-5a65-4f66-bcbb-62d566f7f7ea)
+![スクリーンショット 2023-09-13 1 02 10](https://github.com/takashi-ebina/stepCounterforJava/assets/40939908/b7e68a9e-2ec4-4ce4-af4a-a3bb5b37d18a)
 
 # 主なディレクトリ構成
 ```
