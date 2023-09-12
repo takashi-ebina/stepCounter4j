@@ -1,5 +1,5 @@
 # stepCounterforJava
-自身の学習用に作成したステップ数の集計ツールです。
+プログラムファイルのステップ数集計ツールです。
 
 開発の現場ではあまり経験できなかった以下の点を意識して製造した・・つもり
 
@@ -10,12 +10,12 @@
  * Mavenによる実行形式Jarの作成
 
 # 画面レイアウト
-![stepcounter_ui](https://github.com/takashi-ebina/stepCounterforJava/assets/40939908/c612b40a-eee4-419f-a756-80b4a136fe85)
+![スクリーンショット 2023-09-13 0 57 40](https://github.com/takashi-ebina/stepCounterforJava/assets/40939908/e1beb4e2-5a65-4f66-bcbb-62d566f7f7ea)
 
 # 主なディレクトリ構成
 ```
 stepCounter
-├── doc  ・・・ JavaDocが格納されているフォルダ
+├── document  ・・・ JavaDoc等のドキュメントが格納されているフォルダ
 ├── src  ・・・ stepCounterForJavaの資源が格納されているフォルダ
 │   ├── main  ・・・ javaソースコードが格納されているフォルダ
 │   │   ├── java
