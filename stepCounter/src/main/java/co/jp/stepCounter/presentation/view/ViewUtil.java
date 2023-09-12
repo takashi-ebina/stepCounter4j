@@ -28,6 +28,7 @@ public class ViewUtil {
 	 * ImageIcon取得
 	 * 
 	 * @param imageIconPath 画像のパス
+	 * @param component コンポーネント
 	 * 
 	 * @return ImageIconオブジェクト
 	 */
