@@ -16,10 +16,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.5.0</version>
+				<version>3.6.0</version>
 				<configuration>
+					<reportOutputDirectory>../docs</reportOutputDirectory>
+					<destDir>docs</destDir>
 					<author>true</author>
-					<source>16</source>
+					<source>14</source>
 					<show>protected</show>
 					<encoding>UTF-8</encoding>
 					<charset>UTF-8</charset>
@@ -137,5 +139,4 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
 </project>
