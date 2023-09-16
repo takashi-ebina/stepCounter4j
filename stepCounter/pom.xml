@@ -18,8 +18,8 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.6.0</version>
 				<configuration>
-					<reportOutputDirectory>../docs</reportOutputDirectory>
-					<destDir>docs</destDir>
+					<reportOutputDirectory>../docs/javadoc</reportOutputDirectory>
+					<destDir>javadoc</destDir>
 					<author>true</author>
 					<source>14</source>
 					<show>protected</show>
