@@ -86,3 +86,6 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
  * Java
  * Cs
  * sql
+
+# API仕様書
+https://takashi-ebina.github.io/stepCounterforJava/javadoc/
