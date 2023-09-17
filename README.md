@@ -44,7 +44,7 @@ stepCounterforJava
 ### Jarファイルビルド方法
 pom.xmlが存在する階層で以下のコマンドを実行してください。
 ```
-mvn install
+mvn package
 ```
  * ビルド時に`stepCounter>src>mainフォルダ`に存在するテストコードが起動します。
  * テスト成功の場合に`StepCounter-jar-with-dependencies.jar`ファイルが作成されます。
@@ -83,6 +83,16 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
 /Users/xxC.java,15   ,12    ,2       ,1     <br>
 合計            ,60   ,40     ,8       ,12    <br>
 
+## JavaDocの生成
+```
+mvn javadoc:javadoc
+```
+
+## テストコードの実行およびテストレポート、カバレッジの出力
+```
+mvn clean  test -Dmaven.test.failure.ignore=true  site -DgenerateReports=false  surefire-report:report jacoco:report
+```
+
 # 集計対象言語
  * Java
  * Cs
@@ -90,6 +100,10 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
 
 # ドキュメント
 ## API仕様書
-https://takashi-ebina.github.io/stepCounterforJava/javadoc/
-## 単体テストレポート
+https://takashi-ebina.github.io/stepCounterforJava/javadoc/index.html
+## 単体テスト
+### テストレポート
 https://takashi-ebina.github.io/stepCounterforJava/test-reports/surefire-report.html
+### テストカバレッジ
+https://takashi-ebina.github.io/stepCounterforJava/test-coverage/index.html
+
