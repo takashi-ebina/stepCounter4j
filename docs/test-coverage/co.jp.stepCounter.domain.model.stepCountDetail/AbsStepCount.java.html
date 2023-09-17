@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbsStepCount.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.domain.model.stepCountDetail</a> &gt; <span class="el_source">AbsStepCount.java</span></div><h1>AbsStepCount.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.domain.model.stepCountDetail;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Objects;
+
+import co.jp.stepCounter.constant.SystemConstant;
+import co.jp.stepCounter.domain.model.commentPatternMatch.AbsCommentPatternMatch;
+import co.jp.stepCounter.domain.model.commentPatternMatch.IfCommentPatternMatch;
+import co.jp.stepCounter.domain.model.stepCountDetail.StepCountFactory.MethodType;
+import co.jp.stepCounter.domain.model.stepCountDetail.StepCountFactory.StepCountType;
+import co.jp.stepCounter.domain.value.StepCountData;
+import co.jp.stepCounter.infrastructure.log.Log4J2;
+/**
+ * &lt;p&gt;
+ * ステップカウントの抽象クラス
+ * &lt;p&gt;
+ * 各プログラムファイルのステップカウント処理を提供する抽象クラスです。&lt;br&gt;
+ *  標準のステップカウント処理を利用したい場合は{@link AbsStepCount#deFaultFileReadStepCount}を呼び出してください。&lt;br&gt;
+ * プログラムファイル固有のステップ数集計処理を実装したい場合は、{@link MethodType#ORIGINAL}を設定し、&lt;br&gt;
+ * {@link AbsStepCount#oridinalFileReadStepCount}をオーバライドし独自の集計処理を実装してください。&lt;br&gt;
+ * また、１行コメント／複数行コメント（開始）／複数行コメント（終了）を判定するための正規表現の定義および実装を&lt;br&gt;
+ * {@link AbsCommentPatternMatch}を継承したクラスに記載してください。
+ * &lt;p&gt;
+ * ステップカウントのインスタンスを生成する際は、{@link StepCountType#of(String, IfCommentPatternMatch)}を用いて生成してください。
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ * 
+ * @see IfStepCount
+ * @see JavaStepCount
+ * @see CsStepCount
+ * @see SqlStepCount
+ * @see StepCountFactory
+ * @see AbsCommentPatternMatch
+ */
+public abstract class AbsStepCount implements IfStepCount {
+	/** Log4J2インスタンス */
+<span class="fc" id="L43">	protected final Log4J2 logger = Log4J2.getInstance();</span>
+	/** コメントパターン判定用クラス */
+	protected final IfCommentPatternMatch commentPatternMatch;
+	/** メソッド区分 */
+	protected final MethodType methodType;
+
+	/**
+	 * &lt;p&gt;
+	 * コンストラクタ
+	 * &lt;p&gt;
+	 * ファクトリクラス（{@link StepCountType#of}）で利用するために実装しています。&lt;br&gt;
+	 * 本クラスを継承する際は引数なしのコンストラクタを実装してください。
+	 */
+<span class="fc" id="L56">	protected AbsStepCount() {</span>
+<span class="fc" id="L57">		this.commentPatternMatch = null;</span>
+<span class="fc" id="L58">		this.methodType = null;</span>
+<span class="fc" id="L59">	}</span>
+
+	/**
+	 * &lt;p&gt;
+	 * コンストラクタ
+	 * 
+	 * @param commentPatternMatch コメント判定用クラス
+	 * @param methodType メソッド区分
+	 * @throws IllegalArgumentException コメントパターン判定用クラスがNullの場合
+	 */
+<span class="fc" id="L69">	public AbsStepCount(final IfCommentPatternMatch commentPatternMatch, final MethodType methodType) {</span>
+<span class="pc bpc" id="L70" title="3 of 6 branches missed.">		if (Objects.isNull(commentPatternMatch) || Objects.isNull(methodType == null)) {</span>
+<span class="nc" id="L71">			throw new IllegalArgumentException(&quot;コンストラクタの引数の値がNullです&quot;);</span>
+		}
+<span class="fc" id="L73">		this.commentPatternMatch = commentPatternMatch;</span>
+<span class="fc" id="L74">		this.methodType = methodType;</span>
+<span class="fc" id="L75">	}</span>
+
+	/**
+	 * &lt;p&gt;
+	 * プログラムファイルのステップ数を集計するメソッド
+	 * &lt;p&gt;
+	 * プログラムファイルのステップ数の集計処理を行い、1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラスを返却します。&lt;br&gt;
+	 * {@link MethodType#DEFAULT}の場合、{@link AbsStepCount#deFaultFileReadStepCount}を実行し、&lt;br&gt;
+	 * {@link MethodType#ORIGINAL}の場合は{@link AbsStepCount#oridinalFileReadStepCount}を実行します。&lt;br&gt;
+	 * &lt;p&gt;
+	 * プログラムファイル固有のステップ数集計処理を実装したい場合は、{@link MethodType#ORIGINAL}を設定し、&lt;br&gt;
+	 * {@link AbsStepCount#oridinalFileReadStepCount}をオーバライドし独自の集計処理を実装してください。
+	 * 
+	 * @param inputFile ステップカウント対象ファイル
+	 * @return 1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラス
+	 * @throws Exception プログラムファイルのステップ数集計処理で例外が発生した場合
+	 */
+	@Override
+	public StepCountData stepCount(final File inputFile) throws Exception {
+<span class="fc" id="L94">		StepCountData stepCountData = null;</span>
+<span class="pc bpc" id="L95" title="2 of 3 branches missed.">		switch (this.methodType) {</span>
+<span class="fc" id="L96">			case DEFAULT  -&gt; stepCountData = deFaultFileReadStepCount(inputFile);</span>
+<span class="nc" id="L97">			case ORIGINAL -&gt; stepCountData = oridinalFileReadStepCount(inputFile);</span>
+		}
+<span class="fc" id="L99">		return stepCountData;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * １行コメント判定メソッド
+	 * &lt;p&gt;
+	 * １行コメントを含んでいるか判定するメソッドです。
+	 * &lt;p&gt;
+	 * 実際の処理は{@link IfCommentPatternMatch#isSingleCommentPattern}に移譲しています。
+	 * 
+	 * @param target 検索対象の行
+	 * @return １行コメントが存在する場合はtrueを返却。それ以外の場合はfalseを返却する。
+	 */
+	public boolean isSingleCommentPattern(final String target) {
+<span class="fc" id="L114">		return commentPatternMatch.isSingleCommentPattern(target);</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * 複数行コメント（開始）判定メソッド
+	 * &lt;p&gt;
+	 * 複数行コメント（開始）を含んでいるか判定するメソッドです。
+	 * &lt;p&gt;
+	 * 実際の処理は{@link IfCommentPatternMatch#isStartMultiCommentPattern}に移譲しています。
+	 * 
+	 * @param target 検索対象の行
+	 * @return 複数行コメント（開始）が存在する場合はtrueを返却。それ以外の場合はfalseを返却する。
+	 */
+	public boolean isStartMultiCommentPattern(final String target) {
+<span class="fc" id="L129">		return commentPatternMatch.isStartMultiCommentPattern(target);</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * 複数行コメント（終了）判定メソッド
+	 * &lt;p&gt;
+	 * 複数行コメント（終了）を含んでいるか判定するメソッドです。
+	 * &lt;p&gt;
+	 * 実際の処理は{@link IfCommentPatternMatch#isEndMultiCommentPattern}に移譲しています。
+	 * 
+	 * @param target 検索対象の行
+	 * @return 複数行コメント（終了）が存在する場合はtrueを返却。それ以外の場合はfalseを返却する。
+	 */
+	public boolean isEndMultiCommentPattern(final String target) {
+<span class="fc" id="L144">		return commentPatternMatch.isEndMultiCommentPattern(target);</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * プログラムファイルのステップ数の集計処理を行うメソッド
+	 * &lt;p&gt;
+	 * カウント対象プログラムファイルを元に、総行数／実行行数／コメント行数／空行数を集計処理を行います。&lt;br&gt;
+	 * 共通的に利用される集計メソッドであり、{@link MethodType#DEFAULT}の場合に呼ばれます。&lt;br&gt;
+	 * プログラムファイル独自の集計メソッドを実装したい場合は{@link AbsStepCount#oridinalFileReadStepCount}をオーバライドして呼び出すようにしてください。
+	 * 
+	 * @param inputFile カウント対象プログラムファイル
+	 * @return 1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラス
+	 */
+	protected final StepCountData deFaultFileReadStepCount(final File inputFile) {
+<span class="fc" id="L159">		int tmpTotalStepCount = 0, tmpExecStepCount = 0,</span>
+<span class="fc" id="L160">				tmpCommentStepCount = 0, tmpEmptyStepCount = 0;</span>
+<span class="fc" id="L161">		boolean canWriteStepCount = true;</span>
+<span class="fc" id="L162">		try (BufferedReader bw = new BufferedReader(</span>
+				new InputStreamReader(new FileInputStream(inputFile), SystemConstant.CHARSET_NAME))) {
+<span class="fc" id="L164">			String readLine = &quot;&quot;;</span>
+<span class="fc" id="L165">			boolean isCommentLine = false;</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">			while (Objects.nonNull((readLine = bw.readLine()))) {</span>
+<span class="fc" id="L167">				final String trimReadLine = readLine.trim();</span>
+<span class="fc" id="L168">				tmpTotalStepCount++;</span>
+				// コメント行状態判定
+<span class="fc bfc" id="L170" title="All 2 branches covered.">				if (isCommentLine) {</span>
+<span class="fc" id="L171">					tmpCommentStepCount++;</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">					if (this.isEndMultiCommentPattern(trimReadLine)) {</span>
+<span class="fc" id="L173">						isCommentLine = false;</span>
+					}
+					continue;
+				}
+				// 空行存在判定
+<span class="fc bfc" id="L178" title="All 2 branches covered.">				if (Objects.equals(trimReadLine, &quot;&quot;)) {</span>
+<span class="fc" id="L179">					tmpEmptyStepCount++;</span>
+<span class="fc" id="L180">					continue;</span>
+				}
+				// １行コメント存在判定
+<span class="fc bfc" id="L183" title="All 2 branches covered.">				if (this.isSingleCommentPattern(trimReadLine)) {</span>
+<span class="fc" id="L184">					tmpCommentStepCount++;</span>
+<span class="fc" id="L185">					continue;</span>
+				}
+				// 複数行コメント（１行で完結する複数行コメント）存在判定
+<span class="fc bfc" id="L188" title="All 4 branches covered.">				if (this.isStartMultiCommentPattern(trimReadLine) &amp;&amp; this.isEndMultiCommentPattern(trimReadLine)) {</span>
+<span class="fc" id="L189">					tmpCommentStepCount++;</span>
+<span class="fc" id="L190">					continue;</span>
+				}
+				// 複数行コメント（複数行にまたがる複数行コメント）存在判定
+<span class="pc bpc" id="L193" title="1 of 4 branches missed.">				if (this.isStartMultiCommentPattern(trimReadLine) &amp;&amp; !this.isEndMultiCommentPattern(trimReadLine)) {</span>
+<span class="fc" id="L194">					tmpCommentStepCount++;</span>
+<span class="fc" id="L195">					isCommentLine = true;</span>
+<span class="fc" id="L196">					continue;</span>
+				}
+<span class="fc" id="L198">				tmpExecStepCount++;</span>
+<span class="fc" id="L199">			}</span>
+<span class="nc" id="L200">		} catch (IOException e) {</span>
+<span class="nc" id="L201">			logger.logError(String.format(&quot;[ERROR]StepCount fail {fileName:%s}&quot;, inputFile.getName()), e);</span>
+			// ステップカウント処理で例外が発生した場合は、該当ファイルのステップ数の出力を行わない。
+<span class="nc" id="L203">			canWriteStepCount = false;</span>
+<span class="fc" id="L204">		}</span>
+<span class="fc" id="L205">		return new StepCountData(tmpTotalStepCount, tmpExecStepCount, </span>
+				tmpCommentStepCount, tmpEmptyStepCount, canWriteStepCount, inputFile);
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * プログラムファイルのステップ数の集計処理を行うメソッド（独自処理）
+	 * &lt;p&gt;
+	 * カウント対象プログラムファイルを元に、総行数／実行行数／コメント行数／空行数を集計処理を行います。
+	 * 
+	 * @param inputFile カウント対象プログラムファイル
+	 * @return 1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラス
+	 * @throws Exception 本メソッドをオーバライドせずに呼び出した場合
+	 */
+	protected StepCountData oridinalFileReadStepCount(final File inputFile) throws Exception {
+<span class="nc" id="L220">		throw new Exception(&quot;oridinalFileReadStepCountメソッドはオーバライドして実装してください。&quot;);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

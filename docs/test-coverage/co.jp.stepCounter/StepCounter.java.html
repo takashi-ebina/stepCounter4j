@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StepCounter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter</a> &gt; <span class="el_source">StepCounter.java</span></div><h1>StepCounter.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter;
+
+import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.Objects;
+
+import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
+import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
+import co.jp.stepCounter.constant.StepCounterConstant.SortType;
+import co.jp.stepCounter.presentation.controller.cui.StepCounterCuiController;
+import co.jp.stepCounter.presentation.controller.cui.StepCounterCuiRequestDto;
+import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
+
+/**
+ * &lt;p&gt;
+ * ステップカウント処理を呼び出すクラス
+ * &lt;p&gt;
+ * 対話形式または引数にカウント対象のディレクトリパス、カウント結果出力対象のファイルパスを入力し、&lt;br&gt;
+ * フォルダ内に存在するプログラムファイルのステップ数を集計し、CSV形式でファイルに出力します。
+ * &lt;p&gt;
+ * [使い方]&lt;br&gt;
+ * java -jar StepCounter-jar-with-dependencies.jar&lt;br&gt;
+ * java -jar StepCounter-jar-with-dependencies.jar [オプション] &lt;br&gt;
+ * [オプション]&lt;br&gt;
+ * {@literal -h}:このメッセージを表示して終了する。&lt;br&gt;
+ * {@literal -i}:対話モードで実行する。（オプションを指定しない場合はGUIモード）&lt;br&gt;
+ * {@literal -s}:スクリプトモードで実行する。（オプションを指定しない場合はGUIモード）&lt;br&gt;
+ * {@literal -input=[inputDirectoryPath]}:ステップカウント対象のディレクトリパスを指定する。
+ * ※「{@literal -s}」オプションを利用する場合に指定してください。&lt;br&gt;
+ * {@literal -output=[outputFilePath]}:カウント結果出力対象のファイルパスを指定する。
+ * ※「{@literal -s}」オプションを利用する場合に指定してください。&lt;br&gt;
+ * {@literal -asc=[sortTarget]}:ステップカウント処理の出力順を[sortTarget]をキーとして昇順ソートする。&lt;br&gt;
+ * {@literal -desc=[sortTarget]}:ステップカウント処理の出力順を[sortTarget]をキーとして降順ソートする。&lt;br&gt;
+ * [sortTarget]: 0:ファイルパス、1:総行数、2:実行行数、3:コメント行数、4:空行数&lt;br&gt;
+ * &lt;p&gt;
+ * [出力ファイルイメージ]&lt;br&gt;
+ * ファイルパス,総行数,実行行数,コメント行数,空行数&lt;br&gt;
+ * /Users/xxx.java,30,20,4,6&lt;br&gt;
+ * .. 中略 ..&lt;br&gt;
+ * 合計,60,40,8,12&lt;br&gt;
+ * &lt;p&gt;
+ * [対応プログラムファイル]&lt;br&gt;
+ * &lt;ul&gt;
+ * &lt;li&gt;Java&lt;/li&gt;
+ * &lt;li&gt;Cs&lt;/li&gt;
+ * &lt;li&gt;sql&lt;/li&gt;
+ * &lt;/ul&gt;
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
+<span class="nc" id="L53">public class StepCounter {</span>
+
+	/**
+	 * &lt;p&gt;
+	 * ステップカウント処理を行うエントリーポイントメソッド
+	 * &lt;p&gt;
+	 * コマンドライン引数の値を元にオプションの解析を行う。
+	 * &lt;ul&gt;
+	 * &lt;li&gt;コマンドライン引数の長さが0の場合、ステップカウント処理実行モードがGUIモードになる。&lt;/li&gt;
+	 * &lt;li&gt;コマンドライン引数に{@literal -h}が存在する場合、ステップカウント処理実行モードがヘルプモードになる。&lt;/li&gt;
+	 * &lt;li&gt;コマンドライン引数に{@literal -i}が存在する場合、ステップカウント処理実行モードが対話モードになる。&lt;/li&gt;
+	 * &lt;li&gt;コマンドライン引数に{@literal -s}が存在する場合、ステップカウント処理実行モードがスクリプトモードになる。&lt;br&gt;
+	 * &lt;li&gt;スクリプトモードで利用する引数は{@literal -input=}および{@literal -output=}を指定する。&lt;/li&gt;
+	 * &lt;li&gt;{@literal -input=}：「=」以降にカウント対象のディレクトリパスを指定する。&lt;/li&gt;
+	 * &lt;li&gt;{@literal -output=}：「=」以降にカウント結果出力対象のファイルパスを指定する。&lt;/li&gt;
+	 * &lt;li&gt;ステップカウント処理の出力順をソートさせたい場合は{@literal -asc=}または{@literal -desc=}を指定する。&lt;/li&gt;
+	 * &lt;li&gt;{@literal -asc=}：「=」以降にソート対象の項目を指定する&lt;/li&gt;
+	 * &lt;li&gt;{@literal -desc=}：「=」以降にソート対象の項目を指定する&lt;/li&gt;
+	 * &lt;li&gt;ソート対象の項目は0:ファイルパス、1:総行数、2:実行行数、3:コメント行数、4:空行数で指定する。&lt;/li&gt;
+	 * &lt;/ul&gt;
+	 * 
+	 * @param args 未入力の場合、GUIモードで処理を実行。それ以外の場合は引数に応じて処理が変動する。
+	 */
+	public static void main(String[] args) {
+<span class="nc bnc" id="L77" title="All 4 branches missed.">		if (Objects.isNull(args) || args.length == 0) {</span>
+			// GUIモードとして実行
+<span class="nc" id="L79">			EventQueue.invokeLater(StepCounterGuiMainView::new);</span>
+<span class="nc" id="L80">			return;</span>
+		}
+		// CUIモードとして実行
+<span class="nc" id="L83">		final StepCounterCuiRequestDto requestDto = makeStepCounterCuiRequestDto(args);</span>
+<span class="nc" id="L84">		final StepCounterCuiController controller = new StepCounterCuiController();</span>
+<span class="nc bnc" id="L85" title="All 4 branches missed.">		switch (requestDto.getStepCountExecuteMode()) {</span>
+<span class="nc" id="L86">			case HELP        -&gt; controller.printHelp();</span>
+<span class="nc" id="L87">			case INTERACTIVE -&gt; controller.stepCountInteractiveMode();</span>
+<span class="nc" id="L88">			case SCRIPT      -&gt; controller.stepCountScriptMode(requestDto);</span>
+<span class="nc" id="L89">			default          -&gt; throw new IllegalArgumentException(&quot;Unexpected value: &quot; + requestDto.getStepCountExecuteMode());</span>
+		}
+<span class="nc" id="L91">	}</span>
+	/**
+	 * &lt;p&gt;
+	 * CUIでステップカウント処理を実行する際に利用するDTOオブジェクトの生成
+	 * 
+	 * @param args コマンドライン引数
+	 * @return CUIでステップカウント処理を実行する際に利用するDTOオブジェクト
+	 * 
+	 * @see StepCounterCuiRequestDto
+	 */
+	private static StepCounterCuiRequestDto makeStepCounterCuiRequestDto(String[] args) {
+<span class="nc" id="L102">		String inputDirectoryPath = null;</span>
+<span class="nc" id="L103">		String outputFilePath = null;</span>
+<span class="nc" id="L104">		ExecuteMode stepCountExecuteMode = ExecuteMode.NOTHING;</span>
+<span class="nc" id="L105">		SortType stepCountSortType = SortType.NO_SORT;</span>
+<span class="nc" id="L106">		SortTarget stepCountSortTarget = SortTarget.FILEPATH;</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">		for (final String commandOption : args) {</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">			if (Objects.equals(commandOption, &quot;-h&quot;)) {</span>
+				// ヘルプモードの場合
+<span class="nc" id="L110">				stepCountExecuteMode = ExecuteMode.HELP;</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">			} else if (Objects.equals(commandOption, &quot;-i&quot;)) {</span>
+				// 対話モードの場合
+<span class="nc" id="L113">				stepCountExecuteMode = ExecuteMode.INTERACTIVE;</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">			} else if (Objects.equals(commandOption, &quot;-s&quot;)) {</span>
+				// スクリプトモードの場合
+<span class="nc" id="L116">				stepCountExecuteMode = ExecuteMode.SCRIPT;</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">			} else if (commandOption.startsWith(&quot;-input=&quot;)) {</span>
+				// カウント対象のディレクトリパスを指定している場合
+<span class="nc" id="L119">				inputDirectoryPath = split(commandOption, &quot;=&quot;)[1];</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">			} else if (commandOption.startsWith(&quot;-output=&quot;)) {</span>
+				// カウント結果出力対象のファイルパスを指定している場合
+<span class="nc" id="L122">				outputFilePath = split(commandOption, &quot;=&quot;)[1];</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">			} else if (commandOption.startsWith(&quot;-asc=&quot;)) {</span>
+				// 昇順ソートを指定している場合
+<span class="nc" id="L125">				stepCountSortType = SortType.ASCENDING_ORDER;</span>
+<span class="nc" id="L126">				stepCountSortTarget = SortTarget.lookup(split(commandOption, &quot;=&quot;)[1], SortTarget::getSortTargetCode);</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">			} else if (commandOption.startsWith(&quot;-desc=&quot;)) {</span>
+				// 降順ソートを指定している場合
+<span class="nc" id="L129">				stepCountSortType = SortType.DESCENDING_ORDER;</span>
+<span class="nc" id="L130">				stepCountSortTarget = SortTarget.lookup(split(commandOption, &quot;=&quot;)[1], SortTarget::getSortTargetCode);</span>
+			}
+		}
+<span class="nc bnc" id="L133" title="All 2 branches missed.">		if (stepCountExecuteMode == ExecuteMode.SCRIPT) {</span>
+<span class="nc bnc" id="L134" title="All 4 branches missed.">			if (Objects.isNull(inputDirectoryPath) || Objects.isNull(outputFilePath)) {</span>
+<span class="nc" id="L135">				throw new IllegalArgumentException(&quot;カウント対象のディレクトリパスまたはカウント結果出力対象のファイルパスの値がNullです&quot;);</span>
+			}
+		}
+<span class="nc" id="L138">		return new StepCounterCuiRequestDto(stepCountExecuteMode, stepCountSortType, stepCountSortTarget,</span>
+				inputDirectoryPath, outputFilePath);
+	}
+	
+	/**
+	 * 文字列を指定文字列で分割し、配列で返却します。
+	 *
+	 * @param str 文字列
+	 * @param del 区切り文字列
+	 * @return 分割された文字列を格納した配列
+	 */
+	private static String[] split(final String str, final String del){
+<span class="nc" id="L150">		final ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L151">		int pos   = 0;</span>
+<span class="nc" id="L152">		int index = 0;</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">		while ((index = str.indexOf(del, pos)) !=- 1) {</span>
+<span class="nc" id="L154">			list.add(str.substring(pos, index));</span>
+<span class="nc" id="L155">			pos = index + del.length();</span>
+		}
+<span class="nc" id="L157">		list.add(str.substring(pos, str.length()));</span>
+<span class="nc" id="L158">		return (String[])list.toArray(new String[list.size()]);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

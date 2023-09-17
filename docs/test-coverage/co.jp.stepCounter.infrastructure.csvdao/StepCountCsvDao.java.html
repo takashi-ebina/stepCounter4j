@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StepCountCsvDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.infrastructure.csvdao</a> &gt; <span class="el_source">StepCountCsvDao.java</span></div><h1>StepCountCsvDao.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.infrastructure.csvdao;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import co.jp.stepCounter.constant.SystemConstant;
+import co.jp.stepCounter.domain.repository.StepCountRepository;
+import co.jp.stepCounter.domain.value.AllFilesStepCountData;
+import co.jp.stepCounter.domain.value.StepCountData;
+import co.jp.stepCounter.infrastructure.log.Log4J2;
+
+/**
+ * &lt;p&gt;
+ * ステップカウントのリポジトリクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ * 
+ * @see StepCountRepository
+ */
+<span class="fc" id="L28">public class StepCountCsvDao implements StepCountRepository {</span>
+	
+	/** Log4J2インスタンス */
+<span class="fc" id="L31">	private final Log4J2 logger = Log4J2.getInstance();</span>
+	
+	/**
+	 * &lt;p&gt;
+	 * ステップカウントCSVのヘッダー名
+	 */
+<span class="fc" id="L37">	private final List&lt;String&gt; STEP_COUNT_HEADER_NAME = new ArrayList&lt;String&gt;(</span>
+<span class="fc" id="L38">			Arrays.asList(&quot;ファイルパス&quot;, &quot;総行数&quot;, &quot;実行行数&quot;, &quot;コメント行数&quot;, &quot;空行数&quot;));</span>
+
+	/**
+	 * &lt;p&gt;
+	 * プログラムファイルのステップ数をステップカウント結果出力ファイルに書き込むメソッド
+	 * &lt;p&gt;
+	 * 引数の全ファイルの総行数／実行行数／コメント行数／空行数を集計するデータクラスを元に、&lt;br&gt;
+	 * 集計結果を引数のカウント結果出力対象ファイルに書き込む処理を行います。
+	 * &lt;p&gt;
+	 * [書き込み内容]&lt;br&gt;
+	 * ファイルパス,総行数,実行行数,コメント行数,空行数
+	 * 
+	 * @param allFilesStepCountData 全ファイルの総行数／実行行数／コメント行数／空行数を集計するデータクラス
+	 * @param outputFile            カウント結果出力対象ファイル
+	 */
+	@Override
+	public void save(AllFilesStepCountData allFilesStepCountData, File outputFile) {
+		// CSVヘッダーの書き込み
+<span class="fc" id="L56">		CsvDaoUtil.writeHeader(outputFile, STEP_COUNT_HEADER_NAME);</span>
+		// CSVデータの書き込み
+<span class="fc" id="L58">		try (final BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile, true))) {</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">			for (final StepCountData stepCountData : allFilesStepCountData.getStepCountDatalist()) {</span>
+<span class="fc" id="L60">				logger.logInfo(&quot;ステップカウント結果出力開始。 ファイルパス：&quot; + stepCountData.getInputFile().getAbsolutePath());</span>
+				// 各ファイル毎のステップ数出力
+<span class="fc" id="L62">				bw.write(stepCountData.outputDataCommaDelimited() + SystemConstant.LINE_SEPARATOR);</span>
+<span class="fc" id="L63">			}</span>
+			// 全ファイル合計のステップ数出力
+<span class="fc" id="L65">			bw.write(allFilesStepCountData.outputDataCommaDelimited() + SystemConstant.LINE_SEPARATOR);</span>
+<span class="nc" id="L66">		} catch (IOException e) {</span>
+<span class="nc" id="L67">			throw new UncheckedIOException(e);</span>
+<span class="fc" id="L68">		}</span>
+<span class="fc" id="L69">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

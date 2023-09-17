@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CsCommentPatternMatch.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.domain.model.commentPatternMatch</a> &gt; <span class="el_source">CsCommentPatternMatch.java</span></div><h1>CsCommentPatternMatch.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.domain.model.commentPatternMatch;
+
+import java.util.Objects;
+import java.util.regex.Pattern;
+
+import co.jp.stepCounter.domain.model.commentPatternMatch.CommentPatternMatchFactory.CommentPatternMatchType;
+
+/**
+ * &lt;p&gt;
+ * Csコメントパターン判定用抽象クラス
+ * &lt;p&gt;
+ * Csコメントを判定する処理を提供する具象クラスです。
+ * &lt;p&gt;
+ * {@link IfCommentPatternMatch}で定義されているメソッドをオーバライドして、&lt;br&gt;
+ * １行コメント／複数行コメント（開始）／複数行コメント（終了）を判定する処理を実装しています。
+ * &lt;p&gt;
+ * インスタンスを生成する際は、{@link CommentPatternMatchType#of(String)}を用いて生成してください。
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ * 
+ * @see IfCommentPatternMatch
+ * @see AbsCommentPatternMatch
+ * @see CommentPatternMatchFactory
+ */
+<span class="fc" id="L27">public class CsCommentPatternMatch extends AbsCommentPatternMatch {</span>
+	/**
+	 * &lt;p&gt;
+	 * １行コメント判定メソッド
+	 * &lt;p&gt;
+	 * １行コメントを含んでいるか判定するメソッドです。
+	 * 
+	 * @param target 検索対象の行
+	 * @return １行コメントが存在する場合はtrueを返却。それ以外の場合はfalseを返却する。
+	 */
+	@Override
+	public boolean isSingleCommentPattern(final String target) {
+<span class="nc" id="L39">		final Pattern singleCommentPattern = Pattern.compile(SingleCommentPattern.Cs.getValue());</span>
+<span class="nc" id="L40">		return singleCommentPattern.matcher(target).find();</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * 複数行コメント（開始）判定メソッド
+	 * &lt;p&gt;
+	 * 複数行コメント（開始）を含んでいるか判定するメソッドです。
+	 * 
+	 * @param target 検索対象の行
+	 * @return 複数行コメント（開始）が存在する場合はtrueを返却。それ以外の場合はfalseを返却する。
+	 */
+	@Override
+	public boolean isStartMultiCommentPattern(final String target) {
+<span class="nc" id="L54">		final Pattern startMultiCommentPattern = Pattern.compile(StartMultiCommentPattern.Cs.getValue());</span>
+<span class="nc" id="L55">		return startMultiCommentPattern.matcher(target).find();</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * 複数行コメント（終了）判定メソッド
+	 * &lt;p&gt;
+	 * 複数行コメント（終了）を含んでいるか判定するメソッドです。
+	 * 
+	 * @param target 検索対象の行
+	 * @return 複数行コメント（終了）が存在する場合はtrueを返却。それ以外の場合はfalseを返却する。
+	 */
+	@Override
+	public boolean isEndMultiCommentPattern(final String target) {
+<span class="nc" id="L69">		final Pattern endMultiCCommentPattern = Pattern.compile(EndMultiCommentPattern.Cs.getValue());</span>
+<span class="nc" id="L70">		return endMultiCCommentPattern.matcher(target).find();</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * このオブジェクトが引数の他のオブジェクトが等しいかどうかを判定するメソッド
+	 *
+	 * @param obj 比較対象のオブジェクト
+	 * @return このオブジェクトが引数と同じである場合はtrue。それ以外の場合はfalseを返却する。
+	 */
+	@Override
+	public boolean equals(Object obj) {
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">		if (this == obj) {</span>
+<span class="nc" id="L83">			return true;</span>
+		}
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">		if (!(obj instanceof CsCommentPatternMatch)) {</span>
+<span class="nc" id="L86">			return false;</span>
+		}
+<span class="fc" id="L88">		return true;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * オブジェクトのハッシュ・コード値を返却するメソッド
+	 * 
+	 * @return このオブジェクトのハッシュ・コード値。
+	 */
+	@Override
+	public int hashCode() {
+<span class="nc" id="L99">		return Objects.hash();</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * Csコメントパターン判定のオブジェクトを返却するメソッド
+	 * 
+	 * @return Csコメントパターン判定のオブジェクト
+	 */
+	@Override
+	@SuppressWarnings(&quot;unchecked&quot;)
+	public &lt;T extends IfCommentPatternMatch&gt; T create() {
+<span class="fc" id="L111">		return (T) new CsCommentPatternMatch();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

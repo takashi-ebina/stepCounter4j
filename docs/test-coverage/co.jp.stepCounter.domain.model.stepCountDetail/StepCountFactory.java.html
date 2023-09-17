@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StepCountFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.domain.model.stepCountDetail</a> &gt; <span class="el_source">StepCountFactory.java</span></div><h1>StepCountFactory.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.domain.model.stepCountDetail;
+
+import co.jp.stepCounter.constant.EnumReverseLookup;
+import co.jp.stepCounter.domain.model.commentPatternMatch.IfCommentPatternMatch;
+
+/**
+ * &lt;p&gt;
+ * ステップカウントクラスの生成に利用するFactoryクラス
+ * &lt;p&gt;
+ * {@link IfStepCount}をimplementsしたクラスオブジェクトを生成する場合は、&lt;br&gt;
+ * {@link StepCountType#of(String, IfCommentPatternMatch)}の引数に生成するオブジェクトに紐づく拡張子を渡してください。
+ * &lt;p&gt;
+ * 対応する拡張子は{@link StepCountType}に定義されています。
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ * 
+ * @see IfStepCount
+ * @see AbsStepCount
+ * @see JavaStepCount
+ * @see SqlStepCount
+ * @see CsStepCount
+ */
+<span class="nc" id="L25">public class StepCountFactory {</span>
+	
+	/**
+	 * &lt;p&gt;
+	 * ステップカウントメソッドの種別をもつ列挙型クラス
+	 */
+<span class="fc" id="L31">	public enum MethodType {</span>
+		/** 標準 */
+<span class="fc" id="L33">		DEFAULT,</span>
+		/** 独自 */
+<span class="fc" id="L35">		ORIGINAL</span>
+	}
+	
+	/**
+	 * &lt;p&gt;
+	 * ステップカウントクラスの種別をもつ列挙型クラス
+	 */
+<span class="fc" id="L42">	public enum StepCountType {</span>
+		/** Javaステップカウントオブジェクト */
+<span class="fc" id="L44">		Java(&quot;java&quot;, new JavaStepCount(), MethodType.DEFAULT),</span>
+		/** Csステップカウントオブジェクト */
+<span class="fc" id="L46">		Cs(&quot;cs&quot;, new CsStepCount(), MethodType.DEFAULT),</span>
+		/** sqlステップカウントオブジェクト */
+<span class="fc" id="L48">		sql(&quot;sql&quot;, new SqlStepCount(), MethodType.DEFAULT);</span>
+
+		/** 拡張子 */
+		private final String extension;
+		/** ステップカウントオブジェクト */
+		private final IfStepCount stepCount;
+		/** メソッド区分 */
+		private final MethodType methodType;
+
+		/**
+		 * &lt;p&gt;
+		 * コンストラクタ
+		 * 
+		 * @param extension    拡張子
+		 * @param stepCount ステップカウントオブジェクト
+		 * @param methodType メソッド区分
+		 */
+<span class="fc" id="L65">		StepCountType(final String extension, final IfStepCount stepCount, final MethodType methodType) {</span>
+<span class="fc" id="L66">			this.extension = extension;</span>
+<span class="fc" id="L67">			this.stepCount = stepCount;</span>
+<span class="fc" id="L68">			this.methodType = methodType;</span>
+<span class="fc" id="L69">		}</span>
+
+		/**
+		 * &lt;p&gt;
+		 * 拡張子の値を返却するメソッド
+		 * 
+		 * @return 拡張子
+		 */
+		public String getExtension() {
+<span class="fc" id="L78">			return this.extension;</span>
+		}
+
+		/**
+		 * &lt;p&gt;
+		 * ステップカウントオブジェクトを返却するメソッド
+		 * 
+		 * @return ステップカウントオブジェクト
+		 */
+		public IfStepCount getStepCount() {
+<span class="fc" id="L88">			return this.stepCount;</span>
+		}
+
+		/**
+		 * &lt;p&gt;
+		 * ステップカウントオブジェクトを返却するメソッド
+		 * 
+		 * @return ステップカウントオブジェクト
+		 */
+		public MethodType getMethodType() {
+<span class="fc" id="L98">			return this.methodType;</span>
+		}
+
+		/**
+		 * &lt;p&gt;
+		 * 拡張子に対応するステップカウントオブジェクトを返却するメソッド
+		 * &lt;p&gt;
+		 * 拡張子から該当のEnumを取得する処理は{@link EnumReverseLookup#lookup(Object)}に移譲しています。
+		 * 
+		 * @param extension 拡張子
+		 * @throws IllegalArgumentException 拡張子に対応するクラスが存在しない場合
+		 * @return 拡張子に対応するステップカウントオブジェクト
+		 */
+		public static IfStepCount getByStepCount(final String extension) throws IllegalArgumentException {
+<span class="fc" id="L112">			return new EnumReverseLookup&lt;&gt;(StepCountType.class, StepCountType::getExtension)</span>
+<span class="fc" id="L113">					.lookup(extension).getStepCount();</span>
+		}
+
+		/**
+		 * &lt;p&gt;
+		 * 拡張子に対応するステップカウントオブジェクトを返却するメソッド
+		 * &lt;p&gt;
+		 * 拡張子から該当のEnumを取得する処理は{@link EnumReverseLookup#lookup(Object)}に移譲しています。
+		 * 
+		 * @param extension 拡張子
+		 * @throws IllegalArgumentException 拡張子に対応するクラスが存在しない場合
+		 * @return 拡張子に対応するステップカウントオブジェクト
+		 */
+		public static MethodType getByMethodType(final String extension) throws IllegalArgumentException {
+<span class="fc" id="L127">			return new EnumReverseLookup&lt;&gt;(StepCountType.class, StepCountType::getExtension)</span>
+<span class="fc" id="L128">					.lookup(extension).getMethodType();</span>
+		}
+		
+		/**
+		 * &lt;p&gt;
+		 * 拡張子に対応するEnumの存在判定メソッド
+		 * &lt;p&gt;
+		 * 拡張子から該当のEnumを取得する処理は{@link EnumReverseLookup#containsAttribute(Object)}に移譲しています。
+		 * 
+		 * @param extension 拡張子
+		 * @return 拡張子に対応するEnumが存在する場合trueを返却。それ以外の場合はfalseを返却する。
+		 */
+		public static boolean containsExtension(final String extension) {
+<span class="fc" id="L141">			return new EnumReverseLookup&lt;&gt;(StepCountType.class, StepCountType::getExtension)</span>
+<span class="fc" id="L142">					.containsAttribute(extension);</span>
+		}
+
+		/**
+		 * &lt;p&gt;
+		 * 引数の拡張子に対応するステップカウントオブジェクトを返却するメソッド
+		 * 
+		 * @param extension           拡張子
+		 * @param commentPatternMatch コメントパターン判定用オブジェクト
+		 * 
+		 * @throws IllegalArgumentException 引数の拡張子に対応するステップカウントオブジェクトが存在しない場合
+		 * @return ステップカウントオブジェクト
+		 */
+		public static IfStepCount of(final String extension, final IfCommentPatternMatch commentPatternMatch) {
+<span class="fc" id="L156">			return getByStepCount(extension).create(commentPatternMatch, getByMethodType(extension));</span>
+		}
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

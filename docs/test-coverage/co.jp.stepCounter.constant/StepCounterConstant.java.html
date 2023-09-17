@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StepCounterConstant.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.constant</a> &gt; <span class="el_source">StepCounterConstant.java</span></div><h1>StepCounterConstant.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.constant;
+
+import java.util.function.Function;
+
+/**
+ * &lt;p&gt;
+ * ステップカウント処理関連の定数クラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
+public class StepCounterConstant {
+	/**
+	 * &lt;p&gt;
+	 * コンストラクタ
+	 * &lt;p&gt;
+	 * 定数クラスのため、インスタンス化は不可とする。
+	 */
+	private StepCounterConstant() {
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * ファイルパス区分の種別をもつ列挙型クラス
+	 */
+<span class="nc" id="L27">	public static enum FilePathType {</span>
+		/** ディレクトリ */
+<span class="nc" id="L29">		DIRECTORY,</span>
+		/** ファイル */
+<span class="nc" id="L31">		FILE</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * ステップカウント処理実行モードの種別をもつ列挙型クラス
+	 */
+<span class="fc" id="L38">	public static enum ExecuteMode {</span>
+		/** ヘルプモード */
+<span class="fc" id="L40">		HELP,</span>
+		/** 対話モード */
+<span class="fc" id="L42">		INTERACTIVE,</span>
+		/** スクリプトモード */
+<span class="fc" id="L44">		SCRIPT,</span>
+		/** GUIモード */
+<span class="fc" id="L46">		GUI,</span>
+		/** 該当なし */
+<span class="fc" id="L48">		NOTHING</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * ソート区分の種別をもつ列挙型クラス
+	 */
+<span class="fc" id="L55">	public static enum SortType {</span>
+		/** ソートなし */
+<span class="fc" id="L57">		NO_SORT(&quot;0&quot;, &quot;無&quot;),</span>
+		/** 昇順ソート */
+<span class="fc" id="L59">		ASCENDING_ORDER(&quot;1&quot;, &quot;昇順&quot;),</span>
+		/** 降順ソート */
+<span class="fc" id="L61">		DESCENDING_ORDER(&quot;2&quot;, &quot;降順&quot;);</span>
+		
+		/** ソート区分コード */
+		private final String sortTypeCode;
+		/** ソート区分名称 */
+		private final String sortTypeName;
+		
+		/**
+		 * &lt;p&gt;
+		 * コンストラクタ
+		 * 
+		 * @param sortTypeCode ソート区分コード
+		 * @param sortTypeName ソート区分名称
+		 */
+<span class="fc" id="L75">		SortType(final String sortTypeCode, final String sortTypeName) {</span>
+<span class="fc" id="L76">			this.sortTypeCode = sortTypeCode;</span>
+<span class="fc" id="L77">			this.sortTypeName = sortTypeName;</span>
+<span class="fc" id="L78">		}</span>
+
+		/**
+		 * &lt;p&gt;
+		 * ソート区分コードの値を返却するメソッド
+		 * 
+		 * @return ソート区分コード
+		 */
+		public String getSortTypeCode() {
+<span class="fc" id="L87">			return this.sortTypeCode;</span>
+		}
+		
+		/**
+		 * &lt;p&gt;
+		 * ソート区分コードの値を返却するメソッド
+		 * 
+		 * @return ソート区分名称
+		 */
+		public String getSortTypeName() {
+<span class="nc" id="L97">			return this.sortTypeName;</span>
+		}
+
+		/**
+		 * &lt;p&gt;
+		 * ソート区分コードまたはソート区分名称に対応するソート区分の種別を返却するメソッド
+		 * &lt;p&gt;
+		 * 該当のEnumを取得する処理は{@link EnumReverseLookup#lookup(Object)}に移譲しています。
+		 * 
+		 * @param target 逆引き対象の値
+		 * @param getter 逆引きに利用するgetterメソッド
+		 * 
+		 * @throws IllegalArgumentException ソート区部コードに対応するソート区分の種別が存在しない場合
+		 * @return ソート区分コードに対応するソート区分の種別
+		 */
+		public static SortType lookup(final String target, final Function&lt;SortType, String&gt; getter) throws IllegalArgumentException {
+<span class="fc" id="L113">			return (SortType) new EnumReverseLookup&lt;&gt;(SortType.class, getter).lookup(target);</span>
+		}
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * ソート対象の種別をもつ列挙型クラス
+	 */
+<span class="fc" id="L121">	public static enum SortTarget {</span>
+		/** ファイルパス */
+<span class="fc" id="L123">		FILEPATH(&quot;0&quot;, &quot;ファイルパス&quot;),</span>
+		/** 総行数 */
+<span class="fc" id="L125">		TOTALSTEPCOUNT(&quot;1&quot;, &quot;総行数&quot;),</span>
+		/** 実行行数 */
+<span class="fc" id="L127">		EXECSTEPCOUNT(&quot;2&quot;, &quot;実行行数&quot;),</span>
+		/** コメント行数 */
+<span class="fc" id="L129">		COMMENTSTEPCOUNT(&quot;3&quot;, &quot;コメント行数&quot;),</span>
+		/** 空行数 */
+<span class="fc" id="L131">		EMPTYSTEPCOUNT(&quot;4&quot;, &quot;空行数&quot;);</span>
+
+		/** ソート対象コード */
+		private final String sortTargetCode;
+		/** ソート対象名称 */
+		private final String sortTargetName;
+
+		/**
+		 * &lt;p&gt;
+		 * コンストラクタ
+		 * 
+		 * @param sortTargetCode ソート対象コード
+		 * @param sortTargetName ソート対象名称
+		 */
+<span class="fc" id="L145">		SortTarget(final String sortTargetCode, final String sortTargetName) {</span>
+<span class="fc" id="L146">			this.sortTargetCode = sortTargetCode;</span>
+<span class="fc" id="L147">			this.sortTargetName = sortTargetName;</span>
+<span class="fc" id="L148">		}</span>
+
+		/**
+		 * &lt;p&gt;
+		 * ソート対象コードの値を返却するメソッド
+		 * 
+		 * @return ソート対象コード
+		 */
+		public String getSortTargetCode() {
+<span class="fc" id="L157">			return this.sortTargetCode;</span>
+		}
+		
+		/**
+		 * &lt;p&gt;
+		 * ソート対象名称の値を返却するメソッド
+		 * 
+		 * @return ソート対象名称
+		 */
+		public String getSortTargetName() {
+<span class="nc" id="L167">			return this.sortTargetName;</span>
+		}
+
+		/**
+		 * &lt;p&gt;
+		 * ソート対象コードまたはソート対象名称からソート対象の種別を返却するメソッド
+		 * &lt;p&gt;
+		 * 該当のEnumを取得する処理は{@link EnumReverseLookup#lookup(Object)}に移譲しています。
+		 * @param target 逆引き対象の値
+		 * @param getter 逆引きに利用するgetterメソッド
+		 * 
+		 * @throws IllegalArgumentException ソート対象コードに対応するソート対象の種別が存在しない場合
+		 * @return ソート対象コードに対応するソート対象の種別
+		 */
+		public static SortTarget lookup(final String target, final Function&lt;SortTarget, String&gt; getter) throws IllegalArgumentException {
+<span class="fc" id="L182">			return (SortTarget) new EnumReverseLookup&lt;&gt;(SortTarget.class, getter).lookup(target);</span>
+		}
+	}
+	
+	/**
+	 * &lt;p&gt;
+	 * 処理結果の種別をもつ列挙型クラス
+	 */
+<span class="fc" id="L190">	public static enum ProcessResult {</span>
+		/** 処理成功 */
+<span class="fc" id="L192">		SUCCESS(&quot;正常終了&quot;),</span>
+		/** 処理失敗 */
+<span class="fc" id="L194">		FAIL(&quot;異常終了&quot;);</span>
+		
+		/** メッセージ */
+		private final String message;
+
+		/**
+		 * &lt;p&gt;
+		 * コンストラクタ
+		 * 
+		 * @param message メッセージ
+		 */
+<span class="fc" id="L205">		ProcessResult(final String message) {</span>
+<span class="fc" id="L206">			this.message = message;</span>
+<span class="fc" id="L207">		}</span>
+		/**
+		 * &lt;p&gt;
+		 * メッセージの値を返却するメソッド
+		 * 
+		 * @return メッセージ
+		 */
+		public String getMessage() {
+<span class="fc" id="L215">			return this.message;</span>
+		}
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StepCounterGuiMainView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.presentation.view</a> &gt; <span class="el_source">StepCounterGuiMainView.java</span></div><h1>StepCounterGuiMainView.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.presentation.view;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Paint;
+import java.util.Objects;
+
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTree;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.plaf.basic.BasicSplitPaneDivider;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreeSelectionModel;
+
+import co.jp.stepCounter.infrastructure.log.Log4J2;
+import co.jp.stepCounter.presentation.view.custom.EmptyIcon;
+import co.jp.stepCounter.presentation.view.custom.RowSelectionTree;
+
+/**
+ * &lt;p&gt;
+ * ステップ数の集計を実施するGUIクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
+public class StepCounterGuiMainView extends JFrame {
+	/** 全体パネル */
+<span class="nc" id="L44">	private JPanel jWholePane = null;</span>
+	/** サイドメニューとメインパネルを分割するパネル */
+<span class="nc" id="L46">	private JSplitPane jSpritPane = null;</span>
+	/** メインパネル */
+<span class="nc" id="L48">	private JPanel jMainPane = null;</span>
+	/** サイドメニューパネル */
+<span class="nc" id="L50">	private JScrollPane jSideMenuPane = null;</span>
+	/** ホームパネル */
+<span class="nc" id="L52">	private JPanel jHomePane = null;</span>
+	/** 情報パネル */
+<span class="nc" id="L54">	private JPanel jInfoPane = null;</span>
+	
+	/** フレームロゴ */
+<span class="nc" id="L57">	private final String FRAME_IMG_PATH = &quot;/img/frame_icon_ebi.png&quot;;</span>
+	/** メインパネルのグラデーション（START） */
+<span class="nc" id="L59">	private final Color CONPANE_GRADATION_START_COLOR = new Color(255, 240, 245);</span>
+	/** メインパネルのグラデーション（END） */
+<span class="nc" id="L61">	private final Color CONPANE_GRADATION_END_COLOR = new Color(255, 192, 203);</span>
+	/** 仕切線の色 */
+<span class="nc" id="L63">	private final Color SPLIT_LINE_COLOR = new Color(240, 128, 128);</span>
+	/** サイドメニューの色 */
+<span class="nc" id="L65">	private final Color SIDE_MENU_COLOR = new Color(240, 128, 128);</span>
+
+	/** Log4J2インスタンス */
+<span class="nc" id="L68">	private final Log4J2 logger = Log4J2.getInstance();</span>
+
+	/**
+	 * &lt;p&gt;
+	 * コンストラクタ
+	 */
+<span class="nc" id="L74">	public StepCounterGuiMainView() {</span>
+<span class="nc" id="L75">		logger.logDebug(&quot;GUI-mode start ....&quot;);</span>
+<span class="nc" id="L76">		logger.logDebug(&quot;current LookAndFeel:&quot; + UIManager.getLookAndFeel());</span>
+<span class="nc" id="L77">		init();</span>
+<span class="nc" id="L78">	}</span>
+	/**
+	 * &lt;p&gt;
+	 * 初期化処理
+	 */
+	private void init() {
+<span class="nc" id="L84">		this.setIconImage(ViewUtil.getImageIcon(FRAME_IMG_PATH, this).getImage());</span>
+<span class="nc" id="L85">		this.setResizable(false);</span>
+<span class="nc" id="L86">		this.setContentPane(getJWholePane());</span>
+<span class="nc" id="L87">		this.setTitle(&quot;StepCounter&quot;);</span>
+<span class="nc" id="L88">		this.setSize(850, 430);</span>
+<span class="nc" id="L89">		this.setVisible(true);</span>
+<span class="nc" id="L90">		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L91">	}</span>
+	/**
+	 * &lt;p&gt;
+	 * 全体パネルの生成処理
+	 * 
+	 * @return 全体パネル
+	 */
+	private JPanel getJWholePane() {
+<span class="nc bnc" id="L99" title="All 2 branches missed.">		if (this.jWholePane == null) {</span>
+<span class="nc" id="L100">			this.jWholePane = new JPanel(new BorderLayout(2, 2));</span>
+<span class="nc" id="L101">			this.jWholePane.add(getJSplitPane());</span>
+<span class="nc" id="L102">			this.jWholePane.setPreferredSize(new Dimension(100, 430));</span>
+		}
+<span class="nc" id="L104">		return this.jWholePane;</span>
+	}
+	
+	/**
+	 * &lt;p&gt;
+	 * サイドメニューパネルとメインパネルを分割するパネルの生成処理
+	 * 
+	 * @return サイドメニューパネルとメインパネルを分割するパネル
+	 */
+	private JSplitPane getJSplitPane() {
+<span class="nc bnc" id="L114" title="All 2 branches missed.">		if (this.jSpritPane == null) {</span>
+			// DefaultTreeCellRendererに対して、
+			// アイコンを表示させないようにしたり、文字に色を設定するなど
+			// サイドメニューのレイアウトに関する設定を行なっている。
+<span class="nc" id="L118">			final Icon emptyIcon = new EmptyIcon();</span>
+<span class="nc" id="L119">			UIManager.put(&quot;Tree.openIcon&quot;, emptyIcon);</span>
+<span class="nc" id="L120">			UIManager.put(&quot;Tree.closedIcon&quot;, emptyIcon);</span>
+<span class="nc" id="L121">			UIManager.put(&quot;Tree.leafIcon&quot;, emptyIcon);</span>
+<span class="nc" id="L122">			UIManager.put(&quot;Tree.expandedIcon&quot;, emptyIcon);</span>
+<span class="nc" id="L123">			UIManager.put(&quot;Tree.collapsedIcon&quot;, emptyIcon);</span>
+<span class="nc" id="L124">			UIManager.put(&quot;Tree.leftChildIndent&quot;, 10);</span>
+<span class="nc" id="L125">			UIManager.put(&quot;Tree.rightChildIndent&quot;, 0);</span>
+<span class="nc" id="L126">			UIManager.put(&quot;Tree.paintLines&quot;, false);</span>
+<span class="nc" id="L127">			UIManager.put(&quot;Tree.textForeground&quot;, Color.WHITE);</span>
+			
+			// FIXME:jMainPaneのインタンスが生成されていないとgetJSideMenePaneがうまく動作しないので、
+			// getJMainPane→getJSideMenePaneの順序で呼び出す必要がある。
+<span class="nc" id="L131">			final CardLayout cardLayout = new CardLayout();</span>
+<span class="nc" id="L132">			getJMainPane(cardLayout);</span>
+<span class="nc" id="L133">			getJSideMenuPane(cardLayout);</span>
+			// サイドメニューパネルとメインパネルを分割するパネルの生成
+<span class="nc" id="L135">			this.jSpritPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.jSideMenuPane, this.jMainPane);</span>
+			
+			// 仕切線の色設定
+<span class="nc" id="L138">			this.jSpritPane.setUI(new BasicSplitPaneUI() {</span>
+				public BasicSplitPaneDivider createDefaultDivider() {
+<span class="nc" id="L140">					return new BasicSplitPaneDivider(this) {</span>
+						public void setBorder(Border b) {
+<span class="nc" id="L142">						}</span>
+						@Override
+						public void paint(Graphics g) {
+<span class="nc" id="L145">							g.setColor(SPLIT_LINE_COLOR);</span>
+<span class="nc" id="L146">							g.fillRect(0, 0, getSize().width, getSize().height);</span>
+<span class="nc" id="L147">							super.paint(g);</span>
+<span class="nc" id="L148">						}</span>
+					};
+				}
+			});
+<span class="nc" id="L152">			this.jSpritPane.setBorder(null);</span>
+		}
+<span class="nc" id="L154">		return this.jSpritPane;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * サイドメニューパネルの生成処理
+	 * 
+	 * @return サイドメニューパネル
+	 */
+	private JScrollPane getJSideMenuPane(final CardLayout cardLayout) {
+<span class="nc bnc" id="L164" title="All 2 branches missed.">		if (this.jSideMenuPane == null) {</span>
+<span class="nc" id="L165">			final TreeModel model = makeModel();</span>
+<span class="nc" id="L166">			final JTree tree = new RowSelectionTree();</span>
+<span class="nc" id="L167">			tree.setModel(model);</span>
+<span class="nc" id="L168">			tree.setRowHeight(32);</span>
+<span class="nc" id="L169">			tree.setBorder(BorderFactory.createEmptyBorder(12,12,12,12));</span>
+<span class="nc" id="L170">			tree.setBackground(SIDE_MENU_COLOR);</span>
+<span class="nc" id="L171">			tree.setFont(new Font(&quot;Arial&quot;, Font.BOLD, 14));</span>
+			
+<span class="nc" id="L173">			int row = 0;</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">			while (row &lt; tree.getRowCount()) {</span>
+<span class="nc" id="L175">				tree.expandRow(row++);</span>
+			}
+<span class="nc" id="L177">			tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);</span>
+			// サイドメニューとメインメニューを紐付けるイベント設定
+<span class="nc" id="L179">			tree.addTreeSelectionListener(e -&gt; {</span>
+<span class="nc" id="L180">				final Object o = e.getNewLeadSelectionPath().getLastPathComponent();</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">				if (o instanceof DefaultMutableTreeNode) {</span>
+<span class="nc" id="L182">					final DefaultMutableTreeNode node = (DefaultMutableTreeNode) o;</span>
+<span class="nc" id="L183">					final String title = Objects.toString(node.getUserObject());</span>
+<span class="nc" id="L184">					cardLayout.show(jMainPane, title);</span>
+				}
+<span class="nc" id="L186">			});</span>
+<span class="nc" id="L187">			this.jSideMenuPane = new JScrollPane(tree);</span>
+			
+<span class="nc" id="L189">			this.jSideMenuPane.setBackground(SIDE_MENU_COLOR);</span>
+<span class="nc" id="L190">			this.jSideMenuPane.setBorder(null);</span>
+		}
+<span class="nc" id="L192">		return this.jSideMenuPane;</span>
+	}
+	
+	/**
+	 * &lt;p&gt;
+	 * メインパネルの生成処理
+	 * 
+	 * @return メインパネル
+	 */
+	private JPanel getJMainPane(CardLayout cardLayout) {
+<span class="nc bnc" id="L202" title="All 2 branches missed.">		if (this.jMainPane == null) {</span>
+			// CardLayoutかつ背景色がグラデーションのメインパネルを生成
+			// メインパネル配下のパネルは、JComponent#setOpaque(false);で背景色を透明にすることで本レイアウトが適用させる
+<span class="nc" id="L205">			this.jMainPane = new JPanel(cardLayout) {</span>
+				@Override
+				protected void paintComponent(Graphics g) {
+<span class="nc" id="L208">					Graphics2D g2d = (Graphics2D) g;</span>
+<span class="nc" id="L209">					Paint paint = new GradientPaint(0.0f, 0.0f, CONPANE_GRADATION_START_COLOR, 0.0f, getHeight(),</span>
+							CONPANE_GRADATION_END_COLOR);
+<span class="nc" id="L211">					g2d.setPaint(paint);</span>
+<span class="nc" id="L212">					g2d.fillRect(0, 0, getWidth(), getHeight());</span>
+<span class="nc" id="L213">				}</span>
+			};
+<span class="nc" id="L215">			this.jMainPane.add(getJHomePane(), &quot;HOME&quot;);</span>
+<span class="nc" id="L216">			this.jMainPane.add(getJInfoPane(), &quot;INFO&quot;);</span>
+		}
+<span class="nc" id="L218">		return this.jMainPane;</span>
+	}
+	
+	/**
+	 * &lt;p&gt;
+	 * サイドメニューのツリーモデルの生成処理
+	 * 
+	 * @return ツリーモデル
+	 */
+	private DefaultTreeModel makeModel() {
+<span class="nc" id="L228">		DefaultMutableTreeNode root = new DefaultMutableTreeNode(&quot;root&quot;);</span>
+<span class="nc" id="L229">		DefaultMutableTreeNode c1 = new DefaultMutableTreeNode(&quot;HOME&quot;);</span>
+<span class="nc" id="L230">		DefaultMutableTreeNode c2 = new DefaultMutableTreeNode(&quot;INFO&quot;);</span>
+<span class="nc" id="L231">		root.add(c1);</span>
+<span class="nc" id="L232">		root.add(c2);</span>
+<span class="nc" id="L233">		return new DefaultTreeModel(root);</span>
+	}
+	/**
+	 * &lt;p&gt;
+	 * 情報パネルの生成処理
+	 * 
+	 * @return 情報パネル
+	 */
+	private JPanel getJInfoPane() {
+<span class="nc bnc" id="L242" title="All 2 branches missed.">		if (this.jInfoPane == null ) {</span>
+<span class="nc" id="L243">			this.jInfoPane = new InfoPanel();</span>
+		}
+<span class="nc" id="L245">		return this.jInfoPane;</span>
+	}
+	/**
+	 * &lt;p&gt;
+	 * ホームパネル（ヘッダー部 + メイン部）の生成処理
+	 * 
+	 * @return メインパネル（ヘッダー部 + メイン部）
+	 */
+	private JPanel getJHomePane() {
+<span class="nc bnc" id="L254" title="All 2 branches missed.">		if (this.jHomePane == null) {</span>
+<span class="nc" id="L255">			this.jHomePane = new HomePanel();</span>
+		}
+<span class="nc" id="L257">		return this.jHomePane;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

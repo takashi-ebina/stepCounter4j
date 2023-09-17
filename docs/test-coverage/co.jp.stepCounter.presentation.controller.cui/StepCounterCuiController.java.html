@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StepCounterCuiController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.presentation.controller.cui</a> &gt; <span class="el_source">StepCounterCuiController.java</span></div><h1>StepCounterCuiController.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.presentation.controller.cui;
+
+import java.io.File;
+import java.util.Scanner;
+
+import co.jp.stepCounter.application.service.StepCounterCuiService;
+import co.jp.stepCounter.application.service.impl.StepCounterCuiServiceImpl;
+import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
+import co.jp.stepCounter.constant.StepCounterConstant.ProcessResult;
+import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
+import co.jp.stepCounter.constant.StepCounterConstant.SortType;
+import co.jp.stepCounter.domain.model.stepCountExecutor.StepCountExecutor;
+import co.jp.stepCounter.infrastructure.csvdao.StepCountCsvDao;
+import co.jp.stepCounter.presentation.validator.ValidatorUtil;
+/**
+ * &lt;p&gt;
+ * CUIでステップカウント処理を実行するコントローラクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
+public class StepCounterCuiController {
+	
+	/** CUIでステップカウント処理を実行するサービスクラス*/
+	private StepCounterCuiService service; 
+	
+	/**
+	 * コンストラクタ
+	 */
+<span class="fc" id="L31">	public StepCounterCuiController() {</span>
+<span class="fc" id="L32">		this.service = new StepCounterCuiServiceImpl(new StepCountCsvDao(), new StepCountExecutor());</span>
+<span class="fc" id="L33">	}</span>
+
+	/**
+	 * &lt;p&gt;
+	 * ヘルプメッセージ出力メソッド
+	 * &lt;p&gt;
+	 * ヘルプメッセージをコンソールに出力する。
+	 */
+	public void printHelp() {
+<span class="fc" id="L42">		System.out.println(&quot;Usage: java -jar StepCounter-jar-with-dependencies.jar&quot;);</span>
+<span class="fc" id="L43">		System.out.println(&quot;       java -jar StepCounter-jar-with-dependencies.jar [OPTIONS]&quot;);</span>
+<span class="fc" id="L44">		System.out.println(&quot;OPTIONS&quot;);</span>
+<span class="fc" id="L45">		System.out.println(&quot;       -h:このメッセージを表示して終了する。&quot;);</span>
+<span class="fc" id="L46">		System.out.println(&quot;       -s:スクリプトモードで実行する。（オプションを指定しない場合はGUIモード）&quot;);</span>
+<span class="fc" id="L47">		System.out.println(&quot;       -input=[inputDirectoryPath]:ステップカウント対象のディレクトリパスを指定する。 ※「-s」オプションを利用する場合に指定してください。&quot;);</span>
+<span class="fc" id="L48">		System.out.println(&quot;       -output=[outputFilePath]:カウント結果出力対象のファイルパスを指定する。 ※「-s」オプションを利用する場合に指定してください。&quot;);</span>
+<span class="fc" id="L49">		System.out.println(&quot;       -asc=[sortTarget]:ステップカウント処理の出力順を[sortTarget]をキーとして昇順ソートする。&quot;);</span>
+<span class="fc" id="L50">		System.out.println(&quot;       -desc=[sortTarget]:ステップカウント処理の出力順を[sortTarget]をキーとして降順ソートする。&quot;);</span>
+<span class="fc" id="L51">		System.out.println(&quot;       [sortTarget]: 0:ファイルパス、1:総行数、2:実行行数、3:コメント行数、4:空行数&quot;);</span>
+<span class="fc" id="L52">	}</span>
+	
+	/**
+	 * &lt;p&gt;
+	 * 対話モードのステップカウントメソッド
+	 * &lt;p&gt;
+	 * [処理概要]&lt;br&gt;
+	 * &lt;ol&gt;
+	 * &lt;li&gt;カウント対象のディレクトリパスの入力&lt;br&gt;
+	 * &lt;li&gt;カウント対象のディレクトリパスの入力チェック&lt;br&gt;
+	 * &lt;li&gt;カウント結果出力対象のファイルパスの入力&lt;br&gt;
+	 * &lt;li&gt;カウント結果出力対象のファイルパスの入力チェック&lt;br&gt;
+	 * &lt;li&gt;ソート区分の入力&lt;br&gt;
+	 * &lt;li&gt;ソート対象の入力&lt;br&gt;
+	 * &lt;li&gt;カウント対象ディレクトリのステップカウント処理及びカウント結果をカウント結果出力ファイルに書き込む処理の呼出し&lt;br&gt;
+	 * &lt;/ol&gt;
+	 */
+	@SuppressWarnings(&quot;resource&quot;)
+	public void stepCountInteractiveMode() {
+<span class="fc" id="L71">		System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L72">		System.out.println(&quot;--&gt; カウント対象のディレクトリパスを入力してください&quot;);</span>
+<span class="fc" id="L73">		System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L74">		final Scanner sn = new Scanner(System.in);</span>
+<span class="fc" id="L75">		final String inputDirectoryPath = sn.next();</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">		if (!ValidatorUtil.inputDirectoryCheck(inputDirectoryPath)) {</span>
+<span class="fc" id="L77">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L78">			System.out.println(&quot;--&gt; 入力フォルダに問題があります。&quot;);</span>
+<span class="fc" id="L79">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L80">			return;</span>
+		}
+
+<span class="fc" id="L83">		System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L84">		System.out.println(&quot;--&gt; カウント結果出力対象のファイルパスを入力してください&quot;);</span>
+<span class="fc" id="L85">		System.out.println(&quot;--&gt; ファイル拡張子：CSV&quot;);</span>
+<span class="fc" id="L86">		System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L87">		final String outputFilePath = sn.next();</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">		if (!ValidatorUtil.outputFileCheck(outputFilePath, ExecuteMode.INTERACTIVE, sn)) {</span>
+<span class="fc" id="L89">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L90">			System.out.println(&quot;--&gt; 出力ファイルに問題があります。&quot;);</span>
+<span class="fc" id="L91">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L92">			return;</span>
+		}
+		
+<span class="fc" id="L95">		System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L96">		System.out.println(&quot;--&gt; ソート区分を入力してください&quot;);</span>
+<span class="fc" id="L97">		System.out.println(&quot;--&gt; 0：ソートなし、1：昇順ソート、2：降順ソート&quot;);</span>
+<span class="fc" id="L98">		System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L99">		SortType sortType = null;</span>
+		try {
+<span class="fc" id="L101">			sortType = SortType.lookup(sn.next(), SortType::getSortTypeCode);</span>
+<span class="fc" id="L102">		} catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L103">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L104">			System.out.println(&quot;--&gt; ソート区分に問題があります。&quot;);</span>
+<span class="fc" id="L105">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L106">			return;</span>
+<span class="fc" id="L107">		}</span>
+		
+<span class="fc" id="L109">		SortTarget sortTarget = null;</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">		if (sortType != SortType.NO_SORT) {</span>
+<span class="fc" id="L111">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L112">			System.out.println(&quot;--&gt; ソート対象を入力してください&quot;);</span>
+<span class="fc" id="L113">			System.out.println(&quot;--&gt; 0：ファイルパス、1：総行数、2：実行行数、3：コメント行数、4：空行数&quot;);</span>
+<span class="fc" id="L114">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+			try {
+<span class="fc" id="L116">				sortTarget = SortTarget.lookup(sn.next(), SortTarget::getSortTargetCode);</span>
+<span class="fc" id="L117">			} catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L118">				System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L119">				System.out.println(&quot;--&gt; ソート対象に問題があります。&quot;);</span>
+<span class="fc" id="L120">				System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L121">				return;</span>
+<span class="fc" id="L122">			}</span>
+		} else {
+<span class="fc" id="L124">			sortTarget = SortTarget.FILEPATH;</span>
+		}
+		
+<span class="fc" id="L127">		final ProcessResult result = </span>
+<span class="fc" id="L128">				service.execStepCount(new File(inputDirectoryPath), new File(outputFilePath), sortType, sortTarget);</span>
+		
+<span class="fc" id="L130">		System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L131">		System.out.println(&quot;--&gt; ステップカウント処理が完了しました。 処理結果：&quot; + result.getMessage());</span>
+<span class="fc" id="L132">		System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L133">	}</span>
+	/**
+	 * &lt;p&gt;
+	 * スクリプトモードのステップカウントメソッド
+	 * &lt;p&gt;
+	 * [処理概要]&lt;br&gt;
+	 * &lt;ol&gt;
+	 * &lt;li&gt;カウント対象のディレクトリパスの入力チェック&lt;br&gt;
+	 * &lt;li&gt;カウント結果出力対象のファイルパスの入力チェック&lt;br&gt;
+	 * &lt;li&gt;カウント対象ディレクトリのステップカウント処理及びカウント結果をカウント結果出力ファイルに書き込む処理の呼出し&lt;br&gt;
+	 * &lt;/ol&gt;
+	 * 
+	 * @param dto CUIでステップカウント処理を実行する際に利用するDTOクラス
+	 * @see StepCounterCuiRequestDto
+	 */
+	public void stepCountScriptMode(final StepCounterCuiRequestDto dto) {
+<span class="fc" id="L149">		final String inputDirectoryPath = dto.getInputDirectoryPath();</span>
+<span class="fc" id="L150">		final String outputFilePath = dto.getOutputFilePath();</span>
+
+<span class="fc bfc" id="L152" title="All 2 branches covered.">		if (!ValidatorUtil.inputDirectoryCheck(inputDirectoryPath)) {</span>
+<span class="fc" id="L153">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L154">			System.out.println(&quot;--&gt; 入力フォルダに問題があります。&quot;);</span>
+<span class="fc" id="L155">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L156">			return;</span>
+		}
+<span class="fc bfc" id="L158" title="All 2 branches covered.">		if (!ValidatorUtil.outputFileCheck(outputFilePath, ExecuteMode.SCRIPT, null)) {</span>
+<span class="fc" id="L159">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L160">			System.out.println(&quot;--&gt; 出力ファイルに問題があります。&quot;);</span>
+<span class="fc" id="L161">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L162">			return;</span>
+		}
+<span class="fc" id="L164">		final ProcessResult result = </span>
+<span class="fc" id="L165">				service.execStepCount(new File(inputDirectoryPath), new File(outputFilePath), dto.getStepCountSortType(), dto.getStepCountSortTarget());</span>
+		
+<span class="fc" id="L167">		System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L168">		System.out.println(&quot;--&gt; ステップカウント処理が完了しました。 処理結果：&quot; + result.getMessage());</span>
+<span class="fc" id="L169">		System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L170">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

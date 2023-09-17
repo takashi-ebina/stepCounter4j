@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommentPatternMatchFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.domain.model.commentPatternMatch</a> &gt; <span class="el_source">CommentPatternMatchFactory.java</span></div><h1>CommentPatternMatchFactory.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.domain.model.commentPatternMatch;
+
+import co.jp.stepCounter.constant.EnumReverseLookup;
+
+/**
+ * &lt;p&gt;
+ * コメントパターンマッチクラスの生成に利用するFactoryクラス
+ * &lt;p&gt;
+ * {@link IfCommentPatternMatch}をimplementsしたクラスオブジェクトを生成する場合は、&lt;br&gt;
+ * {@link CommentPatternMatchType#of(String)}の引数に生成するオブジェクトに紐づく拡張子を渡してください。
+ * &lt;p&gt;
+ * 対応する拡張子は{@link CommentPatternMatchType}に定義されています。
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ * 
+ * @see IfCommentPatternMatch
+ * @see AbsCommentPatternMatch
+ * @see JavaCommentPatternMatch
+ * @see CsCommentPatternMatch
+ * @see SqlCommentPatternMatch
+ */
+<span class="nc" id="L24">public class CommentPatternMatchFactory {</span>
+	/**
+	 * &lt;p&gt;
+	 * コメントパターンマッチクラスの種別をもつ列挙型クラス
+	 */
+<span class="fc" id="L29">	public enum CommentPatternMatchType {</span>
+		/** Javaコメント判定用オブジェクト */
+<span class="fc" id="L31">		Java(&quot;java&quot;, new JavaCommentPatternMatch()),</span>
+		/** Csコメント判定用オブジェクト */
+<span class="fc" id="L33">		Cs(&quot;cs&quot;, new CsCommentPatternMatch()),</span>
+		/** sqlコメント判定用オブジェクト */
+<span class="fc" id="L35">		sql(&quot;sql&quot;, new SqlCommentPatternMatch());</span>
+
+		/** 拡張子 */
+		private final String extension;
+		/** コメントパターン判定用オブジェクト */
+		private final IfCommentPatternMatch commentPatternMatch;
+
+		/**
+		 * &lt;p&gt;
+		 * コンストラクタ
+		 * 
+		 * @param extension 拡張子
+		 * @param commentPatternMatch コメントパターン判定用オブジェクト
+		 */
+<span class="fc" id="L49">		CommentPatternMatchType(final String extension, final IfCommentPatternMatch commentPatternMatch) {</span>
+<span class="fc" id="L50">			this.extension = extension;</span>
+<span class="fc" id="L51">			this.commentPatternMatch = commentPatternMatch;</span>
+<span class="fc" id="L52">		}</span>
+
+		/**
+		 * &lt;p&gt;
+		 * 拡張子の値を返却するメソッド
+		 * 
+		 * @return 拡張子
+		 */
+		public String getExtension() {
+<span class="fc" id="L61">			return this.extension;</span>
+		}
+
+		/**
+		 * &lt;p&gt;
+		 * コメントパターン判定オブジェクトを返却するメソッド
+		 * 
+		 * @return コメントパターン判定オブジェクト
+		 */
+		public IfCommentPatternMatch getCommentPatternMatch() {
+<span class="fc" id="L71">			return this.commentPatternMatch;</span>
+		}
+
+		/**
+		 * &lt;p&gt;
+		 * 拡張子に対応するコメントパターン判定オブジェクトの値を返却するメソッド
+		 * &lt;p&gt;
+		 * 拡張子から該当のEnumを取得する処理は{@link EnumReverseLookup#lookup(Object)}に移譲しています。
+		 * 
+		 * @param extension 拡張子
+		 * @throws IllegalArgumentException 拡張子に対応するクラスが存在しない場合
+		 * @return 拡張子に対応するコメントパターン判定オブジェクト
+		 */
+		public static IfCommentPatternMatch getByCommentPatternMatch(final String extension) throws IllegalArgumentException {
+<span class="fc" id="L85">			return new EnumReverseLookup&lt;&gt;(CommentPatternMatchType.class, CommentPatternMatchType::getExtension)</span>
+<span class="fc" id="L86">					.lookup(extension.toLowerCase()).getCommentPatternMatch();</span>
+		}
+
+		/**
+		 * &lt;p&gt;
+		 * 拡張子に対応するEnumの存在判定メソッド
+		 * &lt;p&gt;
+		 * 拡張子から該当のEnumを取得する処理は{@link EnumReverseLookup#containsAttribute(Object)}に移譲しています。
+		 * 
+		 * @param extension 拡張子
+		 * @return 拡張子に対応するEnumが存在する場合trueを返却。それ以外の場合はfalseを返却する。
+		 */
+		public static boolean containsExtension(final String extension) {
+<span class="fc" id="L99">			return new EnumReverseLookup&lt;&gt;(CommentPatternMatchType.class, CommentPatternMatchType::getExtension)</span>
+<span class="fc" id="L100">					.containsAttribute(extension.toLowerCase());</span>
+		}
+
+		/**
+		 * &lt;p&gt;
+		 * 引数の拡張子に紐づくコメントパターン判定用オブジェクトを返却するメソッド
+		 * 
+		 * @param extension           拡張子
+		 * 
+		 * @throws IllegalArgumentException 引数の拡張子に対応するコメントパターン判定用オブジェクトが存在しない場合
+		 * @return コメントパターン判定用オブジェクト
+		 */
+		public static IfCommentPatternMatch of(final String extension) {
+<span class="fc" id="L113">			return getByCommentPatternMatch(extension.toLowerCase()).create();</span>
+		}
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

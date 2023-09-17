@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RowSelectionTree.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.presentation.view.custom</a> &gt; <span class="el_source">RowSelectionTree.java</span></div><h1>RowSelectionTree.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.presentation.view.custom;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.Rectangle;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
+
+import javax.swing.JComponent;
+import javax.swing.JTree;
+import javax.swing.UIManager;
+import javax.swing.event.TreeExpansionEvent;
+import javax.swing.event.TreeWillExpandListener;
+import javax.swing.plaf.basic.BasicTreeUI;
+import javax.swing.tree.ExpandVetoException;
+import javax.swing.tree.TreeCellRenderer;
+import javax.swing.tree.TreePath;
+
+<span class="nc" id="L23">public class RowSelectionTree extends JTree {</span>
+<span class="nc" id="L24">	private static final Color SELECTED_COLOR = new Color(0x64_96_C8);</span>
+	private transient TreeWillExpandListener listener;
+
+	@Override
+	protected void paintComponent(Graphics g) {
+<span class="nc" id="L29">		int[] sr = getSelectionRows();</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">		if (sr == null) {</span>
+<span class="nc" id="L31">			super.paintComponent(g);</span>
+<span class="nc" id="L32">			return;</span>
+		}
+
+<span class="nc" id="L35">		g.setColor(getBackground());</span>
+<span class="nc" id="L36">		g.fillRect(0, 0, getWidth(), getHeight());</span>
+<span class="nc" id="L37">		Graphics2D g2 = (Graphics2D) g.create();</span>
+<span class="nc" id="L38">		g2.setPaint(SELECTED_COLOR);</span>
+<span class="nc" id="L39">		Arrays.stream(sr).mapToObj(this::getRowBounds).forEach(r -&gt; g2.fillRect(0, r.y, getWidth(), r.height));</span>
+<span class="nc" id="L40">		super.paintComponent(g);</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">		if (hasFocus()) {</span>
+<span class="nc" id="L42">			Optional.ofNullable(getLeadSelectionPath()).ifPresent(path -&gt; {</span>
+<span class="nc" id="L43">				Rectangle r = getRowBounds(getRowForPath(path));</span>
+<span class="nc" id="L44">				g2.setPaint(SELECTED_COLOR.darker());</span>
+<span class="nc" id="L45">				g2.drawRect(0, r.y, getWidth() - 1, r.height - 1);</span>
+<span class="nc" id="L46">			});</span>
+		}
+<span class="nc" id="L48">		g2.dispose();</span>
+<span class="nc" id="L49">	}</span>
+
+	@Override
+	public void updateUI() {
+<span class="nc" id="L53">		setCellRenderer(null);</span>
+<span class="nc" id="L54">		removeTreeWillExpandListener(listener);</span>
+<span class="nc" id="L55">		super.updateUI();</span>
+<span class="nc" id="L56">		setUI(new BasicTreeUI() {</span>
+			@Override
+			public Rectangle getPathBounds(JTree tree, TreePath path) {
+<span class="nc bnc" id="L59" title="All 4 branches missed.">				if (Objects.nonNull(tree) &amp;&amp; Objects.nonNull(treeState)) {</span>
+<span class="nc" id="L60">					return getTreePathBounds(path, tree.getInsets(), new Rectangle());</span>
+				}
+<span class="nc" id="L62">				return null;</span>
+			}
+
+			private Rectangle getTreePathBounds(TreePath path, Insets insets, Rectangle bounds) {
+<span class="nc" id="L66">				Rectangle rect = treeState.getBounds(path, bounds);</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">				if (Objects.nonNull(rect)) {</span>
+<span class="nc" id="L68">					rect.width = tree.getWidth();</span>
+<span class="nc" id="L69">					rect.y += insets.top;</span>
+				}
+<span class="nc" id="L71">				return rect;</span>
+			}
+		});
+<span class="nc" id="L74">		UIManager.put(&quot;Tree.repaintWholeRow&quot;, Boolean.TRUE);</span>
+<span class="nc" id="L75">		TreeCellRenderer r = getCellRenderer();</span>
+<span class="nc" id="L76">		setCellRenderer((tree, value, selected, expanded, leaf, row, hasFocus) -&gt; {</span>
+<span class="nc" id="L77">			Component c = r.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">			c.setBackground(selected ? SELECTED_COLOR : tree.getBackground());</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">			if (c instanceof JComponent) {</span>
+<span class="nc" id="L80">				((JComponent) c).setOpaque(true);</span>
+			}
+<span class="nc" id="L82">			return c;</span>
+		});
+<span class="nc" id="L84">		setOpaque(false);</span>
+<span class="nc" id="L85">		setRootVisible(false);</span>
+<span class="nc" id="L86">		listener = new TreeWillExpandListener() {</span>
+			@Override
+			public void treeWillExpand(TreeExpansionEvent e) {
+				// throw new ExpandVetoException(e, &quot;Tree expansion cancelled&quot;);
+<span class="nc" id="L90">			}</span>
+
+			@Override
+			public void treeWillCollapse(TreeExpansionEvent e) throws ExpandVetoException {
+<span class="nc" id="L94">				throw new ExpandVetoException(e, &quot;Tree collapse cancelled&quot;);</span>
+			}
+		};
+<span class="nc" id="L97">		addTreeWillExpandListener(listener);</span>
+<span class="nc" id="L98">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbsCommentPatternMatch.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.domain.model.commentPatternMatch</a> &gt; <span class="el_source">AbsCommentPatternMatch.java</span></div><h1>AbsCommentPatternMatch.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.domain.model.commentPatternMatch;
+
+import co.jp.stepCounter.domain.model.commentPatternMatch.CommentPatternMatchFactory.CommentPatternMatchType;
+
+/**
+ * &lt;p&gt;
+ * コメントパターン判定用抽象クラス
+ * &lt;p&gt;
+ * コメントを判定する処理を提供する抽象クラスです。
+ * &lt;p&gt;
+ * 各プログラムファイルのコメントパターン判定用クラスを実装する際は{@link IfCommentPatternMatch}で定義されているメソッドをオーバライドして、&lt;br&gt;
+ * １行コメント／複数行コメント（開始）／複数行コメント（終了）を判定する処理を実装してください。&lt;br&gt;
+ * また、１行コメント／複数行コメント（開始）／複数行コメント（終了）を抽出する正規表現を&lt;br&gt;
+ * {@link SingleCommentPattern}、{@link StartMultiCommentPattern}、{@link EndMultiCommentPattern}に定義してください。
+ * &lt;p&gt;
+ * インスタンスを生成する際は、{@link CommentPatternMatchType#of}を用いて生成してください。
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ * 
+ * @see IfCommentPatternMatch
+ * @see AbsCommentPatternMatch
+ * @see CsCommentPatternMatch
+ * @see CommentPatternMatchFactory
+ */
+<span class="fc" id="L27">public abstract class AbsCommentPatternMatch implements IfCommentPatternMatch {</span>
+
+	/** １行コメント種別をもつ列挙型クラス */
+<span class="fc" id="L30">	public static enum SingleCommentPattern {</span>
+		/** Java１行コメント */
+<span class="fc" id="L32">		Java(&quot;^//.*&quot;),</span>
+		/** Cs１行コメント */
+<span class="fc" id="L34">		Cs(&quot;^//.*&quot;),</span>
+		/** sql１行コメント */
+<span class="fc" id="L36">		sql(&quot;^--.*&quot;);</span>
+		/** １行コメント種別 */
+		private String value;
+
+		/**
+		 * &lt;p&gt;
+		 * コンストラクタ
+		 * 
+		 * @param value １行コメント種別
+		 */
+<span class="fc" id="L46">		SingleCommentPattern(final String value) {</span>
+<span class="fc" id="L47">			this.value = value;</span>
+<span class="fc" id="L48">		}</span>
+
+		/**
+		 * &lt;p&gt;
+		 * １行コメント種別 の値を返却するメソッド
+		 * 
+		 * @return １行コメント種別
+		 */
+		public String getValue() {
+<span class="fc" id="L57">			return this.value;</span>
+		}
+	};
+
+	/** 複数行コメント（開始）種別をもつ列挙型クラス */
+<span class="fc" id="L62">	public static enum StartMultiCommentPattern {</span>
+		/** Java複数行コメント（開始） */
+<span class="fc" id="L64">		Java(&quot;^/\\*[^*]*&quot;),</span>
+		/** Cs複数行コメント（開始） */
+<span class="fc" id="L66">		Cs(&quot;^/\\*[^*]*&quot;),</span>
+		/** sql複数行コメント（開始） */
+<span class="fc" id="L68">		sql(&quot;^/\\*[^*]*&quot;);</span>
+
+		/** 複数行コメント（開始）種別 */
+		private String value;
+
+		/**
+		 * &lt;p&gt;
+		 * コンストラクタ
+		 * 
+		 * @param value 複数行コメント（開始）種別
+		 */
+<span class="fc" id="L79">		StartMultiCommentPattern(final String value) {</span>
+<span class="fc" id="L80">			this.value = value;</span>
+<span class="fc" id="L81">		}</span>
+
+		/**
+		 * &lt;p&gt;
+		 * 複数行コメント（開始）種別 の値を返却するメソッド
+		 * 
+		 * @return 複数行コメント（開始）種別
+		 */
+		public String getValue() {
+<span class="fc" id="L90">			return this.value;</span>
+		}
+	};
+
+	/** 複数行コメント（終了）種別をもつ列挙型クラス */
+<span class="fc" id="L95">	public static enum EndMultiCommentPattern {</span>
+		/** Java複数行コメント（終了） */
+<span class="fc" id="L97">		Java(&quot;\\*/$&quot;),</span>
+		/** Cs複数行コメント（終了） */
+<span class="fc" id="L99">		Cs(&quot;\\*/$&quot;),</span>
+		/** sql複数行コメント（終了） */
+<span class="fc" id="L101">		sql(&quot;\\*/$&quot;);</span>
+
+		/** 複数行コメント（終了）種別 */
+		private String value;
+
+		/**
+		 * &lt;p&gt;
+		 * コンストラクタ
+		 * 
+		 * @param value 複数行コメント（終了）種別
+		 */
+<span class="fc" id="L112">		EndMultiCommentPattern(final String value) {</span>
+<span class="fc" id="L113">			this.value = value;</span>
+<span class="fc" id="L114">		}</span>
+
+		/**
+		 * &lt;p&gt;
+		 * 複数行コメント（終了）種別 の値を返却するメソッド
+		 * 
+		 * @return 複数行コメント（終了）種別
+		 */
+		public String getValue() {
+<span class="fc" id="L123">			return this.value;</span>
+		}
+	};
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

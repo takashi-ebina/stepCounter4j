@@ -1,0 +1,51 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+stepCounter,co.jp.stepCounter.domain.model.commentPatternMatch,AbsCommentPatternMatch,0,3,0,0,0,1,0,1,0,1
+stepCounter,co.jp.stepCounter.domain.model.commentPatternMatch,JavaCommentPatternMatch,8,42,2,2,3,11,3,6,1,6
+stepCounter,co.jp.stepCounter.domain.model.commentPatternMatch,AbsCommentPatternMatch.StartMultiCommentPattern,0,35,0,0,0,8,0,3,0,3
+stepCounter,co.jp.stepCounter.domain.model.commentPatternMatch,CommentPatternMatchFactory,3,0,0,0,1,0,1,0,1,0
+stepCounter,co.jp.stepCounter.domain.model.commentPatternMatch,SqlCommentPatternMatch,47,3,4,0,13,1,8,1,6,1
+stepCounter,co.jp.stepCounter.domain.model.commentPatternMatch,AbsCommentPatternMatch.EndMultiCommentPattern,0,35,0,0,0,8,0,3,0,3
+stepCounter,co.jp.stepCounter.domain.model.commentPatternMatch,CommentPatternMatchFactory.CommentPatternMatchType,0,75,0,0,0,15,0,7,0,7
+stepCounter,co.jp.stepCounter.domain.model.commentPatternMatch,CsCommentPatternMatch,35,15,2,2,9,5,6,3,4,3
+stepCounter,co.jp.stepCounter.domain.model.commentPatternMatch,AbsCommentPatternMatch.SingleCommentPattern,0,35,0,0,0,8,0,3,0,3
+stepCounter,co.jp.stepCounter.presentation.controller.gui,StepCounterGuiRequestDto,184,0,36,0,5,0,26,0,8,0
+stepCounter,co.jp.stepCounter.presentation.controller.gui,StepCounterGuiMainController,58,0,4,0,15,0,4,0,2,0
+stepCounter,co.jp.stepCounter.constant,StepCounterConstant.ProcessResult,0,28,0,0,0,7,0,3,0,3
+stepCounter,co.jp.stepCounter.constant,SystemConstant,0,7,0,0,0,2,0,1,0,1
+stepCounter,co.jp.stepCounter.constant,StepCounterConstant.ExecuteMode,0,33,0,0,0,6,0,1,0,1
+stepCounter,co.jp.stepCounter.constant,EnumReverseLookup,0,51,0,0,0,7,0,6,0,6
+stepCounter,co.jp.stepCounter.constant,StepCounterConstant.SortType,3,50,0,0,1,10,1,4,1,4
+stepCounter,co.jp.stepCounter.constant,StepCounterConstant.FilePathType,15,0,0,0,3,0,1,0,1,0
+stepCounter,co.jp.stepCounter.constant,StepCounterConstant.SortTarget,3,66,0,0,1,12,1,4,1,4
+stepCounter,co.jp.stepCounter.presentation.controller.cui,StepCounterCuiRequestDto,194,30,44,0,1,5,26,5,4,5
+stepCounter,co.jp.stepCounter.presentation.controller.cui,StepCounterCuiController,0,260,0,10,0,84,0,9,0,4
+stepCounter,co.jp.stepCounter.application.service.impl,StepCounterGuiMainServiceImpl,82,0,4,0,17,0,4,0,2,0
+stepCounter,co.jp.stepCounter.application.service.impl,StepCounterCuiServiceImpl,13,69,2,2,4,13,2,2,0,2
+stepCounter,co.jp.stepCounter.presentation.validator,ValidatorUtil,17,113,5,15,7,31,5,9,0,4
+stepCounter,co.jp.stepCounter.domain.model.stepCountDetail,AbsStepCount,32,156,6,21,6,47,7,15,1,7
+stepCounter,co.jp.stepCounter.domain.model.stepCountDetail,StepCountFactory.StepCountType,0,94,0,0,0,19,0,9,0,9
+stepCounter,co.jp.stepCounter.domain.model.stepCountDetail,StepCountFactory.MethodType,0,15,0,0,0,3,0,1,0,1
+stepCounter,co.jp.stepCounter.domain.model.stepCountDetail,CsStepCount,12,37,4,4,5,11,5,4,1,4
+stepCounter,co.jp.stepCounter.domain.model.stepCountDetail,StepCountFactory,3,0,0,0,1,0,1,0,1,0
+stepCounter,co.jp.stepCounter.domain.model.stepCountDetail,SqlStepCount,12,37,4,4,5,11,5,4,1,4
+stepCounter,co.jp.stepCounter.domain.model.stepCountDetail,JavaStepCount,12,37,4,4,5,11,5,4,1,4
+stepCounter,co.jp.stepCounter.presentation.view.custom,RowSelectionTree.new BasicTreeUI() {...},47,0,6,0,9,0,6,0,3,0
+stepCounter,co.jp.stepCounter.presentation.view.custom,EmptyIcon,8,0,0,0,4,0,4,0,4,0
+stepCounter,co.jp.stepCounter.presentation.view.custom,RowSelectionTree.new TreeWillExpandListener() {...},13,0,0,0,3,0,3,0,3,0
+stepCounter,co.jp.stepCounter.presentation.view.custom,JPlaceholderTextField,104,0,12,0,25,0,11,0,5,0
+stepCounter,co.jp.stepCounter.presentation.view.custom,RowSelectionTree,166,0,8,0,37,0,11,0,7,0
+stepCounter,co.jp.stepCounter.presentation.view.custom,RoundedCornerBorder,99,0,0,0,18,0,6,0,6,0
+stepCounter,co.jp.stepCounter.presentation.view,ViewUtil,24,0,0,0,8,0,1,0,1,0
+stepCounter,co.jp.stepCounter.presentation.view,StepCounterGuiMainView.new JPanel() {...},38,0,0,0,6,0,2,0,2,0
+stepCounter,co.jp.stepCounter.presentation.view,StepCounterGuiMainView.new BasicSplitPaneUI() {...},12,0,0,0,2,0,2,0,2,0
+stepCounter,co.jp.stepCounter.presentation.view,InfoPanel,25,0,0,0,8,0,2,0,2,0
+stepCounter,co.jp.stepCounter.presentation.view,StepCounterGuiMainView.1.new BasicSplitPaneDivider() {...},28,0,0,0,6,0,3,0,3,0
+stepCounter,co.jp.stepCounter.presentation.view,HomePanel,979,0,36,0,206,0,40,0,21,0
+stepCounter,co.jp.stepCounter.presentation.view,StepCounterGuiMainView,376,0,16,0,88,0,18,0,10,0
+stepCounter,co.jp.stepCounter.infrastructure.csvdao,CsvDaoUtil,6,31,0,0,2,6,0,2,0,2
+stepCounter,co.jp.stepCounter.infrastructure.csvdao,StepCountCsvDao,6,80,0,2,2,13,0,3,0,2
+stepCounter,co.jp.stepCounter.domain.model.stepCountExecutor,StepCountExecutor,4,100,4,12,0,20,4,8,0,4
+stepCounter,co.jp.stepCounter.infrastructure.log,Log4J2,73,103,8,6,18,26,8,9,3,7
+stepCounter,co.jp.stepCounter,StepCounter,209,0,32,0,46,0,21,0,4,0
+stepCounter,co.jp.stepCounter.domain.value,AllFilesStepCountData,207,136,33,11,40,32,30,9,11,6
+stepCounter,co.jp.stepCounter.domain.value,StepCountData,47,95,5,7,9,25,6,9,1,8

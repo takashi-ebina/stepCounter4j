@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StepCounterGuiMainController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.presentation.controller.gui</a> &gt; <span class="el_source">StepCounterGuiMainController.java</span></div><h1>StepCounterGuiMainController.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.presentation.controller.gui;
+
+import java.awt.Component;
+import java.io.File;
+
+import javax.swing.JOptionPane;
+
+import co.jp.stepCounter.application.service.StepCounterGuiMainService;
+import co.jp.stepCounter.application.service.impl.StepCounterGuiMainServiceImpl;
+import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
+import co.jp.stepCounter.constant.StepCounterConstant.ProcessResult;
+import co.jp.stepCounter.domain.model.stepCountExecutor.StepCountExecutor;
+import co.jp.stepCounter.infrastructure.csvdao.StepCountCsvDao;
+import co.jp.stepCounter.presentation.validator.ValidatorUtil;
+/**
+ * &lt;p&gt;
+ * GUIでステップカウント処理を実行するコントローラクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
+public class StepCounterGuiMainController {
+	
+	/** GUIでステップカウント処理を実行するサービスクラス*/
+	private StepCounterGuiMainService service; 
+	
+	/**
+	 * コンストラクタ
+	 */
+<span class="nc" id="L31">	public StepCounterGuiMainController() {</span>
+<span class="nc" id="L32">		this.service = new StepCounterGuiMainServiceImpl(new StepCountCsvDao(), new StepCountExecutor());</span>
+<span class="nc" id="L33">	}</span>
+	
+	/**
+	 * &lt;p&gt;
+	 * GUIモードのステップカウントメソッド
+	 * &lt;p&gt;
+	 * [処理概要]&lt;br&gt;
+	 * &lt;ol&gt;
+	 * &lt;li&gt;カウント対象のディレクトリパスの入力チェック&lt;br&gt;
+	 * &lt;li&gt;カウント結果出力対象のファイルパスの入力チェック&lt;br&gt;
+	 * &lt;li&gt;カウント対象ディレクトリのステップカウント処理及びカウント結果をカウント結果出力ファイルに書き込む処理の呼出し&lt;br&gt;
+	 * &lt;/ol&gt;
+	 * 
+	 * @param dto GUIでステップカウント処理を実行する際に利用するDTOクラス
+	 * @param parent ステップ数の集計を実施するGUIクラス
+	 */
+	public void stepCountGuiMode (final StepCounterGuiRequestDto dto, final Component parent) {
+<span class="nc" id="L50">		final String inputDirectoryPath = dto.getInputDirectoryPath();</span>
+<span class="nc" id="L51">		final String outputFilePath = dto.getOutputFilePath();</span>
+		
+<span class="nc bnc" id="L53" title="All 2 branches missed.">		if (!ValidatorUtil.inputDirectoryCheck(inputDirectoryPath)) {</span>
+<span class="nc" id="L54">			JOptionPane.showMessageDialog(parent, &quot;入力フォルダに問題があります。&quot;);</span>
+<span class="nc" id="L55">			return;</span>
+		}
+<span class="nc bnc" id="L57" title="All 2 branches missed.">		if (!ValidatorUtil.outputFileCheck(outputFilePath, ExecuteMode.GUI, null)) {</span>
+<span class="nc" id="L58">			JOptionPane.showMessageDialog(parent, &quot;出力ファイルに問題があります。&quot;);</span>
+<span class="nc" id="L59">			return;</span>
+		}
+		
+<span class="nc" id="L62">		final ProcessResult result = </span>
+<span class="nc" id="L63">				service.execStepCount(new File(inputDirectoryPath), new File(outputFilePath), dto.getStepCountSortType(), dto.getStepCountSortTarget());</span>
+		
+<span class="nc" id="L65">		JOptionPane.showMessageDialog(parent, &quot;ステップカウント処理が完了しました。 処理結果：&quot; + result.getMessage());</span>
+<span class="nc" id="L66">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HomePanel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.presentation.view</a> &gt; <span class="el_source">HomePanel.java</span></div><h1>HomePanel.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.presentation.view;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.TitledBorder;
+
+import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
+import co.jp.stepCounter.constant.StepCounterConstant.SortType;
+import co.jp.stepCounter.presentation.controller.gui.StepCounterGuiMainController;
+import co.jp.stepCounter.presentation.controller.gui.StepCounterGuiRequestDto;
+import co.jp.stepCounter.presentation.view.custom.JPlaceholderTextField;
+/**
+ * &lt;p&gt;
+ * ホームパネルのクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
+public class HomePanel extends JPanel implements ActionListener {
+
+	/** ホームヘッダー */
+<span class="nc" id="L43">	private JPanel jHeaderContentPane = null;</span>
+	/** ホームパネル１（入力フォルダ） */
+<span class="nc" id="L45">	private JPanel jp1 = null;</span>
+	/** ホームパネル２(結果出力選択) */
+<span class="nc" id="L47">	private JPanel jp2 = null;</span>
+	/** ホームパネル３（ラジオボタン） */
+<span class="nc" id="L49">	private JPanel jp3 = null;</span>
+	/** ホームパネル４（ボタン） */
+<span class="nc" id="L51">	private JPanel jp4 = null;</span>
+	/** 入力フォルダテキストボックス */
+<span class="nc" id="L53">	private JTextField input = null;</span>
+	/** 入力フォルダ選択ボタン */
+<span class="nc" id="L55">	private JButton jSelButton = null;</span>
+	/** 出力ファイルテキストボックス */
+<span class="nc" id="L57">	private JTextField input2 = null;</span>
+	/** 出力ファイル選択ボタン */
+<span class="nc" id="L59">	private JButton jSelButton2 = null;</span>
+	/** ソート区分ラジオボタン */
+<span class="nc" id="L61">	private JPanel jSortTypeRadioButton = null;</span>
+	/** ソート対象ラジオボタン */
+<span class="nc" id="L63">	private JPanel jSortTargetRadioButton = null;</span>
+	/** ソート区分ラジオグループ */
+<span class="nc" id="L65">	private ButtonGroup sortTypeRadioGroup = null;</span>
+	/** ソート対象ラジオグループ */
+<span class="nc" id="L67">	private ButtonGroup sortTargetRadioGroup = null;</span>
+	/** 開始ボタン */
+<span class="nc" id="L69">	private JButton jStartButton = null;</span>
+	/** GridBagLayout */
+<span class="nc" id="L71">	private final GridBagLayout gbl = new GridBagLayout();</span>
+	/** GridBagConstraints */
+<span class="nc" id="L73">	private final GridBagConstraints gbc = new GridBagConstraints();</span>
+	/** ボタンの背景色 */
+<span class="nc" id="L75">	private final Color BACKGROUND_BUTTON_COLOR = new Color(240, 128, 128);</span>
+	/** ボタンの前景色 */
+<span class="nc" id="L77">	private final Color FOREGROUND_BUTTON_COLOR = new Color(248, 248, 255);</span>
+
+	/** コントローラー */
+<span class="nc" id="L80">	private final StepCounterGuiMainController controller = new StepCounterGuiMainController();</span>
+	/** タイトルロゴ */
+<span class="nc" id="L82">	private final String TITLE_IMG_PATH = &quot;/img/icon_ebi.png&quot;;</span>
+
+	/**
+	 * &lt;p&gt;
+	 * コンストラクタ
+	 */
+<span class="nc" id="L88">	public HomePanel() {</span>
+<span class="nc" id="L89">		init();</span>
+<span class="nc" id="L90">	}</span>
+	/**
+	 * &lt;p&gt;
+	 * 初期化処理
+	 */
+	public void init() {
+<span class="nc" id="L96">		this.add(getJContentHeaderPane());</span>
+<span class="nc" id="L97">		this.add(getJp1());</span>
+<span class="nc" id="L98">		this.add(getJp2());</span>
+<span class="nc" id="L99">		this.add(getJp3());</span>
+<span class="nc" id="L100">		this.add(getJp4());</span>
+<span class="nc" id="L101">		this.setOpaque(false);</span>
+<span class="nc" id="L102">		this.setPreferredSize(new Dimension(750, 440));</span>
+<span class="nc" id="L103">	}</span>
+
+	/**
+	 * &lt;p&gt;
+	 * ホームパネル（ヘッダー部）の生成処理
+	 * 
+	 * @return ホームパネル（ヘッダー部）
+	 */
+	private JPanel getJContentHeaderPane() {
+<span class="nc bnc" id="L112" title="All 2 branches missed.">		if (this.jHeaderContentPane == null) {</span>
+<span class="nc" id="L113">			this.jHeaderContentPane = new JPanel();</span>
+<span class="nc" id="L114">			this.jHeaderContentPane.add(new JLabel(ViewUtil.getImageIcon(TITLE_IMG_PATH, this)), null);</span>
+<span class="nc" id="L115">			this.jHeaderContentPane.setOpaque(false);</span>
+<span class="nc" id="L116">			setGridBagLayout(this.jHeaderContentPane, GridBagConstraints.BOTH, 0, 0, 1, 1);</span>
+		}
+<span class="nc" id="L118">		return this.jHeaderContentPane;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * ホームパネル１（入力フォルダ）
+	 * 
+	 * @return ホームパネル１（入力フォルダ）
+	 */
+	public JPanel getJp1() {
+<span class="nc bnc" id="L128" title="All 2 branches missed.">		if (this.jp1 == null) {</span>
+<span class="nc" id="L129">			this.jp1 = new JPanel();</span>
+<span class="nc" id="L130">			this.jp1.add(getInput(), BorderLayout.CENTER);</span>
+<span class="nc" id="L131">			this.jp1.add(getSelButton(), BorderLayout.EAST);</span>
+<span class="nc" id="L132">			this.jp1.setOpaque(false);</span>
+<span class="nc" id="L133">			this.jp1.setPreferredSize(new Dimension(750, 70));</span>
+		}
+<span class="nc" id="L135">		return this.jp1;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * テキストフィールド（フォルダ）
+	 * 
+	 * @return テキストフィールド（フォルダ）
+	 */
+	public JTextField getInput() {
+<span class="nc bnc" id="L145" title="All 2 branches missed.">		if (this.input == null) {</span>
+<span class="nc" id="L146">			this.input = new JPlaceholderTextField(&quot;入力フォルダ&quot;);</span>
+<span class="nc" id="L147">			this.input.setOpaque(false);</span>
+<span class="nc" id="L148">			File f = new File(&quot;.&quot;).getAbsoluteFile().getParentFile();</span>
+<span class="nc" id="L149">			this.input.setText(f.getPath());</span>
+<span class="nc" id="L150">			this.input.setPreferredSize(new Dimension(650, 50));</span>
+<span class="nc" id="L151">			setGridBagLayout(this.input, GridBagConstraints.BOTH, 0, 1, 1, 1);</span>
+		}
+<span class="nc" id="L153">		return this.input;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * フォルダ選択ボタン
+	 * 
+	 * @return フォルダ選択ボタン
+	 */
+	public JButton getSelButton() {
+<span class="nc bnc" id="L163" title="All 2 branches missed.">		if (this.jSelButton == null) {</span>
+<span class="nc" id="L164">			this.jSelButton = new JButton();</span>
+<span class="nc" id="L165">			this.jSelButton.setText(&quot;...&quot;);</span>
+<span class="nc" id="L166">			this.jSelButton.addActionListener(this);</span>
+<span class="nc" id="L167">			this.jSelButton.setActionCommand(&quot;sel1&quot;);</span>
+<span class="nc" id="L168">			this.jSelButton.setPreferredSize(new Dimension(50, 50));</span>
+<span class="nc" id="L169">			setGridBagLayout(this.jSelButton, GridBagConstraints.BOTH, 1, 1, 1, 1);</span>
+		}
+<span class="nc" id="L171">		return this.jSelButton;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * ホームパネル２（出力ファイル）
+	 * 
+	 * @return ホームパネル２（出力ファイル）
+	 */
+	public JPanel getJp2() {
+<span class="nc bnc" id="L181" title="All 2 branches missed.">		if (this.jp2 == null) {</span>
+<span class="nc" id="L182">			this.jp2 = new JPanel();</span>
+<span class="nc" id="L183">			this.jp2.add(getInput2(), BorderLayout.CENTER);</span>
+<span class="nc" id="L184">			this.jp2.add(getSelButton2(), BorderLayout.EAST);</span>
+<span class="nc" id="L185">			this.jp2.setOpaque(false);</span>
+<span class="nc" id="L186">			this.jp2.setPreferredSize(new Dimension(750, 70));</span>
+		}
+<span class="nc" id="L188">		return this.jp2;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * テキストフィールド（ファイル）
+	 * 
+	 * @return テキストフィールド（ファイル）
+	 */
+	public JTextField getInput2() {
+<span class="nc bnc" id="L198" title="All 2 branches missed.">		if (this.input2 == null) {</span>
+<span class="nc" id="L199">			this.input2 = new JPlaceholderTextField(&quot;出力ファイル&quot;);</span>
+<span class="nc" id="L200">			File f = new File(&quot;.&quot;).getAbsoluteFile().getParentFile();</span>
+<span class="nc" id="L201">			this.input2.setText(f.getPath());</span>
+<span class="nc" id="L202">			this.input2.setPreferredSize(new Dimension(650, 50));</span>
+<span class="nc" id="L203">			this.input2.setToolTipText(&quot;拡張子はCSVを指定してください&quot;);</span>
+<span class="nc" id="L204">			setGridBagLayout(this.input2, GridBagConstraints.BOTH, 0, 2, 1, 1);</span>
+		}
+<span class="nc" id="L206">		return this.input2;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * ファイル選択ボタン
+	 * 
+	 * @return ファイル選択ボタン
+	 */
+	public JButton getSelButton2() {
+<span class="nc bnc" id="L216" title="All 2 branches missed.">		if (this.jSelButton2 == null) {</span>
+<span class="nc" id="L217">			this.jSelButton2 = new JButton();</span>
+<span class="nc" id="L218">			this.jSelButton2.setText(&quot;...&quot;);</span>
+<span class="nc" id="L219">			this.jSelButton2.addActionListener(this);</span>
+<span class="nc" id="L220">			this.jSelButton2.setActionCommand(&quot;sel2&quot;);</span>
+<span class="nc" id="L221">			this.jSelButton2.setPreferredSize(new Dimension(50, 50));</span>
+<span class="nc" id="L222">			setGridBagLayout(this.jSelButton2, GridBagConstraints.BOTH, 1, 2, 1, 1);</span>
+		}
+<span class="nc" id="L224">		return this.jSelButton2;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * ホームパネル３（ラジオボタン）
+	 * 
+	 * @return ホームパネル３（ラジオボタン）
+	 */
+	public JPanel getJp3() {
+<span class="nc bnc" id="L234" title="All 2 branches missed.">		if (this.jp3 == null) {</span>
+<span class="nc" id="L235">			this.jp3 = new JPanel();</span>
+<span class="nc" id="L236">			this.jp3.add(getSortTypeRadioButton(), BorderLayout.WEST);</span>
+<span class="nc" id="L237">			this.jp3.add(getSortTargetRadioButton(), BorderLayout.CENTER);</span>
+<span class="nc" id="L238">			this.jp3.setOpaque(false);</span>
+<span class="nc" id="L239">			this.jp3.setPreferredSize(new Dimension(750, 70));</span>
+<span class="nc" id="L240">			setGridBagLayout(this.jp3, GridBagConstraints.BOTH, 0, 3, 1, 1);</span>
+		}
+<span class="nc" id="L242">		return this.jp3;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * ソート区分ラジオボタン
+	 * 
+	 * @return ソート区分ラジオボタン
+	 */
+	public JPanel getSortTypeRadioButton() {
+<span class="nc bnc" id="L252" title="All 4 branches missed.">		if (this.jSortTypeRadioButton == null &amp;&amp; this.sortTypeRadioGroup == null) {</span>
+<span class="nc" id="L253">			this.jSortTypeRadioButton = new JPanel();</span>
+			// ラジオボタンのタイトル
+<span class="nc" id="L255">			setRadioButtonTitle(this.jSortTypeRadioButton, &quot;ソート区分&quot;);</span>
+			// 各ラジオボタンの生成
+<span class="nc" id="L257">			JRadioButton sortTypeRadioFromNoSort = new JRadioButton(SortType.NO_SORT.getSortTypeName(), true);</span>
+<span class="nc" id="L258">			JRadioButton sortTypeRadioFromAscOrder = new JRadioButton(SortType.ASCENDING_ORDER.getSortTypeName());</span>
+<span class="nc" id="L259">			JRadioButton sortTypeRadioFromDesOrder = new JRadioButton(SortType.DESCENDING_ORDER.getSortTypeName());</span>
+			// 各ラジオボタンのアクション
+<span class="nc" id="L261">			sortTypeRadioFromNoSort.setActionCommand(SortType.NO_SORT.getSortTypeName());</span>
+<span class="nc" id="L262">			sortTypeRadioFromAscOrder.setActionCommand(SortType.ASCENDING_ORDER.getSortTypeName());</span>
+<span class="nc" id="L263">			sortTypeRadioFromDesOrder.setActionCommand(SortType.DESCENDING_ORDER.getSortTypeName());</span>
+<span class="nc" id="L264">			sortTypeRadioFromNoSort.setOpaque(false);</span>
+<span class="nc" id="L265">			sortTypeRadioFromAscOrder.setOpaque(false);</span>
+<span class="nc" id="L266">			sortTypeRadioFromDesOrder.setOpaque(false);</span>
+			// ラジオボタンのグルーピング
+<span class="nc" id="L268">			this.sortTypeRadioGroup = new ButtonGroup();</span>
+<span class="nc" id="L269">			this.sortTypeRadioGroup.add(sortTypeRadioFromNoSort);</span>
+<span class="nc" id="L270">			this.sortTypeRadioGroup.add(sortTypeRadioFromAscOrder);</span>
+<span class="nc" id="L271">			this.sortTypeRadioGroup.add(sortTypeRadioFromDesOrder);</span>
+			// ラジオボタンの追加
+<span class="nc" id="L273">			this.jSortTypeRadioButton.add(sortTypeRadioFromNoSort);</span>
+<span class="nc" id="L274">			this.jSortTypeRadioButton.add(sortTypeRadioFromAscOrder);</span>
+<span class="nc" id="L275">			this.jSortTypeRadioButton.add(sortTypeRadioFromDesOrder);</span>
+<span class="nc" id="L276">			this.jSortTypeRadioButton.setOpaque(false);</span>
+		}
+<span class="nc" id="L278">		return this.jSortTypeRadioButton;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * ソート対象ラジオボタン
+	 * 
+	 * @return ソート対象ラジオボタン
+	 */
+	public JPanel getSortTargetRadioButton() {
+<span class="nc bnc" id="L288" title="All 4 branches missed.">		if (this.jSortTargetRadioButton == null &amp;&amp; this.sortTargetRadioGroup == null) {</span>
+<span class="nc" id="L289">			this.jSortTargetRadioButton = new JPanel();</span>
+			// ラジオボタンのタイトル
+<span class="nc" id="L291">			setRadioButtonTitle(this.jSortTargetRadioButton, &quot;ソート対象&quot;);</span>
+			// 各ラジオボタンの生成
+<span class="nc" id="L293">			JRadioButton sortTargetRadioFromFilePath = new JRadioButton(SortTarget.FILEPATH.getSortTargetName(), true);</span>
+<span class="nc" id="L294">			JRadioButton sortTargetRadioFromTotalStep = new JRadioButton(SortTarget.TOTALSTEPCOUNT.getSortTargetName());</span>
+<span class="nc" id="L295">			JRadioButton sortTargetRadioFromExecStep = new JRadioButton(SortTarget.EXECSTEPCOUNT.getSortTargetName());</span>
+<span class="nc" id="L296">			JRadioButton sortTargetRadioFromCommentStep = new JRadioButton(</span>
+<span class="nc" id="L297">					SortTarget.COMMENTSTEPCOUNT.getSortTargetName());</span>
+<span class="nc" id="L298">			JRadioButton sortTargetRadioFromEmptyStep = new JRadioButton(SortTarget.EMPTYSTEPCOUNT.getSortTargetName());</span>
+			// 各ラジオボタンのアクション
+<span class="nc" id="L300">			sortTargetRadioFromFilePath.setActionCommand(SortTarget.FILEPATH.getSortTargetName());</span>
+<span class="nc" id="L301">			sortTargetRadioFromTotalStep.setActionCommand(SortTarget.TOTALSTEPCOUNT.getSortTargetName());</span>
+<span class="nc" id="L302">			sortTargetRadioFromExecStep.setActionCommand(SortTarget.EXECSTEPCOUNT.getSortTargetName());</span>
+<span class="nc" id="L303">			sortTargetRadioFromCommentStep.setActionCommand(SortTarget.COMMENTSTEPCOUNT.getSortTargetName());</span>
+<span class="nc" id="L304">			sortTargetRadioFromEmptyStep.setActionCommand(SortTarget.EMPTYSTEPCOUNT.getSortTargetName());</span>
+<span class="nc" id="L305">			sortTargetRadioFromFilePath.setOpaque(false);</span>
+<span class="nc" id="L306">			sortTargetRadioFromTotalStep.setOpaque(false);</span>
+<span class="nc" id="L307">			sortTargetRadioFromExecStep.setOpaque(false);</span>
+<span class="nc" id="L308">			sortTargetRadioFromCommentStep.setOpaque(false);</span>
+<span class="nc" id="L309">			sortTargetRadioFromEmptyStep.setOpaque(false);</span>
+			// ラジオボタンのグルーピング
+<span class="nc" id="L311">			this.sortTargetRadioGroup = new ButtonGroup();</span>
+<span class="nc" id="L312">			this.sortTargetRadioGroup.add(sortTargetRadioFromFilePath);</span>
+<span class="nc" id="L313">			this.sortTargetRadioGroup.add(sortTargetRadioFromTotalStep);</span>
+<span class="nc" id="L314">			this.sortTargetRadioGroup.add(sortTargetRadioFromExecStep);</span>
+<span class="nc" id="L315">			this.sortTargetRadioGroup.add(sortTargetRadioFromCommentStep);</span>
+<span class="nc" id="L316">			this.sortTargetRadioGroup.add(sortTargetRadioFromEmptyStep);</span>
+			// ラジオボタンの追加
+<span class="nc" id="L318">			this.jSortTargetRadioButton.add(sortTargetRadioFromFilePath);</span>
+<span class="nc" id="L319">			this.jSortTargetRadioButton.add(sortTargetRadioFromTotalStep);</span>
+<span class="nc" id="L320">			this.jSortTargetRadioButton.add(sortTargetRadioFromExecStep);</span>
+<span class="nc" id="L321">			this.jSortTargetRadioButton.add(sortTargetRadioFromCommentStep);</span>
+<span class="nc" id="L322">			this.jSortTargetRadioButton.add(sortTargetRadioFromEmptyStep);</span>
+<span class="nc" id="L323">			this.jSortTargetRadioButton.setOpaque(false);</span>
+		}
+<span class="nc" id="L325">		return this.jSortTargetRadioButton;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * ラジオボタンのタイトルレイアウト設定
+	 * 
+	 * @param target    コンポーネント対象
+	 * @param titleName タイトル名
+	 */
+	private void setRadioButtonTitle(final JPanel target, final String titleName) {
+<span class="nc" id="L336">		final Border outside = BorderFactory.createMatteBorder(0, 10, 2, 0, new Color(250, 128, 114));</span>
+<span class="nc" id="L337">		final Border inside = BorderFactory.createEmptyBorder(0, 5, 0, 0);</span>
+<span class="nc" id="L338">		target.setBorder(BorderFactory.createTitledBorder(BorderFactory.createCompoundBorder(outside, inside),</span>
+				titleName, TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SANS_SERIF, Font.BOLD, 14), Color.BLACK));
+<span class="nc" id="L340">	}</span>
+
+	/**
+	 * &lt;p&gt;
+	 * ホームパネル４（ボタン）
+	 * 
+	 * @return ホームパネル４（ボタン）
+	 */
+	public JPanel getJp4() {
+<span class="nc bnc" id="L349" title="All 2 branches missed.">		if (this.jp4 == null) {</span>
+<span class="nc" id="L350">			this.jp4 = new JPanel();</span>
+<span class="nc" id="L351">			this.jp4.add(getStartButton(), null);</span>
+<span class="nc" id="L352">			this.jp4.setOpaque(false);</span>
+<span class="nc" id="L353">			this.jp4.setPreferredSize(new Dimension(300, 70));</span>
+<span class="nc" id="L354">			setGridBagLayout(this.jp4, GridBagConstraints.BOTH, 0, 4, 1, 1);</span>
+		}
+<span class="nc" id="L356">		return this.jp4;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * 開始ボタン
+	 * 
+	 * @return 開始ボタン
+	 */
+	public JButton getStartButton() {
+<span class="nc bnc" id="L366" title="All 2 branches missed.">		if (this.jStartButton == null) {</span>
+<span class="nc" id="L367">			this.jStartButton = new JButton();</span>
+<span class="nc" id="L368">			this.jStartButton.addActionListener(this);</span>
+<span class="nc" id="L369">			this.jStartButton.setActionCommand(&quot;start&quot;);</span>
+<span class="nc" id="L370">			this.jStartButton.setText(&quot;count start !!&quot;);</span>
+<span class="nc" id="L371">			this.jStartButton.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 28));</span>
+<span class="nc" id="L372">			this.jStartButton.setForeground(FOREGROUND_BUTTON_COLOR);</span>
+<span class="nc" id="L373">			this.jStartButton.setBackground(BACKGROUND_BUTTON_COLOR);</span>
+<span class="nc" id="L374">			this.jStartButton.setPreferredSize(new Dimension(30, 30));</span>
+<span class="nc" id="L375">			this.jStartButton.setBorder(</span>
+					new SoftBevelBorder(BevelBorder.RAISED, new Color(255, 228, 225), new Color(128, 128, 128)));
+<span class="nc" id="L377">			this.jStartButton.setOpaque(true);</span>
+<span class="nc" id="L378">			this.jStartButton.setPreferredSize(new Dimension(300, 60));</span>
+		}
+<span class="nc" id="L380">		return this.jStartButton;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * アクション監視
+	 */
+	@Override
+	public void actionPerformed(final ActionEvent e) {
+<span class="nc" id="L389">		final String cmd = e.getActionCommand();</span>
+		try {
+<span class="nc" id="L391">			setButtonAble(false);</span>
+<span class="nc bnc" id="L392" title="All 4 branches missed.">			switch (cmd) {</span>
+<span class="nc" id="L393">			case &quot;sel1&quot; -&gt; directoriesSelect(this.getInput());</span>
+<span class="nc" id="L394">			case &quot;sel2&quot; -&gt; fileSelect(this.getInput2());</span>
+<span class="nc" id="L395">			case &quot;start&quot; -&gt; this.controller.stepCountGuiMode(makeStepCounterGuiRequestDto(), this);</span>
+			}
+		} finally {
+<span class="nc" id="L398">			setButtonAble(true);</span>
+		}
+<span class="nc" id="L400">	}</span>
+
+	/**
+	 * &lt;p&gt;
+	 * GUIでステップカウント処理を実行する際に利用するDTOオブジェクトの作成メソッド
+	 * 
+	 * @return GUIでステップカウント処理を実行する際に利用するDTOオブジェクト
+	 */
+	private StepCounterGuiRequestDto makeStepCounterGuiRequestDto() {
+<span class="nc" id="L409">		final SortType sortType = SortType.lookup(this.sortTypeRadioGroup.getSelection().getActionCommand(),</span>
+				SortType::getSortTypeName);
+<span class="nc" id="L411">		final SortTarget sortTarget = SortTarget.lookup(this.sortTargetRadioGroup.getSelection().getActionCommand(),</span>
+				SortTarget::getSortTargetName);
+<span class="nc" id="L413">		final String inputDirectoryPath = this.getInput().getText();</span>
+<span class="nc" id="L414">		final String outputFilePath = this.getInput2().getText();</span>
+<span class="nc" id="L415">		return new StepCounterGuiRequestDto(sortType, sortTarget, inputDirectoryPath, outputFilePath);</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * ボタン抑止
+	 * 
+	 * @param flg ボタン抑止フラグ
+	 */
+	protected void setButtonAble(final boolean flg) {
+<span class="nc" id="L425">		this.getStartButton().setEnabled(flg);</span>
+<span class="nc" id="L426">		this.getSelButton().setEnabled(flg);</span>
+<span class="nc" id="L427">		this.getSelButton2().setEnabled(flg);</span>
+<span class="nc" id="L428">	}</span>
+
+	/**
+	 * &lt;p&gt;
+	 * ファイル・ディレクトリ選択
+	 * 
+	 * @param text テキスト
+	 */
+	private void fileSelect(final JTextField text) {
+<span class="nc" id="L437">		final JFileChooser fc = new JFileChooser();</span>
+<span class="nc" id="L438">		fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);</span>
+<span class="nc" id="L439">		fc.setCurrentDirectory(new File(text.getText()));</span>
+
+<span class="nc" id="L441">		final int selected = fc.showOpenDialog(this);</span>
+<span class="nc bnc" id="L442" title="All 2 branches missed.">		if (selected == JFileChooser.APPROVE_OPTION) {</span>
+<span class="nc" id="L443">			text.setText(fc.getSelectedFile().getAbsolutePath());</span>
+		}
+<span class="nc" id="L445">	}</span>
+
+	/**
+	 * &lt;p&gt;
+	 * ディレクトリ選択
+	 * 
+	 * @param text テキスト
+	 */
+	private void directoriesSelect(final JTextField text) {
+<span class="nc" id="L454">		final JFileChooser fc = new JFileChooser();</span>
+<span class="nc" id="L455">		fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);</span>
+<span class="nc" id="L456">		fc.setCurrentDirectory(new File(text.getText()));</span>
+
+<span class="nc" id="L458">		final int selected = fc.showOpenDialog(this);</span>
+<span class="nc bnc" id="L459" title="All 2 branches missed.">		if (selected == JFileChooser.APPROVE_OPTION) {</span>
+<span class="nc" id="L460">			text.setText(fc.getSelectedFile().getAbsolutePath());</span>
+		}
+<span class="nc" id="L462">	}</span>
+
+	/**
+	 * &lt;p&gt;
+	 * コンポーネント設定
+	 * 
+	 * @param target     コンポーネント設定対象
+	 * @param fill       初期 fill 値
+	 * @param gridx      初期 gridx 値
+	 * @param gridy      初期 gridy 値
+	 * @param gridwidth  初期 gridwidth 値
+	 * @param gridheight 初期 gridheight 値
+	 */
+	private void setGridBagLayout(JComponent target, int fill, int gridx, int gridy, int gridwidth, int gridheight) {
+<span class="nc" id="L476">		this.gbc.fill = fill;</span>
+<span class="nc" id="L477">		this.gbc.gridx = gridx;</span>
+<span class="nc" id="L478">		this.gbc.gridy = gridy;</span>
+<span class="nc" id="L479">		this.gbc.gridwidth = gridwidth;</span>
+<span class="nc" id="L480">		this.gbc.gridheight = gridheight;</span>
+<span class="nc" id="L481">		this.gbl.setConstraints(target, gbc);</span>
+<span class="nc" id="L482">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

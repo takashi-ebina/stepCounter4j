@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CsvDaoUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.infrastructure.csvdao</a> &gt; <span class="el_source">CsvDaoUtil.java</span></div><h1>CsvDaoUtil.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.infrastructure.csvdao;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.util.List;
+import java.util.StringJoiner;
+
+import co.jp.stepCounter.constant.SystemConstant;
+/**
+ * &lt;p&gt;
+ * CSVファイルの登録・更新・削除処理のユーティリティメソッドを提供するクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
+public class CsvDaoUtil {
+	
+	/**
+	 * &lt;p&gt;
+	 * コンストラクタ
+	 * &lt;p&gt;
+	 * ユーティリティメソッドを提供するクラスのため、インスタンス化は不可とする。
+	 */
+	private CsvDaoUtil() {
+	}
+	/**
+	 * &lt;p&gt;
+	 * CSVヘッダー書き込みメソッド
+	 * &lt;p&gt;
+	 * 引数のカウント結果出力対象ファイルに対して、CSVのヘッダーの書き込み処理を行う。
+	 * 
+	 * @param outputFile カウント結果出力対象ファイル
+	 * @param headerName ヘッダー名を定義しているリスト
+	 */
+	public static void writeHeader(final File outputFile, final List&lt;String&gt; headerName) {
+<span class="fc" id="L40">		try (final BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile))) {</span>
+<span class="fc" id="L41">			final StringJoiner sj = new StringJoiner(&quot;,&quot;);</span>
+<span class="fc" id="L42">			headerName.stream().forEach(r -&gt; sj.add(r));</span>
+<span class="fc" id="L43">			bw.write(sj.toString() + SystemConstant.LINE_SEPARATOR);</span>
+<span class="nc" id="L44">		} catch (IOException e) {</span>
+<span class="nc" id="L45">			throw new UncheckedIOException(e);</span>
+<span class="fc" id="L46">		}</span>
+<span class="fc" id="L47">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

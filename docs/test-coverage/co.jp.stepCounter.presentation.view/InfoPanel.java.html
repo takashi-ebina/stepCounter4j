@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InfoPanel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.presentation.view</a> &gt; <span class="el_source">InfoPanel.java</span></div><h1>InfoPanel.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.presentation.view;
+
+import java.awt.Dimension;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+/**
+ * &lt;p&gt;
+ * 情報パネルのクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
+public class InfoPanel extends JPanel {
+	/**
+	 * &lt;p&gt;
+	 * コンストラクタ
+	 */
+<span class="nc" id="L20">	public InfoPanel() {</span>
+<span class="nc" id="L21">		init();</span>
+<span class="nc" id="L22">	}</span>
+	/**
+	 * &lt;p&gt;
+	 * 初期化処理
+	 */
+	public void init() {
+<span class="nc" id="L28">		final String strHtml = </span>
+				&quot;&lt;html&gt;&lt;h1&gt;&lt;font Size=6&gt;stepcounterについて&lt;/font&gt;&lt;/h1&gt;&quot;
+				+ &quot;&lt;p&gt;プログラムのステップ数を集計するツールです。&lt;/p&gt;&quot;
+				+ &quot;&lt;br&gt;&quot;
+				+ &quot;&lt;p&gt;対応プログラムファイル：Java、Cs、sql&lt;br&gt;&quot;
+				+ &quot;作成者：takashi.ebina&lt;br&gt;&quot;
+				+ &quot;GitHubリポジトリ：https://github.com/takashi-ebina/stepCounterforJava/&lt;/p&gt;&quot;
+				+ &quot;&lt;br&gt;&quot;
+				+ &quot;&lt;h2&gt;&lt;font Size=5&gt;変更履歴&lt;/font&gt;&lt;/h2&gt;&quot;
+				+ &quot;&lt;h3&gt;&lt;font Size=4&gt;1.0.0&lt;/font&gt;&lt;/h3&gt;&quot;
+				+ &quot;新規リリース&quot;
+				;
+<span class="nc" id="L40">		this.add(new JLabel(strHtml));</span>
+<span class="nc" id="L41">		this.setOpaque(false);</span>
+<span class="nc" id="L42">		this.setPreferredSize(new Dimension(750, 440));</span>
+<span class="nc" id="L43">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

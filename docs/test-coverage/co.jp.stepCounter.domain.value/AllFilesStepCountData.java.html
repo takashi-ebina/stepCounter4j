@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AllFilesStepCountData.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.domain.value</a> &gt; <span class="el_source">AllFilesStepCountData.java</span></div><h1>AllFilesStepCountData.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.domain.value;
+
+import java.util.List;
+import java.util.Objects;
+
+import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
+import co.jp.stepCounter.constant.StepCounterConstant.SortType;
+
+/**
+ * &lt;p&gt;
+ * 全ファイルの総行数／実行行数／コメント行数／空行数を集計するデータクラス
+ * &lt;p&gt;
+ * 全ファイルの総行数／実行行数／コメント行数／空行数の集計処理は&lt;br&gt;
+ * {@link AllFilesStepCountData#AllFilesStepCountData}コンストラクタで行なっています。&lt;br&gt;
+ * そのため、setterメソッドは実装しておらず、新規実装も推奨していません。
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
+public final class AllFilesStepCountData {
+	/** 全ファイルの総行数 */
+	private final int allFilesTotalStepCount;
+	/** 全ファイルの実行行数 */
+	private final int allFilesExecStepCount;
+	/** 全ファイルのコメント行数 */
+	private final int allFilesCommentStepCount;
+	/** 全ファイルの空行数 */
+	private final int allFilesEmptyStepCount;
+	/** 1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラスリスト */
+	private final List&lt;StepCountData&gt; stepCountDatalist;
+
+	/**
+	 * &lt;p&gt;
+	 * コンストラクタ
+	 * &lt;p&gt;
+	 * 引数の1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラスリストを元に、&lt;br&gt;
+	 * 全ファイルの総行数／実行行数／コメント行数／空行数の集計を実施します。
+	 * &lt;p&gt;
+	 * {@link StepCountData#canWriteStepCount}の値がfalseのデータクラスに関しては、&lt;br&gt;
+	 * 1ファイル単位のステップ数の集計が失敗したデータクラスとみなし、全ファイルのステップ数の集計対象外とします。
+	 * @throws IllegalArgumentException 引数にNullが存在する場合
+	 * @param stepCountDataList   1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラスリスト
+	 * @param stepCountSortType   ソート区分
+	 * @param stepCountSortTarget ソート対象
+	 */
+	public AllFilesStepCountData(final List&lt;StepCountData&gt; stepCountDataList, 
+<span class="fc" id="L48">			final SortType stepCountSortType, final SortTarget stepCountSortTarget) {</span>
+
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">		if (Objects.isNull(stepCountDataList)) {</span>
+<span class="nc" id="L51">			throw new IllegalArgumentException(&quot;コンストラクタの引数の値がNullです&quot;);</span>
+		}
+
+<span class="fc" id="L54">		this.stepCountDatalist = sortStepCountDataList(stepCountDataList, stepCountSortType, stepCountSortTarget);</span>
+
+<span class="fc" id="L56">		int tmpAllFilesTotalStepCount = 0, tmpAllFilesExecStepCount = 0, </span>
+<span class="fc" id="L57">			tmpAllFilesCommentStepCount = 0, tmpAllFilesEmptyStepCount = 0;</span>
+		
+<span class="fc bfc" id="L59" title="All 2 branches covered.">		for (StepCountData stepCountData : stepCountDataList) {</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">			if (!stepCountData.canWriteStepCount()) {</span>
+<span class="nc" id="L61">				continue;</span>
+			}
+<span class="fc" id="L63">			tmpAllFilesTotalStepCount += stepCountData.getTotalStepCount();</span>
+<span class="fc" id="L64">			tmpAllFilesExecStepCount += stepCountData.getExecStepCount();</span>
+<span class="fc" id="L65">			tmpAllFilesCommentStepCount += stepCountData.getCommentStepCount();</span>
+<span class="fc" id="L66">			tmpAllFilesEmptyStepCount  += stepCountData.getEmptyStepCount();</span>
+<span class="fc" id="L67">		}</span>
+<span class="fc" id="L68">		this.allFilesTotalStepCount = tmpAllFilesTotalStepCount;</span>
+<span class="fc" id="L69">		this.allFilesExecStepCount = tmpAllFilesExecStepCount;</span>
+<span class="fc" id="L70">		this.allFilesCommentStepCount = tmpAllFilesCommentStepCount;</span>
+<span class="fc" id="L71">		this.allFilesEmptyStepCount = tmpAllFilesEmptyStepCount;</span>
+<span class="fc" id="L72">	}</span>
+	
+	/**
+	 * &lt;p&gt;
+	 * 1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラスリストのソートメソッド
+	 * &lt;p&gt;
+	 * 引数のソート区分、ソート対象を元に&lt;br&gt;
+	 * 1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラスリストのソートを実施します。
+	 * 
+	 * @param stepCountDataList   1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラスリスト
+	 * @param stepCountSortType   ソート区分
+	 * @param stepCountSortTarget ソート対象
+	 * @return ソート後の1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラスリスト
+	 */
+	private List&lt;StepCountData&gt; sortStepCountDataList(final List&lt;StepCountData&gt; stepCountDataList, 
+			final SortType stepCountSortType, final SortTarget stepCountSortTarget) {
+<span class="fc bfc" id="L88" title="All 2 branches covered.">		if (stepCountSortType == SortType.ASCENDING_ORDER) {</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">			if (stepCountSortTarget == SortTarget.FILEPATH) {</span>
+<span class="fc" id="L90">				stepCountDataList.sort((o1, o2) -&gt; o1.getInputFile().getName().compareTo(o2.getInputFile().getName()));</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">			} else if (stepCountSortTarget == SortTarget.TOTALSTEPCOUNT) {</span>
+<span class="nc" id="L92">				stepCountDataList.sort((o1, o2) -&gt; o1.getTotalStepCount() - o2.getTotalStepCount());</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">			} else if (stepCountSortTarget == SortTarget.EXECSTEPCOUNT) {</span>
+<span class="nc" id="L94">				stepCountDataList.sort((o1, o2) -&gt; o1.getExecStepCount() - o2.getExecStepCount());</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">			} else if (stepCountSortTarget == SortTarget.COMMENTSTEPCOUNT) {</span>
+<span class="nc" id="L96">				stepCountDataList.sort((o1, o2) -&gt; o1.getCommentStepCount() - o2.getCommentStepCount());</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">			} else if (stepCountSortTarget == SortTarget.EMPTYSTEPCOUNT) {</span>
+<span class="nc" id="L98">				stepCountDataList.sort((o1, o2) -&gt; o1.getEmptyStepCount() - o2.getEmptyStepCount());</span>
+			}
+<span class="fc bfc" id="L100" title="All 2 branches covered.">		} else if (stepCountSortType == SortType.DESCENDING_ORDER) {</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">			if (stepCountSortTarget == SortTarget.FILEPATH) {</span>
+<span class="nc" id="L102">				stepCountDataList.sort((o1, o2) -&gt; o2.getInputFile().getName().compareTo(o1.getInputFile().getName()));</span>
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">			} else if (stepCountSortTarget == SortTarget.TOTALSTEPCOUNT) {</span>
+<span class="fc" id="L104">				stepCountDataList.sort((o1, o2) -&gt; o2.getTotalStepCount() - o1.getTotalStepCount());</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">			} else if (stepCountSortTarget == SortTarget.EXECSTEPCOUNT) {</span>
+<span class="nc" id="L106">				stepCountDataList.sort((o1, o2) -&gt; o2.getExecStepCount() - o1.getExecStepCount());</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">			} else if (stepCountSortTarget == SortTarget.COMMENTSTEPCOUNT) {</span>
+<span class="nc" id="L108">				stepCountDataList.sort((o1, o2) -&gt; o2.getCommentStepCount() - o1.getCommentStepCount());</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">			} else if (stepCountSortTarget == SortTarget.EMPTYSTEPCOUNT) {</span>
+<span class="nc" id="L110">				stepCountDataList.sort((o1, o2) -&gt; o2.getEmptyStepCount() - o1.getEmptyStepCount());</span>
+			}
+		}
+<span class="fc" id="L113">		return stepCountDataList;</span>
+	}
+	
+	/**
+	 * &lt;p&gt;
+	 * 1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラスリストを返却するメソッド
+	 * 
+	 * @return 1ファイル単位の総行数／実行行数／コメント行数／空行数を集計するデータクラスリスト
+	 */
+	public List&lt;StepCountData&gt; getStepCountDatalist() {
+<span class="fc" id="L123">		return this.stepCountDatalist;</span>
+	}
+	
+	/**
+	 * &lt;p&gt;
+	 * {@link AllFilesStepCountData}で定義されている文字列表現を返却するメソッド
+	 * 
+	 * @return {@link AllFilesStepCountData}で定義されている文字列表現
+	 */
+	@Override
+	public String toString() {
+<span class="nc" id="L134">		return new StringBuilder()</span>
+<span class="nc" id="L135">				.append(&quot;AllFilesStepCountData [allFilesTotalStepCount=&quot;).append(this.allFilesTotalStepCount)</span>
+<span class="nc" id="L136">				.append(&quot;, allFilesExecStepCount=&quot;).append(this.allFilesExecStepCount)</span>
+<span class="nc" id="L137">				.append(&quot;, allFilesCommentStepCount=&quot;).append(this.allFilesCommentStepCount)</span>
+<span class="nc" id="L138">				.append(&quot;, allFilesEmptyStepCount=&quot;).append(this.allFilesEmptyStepCount)</span>
+<span class="nc" id="L139">				.append(&quot;, stepCountDatalist=&quot;).append(this.stepCountDatalist).append(&quot;]&quot;).toString();</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * &quot;合計&quot;／全ファイルの総行数／実行行数／コメント行数／空行数をカンマ区切りで返却するメソッド
+	 * 
+	 * @return &quot;合計&quot;／全ファイルの総行数／実行行数／コメント行数／空行数をカンマ区切りにした文字列を返却する。
+	 */
+	public String outputDataCommaDelimited() {
+<span class="fc" id="L149">		return new StringBuilder()</span>
+<span class="fc" id="L150">				.append(&quot;合計&quot;).append(&quot;,&quot;)</span>
+<span class="fc" id="L151">				.append(this.allFilesTotalStepCount).append(&quot;,&quot;)</span>
+<span class="fc" id="L152">				.append(this.allFilesExecStepCount).append(&quot;,&quot;)</span>
+<span class="fc" id="L153">				.append(this.allFilesCommentStepCount).append(&quot;,&quot;)</span>
+<span class="fc" id="L154">				.append(this.allFilesEmptyStepCount).toString();</span>
+
+	}
+	
+	/**
+	 * &lt;p&gt;
+	 * このオブジェクトが引数の他のオブジェクトが等しいかどうかを判定するメソッド
+	 *
+	 * @param obj 比較対象のオブジェクト
+	 * @return このオブジェクトが引数と同じである場合はtrue。それ以外の場合はfalseを返却する。
+	 */
+	@Override
+	public boolean equals(Object obj) {
+<span class="nc bnc" id="L167" title="All 2 branches missed.">		if (this == obj) {</span>
+<span class="nc" id="L168">			return true;</span>
+		}
+<span class="nc bnc" id="L170" title="All 2 branches missed.">		if (!(obj instanceof AllFilesStepCountData)) {</span>
+<span class="nc" id="L171">			return false;</span>
+		}
+		
+<span class="nc" id="L174">		AllFilesStepCountData test = (AllFilesStepCountData) obj;</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">		if (!(Objects.equals(this.allFilesTotalStepCount, test.allFilesTotalStepCount))) {</span>
+<span class="nc" id="L176">			return false;</span>
+		}
+<span class="nc bnc" id="L178" title="All 2 branches missed.">		if (!(Objects.equals(this.allFilesExecStepCount, test.allFilesExecStepCount))) {</span>
+<span class="nc" id="L179">			return false;</span>
+		}
+<span class="nc bnc" id="L181" title="All 2 branches missed.">		if (!(Objects.equals(this.allFilesCommentStepCount, test.allFilesCommentStepCount))) {</span>
+<span class="nc" id="L182">			return false;</span>
+		}
+<span class="nc bnc" id="L184" title="All 2 branches missed.">		if (!(Objects.equals(this.allFilesEmptyStepCount, test.allFilesEmptyStepCount))) {</span>
+<span class="nc" id="L185">			return false;</span>
+		}
+<span class="nc bnc" id="L187" title="All 2 branches missed.">		if (!(Objects.equals(this.stepCountDatalist, test.stepCountDatalist))) {</span>
+<span class="nc" id="L188">			return false;</span>
+		}
+<span class="nc" id="L190">		return true;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * オブジェクトのハッシュ・コード値を返却するメソッド
+	 * 
+	 * @return このオブジェクトのハッシュ・コード値。
+	 */
+	@Override
+	public int hashCode() {
+<span class="nc" id="L201">		return Objects.hash();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
