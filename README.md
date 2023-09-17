@@ -14,25 +14,26 @@
 
 # 主なディレクトリ構成
 ```
-stepCounter
-├── document  ・・・ JavaDoc等のドキュメントが格納されているフォルダ
-├── src  ・・・ stepCounterForJavaの資源が格納されているフォルダ
-│   ├── main  ・・・ javaソースコードが格納されているフォルダ
-│   │   ├── java
-│   │   │   └── co
-│   │   │       └── jp
-│   │   │           └── stepCounter
-│   │   └── resources  ・・・ 静的資源が格納されているフォルダ
-│   │       ├── img
-│   │       │   └── icon_ebi.png
-│   │       └── settings
-│   │           └── log4j2.xml
-│   └── test  ・・・ テストコードが格納されているフォルダ
-├── target  ・・・ ビルド後の資源が格納されているフォルダ
-│   ├── StepCounter-jar-with-dependencies.jar  ・・・ステップカウント処理実行に利用する実行形式Jarファイル
-│   └── settings    ・・・ 実行形式Jarファイルが参照する静的資源
-│       └── log4j2.xml
-└── pom.xml  
+stepCounterforJava
+├──docs           ・・・ JavaDoc等のドキュメントが格納されているフォルダ
+└──stepCounter    ・・・ stepCounterForJavaの資源が格納されているフォルダ
+    ├── src
+    │   ├── main  ・・・ javaソースコードが格納されているフォルダ
+    │   │   ├── java
+    │   │   │   └── co
+    │   │   │       └── jp
+    │   │   │           └── stepCounter
+    │   │   └── resources  ・・・ 静的資源が格納されているフォルダ
+    │   │       ├── img
+    │   │       │   └── icon_ebi.png
+    │   │       └── settings
+    │   │           └── log4j2.xml
+    │   └── test  ・・・ テストコードが格納されているフォルダ
+    ├── target  ・・・ ビルド後の資源が格納されているフォルダ
+    │   ├── StepCounter-jar-with-dependencies.jar  ・・・ステップカウント処理実行に利用する実行形式Jarファイル
+    │   └── settings    ・・・ 実行形式Jarファイルが参照する静的資源
+    │       └── log4j2.xml
+    └── pom.xml  
 ```
 
 # 使い方
@@ -86,3 +87,6 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
  * Java
  * Cs
  * sql
+
+# API仕様書
+https://takashi-ebina.github.io/stepCounterforJava/javadoc/
