@@ -77,12 +77,13 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
  * `[sortTarget]`:0:ファイルパス、1:総行数、2:実行行数、3:コメント行数、4:空行数。
 
 ### [出力ファイルイメージ]
+```
 ファイルパス      ,総行数,実行行数,コメント行数,空行数 <br>
 /Users/xxA.java,30   ,20     ,4       ,6     <br>
 /Users/xxB.java,15   ,8     ,2       ,5     <br>
 /Users/xxC.java,15   ,12    ,2       ,1     <br>
 合計            ,60   ,40     ,8       ,12    <br>
-
+```
 ## JavaDocの生成
 ```
 mvn javadoc:javadoc
