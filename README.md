@@ -92,10 +92,12 @@ mvn javadoc:javadoc
 ```
 mvn clean  test -Dmaven.test.failure.ignore=true  site -DgenerateReports=false  surefire-report:report jacoco:report
 ```
+# 対象Javaバージョン
+Java SE 16
 
-# 集計対象言語
+# 集計対象プログラム言語
  * Java
- * Cs
+ * C#
  * sql
 
 # ドキュメント
