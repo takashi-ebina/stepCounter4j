@@ -21,7 +21,7 @@
 					<reportOutputDirectory>../docs/javadoc</reportOutputDirectory>
 					<destDir>javadoc</destDir>
 					<author>true</author>
-					<source>14</source>
+					<source>16</source>
 					<show>protected</show>
 					<encoding>UTF-8</encoding>
 					<charset>UTF-8</charset>
@@ -37,9 +37,13 @@
 				<version>3.0.0-M5</version>
 				<configuration>
 					<argLine>
+					@{argLine} 
 					--add-opens=java.base/java.io=ALL-UNNAMED
 					--add-opens=java.base/java.lang=ALL-UNNAMED
 					</argLine>
+					<statelessTestsetReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
+						<usePhrasedTestCaseMethodName>true</usePhrasedTestCaseMethodName>
+					</statelessTestsetReporter>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -68,7 +72,30 @@
 					<outputDirectory>../docs/test-reports</outputDirectory>
 				</configuration>
 			</plugin>
-			<!-- 実行可能jarファイル用のプラグイン -->
+			<!-- JaCoCoのテストレポートを出力に必要なプラグイン -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.10</version>
+				<configuration>
+					<outputDirectory>../docs/test-coverage</outputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- 実行可能jarファイル作成に必要なプラグイン -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -121,7 +148,27 @@
 				</executions>
 			</plugin>
 		</plugins>
+
 	</build>
+	
+			
+<!-- reporting設定 -->
+<reporting>
+    <plugins>
+        <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <reportSets>
+                <reportSet>
+                    <reports>
+                        <!-- select non-aggregate reports -->
+                        <report>report</report>
+                    </reports>
+                </reportSet>
+            </reportSets>
+       </plugin>
+    </plugins>
+</reporting>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>

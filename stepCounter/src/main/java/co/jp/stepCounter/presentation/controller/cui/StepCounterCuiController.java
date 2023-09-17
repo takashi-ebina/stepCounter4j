@@ -127,15 +127,9 @@ public class StepCounterCuiController {
 		final ProcessResult result = 
 				service.execStepCount(new File(inputDirectoryPath), new File(outputFilePath), sortType, sortTarget);
 		
-		if (result == ProcessResult.SUCCESS) {
-			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> ステップカウント処理が完了しました。 処理結果：正常終了");
-			System.out.println("--> ------------------------------------------------");
-		} else if (result == ProcessResult.FAIL) {
-			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> ステップカウント処理が完了しました。 処理結果：異常終了");
-			System.out.println("--> ------------------------------------------------");
-		}
+		System.out.println("--> ------------------------------------------------");
+		System.out.println("--> ステップカウント処理が完了しました。 処理結果：" + result.getMessage());
+		System.out.println("--> ------------------------------------------------");
 	}
 	/**
 	 * <p>
