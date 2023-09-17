@@ -63,7 +63,7 @@ public class StepCounterGuiMainServiceImpl implements StepCounterGuiMainService 
 	public ProcessResult execStepCount(final File inputDirectory, final File outputFile,
 			final SortType stepCountSortType, final SortTarget stepCountSortTarget) {
 		try {
-			logger.logInfo(String.format("[START]StepCount execute {inputDirectory:%s ,outputFile:%s ,SortType: %s,SortTarget:%s}"
+			logger.logInfo(String.format("[START]StepCount execute {inputDirectory:%s, outputFile:%s, SortType:%s, SortTarget:%s}"
 					,inputDirectory.toString(), outputFile.toString(), stepCountSortType.getSortTypeCode(), stepCountSortTarget.getSortTargetCode()));
 
 			// ステップ数の集計処理
@@ -77,7 +77,7 @@ public class StepCounterGuiMainServiceImpl implements StepCounterGuiMainService 
 
 			return ProcessResult.SUCCESS;
 		} catch (Exception e) {
-			logger.logError("ステップカウント処理で異常発生", e);
+			logger.logError("[ERROR]StepCount fail ", e);
 			return ProcessResult.FAIL;
 		}
 	}

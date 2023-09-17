@@ -62,11 +62,7 @@ public class StepCounterGuiMainController {
 		final ProcessResult result = 
 				service.execStepCount(new File(inputDirectoryPath), new File(outputFilePath), dto.getStepCountSortType(), dto.getStepCountSortTarget());
 		
-		if (result == ProcessResult.SUCCESS) {
-			JOptionPane.showMessageDialog(parent, "ステップカウント処理が完了しました。 処理結果：正常終了");
-		} else if (result == ProcessResult.FAIL) {
-			JOptionPane.showMessageDialog(parent, "ステップカウント処理が完了しました。 処理結果：異常終了");	
-		}
+		JOptionPane.showMessageDialog(parent, "ステップカウント処理が完了しました。 処理結果：" + result.getMessage());
 	}
 
 }

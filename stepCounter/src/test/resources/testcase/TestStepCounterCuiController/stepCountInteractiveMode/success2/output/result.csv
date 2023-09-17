@@ -1,0 +1,9 @@
+ファイルパス,総行数,実行行数,コメント行数,空行数
+/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input/logic/Main.java,73,34,28,11
+/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input/character/Character.java,33,9,20,4
+/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input/constant/Constant.java,25,15,7,3
+/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input/character/CharacterIf.java,14,4,9,1
+/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input/character/Mario.java,8,6,0,2
+/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input/character/Luigi.java,8,6,0,2
+/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input/character/HammerBros.java,8,6,0,2
+合計,169,80,64,25

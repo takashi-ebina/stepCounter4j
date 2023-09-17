@@ -189,8 +189,30 @@ public class StepCounterConstant {
 	 */
 	public static enum ProcessResult {
 		/** 処理成功 */
-		SUCCESS,
+		SUCCESS("正常終了"),
 		/** 処理失敗 */
-		FAIL
+		FAIL("異常終了");
+		
+		/** メッセージ */
+		private final String message;
+
+		/**
+		 * <p>
+		 * コンストラクタ
+		 * 
+		 * @param message メッセージ
+		 */
+		ProcessResult(final String message) {
+			this.message = message;
+		}
+		/**
+		 * <p>
+		 * メッセージの値を返却するメソッド
+		 * 
+		 * @return メッセージ
+		 */
+		public String getMessage() {
+			return this.message;
+		}
 	}
 }

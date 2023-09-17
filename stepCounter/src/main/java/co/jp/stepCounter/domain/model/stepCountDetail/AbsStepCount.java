@@ -93,12 +93,8 @@ public abstract class AbsStepCount implements IfStepCount {
 	public StepCountData stepCount(final File inputFile) throws Exception {
 		StepCountData stepCountData = null;
 		switch (this.methodType) {
-		case DEFAULT:
-			stepCountData = deFaultFileReadStepCount(inputFile);
-			break;
-		case ORIGINAL:
-			stepCountData = oridinalFileReadStepCount(inputFile);
-			break;
+			case DEFAULT  -> stepCountData = deFaultFileReadStepCount(inputFile);
+			case ORIGINAL -> stepCountData = oridinalFileReadStepCount(inputFile);
 		}
 		return stepCountData;
 	}
@@ -202,7 +198,7 @@ public abstract class AbsStepCount implements IfStepCount {
 				tmpExecStepCount++;
 			}
 		} catch (IOException e) {
-			logger.logError("ステップ数集計処理で例外発生。 ファイル名：" + inputFile.getName(), e);
+			logger.logError(String.format("[ERROR]StepCount fail {fileName:%s}", inputFile.getName()), e);
 			// ステップカウント処理で例外が発生した場合は、該当ファイルのステップ数の出力を行わない。
 			canWriteStepCount = false;
 		}
