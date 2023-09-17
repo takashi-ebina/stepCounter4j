@@ -6,8 +6,7 @@
  * ３層アーキテクチャや軽量DDDを意識したパッケージ構成
  * 保守性や変更容易性を意識した実装
  * ファクトリクラスやシングルトンなどのデザインパターンを意識した実装
- * Mavenによるテスト自動化
- * Mavenによる実行形式Jarの作成
+ * Mavenによるテスト自動化、実行形式Jarの作成、JavaDoc、テストレポートの出力（JavaDoc、テストレポートはGitHub Pagesに公開）
 
 # 画面レイアウト
 ![スクリーンショット 2023-09-13 1 02 10](https://github.com/takashi-ebina/stepCounterforJava/assets/40939908/b7e68a9e-2ec4-4ce4-af4a-a3bb5b37d18a)
@@ -79,8 +78,9 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
 
 ### [出力ファイルイメージ]
 ファイルパス      ,総行数,実行行数,コメント行数,空行数 <br>
-/Users/xxx.java,30   ,20     ,4       ,6     <br>
-           .. 中略 ..                         <br>
+/Users/xxA.java,30   ,20     ,4       ,6     <br>
+/Users/xxB.java,15   ,8     ,2       ,5     <br>
+/Users/xxC.java,15   ,12    ,2       ,1     <br>
 合計            ,60   ,40     ,8       ,12    <br>
 
 # 集計対象言語
@@ -88,5 +88,8 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
  * Cs
  * sql
 
-# API仕様書
+# ドキュメント
+## API仕様書
 https://takashi-ebina.github.io/stepCounterforJava/javadoc/
+## 単体テストレポート
+https://takashi-ebina.github.io/stepCounterforJava/test-reports/surefire-report.html
