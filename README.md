@@ -15,6 +15,9 @@
 ```
 stepCounterforJava
 ├──docs           ・・・ JavaDoc等のドキュメントが格納されているフォルダ
+│   ├── javadoc
+│   ├── test-coverage
+│   └── test-reports
 └──stepCounter    ・・・ stepCounterForJavaの資源が格納されているフォルダ
     ├── src
     │   ├── main  ・・・ javaソースコードが格納されているフォルダ
@@ -24,9 +27,7 @@ stepCounterforJava
     │   │   │           └── stepCounter
     │   │   └── resources  ・・・ 静的資源が格納されているフォルダ
     │   │       ├── img
-    │   │       │   └── icon_ebi.png
     │   │       └── settings
-    │   │           └── log4j2.xml
     │   └── test  ・・・ テストコードが格納されているフォルダ
     ├── target  ・・・ ビルド後の資源が格納されているフォルダ
     │   ├── StepCounter-jar-with-dependencies.jar  ・・・ステップカウント処理実行に利用する実行形式Jarファイル
@@ -78,11 +79,11 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
 
 ### [出力ファイルイメージ]
 ```
-ファイルパス      ,総行数,実行行数,コメント行数,空行数 <br>
-/Users/xxA.java,30   ,20     ,4       ,6     <br>
-/Users/xxB.java,15   ,8     ,2       ,5     <br>
-/Users/xxC.java,15   ,12    ,2       ,1     <br>
-合計            ,60   ,40     ,8       ,12    <br>
+ファイルパス      ,総行数,実行行数,コメント行数,空行数
+/Users/xxA.java,30   ,20     ,4       ,6
+/Users/xxB.java,15   ,8     ,2       ,5
+/Users/xxC.java,15   ,12    ,2       ,1
+合計            ,60   ,40     ,8       ,12
 ```
 ## JavaDocの生成
 ```
