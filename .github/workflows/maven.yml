@@ -39,7 +39,7 @@ jobs:
           ls -la target/
           mkdir staging 
           cp target/*.jar staging 
-          cp target/settings staging
+          cp -r target/settings staging
           
     - uses: actions/upload-artifact@v2
       with:
