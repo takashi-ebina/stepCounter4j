@@ -56,7 +56,7 @@ public class TestStepCounterUtil {
 		final String testMethodName = getMethodName(3);
 		final int pos = className.lastIndexOf(".");
 		final String testClassName = className.substring(pos + 1, className.length());
-		final StringBuffer testcasePath = new StringBuffer();
+		final StringBuilder testcasePath = new StringBuilder();
 		return testcasePath
 				.append(TestStepCounterConstant.BASE_FILE_PATH)
 				.append(TestStepCounterConstant.TESTCASE_PATH)
@@ -75,7 +75,7 @@ public class TestStepCounterUtil {
 	 * @return 共通のテストケースのパス
 	 */
 	public static String getCommonTestcasePath(final TestCaseInOutDiv inoutDiv) {
-		final StringBuffer testcasePath = new StringBuffer();
+		final StringBuilder testcasePath = new StringBuilder();
 		return testcasePath
 				.append(TestStepCounterConstant.BASE_FILE_PATH)
 				.append(TestStepCounterConstant.COMMON_TESTCASE_PATH)
