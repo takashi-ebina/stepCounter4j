@@ -129,17 +129,20 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
 				<executions>
 					<execution>
+						<id>test</id> 
 						<phase>package</phase>
 						<configuration>
-							<tasks>
+							<target name="filecopy" description="設定ファイルのコピー">
+								<echo message="設定ファイルのコピーを行います。" />
 								<mkdir dir="${project.build.directory}/settings" />
 								<copy todir="${project.build.directory}/settings">
 									<fileset
 										dir="${project.basedir}/src/main/resources/settings" />
 								</copy>
-							</tasks>
+							</target>
 						</configuration>
 						<goals>
 							<goal>run</goal>
