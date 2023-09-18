@@ -17,18 +17,22 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
+    - uses: actions/checkout@v2
+    - name: Standard Checkout
+      uses: actions/setup-java@v2
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file ../../../stepCounter/pom.xml
+      run: |
+          ls -la
+          cd ./stepCounter
+          ls -la
+          mvn clean -e -B package --file pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     # - name: Update dependency graph
