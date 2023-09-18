@@ -35,7 +35,8 @@ jobs:
           mvn clean -e -B package --file pom.xml
     - run: |
           cd ./stepCounter
-          ls -la
+          ls -la 
+          ls -la target/
           mkdir staging 
           cp target/*.jar staging 
           cp target/settings staging
