@@ -28,7 +28,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      working-directory: src/webclient
       run: |
           ls -la
           cd ./stepCounter
