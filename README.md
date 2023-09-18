@@ -3,11 +3,12 @@
 
 開発の現場ではあまり経験できなかった以下の点を意識して製造した・・つもり
 
- * ３層アーキテクチャや軽量DDDを意識したパッケージ構成
- * 保守性や変更容易性を意識した実装
- * ファクトリクラスやシングルトンなどのデザインパターンを意識した実装
- * Mavenによるテスト自動化、実行形式Jarの作成、JavaDoc、テストレポートの出力（JavaDoc、テストレポートはGitHub Pagesに公開）
- * GitHub Actionsを用いてmasterにプッシュ時に実行形式Jarをアップロード
+- ３層アーキテクチャや軽量DDDを意識したパッケージ構成
+-  保守性や変更容易性を意識した実装
+- ファクトリクラスやシングルトンなどのデザインパターンを意識した実装
+- Mavenによるテスト自動化、実行形式Jarの作成、JavaDoc、テストレポートの出力（JavaDoc、テストレポートはGitHub Pagesに公開）
+- GitHub Actionsを用いたCI/CD環境の構築
+    - masterにプッシュ時に単体テスト実施・実行形式Jarのビルド実施
 
 # 画面レイアウト
 ![スクリーンショット 2023-09-13 1 02 10](https://github.com/takashi-ebina/stepCounterforJava/assets/40939908/b7e68a9e-2ec4-4ce4-af4a-a3bb5b37d18a)
