@@ -33,6 +33,8 @@ jobs:
           cd ./stepCounter
           ls -la
           mvn clean -e -B package --file pom.xml
+    - run: mkdir staging && cp target/*.jar staging
     - uses: actions/upload-artifact@v3
       with:
         name: Package
+        path: staging
