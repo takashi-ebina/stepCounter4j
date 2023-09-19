@@ -106,7 +106,7 @@ Java SE 16
 
 ## ドキュメント
 ### 外部設計書一覧
-https://takashi-ebina.github.io/stepCounterforJava/externalDesign/readme.md
+[https://takashi-ebina.github.io/stepCounterforJava/externalDesign/readme.md](https://github.com/takashi-ebina/stepCounterforJava/tree/master/docs/externalDesign#readme)
 ### API仕様書
 https://takashi-ebina.github.io/stepCounterforJava/javadoc/index.html
 ### 単体テスト
