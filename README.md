@@ -6,7 +6,8 @@
 - ３層アーキテクチャや軽量DDDを意識したパッケージ構成
 -  保守性や変更容易性を意識した実装
 - ファクトリクラスやシングルトンなどのデザインパターンを意識した実装
-- Mavenによるテスト自動化、実行形式Jarの作成、JavaDoc、テストレポートの出力（JavaDoc、テストレポートはGitHub Pagesに公開）
+- Mavenによるテスト自動化、実行形式Jarの作成、JavaDoc、テストレポートの出力
+    - JavaDoc、テストレポートはGitHub Pagesに公開
 - GitHub Actionsを用いたCI/CD環境の構築
     - masterにプッシュ時に単体テスト実施・実行形式Jarのビルド実施
 
