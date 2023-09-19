@@ -10,10 +10,10 @@
 - GitHub Actionsを用いたCI/CD環境の構築
     - masterにプッシュ時に単体テスト実施・実行形式Jarのビルド実施
 
-# 画面レイアウト
+## 画面レイアウト
 ![スクリーンショット 2023-09-13 1 02 10](https://github.com/takashi-ebina/stepCounterforJava/assets/40939908/b7e68a9e-2ec4-4ce4-af4a-a3bb5b37d18a)
 
-# 主なディレクトリ構成
+## 主なディレクトリ構成
 ```
 stepCounterforJava
 ├──docs           ・・・ JavaDoc等のドキュメントが格納されているフォルダ
@@ -38,13 +38,13 @@ stepCounterforJava
     └── pom.xml  
 ```
 
-# 使い方
-## Jarファイル名及びJarファイルビルド方法
-### ファイル名
+## 使い方
+### Jarファイル名及びJarファイルビルド方法
+#### ファイル名
 ステップ数の集計ツール起動時に利用するファイルは`StepCounter-jar-with-dependencies.jar`です。<br>
 同階層に`settings`フォルダも存在する状態で起動してください。
 
-### Jarファイルビルド方法
+#### Jarファイルビルド方法
 pom.xmlが存在する階層で以下のコマンドを実行してください。
 ```
 mvn package
@@ -53,17 +53,17 @@ mvn package
  * テスト成功の場合に`StepCounter-jar-with-dependencies.jar`ファイルが作成されます。
  * Jarファイルの出力先は`stepCounter>target`フォルダになります。
 
-## GUIでの起動方法
+### GUIでの起動方法
 ```
 java -jar StepCounter-jar-with-dependencies.jar
 ```
 
-## CUIでの起動方法
+### CUIでの起動方法
 ```
 java -jar StepCounter-jar-with-dependencies.jar　[オプション]
 ```
 
-### [オプション]
+#### [オプション]
  * `-h`:このメッセージを表示して終了する。
 
  * `-i`:対話モードで実行する。（オプションを指定しない場合はGUIモード）
@@ -87,29 +87,31 @@ java -jar StepCounter-jar-with-dependencies.jar　[オプション]
 /Users/xxC.java,15   ,12    ,2       ,1
 合計            ,60   ,40     ,8       ,12
 ```
-## JavaDocの生成
+### JavaDocの生成
 ```
 mvn javadoc:javadoc
 ```
 
-## テストコードの実行およびテストレポート、カバレッジの出力
+### テストコードの実行およびテストレポート、カバレッジの出力
 ```
 mvn clean  test -Dmaven.test.failure.ignore=true  site -DgenerateReports=false  surefire-report:report jacoco:report
 ```
-# 対象Javaバージョン
+## 対象Javaバージョン
 Java SE 16
 
-# 集計対象プログラム言語
+## 集計対象プログラム言語
  * Java
  * C#
  * sql
 
-# ドキュメント
-## API仕様書
+## ドキュメント
+### 外部設計書一覧
+https://takashi-ebina.github.io/stepCounterforJava/externalDesign/readme.md
+### API仕様書
 https://takashi-ebina.github.io/stepCounterforJava/javadoc/index.html
-## 単体テスト
-### テストレポート
+### 単体テスト
+#### テストレポート
 https://takashi-ebina.github.io/stepCounterforJava/test-reports/surefire-report.html
-### テストカバレッジ
+#### テストカバレッジ
 https://takashi-ebina.github.io/stepCounterforJava/test-coverage/index.html
 
