@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -44,11 +46,14 @@ public class SystemConstant {
 	 */
 	public static final Map<String, String> JDBC_PROPERTIES = new HashMap<>();
 	static {
-		Properties properties = new Properties();
+		final Properties properties = new Properties();
 		// プロパティファイルのパスを指定する
-		String strpass = System.getProperty("user.dir") + SystemConstant.JDBC_PROPERTIES_FILE_PATH;
+		String propertiesFilePath = System.getProperty("user.dir") + SystemConstant.JDBC_PROPERTIES_FILE_PATH;
 		try {
-			InputStream istream = new FileInputStream(strpass);
+			if (!Files.exists(Paths.get(propertiesFilePath))){
+				propertiesFilePath = System.getProperty("user.dir") + SystemConstant.JDBC_PROPERTIES_FILE_PATH_LOCAL;
+			}
+			InputStream istream = new FileInputStream(propertiesFilePath);
 			properties.load(istream);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -58,6 +63,11 @@ public class SystemConstant {
 			SystemConstant.JDBC_PROPERTIES.put(e.getKey().toString(), e.getValue().toString());
 		}
 	}
+	/**
+	 * <p>
+	 * JDBC.propertiesのパス（ローカル）
+	 */
+	public static final String JDBC_PROPERTIES_FILE_PATH_LOCAL = "/src/main/resources/settings/JDBC.properties";
 	/**
 	 * <p>
 	 * JDBC.propertiesのパス
