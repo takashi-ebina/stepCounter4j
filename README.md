@@ -107,14 +107,14 @@ Java SE 16
 
 ## ドキュメント
 ### 外部設計書一覧
-[https://takashi-ebina.github.io/stepCounterforJava/externalDesign/readme.md](https://github.com/takashi-ebina/stepCounterforJava/tree/master/docs/externalDesign#readme)
+[https://takashi-ebina.github.io/stepCounter4j/externalDesign/readme.md](https://github.com/takashi-ebina/stepCounter4j/tree/master/docs/externalDesign#readme)
 ### API仕様書
-https://takashi-ebina.github.io/stepCounterforJava/javadoc/index.html
+https://takashi-ebina.github.io/stepCounter4j/javadoc/index.html
 ### 単体テスト
 #### テストレポート
-https://takashi-ebina.github.io/stepCounterforJava/test-reports/surefire-report.html
+https://takashi-ebina.github.io/stepCounter4j/test-reports/surefire-report.html
 #### テストカバレッジ
-https://takashi-ebina.github.io/stepCounterforJava/test-coverage/index.html
+https://takashi-ebina.github.io/stepCounter4j/test-coverage/index.html
 
 ---
     
@@ -228,15 +228,15 @@ Java SE 16
 
 ## Documentation
 ### List of external design documents
-[https://takashi-ebina.github.io/stepCounterforJava/externalDesign/readme.md](https://github.com/takashi-ebina/stepCounterforJava/tree/master/docs/externalDesign#readme)
+[https://takashi-ebina.github.io/stepCounter4j/externalDesign/readme.md](https://github.com/takashi-ebina/stepCounter4j/tree/master/docs/externalDesign#readme)
 
 ### API Specifications
-https://takashi-ebina.github.io/stepCounterforJava/javadoc/index.html
+https://takashi-ebina.github.io/stepCounter4j/javadoc/index.html
 ### Unit Tests
 #### test report
-https://takashi-ebina.github.io/stepCounterforJava/test-reports/surefire-report.html
+https://takashi-ebina.github.io/stepCounter4j/test-reports/surefire-report.html
 #### test coverage
-https://takashi-ebina.github.io/stepCounterforJava/test-coverage/index.html
+https://takashi-ebina.github.io/stepCounter4j/test-coverage/index.html
 
 
 
