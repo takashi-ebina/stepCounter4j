@@ -95,7 +95,7 @@ mvn javadoc:javadoc
 
 ### テストコードの実行およびテストレポート、カバレッジの出力
 ```
-mvn clean  test -Dmaven.test.failure.ignore=true  site -DgenerateReports=false  surefire-report:report jacoco:report
+mvn clean test -Dmaven.test.failure.ignore=true  site -DgenerateReports=false  surefire-report:report jacoco:report
 ```
 ## 対象Javaバージョン
 Java SE 16
