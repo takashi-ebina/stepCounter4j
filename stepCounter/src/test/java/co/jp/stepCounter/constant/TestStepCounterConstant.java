@@ -3,7 +3,7 @@ package co.jp.stepCounter.constant;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class TestStepCounterConstant {
+class TestStepCounterConstant {
 	@DisplayName("【テスト対象外】TestStepCounterConstant")
 	@Test
 	void test() {

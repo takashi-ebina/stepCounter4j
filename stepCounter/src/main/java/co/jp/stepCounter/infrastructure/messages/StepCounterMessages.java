@@ -55,7 +55,7 @@ public class StepCounterMessages {
 	 * <p>
 	 * メッセージコードとバインドパラメータから、メッセージを生成するメソッド
 	 * @param id メッセージID
-	 * @param bindMsgs バインドメッセージ
+	 * @param bindMessages バインドメッセージ
 	 * @return メッセージ
 	 */
 	public String getMessageText(final String id, final Object... bindMessages) {

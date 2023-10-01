@@ -13,15 +13,30 @@ import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JTextField;
 import javax.swing.border.AbstractBorder;
-
+/**
+ * <p>
+ * プレースホルダーを表示させるためにテキストフィールドをカスタマイズしたクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
 public class JPlaceholderTextField extends JTextField {
-
+	/** プレースホルダー */
 	private String ph;
-
+	/**
+	 * <p>
+	 * コンストラクタ
+	 * 
+	 * @param ph プレースホルダー 
+	 */
 	public JPlaceholderTextField(String ph) {
 		this.ph = ph;
 	}
-
+	/**
+	 * <p>
+	 * コンストラクタ
+	 */
 	public JPlaceholderTextField() {
 		this.ph = null;
 	}
@@ -61,7 +76,14 @@ public class JPlaceholderTextField extends JTextField {
 		setBorder(new RoundedCornerBorder());
 	}
 };
-
+/**
+ * <p>
+ * テキストフィールドの端を丸みを帯びたレイアウトにカスタマイズするためのクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
 class RoundedCornerBorder extends AbstractBorder {
 	private static final Color ALPHA_ZERO = new Color(0x0, true);
 

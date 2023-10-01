@@ -1,6 +1,5 @@
 package co.jp.stepCounter.infrastructure.log;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

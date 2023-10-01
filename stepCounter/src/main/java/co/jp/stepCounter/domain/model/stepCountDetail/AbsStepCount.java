@@ -198,7 +198,7 @@ public abstract class AbsStepCount implements IfStepCount {
 				tmpExecStepCount++;
 			}
 		} catch (IOException e) {
-			logger.logError(String.format("[ERROR]StepCount fail {fileName:%s}", inputFile.getName()), e);
+			logger.logError("StepCount countError!! [fileName]:" + inputFile.getName(), e);
 			// ステップカウント処理で例外が発生した場合は、該当ファイルのステップ数の出力を行わない。
 			canWriteStepCount = false;
 		}

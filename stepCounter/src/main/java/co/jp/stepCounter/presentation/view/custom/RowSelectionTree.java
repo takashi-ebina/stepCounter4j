@@ -19,7 +19,14 @@ import javax.swing.plaf.basic.BasicTreeUI;
 import javax.swing.tree.ExpandVetoException;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
-
+/**
+ * <p>
+ * 階層型のデータクラスをカスタマイズしたクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
 public class RowSelectionTree extends JTree {
 	private static final Color SELECTED_COLOR = new Color(0x64_96_C8);
 	private transient TreeWillExpandListener listener;
