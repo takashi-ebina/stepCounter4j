@@ -13,7 +13,6 @@ import co.jp.stepCounter.constant.SystemConstant;
 import co.jp.stepCounter.domain.repository.StepCountRepository;
 import co.jp.stepCounter.domain.value.AllFilesStepCountData;
 import co.jp.stepCounter.domain.value.StepCountData;
-import co.jp.stepCounter.infrastructure.log.Log4J2;
 
 /**
  * <p>
@@ -26,9 +25,6 @@ import co.jp.stepCounter.infrastructure.log.Log4J2;
  * @see StepCountRepository
  */
 public class StepCountCsvDao implements StepCountRepository {
-	
-	/** Log4J2インスタンス */
-	private final Log4J2 logger = Log4J2.getInstance();
 	
 	/**
 	 * <p>
@@ -57,7 +53,6 @@ public class StepCountCsvDao implements StepCountRepository {
 		// CSVデータの書き込み
 		try (final BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile, true))) {
 			for (final StepCountData stepCountData : allFilesStepCountData.getStepCountDatalist()) {
-				logger.logInfo("ステップカウント結果出力開始。 ファイルパス：" + stepCountData.getInputFile().getAbsolutePath());
 				// 各ファイル毎のステップ数出力
 				bw.write(stepCountData.outputDataCommaDelimited() + SystemConstant.LINE_SEPARATOR);
 			}

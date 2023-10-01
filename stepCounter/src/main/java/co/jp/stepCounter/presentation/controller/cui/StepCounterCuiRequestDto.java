@@ -3,6 +3,7 @@ package co.jp.stepCounter.presentation.controller.cui;
 import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
+import lombok.ToString;
 import lombok.Value;
 /**
  * <p>
@@ -13,6 +14,7 @@ import lombok.Value;
  * @author takashi.ebina
  */
 @Value
+@ToString
 public class StepCounterCuiRequestDto {
 	/** ステップカウント処理実行モード */
 	private ExecuteMode stepCountExecuteMode;

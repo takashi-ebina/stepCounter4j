@@ -7,9 +7,11 @@ import java.util.Objects;
 import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
+import co.jp.stepCounter.infrastructure.dbdao.JdbcConnection;
 import co.jp.stepCounter.presentation.controller.cui.StepCounterCuiController;
 import co.jp.stepCounter.presentation.controller.cui.StepCounterCuiRequestDto;
 import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
+import jp.co.future.uroborosql.SqlAgent;
 
 /**
  * <p>
@@ -74,6 +76,7 @@ public class StepCounter {
 	 * @param args 未入力の場合、GUIモードで処理を実行。それ以外の場合は引数に応じて処理が変動する。
 	 */
 	public static void main(String[] args) {
+		dbSetup();
 		if (Objects.isNull(args) || args.length == 0) {
 			// GUIモードとして実行
 			EventQueue.invokeLater(StepCounterGuiMainView::new);
@@ -87,6 +90,22 @@ public class StepCounter {
 			case INTERACTIVE -> controller.stepCountInteractiveMode();
 			case SCRIPT      -> controller.stepCountScriptMode(requestDto);
 			default          -> throw new IllegalArgumentException("Unexpected value: " + requestDto.getStepCountExecuteMode());
+		}
+	}
+	/**
+	 * <p>
+	 * アプリケーション利用に必要なDDL及び初期でデータの投入を行うメソッド
+	 * 
+	 */
+	private static void dbSetup() {
+		final JdbcConnection con = JdbcConnection.getInstance();
+		try (final SqlAgent agent = con.getSqlConfig().agent()) {
+			agent.required(() -> {
+				agent.autoCommitScope(() -> {
+					agent.update("ddl/table/message").count();
+					agent.update("setup/data/insert_message").count();
+				});
+			});
 		}
 	}
 	/**

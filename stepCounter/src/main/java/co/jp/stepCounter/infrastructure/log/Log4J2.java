@@ -17,11 +17,8 @@ import co.jp.stepCounter.constant.SystemConstant;
  */
 public class Log4J2 {
 
-	/**
-	 * <p>
-	 * 唯一のLog4J2インスタンス
-	 */
-	private static Log4J2 thisinstance = null;
+	/** 唯一のLog4J2インスタンス */
+	private static Log4J2 thisInstance = null;
 
 	/**
 	 * <p>
@@ -30,10 +27,10 @@ public class Log4J2 {
 	 * @return Log4J2インスタンス
 	 */
 	public synchronized static Log4J2 getInstance() {
-		if (Objects.isNull(Log4J2.thisinstance)) {
-			Log4J2.thisinstance = new Log4J2();
+		if (Objects.isNull(Log4J2.thisInstance)) {
+			Log4J2.thisInstance = new Log4J2();
 		}
-		return Log4J2.thisinstance;
+		return Log4J2.thisInstance;
 	}
 
 	/**

@@ -1,11 +1,16 @@
 package co.jp.stepCounter.presentation.validator;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
-import co.jp.stepCounter.infrastructure.log.Log4J2;
+import co.jp.stepCounter.constant.messageConstant.ErrorMessageDiv;
+import co.jp.stepCounter.constant.messageConstant.InfoMessageDiv;
+import co.jp.stepCounter.infrastructure.messages.StepCounterMessages;
 
 /**
  * <p>
@@ -17,8 +22,11 @@ import co.jp.stepCounter.infrastructure.log.Log4J2;
  */
 public class ValidatorUtil {
 	
-	/** Log4J2インスタンス */
-	private static final Log4J2 logger = Log4J2.getInstance();
+	/** StepCounerMessagesインスタンス */
+	private static final StepCounterMessages messages = StepCounterMessages.getInstance();
+	/** チェック処理成功時に返却する空リスト */
+	private static final List<String> SUCCESS_LIST = Collections.unmodifiableList(new ArrayList<String>()); 
+	
 	/**
 	 * <p>
 	 * コンストラクタ
@@ -39,22 +47,24 @@ public class ValidatorUtil {
 	 * </ol>
 	 * 
 	 * @param inputPath 入力ディレクトリパス
-	 * @return 全ての入力チェックが正常の場合はtrueを返却。それ以外の場合はfalseを返却する。
+	 * @return 全ての入力チェックが正常の場合は空のリストを返却。それ以外の場合はエラーメッセージのリストを返却する。
 	 */
-	public static boolean inputDirectoryCheck(final String inputPath) {
+	public static List<String> inputDirectoryCheck(final String inputPath) {
 
-		logger.logDebug("入力ディレクトリパスチェック ファイルパス：" + inputPath);
+		final List<String> errorMessageList = new ArrayList<String>(); 
 		
 		if (Objects.equals(inputPath, "")) {
-			logger.logDebug("チェック結果：入力ファイルパスが未指定");
-			return false;
+			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.BLANK_MESSAGE.name(), "入力フォルダ"));
+			return errorMessageList;
 		}
+		
 		final File file = new File(inputPath);
 		if (!file.isDirectory()) {
-			logger.logDebug("チェック結果：入力ファイルパスがファイル");
-			return false;
+			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.FILEPATH_MESSAGE.name(), "入力フォルダ"));
+			return errorMessageList;
 		}
-		return true;
+		
+		return SUCCESS_LIST;
 	}
 
 	/**
@@ -71,24 +81,24 @@ public class ValidatorUtil {
 	 * @param outputPath 出力ファイルパス
 	 * @param mode       コマンドオプション区分
 	 * @param sn         Scanner
-	 * @return 全ての入力チェックが正常の場合はtrueを返却。それ以外の場合はfalseを返却する。
+	 * @return 全ての入力チェックが正常の場合は空のリストを返却。それ以外の場合はエラーメッセージのリストを返却する。
 	 */
-	public static boolean outputFileCheck(final String outputPath, final ExecuteMode mode, final Scanner sn) {
+	public static List<String> outputFileCheck(final String outputPath, final ExecuteMode mode, final Scanner sn) {
 		
-		logger.logDebug("出力ファイルパスチェック ファイルパス：" + outputPath);
+		final List<String> errorMessageList = new ArrayList<String>(); 
 		
 		if (Objects.equals(outputPath, "")) {
-			logger.logDebug("チェック結果：出力ファイルパスが未指定");
-			return false;
+			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.BLANK_MESSAGE.name(), "出力ファイル"));
+			return errorMessageList;
 		}
 		final File file = new File(outputPath);
 		if (file.isDirectory()) {
-			logger.logDebug("チェック結果：出力ファイルパスがディレクトリ");
-			return false;
+			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.FOLDERPATH_MESSAGE.name(), "出力ファイル"));
+			return errorMessageList;
 		}
 		if (!isExtension(file, "csv")) {
-			logger.logDebug("チェック結果：拡張子がCSV以外");
-			return false;
+			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.EXTENSION_MESSAGE.name(), "出力ファイル", "csv"));
+			return errorMessageList;
 		}
 		if (mode == ExecuteMode.INTERACTIVE &&
 				new File(outputPath).exists() && Objects.nonNull(sn)) {
@@ -101,13 +111,14 @@ public class ValidatorUtil {
 				if (Objects.equals(decide, "y")) {
 					break;
 				} else if (Objects.equals(decide, "n")) {
-					return false;
+					errorMessageList.add(messages.getMessageText(InfoMessageDiv.SUSPENTION_MESSAGE.name()));
+					return errorMessageList;
 				} else {
 					System.out.println("--> y または n を入力してください");
 				}
 			}
 		}
-		return true;
+		return SUCCESS_LIST;
 	}
 
 	/**

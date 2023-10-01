@@ -29,6 +29,8 @@ import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.constant.StepCounterConstant.ProcessResult;
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
+import co.jp.stepCounter.infrastructure.dbdao.JdbcConnection;
+import jp.co.future.uroborosql.SqlAgent;
 
 class TestStepCounterCuiController {
 
@@ -43,6 +45,15 @@ class TestStepCounterCuiController {
 
 	@BeforeEach
 	void setUp() {
+		final JdbcConnection con = JdbcConnection.getInstance();
+		try (final SqlAgent agent = con.getSqlConfig().agent()) {
+			agent.required(() -> {
+				agent.autoCommitScope(() -> {
+					agent.update("ddl/table/message").count();
+					agent.update("setup/data/insert_message").count();
+				});
+			});
+		}
 		System.setIn(in);
 		System.setOut(out);
 		MockitoAnnotations.initMocks(this);
@@ -274,9 +285,7 @@ class TestStepCounterCuiController {
 		void warning1() {
 			// 【事前準備】
 			// カウント対象のディレクトリパスの入力
-			in.inputln(""); 
-			// カウント結果出力対象のファイルパスの入力
-			in.inputln(TestStepCounterUtil.getTestcasePath(TestCaseInOutDiv.OUTPUT) + TestStepCounterConstant.RESULT_FILE_NAME);
+			in.inputln(TestStepCounterUtil.getCommonTestcasePath(TestCaseInOutDiv.OUTPUT)); 
 			// 【実行】
 			cuiController.stepCountInteractiveMode();
 			// 【検証】
@@ -285,7 +294,7 @@ class TestStepCounterCuiController {
 			assertEquals("--> ------------------------------------------------", out.readLine());
 			
 			assertEquals("--> ------------------------------------------------", out.readLine());
-			assertEquals("--> 入力フォルダに問題があります。", out.readLine());
+			assertEquals("--> 入力フォルダ　ファイルパスを指定しています。", out.readLine());
 			assertEquals("--> ------------------------------------------------", out.readLine());
 			// 【後処理】
 		}
@@ -310,7 +319,7 @@ class TestStepCounterCuiController {
 			assertEquals("--> ------------------------------------------------", out.readLine());
 			
 			assertEquals("--> ------------------------------------------------", out.readLine());
-			assertEquals("--> 出力ファイルに問題があります。", out.readLine());
+			assertEquals("--> 出力ファイル　フォルダパスを指定しています。", out.readLine());
 			assertEquals("--> ------------------------------------------------", out.readLine());
 			// 【後処理】
 		}
@@ -488,7 +497,7 @@ class TestStepCounterCuiController {
 			injectMockcuiController.stepCountScriptMode(dto);
 			// 【検証】
 			assertEquals("--> ------------------------------------------------", out.readLine());
-			assertEquals("--> 入力フォルダに問題があります。", out.readLine());
+			assertEquals("--> 入力フォルダ　ファイルパスを指定しています。", out.readLine());
 			assertEquals("--> ------------------------------------------------", out.readLine());
 			// 【後処理】
 		}
@@ -511,7 +520,7 @@ class TestStepCounterCuiController {
 			injectMockcuiController.stepCountScriptMode(dto);
 			// 【検証】
 			assertEquals("--> ------------------------------------------------", out.readLine());
-			assertEquals("--> 出力ファイルに問題があります。", out.readLine());
+			assertEquals("--> 出力ファイル　フォルダパスを指定しています。", out.readLine());
 			assertEquals("--> ------------------------------------------------", out.readLine());
 			// 【後処理】
 		}

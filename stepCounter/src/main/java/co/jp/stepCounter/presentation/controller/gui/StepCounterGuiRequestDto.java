@@ -2,6 +2,7 @@ package co.jp.stepCounter.presentation.controller.gui;
 
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
+import lombok.ToString;
 import lombok.Value;
 
 /**
@@ -13,6 +14,7 @@ import lombok.Value;
  * @author takashi.ebina
  */
 @Value
+@ToString
 public class StepCounterGuiRequestDto {
 	/** ステップカウントソート区分 */
 	private SortType stepCountSortType;

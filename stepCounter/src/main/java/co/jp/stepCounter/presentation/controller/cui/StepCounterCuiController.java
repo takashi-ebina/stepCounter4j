@@ -1,7 +1,10 @@
 package co.jp.stepCounter.presentation.controller.cui;
 
 import java.io.File;
+import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 import co.jp.stepCounter.application.service.StepCounterCuiService;
 import co.jp.stepCounter.application.service.impl.StepCounterCuiServiceImpl;
@@ -9,8 +12,12 @@ import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.constant.StepCounterConstant.ProcessResult;
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
+import co.jp.stepCounter.constant.SystemConstant;
+import co.jp.stepCounter.constant.messageConstant.InfoMessageDiv;
 import co.jp.stepCounter.domain.model.stepCountExecutor.StepCountExecutor;
 import co.jp.stepCounter.infrastructure.csvdao.StepCountCsvDao;
+import co.jp.stepCounter.infrastructure.log.Log4J2;
+import co.jp.stepCounter.infrastructure.messages.StepCounterMessages;
 import co.jp.stepCounter.presentation.validator.ValidatorUtil;
 /**
  * <p>
@@ -22,6 +29,10 @@ import co.jp.stepCounter.presentation.validator.ValidatorUtil;
  */
 public class StepCounterCuiController {
 	
+	/** Log4J2インスタンス */
+	private final Log4J2 logger = Log4J2.getInstance();
+	/** StepCounerMessagesインスタンス */
+	private static final StepCounterMessages messages = StepCounterMessages.getInstance();
 	/** CUIでステップカウント処理を実行するサービスクラス*/
 	private StepCounterCuiService service; 
 	
@@ -73,9 +84,13 @@ public class StepCounterCuiController {
 		System.out.println("--> ------------------------------------------------");
 		final Scanner sn = new Scanner(System.in);
 		final String inputDirectoryPath = sn.next();
-		if (!ValidatorUtil.inputDirectoryCheck(inputDirectoryPath)) {
+		// カウント対象のディレクトリパスの入力チェック
+		List<String> errorMessageList =  ValidatorUtil.inputDirectoryCheck(inputDirectoryPath);
+		if (Objects.nonNull(errorMessageList) && errorMessageList.size() > 0) {
+			final StringJoiner sj = new StringJoiner(SystemConstant.LINE_SEPARATOR);
+			errorMessageList.stream().forEach(r -> sj.add(r));
 			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> 入力フォルダに問題があります。");
+			System.out.println("--> " + sj.toString());
 			System.out.println("--> ------------------------------------------------");
 			return;
 		}
@@ -85,9 +100,13 @@ public class StepCounterCuiController {
 		System.out.println("--> ファイル拡張子：CSV");
 		System.out.println("--> ------------------------------------------------");
 		final String outputFilePath = sn.next();
-		if (!ValidatorUtil.outputFileCheck(outputFilePath, ExecuteMode.INTERACTIVE, sn)) {
+		// カウント結果出力対象のファイルパスの入力チェック
+		errorMessageList =  ValidatorUtil.outputFileCheck(outputFilePath, ExecuteMode.INTERACTIVE, sn);
+		if (Objects.nonNull(errorMessageList) && errorMessageList.size() > 0) {
+			final StringJoiner sj = new StringJoiner(SystemConstant.LINE_SEPARATOR);
+			errorMessageList.stream().forEach(r -> sj.add(r));
 			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> 出力ファイルに問題があります。");
+			System.out.println("--> " + sj.toString());
 			System.out.println("--> ------------------------------------------------");
 			return;
 		}
@@ -128,7 +147,7 @@ public class StepCounterCuiController {
 				service.execStepCount(new File(inputDirectoryPath), new File(outputFilePath), sortType, sortTarget);
 		
 		System.out.println("--> ------------------------------------------------");
-		System.out.println("--> ステップカウント処理が完了しました。 処理結果：" + result.getMessage());
+		System.out.println("--> " + messages.getMessageText(InfoMessageDiv.RESULT_MESSAGE.name(),result.getMessage()));
 		System.out.println("--> ------------------------------------------------");
 	}
 	/**
@@ -146,26 +165,37 @@ public class StepCounterCuiController {
 	 * @see StepCounterCuiRequestDto
 	 */
 	public void stepCountScriptMode(final StepCounterCuiRequestDto dto) {
+		logger.logInfo(String.format("[START]StepCounterCuiRequestDto=%s", dto.toString()));
+		
 		final String inputDirectoryPath = dto.getInputDirectoryPath();
 		final String outputFilePath = dto.getOutputFilePath();
 
-		if (!ValidatorUtil.inputDirectoryCheck(inputDirectoryPath)) {
+		// カウント対象のディレクトリパスの入力チェック
+		List<String> errorMessageList =  ValidatorUtil.inputDirectoryCheck(inputDirectoryPath);
+		if (Objects.nonNull(errorMessageList) && errorMessageList.size() > 0) {
+			final StringJoiner sj = new StringJoiner(SystemConstant.LINE_SEPARATOR);
+			errorMessageList.stream().forEach(r -> sj.add(r));
 			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> 入力フォルダに問題があります。");
-			System.out.println("--> ------------------------------------------------");
-			return;
-		}
-		if (!ValidatorUtil.outputFileCheck(outputFilePath, ExecuteMode.SCRIPT, null)) {
-			System.out.println("--> ------------------------------------------------");
-			System.out.println("--> 出力ファイルに問題があります。");
+			System.out.println("--> " + sj.toString());
 			System.out.println("--> ------------------------------------------------");
 			return;
 		}
+		// カウント結果出力対象のファイルパスの入力チェック
+		errorMessageList =  ValidatorUtil.outputFileCheck(outputFilePath, ExecuteMode.SCRIPT, null);
+		if (Objects.nonNull(errorMessageList) && errorMessageList.size() > 0) {
+			final StringJoiner sj = new StringJoiner(SystemConstant.LINE_SEPARATOR);
+			errorMessageList.stream().forEach(r -> sj.add(r));
+			System.out.println("--> ------------------------------------------------");
+			System.out.println("--> " + sj.toString());
+			System.out.println("--> ------------------------------------------------");
+			return;
+		}
+		// サービス呼出し
 		final ProcessResult result = 
 				service.execStepCount(new File(inputDirectoryPath), new File(outputFilePath), dto.getStepCountSortType(), dto.getStepCountSortTarget());
 		
 		System.out.println("--> ------------------------------------------------");
-		System.out.println("--> ステップカウント処理が完了しました。 処理結果：" + result.getMessage());
+		System.out.println("--> " + messages.getMessageText(InfoMessageDiv.RESULT_MESSAGE.name(),result.getMessage()));
 		System.out.println("--> ------------------------------------------------");
 	}
 }

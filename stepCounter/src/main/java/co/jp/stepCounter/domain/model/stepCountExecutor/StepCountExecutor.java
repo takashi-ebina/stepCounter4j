@@ -53,11 +53,11 @@ public class StepCountExecutor {
 				final String extension = getExtension(inputFile);
 				if (isValidExtension(extension)) {
 					IfStepCount stepCountObj = StepCountType.of(extension, CommentPatternMatchType.of(extension));
-					logger.logInfo("ステップカウント処理開始。 ファイル名：" + inputFile.getName());
+					logger.logInfo("StepCount execute. [fileName]:" + inputFile.getName());
 					final StepCountData stepCountData = stepCountObj.stepCount(inputFile);
 					stepCountDatalist.add(stepCountData);
 				} else {
-					logger.logWarn("ファイルの拡張子が未対応。ステップカウント処理をスキップ。 ファイル名：" + inputFile.getName());
+					logger.logWarn("StepCount skip. [fileName]:" + inputFile.getName());
 				}
 			}
 		}

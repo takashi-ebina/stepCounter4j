@@ -1,0 +1,1 @@
+package co.jp.stepCounter.infrastructure.messages;

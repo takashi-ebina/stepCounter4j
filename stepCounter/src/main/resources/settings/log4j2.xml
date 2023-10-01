@@ -14,8 +14,8 @@
    		%mはログメッセージ
    		%nは改行
       -->
-        <Property name="logfile">./var/log/stepCounterlog.log</Property>
-        <Property name="logfile-archive">./var/log/stepCounterlog_%d{yyyy-MM-dd}-%i.log</Property>
+        <Property name="logfile">./var/log/stepCounter.log</Property>
+        <Property name="logfile-archive">./var/log/stepCounter_%d{yyyy-MM-dd}-%i.log</Property>
     </Properties>
     
 	<Appenders>
@@ -34,7 +34,7 @@
 				<pattern>${format1}</pattern>
 			</PatternLayout>
 			<Policies>
-				<SizeBasedTriggeringPolicy size="800KB"/>
+				<SizeBasedTriggeringPolicy size="10000KB"/>
 			</Policies>
 			<DefaultRolloverStrategy max="3"/>
 		</RollingFile>
