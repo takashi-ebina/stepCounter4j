@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ValidatorUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.presentation.validator</a> &gt; <span class="el_source">ValidatorUtil.java</span></div><h1>ValidatorUtil.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.presentation.validator;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
-import co.jp.stepCounter.infrastructure.log.Log4J2;
+import co.jp.stepCounter.constant.messageConstant.ErrorMessageDiv;
+import co.jp.stepCounter.constant.messageConstant.InfoMessageDiv;
+import co.jp.stepCounter.infrastructure.messages.StepCounterMessages;
 
 /**
  * &lt;p&gt;
@@ -17,8 +22,11 @@ import co.jp.stepCounter.infrastructure.log.Log4J2;
  */
 public class ValidatorUtil {
 	
-	/** Log4J2インスタンス */
-<span class="fc" id="L21">	private static final Log4J2 logger = Log4J2.getInstance();</span>
+	/** StepCounerMessagesインスタンス */
+<span class="fc" id="L26">	private static final StepCounterMessages messages = StepCounterMessages.getInstance();</span>
+	/** チェック処理成功時に返却する空リスト */
+<span class="fc" id="L28">	private static final List&lt;String&gt; SUCCESS_LIST = Collections.unmodifiableList(new ArrayList&lt;String&gt;()); </span>
+	
 	/**
 	 * &lt;p&gt;
 	 * コンストラクタ
@@ -39,22 +47,24 @@ public class ValidatorUtil {
 	 * &lt;/ol&gt;
 	 * 
 	 * @param inputPath 入力ディレクトリパス
-	 * @return 全ての入力チェックが正常の場合はtrueを返却。それ以外の場合はfalseを返却する。
+	 * @return 全ての入力チェックが正常の場合は空のリストを返却。それ以外の場合はエラーメッセージのリストを返却する。
 	 */
-	public static boolean inputDirectoryCheck(final String inputPath) {
+	public static List&lt;String&gt; inputDirectoryCheck(final String inputPath) {
 
-<span class="fc" id="L46">		logger.logDebug(&quot;入力ディレクトリパスチェック ファイルパス：&quot; + inputPath);</span>
+<span class="fc" id="L54">		final List&lt;String&gt; errorMessageList = new ArrayList&lt;String&gt;(); </span>
 		
-<span class="pc bpc" id="L48" title="1 of 2 branches missed.">		if (Objects.equals(inputPath, &quot;&quot;)) {</span>
-<span class="nc" id="L49">			logger.logDebug(&quot;チェック結果：入力ファイルパスが未指定&quot;);</span>
-<span class="nc" id="L50">			return false;</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">		if (Objects.equals(inputPath, &quot;&quot;)) {</span>
+<span class="nc" id="L57">			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.BLANK_MESSAGE.name(), &quot;入力フォルダ&quot;));</span>
+<span class="nc" id="L58">			return errorMessageList;</span>
 		}
-<span class="fc" id="L52">		final File file = new File(inputPath);</span>
-<span class="fc bfc" id="L53" title="All 2 branches covered.">		if (!file.isDirectory()) {</span>
-<span class="fc" id="L54">			logger.logDebug(&quot;チェック結果：入力ファイルパスがファイル&quot;);</span>
-<span class="fc" id="L55">			return false;</span>
+		
+<span class="fc" id="L61">		final File file = new File(inputPath);</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">		if (!file.isDirectory()) {</span>
+<span class="fc" id="L63">			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.FILEPATH_MESSAGE.name(), &quot;入力フォルダ&quot;));</span>
+<span class="fc" id="L64">			return errorMessageList;</span>
 		}
-<span class="fc" id="L57">		return true;</span>
+		
+<span class="fc" id="L67">		return SUCCESS_LIST;</span>
 	}
 
 	/**
@@ -71,43 +81,44 @@ public class ValidatorUtil {
 	 * @param outputPath 出力ファイルパス
 	 * @param mode       コマンドオプション区分
 	 * @param sn         Scanner
-	 * @return 全ての入力チェックが正常の場合はtrueを返却。それ以外の場合はfalseを返却する。
+	 * @return 全ての入力チェックが正常の場合は空のリストを返却。それ以外の場合はエラーメッセージのリストを返却する。
 	 */
-	public static boolean outputFileCheck(final String outputPath, final ExecuteMode mode, final Scanner sn) {
+	public static List&lt;String&gt; outputFileCheck(final String outputPath, final ExecuteMode mode, final Scanner sn) {
 		
-<span class="fc" id="L78">		logger.logDebug(&quot;出力ファイルパスチェック ファイルパス：&quot; + outputPath);</span>
+<span class="fc" id="L88">		final List&lt;String&gt; errorMessageList = new ArrayList&lt;String&gt;(); </span>
 		
-<span class="pc bpc" id="L80" title="1 of 2 branches missed.">		if (Objects.equals(outputPath, &quot;&quot;)) {</span>
-<span class="nc" id="L81">			logger.logDebug(&quot;チェック結果：出力ファイルパスが未指定&quot;);</span>
-<span class="nc" id="L82">			return false;</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">		if (Objects.equals(outputPath, &quot;&quot;)) {</span>
+<span class="nc" id="L91">			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.BLANK_MESSAGE.name(), &quot;出力ファイル&quot;));</span>
+<span class="nc" id="L92">			return errorMessageList;</span>
 		}
-<span class="fc" id="L84">		final File file = new File(outputPath);</span>
-<span class="fc bfc" id="L85" title="All 2 branches covered.">		if (file.isDirectory()) {</span>
-<span class="fc" id="L86">			logger.logDebug(&quot;チェック結果：出力ファイルパスがディレクトリ&quot;);</span>
-<span class="fc" id="L87">			return false;</span>
+<span class="fc" id="L94">		final File file = new File(outputPath);</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">		if (file.isDirectory()) {</span>
+<span class="fc" id="L96">			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.FOLDERPATH_MESSAGE.name(), &quot;出力ファイル&quot;));</span>
+<span class="fc" id="L97">			return errorMessageList;</span>
 		}
-<span class="pc bpc" id="L89" title="1 of 2 branches missed.">		if (!isExtension(file, &quot;csv&quot;)) {</span>
-<span class="nc" id="L90">			logger.logDebug(&quot;チェック結果：拡張子がCSV以外&quot;);</span>
-<span class="nc" id="L91">			return false;</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">		if (!isExtension(file, &quot;csv&quot;)) {</span>
+<span class="nc" id="L100">			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.EXTENSION_MESSAGE.name(), &quot;出力ファイル&quot;, &quot;csv&quot;));</span>
+<span class="nc" id="L101">			return errorMessageList;</span>
 		}
-<span class="fc bfc" id="L93" title="All 2 branches covered.">		if (mode == ExecuteMode.INTERACTIVE &amp;&amp;</span>
-<span class="pc bpc" id="L94" title="1 of 4 branches missed.">				new File(outputPath).exists() &amp;&amp; Objects.nonNull(sn)) {</span>
-<span class="fc" id="L95">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
-<span class="fc" id="L96">			System.out.println(&quot;--&gt; 該当のファイルが既に存在します。 上書きされてしまいますがよろしいですか？ y / n&quot;);</span>
-<span class="fc" id="L97">			System.out.println(&quot;--&gt; ファイルパス：&quot; + outputPath);</span>
-<span class="fc" id="L98">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">		if (mode == ExecuteMode.INTERACTIVE &amp;&amp;</span>
+<span class="pc bpc" id="L104" title="1 of 4 branches missed.">				new File(outputPath).exists() &amp;&amp; Objects.nonNull(sn)) {</span>
+<span class="fc" id="L105">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
+<span class="fc" id="L106">			System.out.println(&quot;--&gt; 該当のファイルが既に存在します。 上書きされてしまいますがよろしいですか？ y / n&quot;);</span>
+<span class="fc" id="L107">			System.out.println(&quot;--&gt; ファイルパス：&quot; + outputPath);</span>
+<span class="fc" id="L108">			System.out.println(&quot;--&gt; ------------------------------------------------&quot;);</span>
 			while (true) {
-<span class="fc" id="L100">				final String decide = sn.next().toLowerCase().trim();</span>
-<span class="fc bfc" id="L101" title="All 2 branches covered.">				if (Objects.equals(decide, &quot;y&quot;)) {</span>
-<span class="fc" id="L102">					break;</span>
-<span class="pc bpc" id="L103" title="1 of 2 branches missed.">				} else if (Objects.equals(decide, &quot;n&quot;)) {</span>
-<span class="nc" id="L104">					return false;</span>
+<span class="fc" id="L110">				final String decide = sn.next().toLowerCase().trim();</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">				if (Objects.equals(decide, &quot;y&quot;)) {</span>
+<span class="fc" id="L112">					break;</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">				} else if (Objects.equals(decide, &quot;n&quot;)) {</span>
+<span class="nc" id="L114">					errorMessageList.add(messages.getMessageText(InfoMessageDiv.SUSPENTION_MESSAGE.name()));</span>
+<span class="nc" id="L115">					return errorMessageList;</span>
 				} else {
-<span class="fc" id="L106">					System.out.println(&quot;--&gt; y または n を入力してください&quot;);</span>
+<span class="fc" id="L117">					System.out.println(&quot;--&gt; y または n を入力してください&quot;);</span>
 				}
-<span class="fc" id="L108">			}</span>
+<span class="fc" id="L119">			}</span>
 		}
-<span class="fc" id="L110">		return true;</span>
+<span class="fc" id="L121">		return SUCCESS_LIST;</span>
 	}
 
 	/**
@@ -121,9 +132,9 @@ public class ValidatorUtil {
 	 * @return ファイルの拡張子が想定通りの場合はtrueを返却。それ以外の場合はfalseを返却する。
 	 */
 	private static boolean isExtension(final File file, final String expectedExtension) {
-<span class="fc" id="L124">		final String fileName = file.getName();</span>
-<span class="fc" id="L125">		final String extension = fileName.substring(fileName.lastIndexOf(&quot;.&quot;) + 1).toLowerCase().trim();</span>
-<span class="fc" id="L126">		return Objects.equals(extension, expectedExtension);</span>
+<span class="fc" id="L135">		final String fileName = file.getName();</span>
+<span class="fc" id="L136">		final String extension = fileName.substring(fileName.lastIndexOf(&quot;.&quot;) + 1).toLowerCase().trim();</span>
+<span class="fc" id="L137">		return Objects.equals(extension, expectedExtension);</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

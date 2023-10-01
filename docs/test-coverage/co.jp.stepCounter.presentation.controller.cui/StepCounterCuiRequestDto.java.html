@@ -3,6 +3,7 @@
 import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
+import lombok.ToString;
 import lombok.Value;
 /**
  * &lt;p&gt;
@@ -12,17 +13,18 @@ import lombok.Value;
  * @version 1.0
  * @author takashi.ebina
  */
-<span class="pc bnc" id="L15" title="All 44 branches missed.">@Value</span>
+<span class="pc bnc" id="L16" title="All 44 branches missed.">@Value</span>
+<span class="fc" id="L17">@ToString</span>
 public class StepCounterCuiRequestDto {
 	/** ステップカウント処理実行モード */
-<span class="nc" id="L18">	private ExecuteMode stepCountExecuteMode;</span>
+<span class="fc" id="L20">	private ExecuteMode stepCountExecuteMode;</span>
 	/** ステップカウントソート区分 */
-<span class="fc" id="L20">	private SortType stepCountSortType;</span>
+<span class="fc" id="L22">	private SortType stepCountSortType;</span>
 	/** ステップカウントソート対象 */
-<span class="fc" id="L22">	private SortTarget stepCountSortTarget;</span>
+<span class="fc" id="L24">	private SortTarget stepCountSortTarget;</span>
 	/** カウント対象のディレクトリパス */
-<span class="fc" id="L24">	private String inputDirectoryPath;</span>
+<span class="fc" id="L26">	private String inputDirectoryPath;</span>
 	/** カウント結果出力対象のファイルパス */
-<span class="fc" id="L26">	private String outputFilePath;</span>
+<span class="fc" id="L28">	private String outputFilePath;</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

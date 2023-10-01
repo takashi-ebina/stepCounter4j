@@ -19,82 +19,89 @@ import javax.swing.plaf.basic.BasicTreeUI;
 import javax.swing.tree.ExpandVetoException;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
-
-<span class="nc" id="L23">public class RowSelectionTree extends JTree {</span>
-<span class="nc" id="L24">	private static final Color SELECTED_COLOR = new Color(0x64_96_C8);</span>
+/**
+ * &lt;p&gt;
+ * 階層型のデータクラスをカスタマイズしたクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
+<span class="nc" id="L30">public class RowSelectionTree extends JTree {</span>
+<span class="nc" id="L31">	private static final Color SELECTED_COLOR = new Color(0x64_96_C8);</span>
 	private transient TreeWillExpandListener listener;
 
 	@Override
 	protected void paintComponent(Graphics g) {
-<span class="nc" id="L29">		int[] sr = getSelectionRows();</span>
-<span class="nc bnc" id="L30" title="All 2 branches missed.">		if (sr == null) {</span>
-<span class="nc" id="L31">			super.paintComponent(g);</span>
-<span class="nc" id="L32">			return;</span>
+<span class="nc" id="L36">		int[] sr = getSelectionRows();</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">		if (sr == null) {</span>
+<span class="nc" id="L38">			super.paintComponent(g);</span>
+<span class="nc" id="L39">			return;</span>
 		}
 
-<span class="nc" id="L35">		g.setColor(getBackground());</span>
-<span class="nc" id="L36">		g.fillRect(0, 0, getWidth(), getHeight());</span>
-<span class="nc" id="L37">		Graphics2D g2 = (Graphics2D) g.create();</span>
-<span class="nc" id="L38">		g2.setPaint(SELECTED_COLOR);</span>
-<span class="nc" id="L39">		Arrays.stream(sr).mapToObj(this::getRowBounds).forEach(r -&gt; g2.fillRect(0, r.y, getWidth(), r.height));</span>
-<span class="nc" id="L40">		super.paintComponent(g);</span>
-<span class="nc bnc" id="L41" title="All 2 branches missed.">		if (hasFocus()) {</span>
-<span class="nc" id="L42">			Optional.ofNullable(getLeadSelectionPath()).ifPresent(path -&gt; {</span>
-<span class="nc" id="L43">				Rectangle r = getRowBounds(getRowForPath(path));</span>
-<span class="nc" id="L44">				g2.setPaint(SELECTED_COLOR.darker());</span>
-<span class="nc" id="L45">				g2.drawRect(0, r.y, getWidth() - 1, r.height - 1);</span>
-<span class="nc" id="L46">			});</span>
+<span class="nc" id="L42">		g.setColor(getBackground());</span>
+<span class="nc" id="L43">		g.fillRect(0, 0, getWidth(), getHeight());</span>
+<span class="nc" id="L44">		Graphics2D g2 = (Graphics2D) g.create();</span>
+<span class="nc" id="L45">		g2.setPaint(SELECTED_COLOR);</span>
+<span class="nc" id="L46">		Arrays.stream(sr).mapToObj(this::getRowBounds).forEach(r -&gt; g2.fillRect(0, r.y, getWidth(), r.height));</span>
+<span class="nc" id="L47">		super.paintComponent(g);</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">		if (hasFocus()) {</span>
+<span class="nc" id="L49">			Optional.ofNullable(getLeadSelectionPath()).ifPresent(path -&gt; {</span>
+<span class="nc" id="L50">				Rectangle r = getRowBounds(getRowForPath(path));</span>
+<span class="nc" id="L51">				g2.setPaint(SELECTED_COLOR.darker());</span>
+<span class="nc" id="L52">				g2.drawRect(0, r.y, getWidth() - 1, r.height - 1);</span>
+<span class="nc" id="L53">			});</span>
 		}
-<span class="nc" id="L48">		g2.dispose();</span>
-<span class="nc" id="L49">	}</span>
+<span class="nc" id="L55">		g2.dispose();</span>
+<span class="nc" id="L56">	}</span>
 
 	@Override
 	public void updateUI() {
-<span class="nc" id="L53">		setCellRenderer(null);</span>
-<span class="nc" id="L54">		removeTreeWillExpandListener(listener);</span>
-<span class="nc" id="L55">		super.updateUI();</span>
-<span class="nc" id="L56">		setUI(new BasicTreeUI() {</span>
+<span class="nc" id="L60">		setCellRenderer(null);</span>
+<span class="nc" id="L61">		removeTreeWillExpandListener(listener);</span>
+<span class="nc" id="L62">		super.updateUI();</span>
+<span class="nc" id="L63">		setUI(new BasicTreeUI() {</span>
 			@Override
 			public Rectangle getPathBounds(JTree tree, TreePath path) {
-<span class="nc bnc" id="L59" title="All 4 branches missed.">				if (Objects.nonNull(tree) &amp;&amp; Objects.nonNull(treeState)) {</span>
-<span class="nc" id="L60">					return getTreePathBounds(path, tree.getInsets(), new Rectangle());</span>
+<span class="nc bnc" id="L66" title="All 4 branches missed.">				if (Objects.nonNull(tree) &amp;&amp; Objects.nonNull(treeState)) {</span>
+<span class="nc" id="L67">					return getTreePathBounds(path, tree.getInsets(), new Rectangle());</span>
 				}
-<span class="nc" id="L62">				return null;</span>
+<span class="nc" id="L69">				return null;</span>
 			}
 
 			private Rectangle getTreePathBounds(TreePath path, Insets insets, Rectangle bounds) {
-<span class="nc" id="L66">				Rectangle rect = treeState.getBounds(path, bounds);</span>
-<span class="nc bnc" id="L67" title="All 2 branches missed.">				if (Objects.nonNull(rect)) {</span>
-<span class="nc" id="L68">					rect.width = tree.getWidth();</span>
-<span class="nc" id="L69">					rect.y += insets.top;</span>
+<span class="nc" id="L73">				Rectangle rect = treeState.getBounds(path, bounds);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">				if (Objects.nonNull(rect)) {</span>
+<span class="nc" id="L75">					rect.width = tree.getWidth();</span>
+<span class="nc" id="L76">					rect.y += insets.top;</span>
 				}
-<span class="nc" id="L71">				return rect;</span>
+<span class="nc" id="L78">				return rect;</span>
 			}
 		});
-<span class="nc" id="L74">		UIManager.put(&quot;Tree.repaintWholeRow&quot;, Boolean.TRUE);</span>
-<span class="nc" id="L75">		TreeCellRenderer r = getCellRenderer();</span>
-<span class="nc" id="L76">		setCellRenderer((tree, value, selected, expanded, leaf, row, hasFocus) -&gt; {</span>
-<span class="nc" id="L77">			Component c = r.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);</span>
-<span class="nc bnc" id="L78" title="All 2 branches missed.">			c.setBackground(selected ? SELECTED_COLOR : tree.getBackground());</span>
-<span class="nc bnc" id="L79" title="All 2 branches missed.">			if (c instanceof JComponent) {</span>
-<span class="nc" id="L80">				((JComponent) c).setOpaque(true);</span>
+<span class="nc" id="L81">		UIManager.put(&quot;Tree.repaintWholeRow&quot;, Boolean.TRUE);</span>
+<span class="nc" id="L82">		TreeCellRenderer r = getCellRenderer();</span>
+<span class="nc" id="L83">		setCellRenderer((tree, value, selected, expanded, leaf, row, hasFocus) -&gt; {</span>
+<span class="nc" id="L84">			Component c = r.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">			c.setBackground(selected ? SELECTED_COLOR : tree.getBackground());</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">			if (c instanceof JComponent) {</span>
+<span class="nc" id="L87">				((JComponent) c).setOpaque(true);</span>
 			}
-<span class="nc" id="L82">			return c;</span>
+<span class="nc" id="L89">			return c;</span>
 		});
-<span class="nc" id="L84">		setOpaque(false);</span>
-<span class="nc" id="L85">		setRootVisible(false);</span>
-<span class="nc" id="L86">		listener = new TreeWillExpandListener() {</span>
+<span class="nc" id="L91">		setOpaque(false);</span>
+<span class="nc" id="L92">		setRootVisible(false);</span>
+<span class="nc" id="L93">		listener = new TreeWillExpandListener() {</span>
 			@Override
 			public void treeWillExpand(TreeExpansionEvent e) {
 				// throw new ExpandVetoException(e, &quot;Tree expansion cancelled&quot;);
-<span class="nc" id="L90">			}</span>
+<span class="nc" id="L97">			}</span>
 
 			@Override
 			public void treeWillCollapse(TreeExpansionEvent e) throws ExpandVetoException {
-<span class="nc" id="L94">				throw new ExpandVetoException(e, &quot;Tree collapse cancelled&quot;);</span>
+<span class="nc" id="L101">				throw new ExpandVetoException(e, &quot;Tree collapse cancelled&quot;);</span>
 			}
 		};
-<span class="nc" id="L97">		addTreeWillExpandListener(listener);</span>
-<span class="nc" id="L98">	}</span>
+<span class="nc" id="L104">		addTreeWillExpandListener(listener);</span>
+<span class="nc" id="L105">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

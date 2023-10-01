@@ -13,7 +13,6 @@ import co.jp.stepCounter.constant.SystemConstant;
 import co.jp.stepCounter.domain.repository.StepCountRepository;
 import co.jp.stepCounter.domain.value.AllFilesStepCountData;
 import co.jp.stepCounter.domain.value.StepCountData;
-import co.jp.stepCounter.infrastructure.log.Log4J2;
 
 /**
  * &lt;p&gt;
@@ -25,17 +24,14 @@ import co.jp.stepCounter.infrastructure.log.Log4J2;
  * 
  * @see StepCountRepository
  */
-<span class="fc" id="L28">public class StepCountCsvDao implements StepCountRepository {</span>
-	
-	/** Log4J2インスタンス */
-<span class="fc" id="L31">	private final Log4J2 logger = Log4J2.getInstance();</span>
+<span class="fc" id="L27">public class StepCountCsvDao implements StepCountRepository {</span>
 	
 	/**
 	 * &lt;p&gt;
 	 * ステップカウントCSVのヘッダー名
 	 */
-<span class="fc" id="L37">	private final List&lt;String&gt; STEP_COUNT_HEADER_NAME = new ArrayList&lt;String&gt;(</span>
-<span class="fc" id="L38">			Arrays.asList(&quot;ファイルパス&quot;, &quot;総行数&quot;, &quot;実行行数&quot;, &quot;コメント行数&quot;, &quot;空行数&quot;));</span>
+<span class="fc" id="L33">	private final List&lt;String&gt; STEP_COUNT_HEADER_NAME = new ArrayList&lt;String&gt;(</span>
+<span class="fc" id="L34">			Arrays.asList(&quot;ファイルパス&quot;, &quot;総行数&quot;, &quot;実行行数&quot;, &quot;コメント行数&quot;, &quot;空行数&quot;));</span>
 
 	/**
 	 * &lt;p&gt;
@@ -53,19 +49,18 @@ import co.jp.stepCounter.infrastructure.log.Log4J2;
 	@Override
 	public void save(AllFilesStepCountData allFilesStepCountData, File outputFile) {
 		// CSVヘッダーの書き込み
-<span class="fc" id="L56">		CsvDaoUtil.writeHeader(outputFile, STEP_COUNT_HEADER_NAME);</span>
+<span class="fc" id="L52">		CsvDaoUtil.writeHeader(outputFile, STEP_COUNT_HEADER_NAME);</span>
 		// CSVデータの書き込み
-<span class="fc" id="L58">		try (final BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile, true))) {</span>
-<span class="fc bfc" id="L59" title="All 2 branches covered.">			for (final StepCountData stepCountData : allFilesStepCountData.getStepCountDatalist()) {</span>
-<span class="fc" id="L60">				logger.logInfo(&quot;ステップカウント結果出力開始。 ファイルパス：&quot; + stepCountData.getInputFile().getAbsolutePath());</span>
+<span class="fc" id="L54">		try (final BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile, true))) {</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">			for (final StepCountData stepCountData : allFilesStepCountData.getStepCountDatalist()) {</span>
 				// 各ファイル毎のステップ数出力
-<span class="fc" id="L62">				bw.write(stepCountData.outputDataCommaDelimited() + SystemConstant.LINE_SEPARATOR);</span>
-<span class="fc" id="L63">			}</span>
+<span class="fc" id="L57">				bw.write(stepCountData.outputDataCommaDelimited() + SystemConstant.LINE_SEPARATOR);</span>
+<span class="fc" id="L58">			}</span>
 			// 全ファイル合計のステップ数出力
-<span class="fc" id="L65">			bw.write(allFilesStepCountData.outputDataCommaDelimited() + SystemConstant.LINE_SEPARATOR);</span>
-<span class="nc" id="L66">		} catch (IOException e) {</span>
-<span class="nc" id="L67">			throw new UncheckedIOException(e);</span>
-<span class="fc" id="L68">		}</span>
-<span class="fc" id="L69">	}</span>
+<span class="fc" id="L60">			bw.write(allFilesStepCountData.outputDataCommaDelimited() + SystemConstant.LINE_SEPARATOR);</span>
+<span class="nc" id="L61">		} catch (IOException e) {</span>
+<span class="nc" id="L62">			throw new UncheckedIOException(e);</span>
+<span class="fc" id="L63">		}</span>
+<span class="fc" id="L64">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -12,7 +12,9 @@ co.jp.stepCounter.domain.repository
 co.jp.stepCounter.domain.value
 co.jp.stepCounter.infrastructure
 co.jp.stepCounter.infrastructure.csvdao
+co.jp.stepCounter.infrastructure.dbdao
 co.jp.stepCounter.infrastructure.log
+co.jp.stepCounter.infrastructure.messages
 co.jp.stepCounter.presentation
 co.jp.stepCounter.presentation.controller
 co.jp.stepCounter.presentation.controller.cui

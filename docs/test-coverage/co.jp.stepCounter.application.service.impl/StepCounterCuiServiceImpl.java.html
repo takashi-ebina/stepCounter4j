@@ -63,7 +63,7 @@ public class StepCounterCuiServiceImpl implements StepCounterCuiService {
 	public ProcessResult execStepCount(final File inputDirectory, final File outputFile,
 			final SortType stepCountSortType, final SortTarget stepCountSortTarget) {
 		try {
-<span class="fc" id="L66">			logger.logInfo(String.format(&quot;[START]StepCount execute {inputDirectory:%s, outputFile:%s, SortType:%s, SortTarget:%s}&quot;</span>
+<span class="fc" id="L66">			logger.logInfo(String.format(&quot;[START]inputDirectory=%s, outputFile=%s, SortType=%s, SortTarget=%s&quot;</span>
 <span class="fc" id="L67">					,inputDirectory.toString(), outputFile.toString(), stepCountSortType.getSortTypeCode(), stepCountSortTarget.getSortTargetCode()));</span>
 
 			// ステップ数の集計処理
@@ -73,12 +73,11 @@ public class StepCounterCuiServiceImpl implements StepCounterCuiService {
 <span class="fc" id="L73">			stepCountRepository.save(</span>
 					new AllFilesStepCountData(stepCountDataList, stepCountSortType, stepCountSortTarget), outputFile);
 
-<span class="fc" id="L76">			logger.logInfo(&quot;[END]StepCount execute &quot;);</span>
-
-<span class="fc" id="L78">			return ProcessResult.SUCCESS;</span>
-<span class="nc" id="L79">		} catch (Exception e) {</span>
-<span class="nc" id="L80">			logger.logError(&quot;[ERROR]StepCount fail &quot;, e);</span>
-<span class="nc" id="L81">			return ProcessResult.FAIL;</span>
+<span class="fc" id="L76">			logger.logInfo(&quot;[END]ProcessResult=SUCCESS&quot;);</span>
+<span class="fc" id="L77">			return ProcessResult.SUCCESS;</span>
+<span class="nc" id="L78">		} catch (Exception e) {</span>
+<span class="nc" id="L79">			logger.logError(&quot;StepCount fail &quot;, e);</span>
+<span class="nc" id="L80">			return ProcessResult.FAIL;</span>
 		}
 	}
 }

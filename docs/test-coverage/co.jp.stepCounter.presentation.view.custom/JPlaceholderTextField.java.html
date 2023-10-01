@@ -13,86 +13,108 @@ import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JTextField;
 import javax.swing.border.AbstractBorder;
-
+/**
+ * &lt;p&gt;
+ * プレースホルダーを表示させるためにテキストフィールドをカスタマイズしたクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
 public class JPlaceholderTextField extends JTextField {
-
+	/** プレースホルダー */
 	private String ph;
-
-<span class="nc" id="L21">	public JPlaceholderTextField(String ph) {</span>
-<span class="nc" id="L22">		this.ph = ph;</span>
-<span class="nc" id="L23">	}</span>
-
-<span class="nc" id="L25">	public JPlaceholderTextField() {</span>
-<span class="nc" id="L26">		this.ph = null;</span>
-<span class="nc" id="L27">	}</span>
+	/**
+	 * &lt;p&gt;
+	 * コンストラクタ
+	 * 
+	 * @param ph プレースホルダー 
+	 */
+<span class="nc" id="L33">	public JPlaceholderTextField(String ph) {</span>
+<span class="nc" id="L34">		this.ph = ph;</span>
+<span class="nc" id="L35">	}</span>
+	/**
+	 * &lt;p&gt;
+	 * コンストラクタ
+	 */
+<span class="nc" id="L40">	public JPlaceholderTextField() {</span>
+<span class="nc" id="L41">		this.ph = null;</span>
+<span class="nc" id="L42">	}</span>
 	@Override
 	public String getText() {
-<span class="nc" id="L30">		String text = super.getText();</span>
+<span class="nc" id="L45">		String text = super.getText();</span>
 
-<span class="nc bnc" id="L32" title="All 4 branches missed.">		if (text.trim().length() == 0 &amp;&amp; ph != null) {</span>
-<span class="nc" id="L33">			text = ph;</span>
+<span class="nc bnc" id="L47" title="All 4 branches missed.">		if (text.trim().length() == 0 &amp;&amp; ph != null) {</span>
+<span class="nc" id="L48">			text = ph;</span>
 		}
 
-<span class="nc" id="L36">		return text;</span>
+<span class="nc" id="L51">		return text;</span>
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
-<span class="nc bnc" id="L41" title="All 4 branches missed.">		if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {</span>
-<span class="nc" id="L42">			Graphics2D g2 = (Graphics2D) g.create();</span>
-<span class="nc" id="L43">			g2.setPaint(getBackground());</span>
-<span class="nc" id="L44">			g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(0, 0, getWidth() - 1, getHeight() - 1));</span>
+<span class="nc bnc" id="L56" title="All 4 branches missed.">		if (!isOpaque() &amp;&amp; getBorder() instanceof RoundedCornerBorder) {</span>
+<span class="nc" id="L57">			Graphics2D g2 = (Graphics2D) g.create();</span>
+<span class="nc" id="L58">			g2.setPaint(getBackground());</span>
+<span class="nc" id="L59">			g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(0, 0, getWidth() - 1, getHeight() - 1));</span>
 			
-<span class="nc bnc" id="L46" title="All 4 branches missed.">			if (super.getText().length() &lt;= 0 &amp;&amp; ph != null) {</span>
-<span class="nc" id="L47">				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span>
-<span class="nc" id="L48">				g2.setColor(super.getDisabledTextColor());</span>
-<span class="nc" id="L49">				g2.drawString(ph, getInsets().left, g.getFontMetrics().getMaxAscent() + getInsets().top);</span>
+<span class="nc bnc" id="L61" title="All 4 branches missed.">			if (super.getText().length() &lt;= 0 &amp;&amp; ph != null) {</span>
+<span class="nc" id="L62">				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span>
+<span class="nc" id="L63">				g2.setColor(super.getDisabledTextColor());</span>
+<span class="nc" id="L64">				g2.drawString(ph, getInsets().left, g.getFontMetrics().getMaxAscent() + getInsets().top);</span>
 			}
-<span class="nc" id="L51">			g2.dispose();</span>
+<span class="nc" id="L66">			g2.dispose();</span>
 		}
 
-<span class="nc" id="L54">		super.paintComponent(g);</span>
-<span class="nc" id="L55">	}</span>
+<span class="nc" id="L69">		super.paintComponent(g);</span>
+<span class="nc" id="L70">	}</span>
 
 	@Override
 	public void updateUI() {
-<span class="nc" id="L59">		super.updateUI();</span>
-<span class="nc" id="L60">		setOpaque(false);</span>
-<span class="nc" id="L61">		setBorder(new RoundedCornerBorder());</span>
-<span class="nc" id="L62">	}</span>
+<span class="nc" id="L74">		super.updateUI();</span>
+<span class="nc" id="L75">		setOpaque(false);</span>
+<span class="nc" id="L76">		setBorder(new RoundedCornerBorder());</span>
+<span class="nc" id="L77">	}</span>
 };
-
-<span class="nc" id="L65">class RoundedCornerBorder extends AbstractBorder {</span>
-<span class="nc" id="L66">	private static final Color ALPHA_ZERO = new Color(0x0, true);</span>
+/**
+ * &lt;p&gt;
+ * テキストフィールドの端を丸みを帯びたレイアウトにカスタマイズするためのクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
+<span class="nc" id="L87">class RoundedCornerBorder extends AbstractBorder {</span>
+<span class="nc" id="L88">	private static final Color ALPHA_ZERO = new Color(0x0, true);</span>
 
 	@Override
 	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-<span class="nc" id="L70">		Graphics2D g2 = (Graphics2D) g.create();</span>
-<span class="nc" id="L71">		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span>
-<span class="nc" id="L72">		Shape border = getBorderShape(x, y, width - 1, height - 1);</span>
-<span class="nc" id="L73">		g2.setPaint(ALPHA_ZERO);</span>
-<span class="nc" id="L74">		Area corner = new Area(new Rectangle2D.Double(x, y, width, height));</span>
-<span class="nc" id="L75">		corner.subtract(new Area(border));</span>
-<span class="nc" id="L76">		g2.fill(corner);</span>
-<span class="nc" id="L77">		g2.setPaint(Color.GRAY);</span>
-<span class="nc" id="L78">		g2.draw(border);</span>
-<span class="nc" id="L79">		g2.dispose();</span>
-<span class="nc" id="L80">	}</span>
+<span class="nc" id="L92">		Graphics2D g2 = (Graphics2D) g.create();</span>
+<span class="nc" id="L93">		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span>
+<span class="nc" id="L94">		Shape border = getBorderShape(x, y, width - 1, height - 1);</span>
+<span class="nc" id="L95">		g2.setPaint(ALPHA_ZERO);</span>
+<span class="nc" id="L96">		Area corner = new Area(new Rectangle2D.Double(x, y, width, height));</span>
+<span class="nc" id="L97">		corner.subtract(new Area(border));</span>
+<span class="nc" id="L98">		g2.fill(corner);</span>
+<span class="nc" id="L99">		g2.setPaint(Color.GRAY);</span>
+<span class="nc" id="L100">		g2.draw(border);</span>
+<span class="nc" id="L101">		g2.dispose();</span>
+<span class="nc" id="L102">	}</span>
 
 	public Shape getBorderShape(int x, int y, int w, int h) {
-<span class="nc" id="L83">		int r = h; </span>
-<span class="nc" id="L84">		return new RoundRectangle2D.Double(x, y, w, h, r, r);</span>
+<span class="nc" id="L105">		int r = h; </span>
+<span class="nc" id="L106">		return new RoundRectangle2D.Double(x, y, w, h, r, r);</span>
 	}
 
 	@Override
 	public Insets getBorderInsets(Component c) {
-<span class="nc" id="L89">		return new Insets(4, 8, 4, 8);</span>
+<span class="nc" id="L111">		return new Insets(4, 8, 4, 8);</span>
 	}
 
 	@Override
 	public Insets getBorderInsets(Component c, Insets insets) {
-<span class="nc" id="L94">		insets.set(4, 8, 4, 8);</span>
-<span class="nc" id="L95">		return insets;</span>
+<span class="nc" id="L116">		insets.set(4, 8, 4, 8);</span>
+<span class="nc" id="L117">		return insets;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

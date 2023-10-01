@@ -53,11 +53,11 @@ import co.jp.stepCounter.infrastructure.log.Log4J2;
 <span class="fc" id="L53">				final String extension = getExtension(inputFile);</span>
 <span class="fc bfc" id="L54" title="All 2 branches covered.">				if (isValidExtension(extension)) {</span>
 <span class="fc" id="L55">					IfStepCount stepCountObj = StepCountType.of(extension, CommentPatternMatchType.of(extension));</span>
-<span class="fc" id="L56">					logger.logInfo(&quot;ステップカウント処理開始。 ファイル名：&quot; + inputFile.getName());</span>
+<span class="fc" id="L56">					logger.logInfo(&quot;StepCount execute. [fileName]:&quot; + inputFile.getName());</span>
 <span class="fc" id="L57">					final StepCountData stepCountData = stepCountObj.stepCount(inputFile);</span>
 <span class="fc" id="L58">					stepCountDatalist.add(stepCountData);</span>
 <span class="fc" id="L59">				} else {</span>
-<span class="fc" id="L60">					logger.logWarn(&quot;ファイルの拡張子が未対応。ステップカウント処理をスキップ。 ファイル名：&quot; + inputFile.getName());</span>
+<span class="fc" id="L60">					logger.logWarn(&quot;StepCount skip. [fileName]:&quot; + inputFile.getName());</span>
 				}
 			}
 		}

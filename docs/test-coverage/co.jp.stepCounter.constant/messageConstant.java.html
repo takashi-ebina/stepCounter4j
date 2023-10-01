@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>messageConstant.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.constant</a> &gt; <span class="el_source">messageConstant.java</span></div><h1>messageConstant.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.constant;
+/**
+ * &lt;p&gt;
+ * メッセージの定数クラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
+public class messageConstant {
+	/**
+	 * &lt;p&gt;
+	 * コンストラクタ
+	 * &lt;p&gt;
+	 * 定数クラスのため、インスタンス化は不可とする。
+	 */
+	private messageConstant() {
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * エラーメッセージの種別をもつ列挙型クラス
+	 */
+<span class="fc" id="L24">	public static enum ErrorMessageDiv {</span>
+		/** メッセージ内容 : {0}　未入力です。*/
+<span class="fc" id="L26">		BLANK_MESSAGE,</span>
+		/** メッセージ内容 : {0}　ファイルパスを指定しています。*/
+<span class="fc" id="L28">		FILEPATH_MESSAGE,</span>
+		/** メッセージ内容 : {0}　フォルダパスを指定しています。*/
+<span class="fc" id="L30">		FOLDERPATH_MESSAGE,</span>
+		/** メッセージ内容 : {0}　拡張子が{1}ではありません。*/
+<span class="fc" id="L32">		EXTENSION_MESSAGE;</span>
+	}
+	/**
+	 * &lt;p&gt;
+	 * メッセージの種別をもつ列挙型クラス
+	 */
+<span class="fc" id="L38">	public static enum InfoMessageDiv {</span>
+		/** メッセージ内容 : ステップカウント処理が完了しました。 処理結果：{0} */
+<span class="fc" id="L40">		RESULT_MESSAGE,</span>
+		/** メッセージ内容 : ステップカウント処理が中断しました。 */
+<span class="fc" id="L42">		SUSPENTION_MESSAGE;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

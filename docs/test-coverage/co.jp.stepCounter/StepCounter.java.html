@@ -7,9 +7,11 @@ import java.util.Objects;
 import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
+import co.jp.stepCounter.infrastructure.dbdao.JdbcConnection;
 import co.jp.stepCounter.presentation.controller.cui.StepCounterCuiController;
 import co.jp.stepCounter.presentation.controller.cui.StepCounterCuiRequestDto;
 import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
+import jp.co.future.uroborosql.SqlAgent;
 
 /**
  * &lt;p&gt;
@@ -50,7 +52,7 @@ import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
  * @version 1.0
  * @author takashi.ebina
  */
-<span class="nc" id="L53">public class StepCounter {</span>
+<span class="nc" id="L55">public class StepCounter {</span>
 
 	/**
 	 * &lt;p&gt;
@@ -74,21 +76,38 @@ import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
 	 * @param args 未入力の場合、GUIモードで処理を実行。それ以外の場合は引数に応じて処理が変動する。
 	 */
 	public static void main(String[] args) {
-<span class="nc bnc" id="L77" title="All 4 branches missed.">		if (Objects.isNull(args) || args.length == 0) {</span>
+<span class="nc" id="L79">		dbSetup();</span>
+<span class="nc bnc" id="L80" title="All 4 branches missed.">		if (Objects.isNull(args) || args.length == 0) {</span>
 			// GUIモードとして実行
-<span class="nc" id="L79">			EventQueue.invokeLater(StepCounterGuiMainView::new);</span>
-<span class="nc" id="L80">			return;</span>
+<span class="nc" id="L82">			EventQueue.invokeLater(StepCounterGuiMainView::new);</span>
+<span class="nc" id="L83">			return;</span>
 		}
 		// CUIモードとして実行
-<span class="nc" id="L83">		final StepCounterCuiRequestDto requestDto = makeStepCounterCuiRequestDto(args);</span>
-<span class="nc" id="L84">		final StepCounterCuiController controller = new StepCounterCuiController();</span>
-<span class="nc bnc" id="L85" title="All 4 branches missed.">		switch (requestDto.getStepCountExecuteMode()) {</span>
-<span class="nc" id="L86">			case HELP        -&gt; controller.printHelp();</span>
-<span class="nc" id="L87">			case INTERACTIVE -&gt; controller.stepCountInteractiveMode();</span>
-<span class="nc" id="L88">			case SCRIPT      -&gt; controller.stepCountScriptMode(requestDto);</span>
-<span class="nc" id="L89">			default          -&gt; throw new IllegalArgumentException(&quot;Unexpected value: &quot; + requestDto.getStepCountExecuteMode());</span>
+<span class="nc" id="L86">		final StepCounterCuiRequestDto requestDto = makeStepCounterCuiRequestDto(args);</span>
+<span class="nc" id="L87">		final StepCounterCuiController controller = new StepCounterCuiController();</span>
+<span class="nc bnc" id="L88" title="All 4 branches missed.">		switch (requestDto.getStepCountExecuteMode()) {</span>
+<span class="nc" id="L89">			case HELP        -&gt; controller.printHelp();</span>
+<span class="nc" id="L90">			case INTERACTIVE -&gt; controller.stepCountInteractiveMode();</span>
+<span class="nc" id="L91">			case SCRIPT      -&gt; controller.stepCountScriptMode(requestDto);</span>
+<span class="nc" id="L92">			default          -&gt; throw new IllegalArgumentException(&quot;Unexpected value: &quot; + requestDto.getStepCountExecuteMode());</span>
 		}
-<span class="nc" id="L91">	}</span>
+<span class="nc" id="L94">	}</span>
+	/**
+	 * &lt;p&gt;
+	 * アプリケーション利用に必要なDDL及び初期でデータの投入を行うメソッド
+	 * 
+	 */
+	private static void dbSetup() {
+<span class="nc" id="L101">		final JdbcConnection con = JdbcConnection.getInstance();</span>
+<span class="nc" id="L102">		try (final SqlAgent agent = con.getSqlConfig().agent()) {</span>
+<span class="nc" id="L103">			agent.required(() -&gt; {</span>
+<span class="nc" id="L104">				agent.autoCommitScope(() -&gt; {</span>
+<span class="nc" id="L105">					agent.update(&quot;ddl/table/message&quot;).count();</span>
+<span class="nc" id="L106">					agent.update(&quot;setup/data/insert_message&quot;).count();</span>
+<span class="nc" id="L107">				});</span>
+<span class="nc" id="L108">			});</span>
+		}
+<span class="nc" id="L110">	}</span>
 	/**
 	 * &lt;p&gt;
 	 * CUIでステップカウント処理を実行する際に利用するDTOオブジェクトの生成
@@ -99,43 +118,43 @@ import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
 	 * @see StepCounterCuiRequestDto
 	 */
 	private static StepCounterCuiRequestDto makeStepCounterCuiRequestDto(String[] args) {
-<span class="nc" id="L102">		String inputDirectoryPath = null;</span>
-<span class="nc" id="L103">		String outputFilePath = null;</span>
-<span class="nc" id="L104">		ExecuteMode stepCountExecuteMode = ExecuteMode.NOTHING;</span>
-<span class="nc" id="L105">		SortType stepCountSortType = SortType.NO_SORT;</span>
-<span class="nc" id="L106">		SortTarget stepCountSortTarget = SortTarget.FILEPATH;</span>
-<span class="nc bnc" id="L107" title="All 2 branches missed.">		for (final String commandOption : args) {</span>
-<span class="nc bnc" id="L108" title="All 2 branches missed.">			if (Objects.equals(commandOption, &quot;-h&quot;)) {</span>
+<span class="nc" id="L121">		String inputDirectoryPath = null;</span>
+<span class="nc" id="L122">		String outputFilePath = null;</span>
+<span class="nc" id="L123">		ExecuteMode stepCountExecuteMode = ExecuteMode.NOTHING;</span>
+<span class="nc" id="L124">		SortType stepCountSortType = SortType.NO_SORT;</span>
+<span class="nc" id="L125">		SortTarget stepCountSortTarget = SortTarget.FILEPATH;</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">		for (final String commandOption : args) {</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">			if (Objects.equals(commandOption, &quot;-h&quot;)) {</span>
 				// ヘルプモードの場合
-<span class="nc" id="L110">				stepCountExecuteMode = ExecuteMode.HELP;</span>
-<span class="nc bnc" id="L111" title="All 2 branches missed.">			} else if (Objects.equals(commandOption, &quot;-i&quot;)) {</span>
+<span class="nc" id="L129">				stepCountExecuteMode = ExecuteMode.HELP;</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">			} else if (Objects.equals(commandOption, &quot;-i&quot;)) {</span>
 				// 対話モードの場合
-<span class="nc" id="L113">				stepCountExecuteMode = ExecuteMode.INTERACTIVE;</span>
-<span class="nc bnc" id="L114" title="All 2 branches missed.">			} else if (Objects.equals(commandOption, &quot;-s&quot;)) {</span>
+<span class="nc" id="L132">				stepCountExecuteMode = ExecuteMode.INTERACTIVE;</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">			} else if (Objects.equals(commandOption, &quot;-s&quot;)) {</span>
 				// スクリプトモードの場合
-<span class="nc" id="L116">				stepCountExecuteMode = ExecuteMode.SCRIPT;</span>
-<span class="nc bnc" id="L117" title="All 2 branches missed.">			} else if (commandOption.startsWith(&quot;-input=&quot;)) {</span>
+<span class="nc" id="L135">				stepCountExecuteMode = ExecuteMode.SCRIPT;</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">			} else if (commandOption.startsWith(&quot;-input=&quot;)) {</span>
 				// カウント対象のディレクトリパスを指定している場合
-<span class="nc" id="L119">				inputDirectoryPath = split(commandOption, &quot;=&quot;)[1];</span>
-<span class="nc bnc" id="L120" title="All 2 branches missed.">			} else if (commandOption.startsWith(&quot;-output=&quot;)) {</span>
+<span class="nc" id="L138">				inputDirectoryPath = split(commandOption, &quot;=&quot;)[1];</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">			} else if (commandOption.startsWith(&quot;-output=&quot;)) {</span>
 				// カウント結果出力対象のファイルパスを指定している場合
-<span class="nc" id="L122">				outputFilePath = split(commandOption, &quot;=&quot;)[1];</span>
-<span class="nc bnc" id="L123" title="All 2 branches missed.">			} else if (commandOption.startsWith(&quot;-asc=&quot;)) {</span>
+<span class="nc" id="L141">				outputFilePath = split(commandOption, &quot;=&quot;)[1];</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">			} else if (commandOption.startsWith(&quot;-asc=&quot;)) {</span>
 				// 昇順ソートを指定している場合
-<span class="nc" id="L125">				stepCountSortType = SortType.ASCENDING_ORDER;</span>
-<span class="nc" id="L126">				stepCountSortTarget = SortTarget.lookup(split(commandOption, &quot;=&quot;)[1], SortTarget::getSortTargetCode);</span>
-<span class="nc bnc" id="L127" title="All 2 branches missed.">			} else if (commandOption.startsWith(&quot;-desc=&quot;)) {</span>
+<span class="nc" id="L144">				stepCountSortType = SortType.ASCENDING_ORDER;</span>
+<span class="nc" id="L145">				stepCountSortTarget = SortTarget.lookup(split(commandOption, &quot;=&quot;)[1], SortTarget::getSortTargetCode);</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">			} else if (commandOption.startsWith(&quot;-desc=&quot;)) {</span>
 				// 降順ソートを指定している場合
-<span class="nc" id="L129">				stepCountSortType = SortType.DESCENDING_ORDER;</span>
-<span class="nc" id="L130">				stepCountSortTarget = SortTarget.lookup(split(commandOption, &quot;=&quot;)[1], SortTarget::getSortTargetCode);</span>
+<span class="nc" id="L148">				stepCountSortType = SortType.DESCENDING_ORDER;</span>
+<span class="nc" id="L149">				stepCountSortTarget = SortTarget.lookup(split(commandOption, &quot;=&quot;)[1], SortTarget::getSortTargetCode);</span>
 			}
 		}
-<span class="nc bnc" id="L133" title="All 2 branches missed.">		if (stepCountExecuteMode == ExecuteMode.SCRIPT) {</span>
-<span class="nc bnc" id="L134" title="All 4 branches missed.">			if (Objects.isNull(inputDirectoryPath) || Objects.isNull(outputFilePath)) {</span>
-<span class="nc" id="L135">				throw new IllegalArgumentException(&quot;カウント対象のディレクトリパスまたはカウント結果出力対象のファイルパスの値がNullです&quot;);</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">		if (stepCountExecuteMode == ExecuteMode.SCRIPT) {</span>
+<span class="nc bnc" id="L153" title="All 4 branches missed.">			if (Objects.isNull(inputDirectoryPath) || Objects.isNull(outputFilePath)) {</span>
+<span class="nc" id="L154">				throw new IllegalArgumentException(&quot;カウント対象のディレクトリパスまたはカウント結果出力対象のファイルパスの値がNullです&quot;);</span>
 			}
 		}
-<span class="nc" id="L138">		return new StepCounterCuiRequestDto(stepCountExecuteMode, stepCountSortType, stepCountSortTarget,</span>
+<span class="nc" id="L157">		return new StepCounterCuiRequestDto(stepCountExecuteMode, stepCountSortType, stepCountSortTarget,</span>
 				inputDirectoryPath, outputFilePath);
 	}
 	
@@ -147,15 +166,15 @@ import co.jp.stepCounter.presentation.view.StepCounterGuiMainView;
 	 * @return 分割された文字列を格納した配列
 	 */
 	private static String[] split(final String str, final String del){
-<span class="nc" id="L150">		final ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();</span>
-<span class="nc" id="L151">		int pos   = 0;</span>
-<span class="nc" id="L152">		int index = 0;</span>
-<span class="nc bnc" id="L153" title="All 2 branches missed.">		while ((index = str.indexOf(del, pos)) !=- 1) {</span>
-<span class="nc" id="L154">			list.add(str.substring(pos, index));</span>
-<span class="nc" id="L155">			pos = index + del.length();</span>
+<span class="nc" id="L169">		final ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L170">		int pos   = 0;</span>
+<span class="nc" id="L171">		int index = 0;</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">		while ((index = str.indexOf(del, pos)) !=- 1) {</span>
+<span class="nc" id="L173">			list.add(str.substring(pos, index));</span>
+<span class="nc" id="L174">			pos = index + del.length();</span>
 		}
-<span class="nc" id="L157">		list.add(str.substring(pos, str.length()));</span>
-<span class="nc" id="L158">		return (String[])list.toArray(new String[list.size()]);</span>
+<span class="nc" id="L176">		list.add(str.substring(pos, str.length()));</span>
+<span class="nc" id="L177">		return (String[])list.toArray(new String[list.size()]);</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

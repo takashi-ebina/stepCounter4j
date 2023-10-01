@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JdbcConnection.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">stepCounter</a> &gt; <a href="index.source.html" class="el_package">co.jp.stepCounter.infrastructure.dbdao</a> &gt; <span class="el_source">JdbcConnection.java</span></div><h1>JdbcConnection.java</h1><pre class="source lang-java linenums">package co.jp.stepCounter.infrastructure.dbdao;
+
+import co.jp.stepCounter.constant.SystemConstant;
+import jp.co.future.uroborosql.UroboroSQL;
+import jp.co.future.uroborosql.config.SqlConfig;
+
+/**
+ * &lt;p&gt;
+ * JDBCに関するクラス
+ * 
+ * @since 1.0
+ * @version 1.0
+ * @author takashi.ebina
+ */
+public class JdbcConnection {
+
+	/** 唯一のJdbcConnectionインスタンス */
+<span class="fc" id="L18">	private static JdbcConnection thisInstance = null;</span>
+	/** SqlConfigオブジェクト */
+	private final SqlConfig config;
+	
+	/**
+	 * &lt;p&gt;
+	 * インスタンス返却メソッド
+	 * 
+	 * @return JdbcConnectionインスタンス
+	 */
+	public static JdbcConnection getInstance() {
+<span class="fc bfc" id="L29" title="All 2 branches covered.">		if (thisInstance == null) {</span>
+<span class="fc" id="L30">			thisInstance = new JdbcConnection();</span>
+		} 
+<span class="fc" id="L32">		return thisInstance;</span>
+	}
+
+	/**
+	 * &lt;p&gt;
+	 * コンストラクタ
+	 * &lt;p&gt;
+	 * Singleton実装の為、外部からのインスタンス化は不可とする。
+	 */
+<span class="fc" id="L41">	private JdbcConnection() {</span>
+<span class="fc" id="L42">		this.config = UroboroSQL.builder(SystemConstant.JDBC_PROPERTIES.get(&quot;url&quot;)</span>
+<span class="fc" id="L43">							, SystemConstant.JDBC_PROPERTIES.get(&quot;user&quot;)</span>
+<span class="fc" id="L44">							, SystemConstant.JDBC_PROPERTIES.get(&quot;password&quot;)).build();</span>
+<span class="fc" id="L45">	}</span>
+	/**
+	 * &lt;p&gt;
+	 * Connectionオブジェクト取得メソッド
+	 * 
+	 * @return Connectionオブジェクト
+	 */
+	public SqlConfig getSqlConfig() {
+<span class="fc" id="L53">		return this.config;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
