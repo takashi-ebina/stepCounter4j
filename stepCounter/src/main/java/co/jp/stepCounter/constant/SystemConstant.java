@@ -72,6 +72,6 @@ public class SystemConstant {
 	 * <p>
 	 * JDBC.propertiesのパス
 	 */
-	public static final String JDBC_PROPERTIES_FILE_PATH = "/src/main/resources/settings/JDBC.properties";
+	public static final String JDBC_PROPERTIES_FILE_PATH = "/settings/JDBC.properties";
 }
 
