@@ -26,6 +26,10 @@ public class ValidatorUtil {
 	private static final StepCounterMessages messages = StepCounterMessages.getInstance();
 	/** チェック処理成功時に返却する空リスト */
 	private static final List<String> SUCCESS_LIST = Collections.unmodifiableList(new ArrayList<String>()); 
+	/** 入力ディレクトリパスの最大文字数 */
+	private static final int INPUT_PATH_MAX_LENGTH = 200;
+	/** 出力ファイルパスの最大文字数 */
+	private static final int OUTPUT_PATH_MAX_LENGTH = 255;
 	
 	/**
 	 * <p>
@@ -55,6 +59,11 @@ public class ValidatorUtil {
 		
 		if (Objects.equals(inputPath, "")) {
 			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.BLANK_MESSAGE.name(), "入力フォルダ"));
+			return errorMessageList;
+		}
+		
+		if (inputPath.length() > INPUT_PATH_MAX_LENGTH) {
+			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.MAXLENGTH_MESSAGE.name(), "入力フォルダ", INPUT_PATH_MAX_LENGTH));
 			return errorMessageList;
 		}
 		
@@ -91,6 +100,12 @@ public class ValidatorUtil {
 			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.BLANK_MESSAGE.name(), "出力ファイル"));
 			return errorMessageList;
 		}
+		
+		if (outputPath.length() > OUTPUT_PATH_MAX_LENGTH) {
+			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.MAXLENGTH_MESSAGE.name(), "出力ファイル", OUTPUT_PATH_MAX_LENGTH));
+			return errorMessageList;
+		}
+		
 		final File file = new File(outputPath);
 		if (file.isDirectory()) {
 			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.FOLDERPATH_MESSAGE.name(), "出力ファイル"));

@@ -29,7 +29,9 @@ public class messageConstant {
 		/** メッセージ内容 : {0}　フォルダパスを指定しています。*/
 		FOLDERPATH_MESSAGE,
 		/** メッセージ内容 : {0}　拡張子が{1}ではありません。*/
-		EXTENSION_MESSAGE;
+		EXTENSION_MESSAGE,
+		/** メッセージ内容 : 0}　{1}文字を超えています。*/
+		MAXLENGTH_MESSAGE;
 	}
 	/**
 	 * <p>
