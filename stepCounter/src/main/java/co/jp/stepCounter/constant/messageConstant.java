@@ -30,7 +30,7 @@ public class messageConstant {
 		FOLDERPATH_MESSAGE,
 		/** メッセージ内容 : {0}　拡張子が{1}ではありません。*/
 		EXTENSION_MESSAGE,
-		/** メッセージ内容 : 0}　{1}文字を超えています。*/
+		/** メッセージ内容 : {0}　{1}文字を超えています。*/
 		MAXLENGTH_MESSAGE;
 	}
 	/**
