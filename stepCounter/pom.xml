@@ -12,6 +12,22 @@
 	<!-- プラグインの設定 -->
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>co.jp.stepCounter.stepCounter</mainClass>
+							<addClasspath>true</addClasspath>
+						</manifest>
+						<manifestEntries>
+							<Class-Path>./settings/</Class-Path>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
 			<!-- Javdoc作成に必要なプラグイン -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -149,22 +165,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>co.jp.stepCounter.stepCounter</mainClass>
-							<addClasspath>true</addClasspath>
-						</manifest>
-						<manifestEntries>
-							<Class-Path>./</Class-Path>
-						</manifestEntries>
-					</archive>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
