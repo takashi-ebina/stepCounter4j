@@ -1,14 +1,9 @@
 package co.jp.stepCounter.constant;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
+import java.util.ResourceBundle;
 
 /**
  * <p>
@@ -46,32 +41,11 @@ public class SystemConstant {
 	 */
 	public static final Map<String, String> JDBC_PROPERTIES = new HashMap<>();
 	static {
-		final Properties properties = new Properties();
 		// プロパティファイルのパスを指定する
-		String propertiesFilePath = System.getProperty("user.dir") + SystemConstant.JDBC_PROPERTIES_FILE_PATH;
-		try {
-			if (!Files.exists(Paths.get(propertiesFilePath))){
-				propertiesFilePath = System.getProperty("user.dir") + SystemConstant.JDBC_PROPERTIES_FILE_PATH_LOCAL;
-			}
-			InputStream istream = new FileInputStream(propertiesFilePath);
-			properties.load(istream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		for (Map.Entry<Object, Object> e : properties.entrySet()) {
-			SystemConstant.JDBC_PROPERTIES.put(e.getKey().toString(), e.getValue().toString());
+		ResourceBundle res = ResourceBundle.getBundle("JDBC");
+		for (String key : res.keySet()) {
+			SystemConstant.JDBC_PROPERTIES.put(key, res.getString(key));
 		}
 	}
-	/**
-	 * <p>
-	 * JDBC.propertiesのパス（ローカル）
-	 */
-	public static final String JDBC_PROPERTIES_FILE_PATH_LOCAL = "/src/main/resources/settings/JDBC.properties";
-	/**
-	 * <p>
-	 * JDBC.propertiesのパス
-	 */
-	public static final String JDBC_PROPERTIES_FILE_PATH = "/settings/JDBC.properties";
 }
 
