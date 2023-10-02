@@ -161,7 +161,7 @@
 							<addClasspath>true</addClasspath>
 						</manifest>
 						<manifestEntries>
-							<Class-Path>./settings/</Class-Path>
+							<Class-Path>./</Class-Path>
 						</manifestEntries>
 					</archive>
 				</configuration>
