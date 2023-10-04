@@ -1,7 +1,13 @@
 package co.jp.stepCounter.constant;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.charset.Charset;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -42,7 +48,15 @@ public class SystemConstant {
 	public static final Map<String, String> JDBC_PROPERTIES = new HashMap<>();
 	static {
 		// プロパティファイルのパスを指定する
-		ResourceBundle res = ResourceBundle.getBundle("JDBC");
+		File dicDir = Paths.get(".\\resource").toFile();
+        URLClassLoader urlLoader = null; // ★2
+        try {
+			urlLoader = new URLClassLoader(new URL[]{dicDir.toURI().toURL()});
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} // ★3
+        
+		ResourceBundle res = ResourceBundle.getBundle("JDBC", Locale.JAPAN, urlLoader);
 		for (String key : res.keySet()) {
 			SystemConstant.JDBC_PROPERTIES.put(key, res.getString(key));
 		}
