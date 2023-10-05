@@ -60,6 +60,9 @@
 					<statelessTestsetReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
 						<usePhrasedTestCaseMethodName>true</usePhrasedTestCaseMethodName>
 					</statelessTestsetReporter>
+					<additionalClasspathElements>
+						<additionalClasspathElement>src/main/resources/settings, /Users/runner/work/stepCounter4j/stepCounter4j/stepCounter/src/main/resources/settings</additionalClasspathElement>
+					</additionalClasspathElements>
 				</configuration>
 			</plugin>
 			<plugin>
