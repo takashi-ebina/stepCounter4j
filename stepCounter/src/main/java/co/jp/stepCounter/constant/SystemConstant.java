@@ -48,7 +48,6 @@ public class SystemConstant {
 	public static final Map<String, String> JDBC_PROPERTIES = new HashMap<>();
 	static {
 		// プロパティファイルのパスを指定する
-		System.out.println(System.getProperty("java.class.path"));
 		File dicDir = Paths.get(".\\resources\\settings").toFile();
         URLClassLoader urlLoader = null;
         try {
