@@ -48,13 +48,14 @@ public class SystemConstant {
 	public static final Map<String, String> JDBC_PROPERTIES = new HashMap<>();
 	static {
 		// プロパティファイルのパスを指定する
+		System.out.println(System.getProperty("java.class.path"));
 		File dicDir = Paths.get(".\\resources\\settings").toFile();
-        URLClassLoader urlLoader = null; // ★2
+        URLClassLoader urlLoader = null;
         try {
 			urlLoader = new URLClassLoader(new URL[]{dicDir.toURI().toURL()});
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-		} // ★3
+		}
         
 		ResourceBundle res = ResourceBundle.getBundle("JDBC", Locale.JAPAN, urlLoader);
 		for (String key : res.keySet()) {
