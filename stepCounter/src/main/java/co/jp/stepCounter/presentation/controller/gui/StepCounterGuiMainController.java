@@ -13,7 +13,7 @@ import co.jp.stepCounter.application.service.impl.StepCounterGuiMainServiceImpl;
 import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.constant.StepCounterConstant.ProcessResult;
 import co.jp.stepCounter.constant.SystemConstant;
-import co.jp.stepCounter.constant.messageConstant.InfoMessageDiv;
+import co.jp.stepCounter.constant.MessageConstant.InfoMessageDiv;
 import co.jp.stepCounter.domain.model.stepCountExecutor.StepCountExecutor;
 import co.jp.stepCounter.infrastructure.csvdao.StepCountCsvDao;
 import co.jp.stepCounter.infrastructure.log.Log4J2;

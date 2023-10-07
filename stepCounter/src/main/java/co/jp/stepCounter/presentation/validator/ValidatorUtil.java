@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
-import co.jp.stepCounter.constant.messageConstant.ErrorMessageDiv;
-import co.jp.stepCounter.constant.messageConstant.InfoMessageDiv;
+import co.jp.stepCounter.constant.MessageConstant.ErrorMessageDiv;
+import co.jp.stepCounter.constant.MessageConstant.InfoMessageDiv;
 import co.jp.stepCounter.infrastructure.messages.StepCounterMessages;
 
 /**

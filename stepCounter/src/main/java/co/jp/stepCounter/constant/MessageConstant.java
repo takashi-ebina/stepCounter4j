@@ -7,14 +7,14 @@ package co.jp.stepCounter.constant;
  * @version 1.0
  * @author takashi.ebina
  */
-public class messageConstant {
+public class MessageConstant {
 	/**
 	 * <p>
 	 * コンストラクタ
 	 * <p>
 	 * 定数クラスのため、インスタンス化は不可とする。
 	 */
-	private messageConstant() {
+	private MessageConstant() {
 	}
 
 	/**
