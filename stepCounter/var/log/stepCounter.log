@@ -492,3 +492,273 @@
 2023/10/04 21:17:01.882 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning1//output/result.csv, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning1//output/result.csv)
 2023/10/04 21:17:01.889 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning2//output)
 2023/10/04 21:17:01.904 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/Exception1//output/result.csv)
+2023/10/10 21:54:47.512 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success1/output/result.csv, SortType=1, SortTarget=0
+2023/10/10 21:54:47.517 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:54:47.518 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:54:47.520 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:54:47.521 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:54:47.522 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:54:47.523 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:54:47.524 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:54:47.526 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:54:47.529 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:54:47.536 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success2/output/result.csv, SortType=2, SortTarget=1
+2023/10/10 21:54:47.537 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:54:47.537 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:54:47.537 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:54:47.538 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:54:47.538 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:54:47.539 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:54:47.540 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:54:47.542 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:54:47.545 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:54:47.554 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success3/output/result.csv, SortType=0, SortTarget=0
+2023/10/10 21:54:47.554 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:54:47.554 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:54:47.555 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:54:47.556 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:54:47.557 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:54:47.557 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:54:47.558 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:54:47.559 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:54:47.563 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:54:47.572 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success4/output/result.csv, SortType=0, SortTarget=0
+2023/10/10 21:54:47.573 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:54:47.574 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:54:47.574 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:54:47.575 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:54:47.576 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:54:47.576 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:54:47.577 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:54:47.578 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:54:47.580 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:54:47.634 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/success1//output/result.csv)
+2023/10/10 21:54:47.634 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/success1/output/result.csv, SortType=1, SortTarget=0
+2023/10/10 21:54:47.635 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:54:47.635 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:54:47.635 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:54:47.636 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:54:47.636 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:54:47.636 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:54:47.637 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:54:47.637 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:54:47.640 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:54:47.649 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning1//output/result.csv, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning1//output/result.csv)
+2023/10/10 21:54:47.659 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning2//output)
+2023/10/10 21:54:47.671 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/Exception1//output/result.csv)
+2023/10/10 21:59:06.975 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success1/output/result.csv, SortType=1, SortTarget=0
+2023/10/10 21:59:06.980 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:59:06.981 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:59:06.983 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:59:06.984 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:59:06.986 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:59:06.987 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:59:06.988 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:59:06.990 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:59:06.992 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:59:07.002 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success2/output/result.csv, SortType=2, SortTarget=1
+2023/10/10 21:59:07.002 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:59:07.003 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:59:07.004 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:59:07.005 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:59:07.006 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:59:07.006 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:59:07.007 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:59:07.008 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:59:07.010 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:59:07.020 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success3/output/result.csv, SortType=0, SortTarget=0
+2023/10/10 21:59:07.020 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:59:07.020 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:59:07.021 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:59:07.022 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:59:07.023 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:59:07.023 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:59:07.024 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:59:07.024 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:59:07.025 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:59:07.034 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success4/output/result.csv, SortType=0, SortTarget=0
+2023/10/10 21:59:07.035 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:59:07.035 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:59:07.036 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:59:07.037 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:59:07.037 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:59:07.038 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:59:07.038 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:59:07.039 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:59:07.040 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:59:07.097 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/success1//output/result.csv)
+2023/10/10 21:59:07.097 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/success1/output/result.csv, SortType=1, SortTarget=0
+2023/10/10 21:59:07.098 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:59:07.098 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:59:07.099 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:59:07.099 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:59:07.100 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:59:07.100 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:59:07.101 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:59:07.102 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:59:07.103 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:59:07.111 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning1//output/result.csv, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning1//output/result.csv)
+2023/10/10 21:59:07.117 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning2//output)
+2023/10/10 21:59:07.128 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/Exception1//output/result.csv)
+2023/10/10 21:59:51.010 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success1/output/result.csv, SortType=1, SortTarget=0
+2023/10/10 21:59:51.014 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:59:51.015 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:59:51.016 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:59:51.017 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:59:51.019 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:59:51.020 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:59:51.021 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:59:51.023 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:59:51.025 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:59:51.035 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success2/output/result.csv, SortType=2, SortTarget=1
+2023/10/10 21:59:51.036 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:59:51.037 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:59:51.037 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:59:51.038 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:59:51.039 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:59:51.040 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:59:51.041 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:59:51.042 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:59:51.043 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:59:51.052 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success3/output/result.csv, SortType=0, SortTarget=0
+2023/10/10 21:59:51.052 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:59:51.052 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:59:51.053 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:59:51.053 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:59:51.054 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:59:51.054 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:59:51.055 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:59:51.056 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:59:51.057 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:59:51.066 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success4/output/result.csv, SortType=0, SortTarget=0
+2023/10/10 21:59:51.066 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:59:51.066 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:59:51.067 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:59:51.067 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:59:51.068 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:59:51.068 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:59:51.069 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:59:51.070 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:59:51.073 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:59:51.129 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/success1//output/result.csv)
+2023/10/10 21:59:51.129 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/success1/output/result.csv, SortType=1, SortTarget=0
+2023/10/10 21:59:51.129 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 21:59:51.130 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 21:59:51.130 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 21:59:51.131 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 21:59:51.132 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 21:59:51.132 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 21:59:51.133 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 21:59:51.134 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 21:59:51.134 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 21:59:51.141 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning1//output/result.csv, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning1//output/result.csv)
+2023/10/10 21:59:51.148 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning2//output)
+2023/10/10 21:59:51.158 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/Exception1//output/result.csv)
+2023/10/10 22:00:25.365 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success1/output/result.csv, SortType=1, SortTarget=0
+2023/10/10 22:00:25.369 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 22:00:25.370 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 22:00:25.371 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 22:00:25.372 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 22:00:25.374 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 22:00:25.375 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 22:00:25.376 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 22:00:25.378 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 22:00:25.381 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 22:00:25.392 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success2/output/result.csv, SortType=2, SortTarget=1
+2023/10/10 22:00:25.394 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 22:00:25.395 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 22:00:25.396 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 22:00:25.397 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 22:00:25.398 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 22:00:25.398 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 22:00:25.399 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 22:00:25.400 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 22:00:25.402 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 22:00:25.414 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success3/output/result.csv, SortType=0, SortTarget=0
+2023/10/10 22:00:25.415 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 22:00:25.415 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 22:00:25.416 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 22:00:25.420 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 22:00:25.421 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 22:00:25.422 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 22:00:25.422 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 22:00:25.423 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 22:00:25.424 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 22:00:25.434 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success4/output/result.csv, SortType=0, SortTarget=0
+2023/10/10 22:00:25.435 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 22:00:25.436 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 22:00:25.436 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 22:00:25.437 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 22:00:25.438 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 22:00:25.438 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 22:00:25.439 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 22:00:25.440 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 22:00:25.441 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 22:00:25.502 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/success1//output/result.csv)
+2023/10/10 22:00:25.503 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/success1/output/result.csv, SortType=1, SortTarget=0
+2023/10/10 22:00:25.504 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 22:00:25.504 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 22:00:25.505 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 22:00:25.505 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 22:00:25.506 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 22:00:25.506 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 22:00:25.507 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 22:00:25.508 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 22:00:25.510 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 22:00:25.518 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning1//output/result.csv, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning1//output/result.csv)
+2023/10/10 22:00:25.523 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning2//output)
+2023/10/10 22:00:25.533 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/Exception1//output/result.csv)
+2023/10/10 22:01:49.453 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success1/output/result.csv, SortType=1, SortTarget=0
+2023/10/10 22:01:49.457 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 22:01:49.458 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 22:01:49.459 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 22:01:49.460 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 22:01:49.462 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 22:01:49.463 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 22:01:49.465 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 22:01:49.467 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 22:01:49.470 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 22:01:49.477 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success2/output/result.csv, SortType=2, SortTarget=1
+2023/10/10 22:01:49.478 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 22:01:49.478 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 22:01:49.479 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 22:01:49.480 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 22:01:49.481 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 22:01:49.481 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 22:01:49.482 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 22:01:49.483 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 22:01:49.485 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 22:01:49.492 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success3/output/result.csv, SortType=0, SortTarget=0
+2023/10/10 22:01:49.493 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 22:01:49.493 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 22:01:49.494 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 22:01:49.494 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 22:01:49.495 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 22:01:49.496 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 22:01:49.497 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 22:01:49.498 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 22:01:49.499 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 22:01:49.505 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountInteractiveMode/success4/output/result.csv, SortType=0, SortTarget=0
+2023/10/10 22:01:49.505 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 22:01:49.506 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 22:01:49.506 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 22:01:49.507 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 22:01:49.507 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 22:01:49.507 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 22:01:49.508 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 22:01:49.509 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 22:01:49.510 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 22:01:49.561 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/success1//output/result.csv)
+2023/10/10 22:01:49.561 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [START]inputDirectory=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common/input, outputFile=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/success1/output/result.csv, SortType=1, SortTarget=0
+2023/10/10 22:01:49.561 [main] WARN   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount skip. [fileName]:.DS_Store
+2023/10/10 22:01:49.562 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Mario.java
+2023/10/10 22:01:49.563 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Luigi.java
+2023/10/10 22:01:49.564 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Character.java
+2023/10/10 22:01:49.564 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:HammerBros.java
+2023/10/10 22:01:49.565 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:CharacterIf.java
+2023/10/10 22:01:49.565 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Main.java
+2023/10/10 22:01:49.566 [main] INFO   Log4J2 StepCountExecutor#execStepCountInDirectory() StepCount execute. [fileName]:Constant.java
+2023/10/10 22:01:49.569 [main] INFO   Log4J2 StepCounterCuiServiceImpl#execStepCount() [END]ProcessResult=SUCCESS
+2023/10/10 22:01:49.575 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning1//output/result.csv, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning1//output/result.csv)
+2023/10/10 22:01:49.581 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/warning2//output)
+2023/10/10 22:01:49.592 [main] INFO   Log4J2 StepCounterCuiController#stepCountScriptMode() [START]StepCounterCuiRequestDto=StepCounterCuiRequestDto(stepCountExecuteMode=SCRIPT, stepCountSortType=ASCENDING_ORDER, stepCountSortTarget=FILEPATH, inputDirectoryPath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/common//input, outputFilePath=/Users/takashi.ebina/git/repository2/stepCounter/src/test/resources/testcase/TestStepCounterCuiController/stepCountScriptMode/Exception1//output/result.csv)

@@ -285,7 +285,7 @@ class TestStepCounterCuiController {
 		void warning1() {
 			// 【事前準備】
 			// カウント対象のディレクトリパスの入力
-			in.inputln(TestStepCounterUtil.getCommonTestcasePath(TestCaseInOutDiv.OUTPUT)); 
+			in.inputln(TestStepCounterUtil.getCommonTestcasePath(TestCaseInOutDiv.OUTPUT) + TestStepCounterConstant.RESULT_FILE_NAME); 
 			// 【実行】
 			cuiController.stepCountInteractiveMode();
 			// 【検証】
