@@ -10,10 +10,10 @@ import javax.swing.JOptionPane;
 
 import co.jp.stepCounter.application.service.StepCounterGuiMainService;
 import co.jp.stepCounter.application.service.impl.StepCounterGuiMainServiceImpl;
+import co.jp.stepCounter.constant.MessageConstant.InfoMessageDiv;
 import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.constant.StepCounterConstant.ProcessResult;
 import co.jp.stepCounter.constant.SystemConstant;
-import co.jp.stepCounter.constant.MessageConstant.InfoMessageDiv;
 import co.jp.stepCounter.domain.model.stepCountExecutor.StepCountExecutor;
 import co.jp.stepCounter.infrastructure.csvdao.StepCountCsvDao;
 import co.jp.stepCounter.infrastructure.log.Log4J2;
@@ -64,7 +64,7 @@ public class StepCounterGuiMainController {
 		final String outputFilePath = dto.getOutputFilePath();
 		
 		// カウント対象のディレクトリパスの入力チェック
-		List<String> errorMessageList =  ValidatorUtil.inputDirectoryCheck(inputDirectoryPath);
+		List<String> errorMessageList = ValidatorUtil.inputDirectoryCheck(inputDirectoryPath);
 		if (Objects.nonNull(errorMessageList) && errorMessageList.size() > 0) {
 			final StringJoiner sj = new StringJoiner(SystemConstant.LINE_SEPARATOR);
 			errorMessageList.stream().forEach(r -> sj.add(r));
@@ -72,7 +72,7 @@ public class StepCounterGuiMainController {
 			return;
 		}
 		// カウント結果出力対象のファイルパスの入力チェック
-		errorMessageList =  ValidatorUtil.outputFileCheck(outputFilePath, ExecuteMode.GUI, null);
+		errorMessageList = ValidatorUtil.outputFileCheck(outputFilePath, ExecuteMode.GUI, null);
 		if (Objects.nonNull(errorMessageList) && errorMessageList.size() > 0) {
 			final StringJoiner sj = new StringJoiner(SystemConstant.LINE_SEPARATOR);
 			errorMessageList.stream().forEach(r -> sj.add(r));

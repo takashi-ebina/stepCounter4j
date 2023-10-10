@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
+import org.apache.commons.lang3.StringUtils;
+
 import co.jp.stepCounter.constant.MessageConstant.ErrorMessageDiv;
 import co.jp.stepCounter.constant.MessageConstant.InfoMessageDiv;
+import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.infrastructure.messages.StepCounterMessages;
 
 /**
@@ -57,7 +59,7 @@ public class ValidatorUtil {
 
 		final List<String> errorMessageList = new ArrayList<String>(); 
 		
-		if (Objects.equals(inputPath, "")) {
+		if (StringUtils.isEmpty(inputPath)) {
 			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.BLANK_MESSAGE.name(), "入力フォルダ"));
 			return errorMessageList;
 		}
@@ -96,7 +98,7 @@ public class ValidatorUtil {
 		
 		final List<String> errorMessageList = new ArrayList<String>(); 
 		
-		if (Objects.equals(outputPath, "")) {
+		if (StringUtils.isEmpty(outputPath)) {
 			errorMessageList.add(messages.getMessageText(ErrorMessageDiv.BLANK_MESSAGE.name(), "出力ファイル"));
 			return errorMessageList;
 		}
