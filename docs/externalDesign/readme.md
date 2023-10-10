@@ -11,4 +11,4 @@
 [メッセージ](/docs/externalDesign/tableDefinition/メッセージ.md)
 
 ## メッセージ一覧
-[メッセージ一覧](/docs/externalDesign/tableDefinition/メッセージ.md)
+[メッセージ一覧](/docs/externalDesign/messageList/メッセージ.md)
