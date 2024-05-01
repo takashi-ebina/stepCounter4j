@@ -1,1 +1,0 @@
-package programmingTraining4Java.answer.kadai2;
