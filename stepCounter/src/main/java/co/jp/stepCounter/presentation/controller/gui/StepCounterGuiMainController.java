@@ -34,7 +34,7 @@ public class StepCounterGuiMainController {
 	/** StepCounerMessagesインスタンス */
 	private final StepCounterMessages messages = StepCounterMessages.getInstance();
 	/** GUIでステップカウント処理を実行するサービスクラス*/
-	private StepCounterGuiMainService service; 
+	private final StepCounterGuiMainService service; 
 	
 	/**
 	 * コンストラクタ

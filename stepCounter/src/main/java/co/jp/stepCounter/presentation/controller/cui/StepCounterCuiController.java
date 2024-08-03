@@ -34,7 +34,7 @@ public class StepCounterCuiController {
 	/** StepCounerMessagesインスタンス */
 	private final StepCounterMessages messages = StepCounterMessages.getInstance();
 	/** CUIでステップカウント処理を実行するサービスクラス*/
-	private StepCounterCuiService service; 
+	private final StepCounterCuiService service; 
 	
 	/**
 	 * コンストラクタ
