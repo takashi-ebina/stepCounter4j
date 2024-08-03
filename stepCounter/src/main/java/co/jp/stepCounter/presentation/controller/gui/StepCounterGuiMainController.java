@@ -32,7 +32,7 @@ public class StepCounterGuiMainController {
 	/** Log4J2インスタンス */
 	private final Log4J2 logger = Log4J2.getInstance();
 	/** StepCounerMessagesインスタンス */
-	private static final StepCounterMessages messages = StepCounterMessages.getInstance();
+	private final StepCounterMessages messages = StepCounterMessages.getInstance();
 	/** GUIでステップカウント処理を実行するサービスクラス*/
 	private StepCounterGuiMainService service; 
 	

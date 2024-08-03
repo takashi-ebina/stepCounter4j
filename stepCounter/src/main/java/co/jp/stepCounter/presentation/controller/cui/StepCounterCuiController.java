@@ -8,12 +8,12 @@ import java.util.StringJoiner;
 
 import co.jp.stepCounter.application.service.StepCounterCuiService;
 import co.jp.stepCounter.application.service.impl.StepCounterCuiServiceImpl;
+import co.jp.stepCounter.constant.MessageConstant.InfoMessageDiv;
 import co.jp.stepCounter.constant.StepCounterConstant.ExecuteMode;
 import co.jp.stepCounter.constant.StepCounterConstant.ProcessResult;
 import co.jp.stepCounter.constant.StepCounterConstant.SortTarget;
 import co.jp.stepCounter.constant.StepCounterConstant.SortType;
 import co.jp.stepCounter.constant.SystemConstant;
-import co.jp.stepCounter.constant.MessageConstant.InfoMessageDiv;
 import co.jp.stepCounter.domain.model.stepCountExecutor.StepCountExecutor;
 import co.jp.stepCounter.infrastructure.csvdao.StepCountCsvDao;
 import co.jp.stepCounter.infrastructure.log.Log4J2;
@@ -32,7 +32,7 @@ public class StepCounterCuiController {
 	/** Log4J2インスタンス */
 	private final Log4J2 logger = Log4J2.getInstance();
 	/** StepCounerMessagesインスタンス */
-	private static final StepCounterMessages messages = StepCounterMessages.getInstance();
+	private final StepCounterMessages messages = StepCounterMessages.getInstance();
 	/** CUIでステップカウント処理を実行するサービスクラス*/
 	private StepCounterCuiService service; 
 	

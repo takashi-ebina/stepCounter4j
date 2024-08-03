@@ -49,8 +49,8 @@ public class SystemConstant {
 	static {
 		// プロパティファイルのパスを指定する
 		File dicDir = Paths.get(".\\resources\\settings").toFile();
-        URLClassLoader urlLoader = null;
-        try {
+		URLClassLoader urlLoader = null;
+		try {
 			urlLoader = new URLClassLoader(new URL[]{dicDir.toURI().toURL()});
 		} catch (MalformedURLException e) {
 			e.printStackTrace();

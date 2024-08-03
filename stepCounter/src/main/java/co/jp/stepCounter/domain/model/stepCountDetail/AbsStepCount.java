@@ -19,7 +19,7 @@ import co.jp.stepCounter.infrastructure.log.Log4J2;
  * ステップカウントの抽象クラス
  * <p>
  * 各プログラムファイルのステップカウント処理を提供する抽象クラスです。<br>
- *  標準のステップカウント処理を利用したい場合は{@link AbsStepCount#deFaultFileReadStepCount}を呼び出してください。<br>
+ * 標準のステップカウント処理を利用したい場合は{@link AbsStepCount#deFaultFileReadStepCount}を呼び出してください。<br>
  * プログラムファイル固有のステップ数集計処理を実装したい場合は、{@link MethodType#ORIGINAL}を設定し、<br>
  * {@link AbsStepCount#oridinalFileReadStepCount}をオーバライドし独自の集計処理を実装してください。<br>
  * また、１行コメント／複数行コメント（開始）／複数行コメント（終了）を判定するための正規表現の定義および実装を<br>
